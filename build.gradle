@@ -1,0 +1,107 @@
+apply plugin: "java"
+
+import org.gradle.internal.os.OperatingSystem
+
+project.ext.guavaVersion = "23.0"
+project.ext.nettyVersion = "4.1.15.Final"
+project.ext.lwjglVersion = "3.1.2"
+project.ext.jomlVersion = "1.9.4"
+project.ext.steamworks4jVersion = "1.6.2"
+
+archivesBaseName = "SOW-Remastered"
+version = "1.0.00"
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	compile "com.google.guava:guava:${guavaVersion}"
+	compile "io.netty:netty-all:${nettyVersion}"
+	compile "org.joml:joml:${jomlVersion}"
+	compile "com.code-disaster.steamworks4j:steamworks4j:${steamworks4jVersion}"
+	compile "org.lwjgl:lwjgl:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-bgfx:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-egl:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-glfw:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-jawt:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-lmdb:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-nanovg:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-nfd:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-nuklear:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-openal:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-opencl:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-opengl:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-opengles:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-ovr:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-par:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-sse:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-stb:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-tinyfd:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-vulkan:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl-xxhash:${lwjglVersion}"
+	compile "org.lwjgl:lwjgl:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-assimp:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-assimp:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-assimp:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-bgfx:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-bgfx:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-bgfx:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-lmdb:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-lmdb:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-lmdb:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-nanovg:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-nanovg:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-nanovg:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-nfd:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-nfd:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-nfd:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-nuklear:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-nuklear:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-nuklear:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-opengles:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-opengles:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-opengles:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-par:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-par:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-par:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-sse:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-sse:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-sse:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-tinyfd:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-tinyfd:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-tinyfd:${lwjglVersion}:natives-macos"
+	compile "org.lwjgl:lwjgl-xxhash:${lwjglVersion}:natives-windows"
+	compile "org.lwjgl:lwjgl-xxhash:${lwjglVersion}:natives-linux"
+	compile "org.lwjgl:lwjgl-xxhash:${lwjglVersion}:natives-macos"
+}
+
+task run(type: JavaExec, dependsOn: classes) {
+    main = "Main"
+    classpath sourceSets.main.runtimeClasspath
+    classpath configurations.runtime
+}
+
+jar {
+	from configurations.compile.collect { zipTree it }
+	manifest.attributes "Main-Class": "com.sowpb.sow.main.Main"
+}
