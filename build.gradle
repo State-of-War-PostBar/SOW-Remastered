@@ -1,7 +1,5 @@
 apply plugin: "java"
 
-import org.gradle.internal.os.OperatingSystem
-
 project.ext.guavaVersion = "23.0"
 project.ext.nettyVersion = "4.1.15.Final"
 project.ext.lwjglVersion = "3.1.2"
@@ -35,7 +33,6 @@ dependencies {
 	compile "org.lwjgl:lwjgl-opencl:${lwjglVersion}"
 	compile "org.lwjgl:lwjgl-opengl:${lwjglVersion}"
 	compile "org.lwjgl:lwjgl-opengles:${lwjglVersion}"
-	compile "org.lwjgl:lwjgl-ovr:${lwjglVersion}"
 	compile "org.lwjgl:lwjgl-par:${lwjglVersion}"
 	compile "org.lwjgl:lwjgl-sse:${lwjglVersion}"
 	compile "org.lwjgl:lwjgl-stb:${lwjglVersion}"
