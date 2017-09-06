@@ -84,7 +84,7 @@ public class Utils {
 		try {
 			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true)));
 			out.write(msg);
-			out.write("\n");
+			out.write("\r\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

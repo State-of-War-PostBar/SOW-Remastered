@@ -14,10 +14,29 @@ workspace [here](https://pan.baidu.com/s/1eStirkA).
 很抱歉我们并不提供工作环境。如果您觉得不适，可以在[这里](https://pan.baidu.com/s/1eStirkA)下载[Taxerap](https://github.com/Taxerap)的[Eclipse](http://www.eclipse.org/)工作环境。
 
 ## Compiling / 编译
-Please install [Gradle](https://gradle.org/) in your PC. Then, go to the directory where build.gradle is located.
-Then use the cmd/shell to run
+Please install [Gradle](https://gradle.org/) in your PC. Then, go to the directory where build.gradle is located,
+use the cmd/shell to run
 
 	'gradle build'
 
 请在您的机器上安装[Gradle](https://gradle.org/). 之后视您的操作系统，启动终端并在build.gradle目录下
 执行上述命令。
+
+## Libraries / 库
+The followings are the libraries used in our program. For more information, please view [build.gradle](build.gradle).
+
+[Google Guava - 21.0](https://github.com/google/guava)
+
+
+[LWJGL - 3.1.1](https://www.lwjgl.org/)
+
+
+[NIO(Netty) - 4.1.7.Final](http://netty.io/)
+
+
+[JOML - 1.9.1](https://github.com/JOML-CI/JOML)
+
+
+[SteamWorks Java Wrapper - 1.6.1](https://github.com/code-disaster/steamworks4j)
+
+以上为程序所使用到的库。更多信息请参阅[build.gradle](build.gradle)。
