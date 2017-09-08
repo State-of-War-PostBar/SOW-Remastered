@@ -25,18 +25,18 @@ use the cmd/shell to run
 ## Libraries / 库
 The followings are the libraries used in our program. For more information, please view [build.gradle](build.gradle).
 
-[Google Guava - 21.0](https://github.com/google/guava)
+[Google Guava - 23.0](https://github.com/google/guava)
 
 
-[LWJGL - 3.1.1](https://www.lwjgl.org/)
+[LWJGL - 3.1.2](https://www.lwjgl.org/)
 
 
-[NIO(Netty) - 4.1.7.Final](http://netty.io/)
+[NIO(Netty) - 4.1.15.Final](http://netty.io/)
 
 
-[JOML - 1.9.1](https://github.com/JOML-CI/JOML)
+[JOML - 1.9.4](https://github.com/JOML-CI/JOML)
 
 
-[SteamWorks Java Wrapper - 1.6.1](https://github.com/code-disaster/steamworks4j)
+[SteamWorks Java Wrapper - 1.6.2](https://github.com/code-disaster/steamworks4j)
 
 以上为程序所使用到的库。更多信息请参阅[build.gradle](build.gradle)。
