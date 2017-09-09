@@ -14,7 +14,7 @@ import com.sowpb.sow.util.Logger;
  */
 public class Window {
 
-	private static final Logger logger = new Logger("Client/Render");
+	private static final Logger logger = new Logger("Render");
 
 	private long handle;
 
@@ -59,7 +59,7 @@ public class Window {
 		if (handle == NULL)
 			throw new RuntimeException("Failed to create a GLFW window.");
 
-		logger.info("Successfully created a window with handle" + Double.toString(handle) + ".");
+		logger.info("Successfully created a window with handle " + Double.toString(handle) + ".");
 		glfwShowWindow(handle);
 		glfwMakeContextCurrent(handle);
 

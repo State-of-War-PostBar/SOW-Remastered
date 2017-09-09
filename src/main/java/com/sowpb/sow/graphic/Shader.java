@@ -15,7 +15,7 @@ import com.sowpb.sow.util.Utils;
 
 public class Shader {
 
-	private static final Logger logger = new Logger("Client/Render");
+	private static final Logger logger = new Logger("Render");
 
 	enum ShaderType {
 		VERTEX, FRAGMENT, GEOMETRY, TESS_CONTROL, TESS_EVALUATION, ALL

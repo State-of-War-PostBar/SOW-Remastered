@@ -16,7 +16,7 @@ public class Main {
 
 		logger.info("Shutting down client...");
 		Trim.abrogate();
-		logger.info("The client is successfullu shut down.");
+		logger.info("The client is successfully shut down.");
 	}
 
 }
