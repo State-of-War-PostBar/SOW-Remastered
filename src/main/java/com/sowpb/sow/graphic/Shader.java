@@ -53,156 +53,33 @@ public class Shader {
 		prog = glCreateProgram();
 		switch (type) {
 		case VERTEX:
-			vs = glCreateShader(GL_VERTEX_SHADER);
-			try {
-				glShaderSource(vs, Utils.readFileToSingleString(file + ".vs"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			glCompileShader(vs);
-			if (glGetShaderi(vs, GL_COMPILE_STATUS) != 1) {
-				logger.error("ERROR AT LOADING A OPENGL VERTEX SHADER!");
-				logger.error(glGetShaderInfoLog(vs));
-			}
-			glAttachShader(prog, vs);
-			glBindAttribLocation(prog, attr++, "vertices");
+			loadVertexShader(file);
 			break;
 
 		case FRAGMENT:
-			fs = glCreateShader(GL_FRAGMENT_SHADER);
-			try {
-				glShaderSource(fs, Utils.readFileToSingleString(file + ".fs"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			glCompileShader(fs);
-			if (glGetShaderi(fs, GL_COMPILE_STATUS) != 1) {
-				logger.error("ERROR AT LOADING A OPENGL FRAGMENT SHADER!");
-				logger.error(glGetShaderInfoLog(fs));
-			}
-			glAttachShader(prog, fs);
-			glBindAttribLocation(prog, attr++, "textures");
+			loadFragmentShader(file);
 			break;
 
 		case GEOMETRY:
-			gs = glCreateShader(GL_GEOMETRY_SHADER);
-			try {
-				glShaderSource(gs, Utils.readFileToSingleString(file + ".gs"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			glCompileShader(gs);
-			if (glGetShaderi(gs, GL_COMPILE_STATUS) != 1) {
-				logger.error("ERROR AT LOADING A OPENGL GEOMETRIC SHADER!");
-				logger.error(glGetShaderInfoLog(gs));
-			}
-			glAttachShader(prog, gs);
-			glBindAttribLocation(prog, attr++, "geometries");
+			loadGeometricShader(file);
 			break;
 
 		case TESS_CONTROL:
-			tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
-			try {
-				glShaderSource(tcs, Utils.readFileToSingleString(file + ".tcs"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			glCompileShader(tcs);
-			if (glGetShaderi(tcs, GL_COMPILE_STATUS) != 1) {
-				logger.error("ERROR AT LOADING A OPENGL TESSELLATION CONTROLLING SHADER!");
-				logger.error(glGetShaderInfoLog(tcs));
-			}
-			glAttachShader(prog, tcs);
-			glBindAttribLocation(prog, attr++, "tess_control");
+			loadTessControllingShader(file);
 			break;
 
 		case TESS_EVALUATION:
-			tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
-			try {
-				glShaderSource(tes, Utils.readFileToSingleString(file + ".tes"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			glCompileShader(tes);
-			if (glGetShaderi(tes, GL_COMPILE_STATUS) != 1) {
-				logger.error("ERROR AT LOADING A OPENGL TESSELLATION EVALUATING SHADER!");
-				logger.error(glGetShaderInfoLog(tes));
-			}
-			glAttachShader(prog, tes);
-			glBindAttribLocation(prog, attr++, "tess_evaluation");
+			loadTessEvaluatingShader(file);
 			break;
 
 		case ALL:
-			vs = glCreateShader(GL_VERTEX_SHADER);
-			try {
-				glShaderSource(vs, Utils.readFileToSingleString(file + ".vs"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			glCompileShader(vs);
-			if (glGetShaderi(vs, GL_COMPILE_STATUS) != 1) {
-				logger.error("ERROR AT LOADING A OPENGL VERTEX SHADER!");
-				logger.error(glGetShaderInfoLog(vs));
-			}
-			glAttachShader(prog, vs);
-			glBindAttribLocation(prog, attr++, "vertices");
-
-			fs = glCreateShader(GL_FRAGMENT_SHADER);
-			try {
-				glShaderSource(fs, Utils.readFileToSingleString(file + ".fs"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			glCompileShader(fs);
-			if (glGetShaderi(fs, GL_COMPILE_STATUS) != 1) {
-				logger.error("ERROR AT LOADING A OPENGL FRAGMENT SHADER!");
-				logger.error(glGetShaderInfoLog(fs));
-			}
-			glAttachShader(prog, fs);
-			glBindAttribLocation(prog, attr++, "textures");
-
-			gs = glCreateShader(GL_GEOMETRY_SHADER);
-			try {
-				glShaderSource(gs, Utils.readFileToSingleString(file + ".gs"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			glCompileShader(gs);
-			if (glGetShaderi(gs, GL_COMPILE_STATUS) != 1) {
-				logger.error("ERROR AT LOADING A OPENGL GEOMETRIC SHADER!");
-				logger.error(glGetShaderInfoLog(gs));
-			}
-			glAttachShader(prog, gs);
-			glBindAttribLocation(prog, attr++, "geometries");
-
-			tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
-			try {
-				glShaderSource(tcs, Utils.readFileToSingleString(file + ".tcs"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			glCompileShader(tcs);
-			if (glGetShaderi(tcs, GL_COMPILE_STATUS) != 1) {
-				logger.error("ERROR AT LOADING A OPENGL TESSELLATION CONTROLLING SHADER!");
-				logger.error(glGetShaderInfoLog(tcs));
-			}
-			glAttachShader(prog, tcs);
-			glBindAttribLocation(prog, attr++, "tess_control");
-
-			tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
-			try {
-				glShaderSource(tes, Utils.readFileToSingleString(file + ".tes"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			glCompileShader(tes);
-			if (glGetShaderi(tes, GL_COMPILE_STATUS) != 1) {
-				logger.error("ERROR AT LOADING A OPENGL TESSELLATION EVALUATING SHADER!");
-				logger.error(glGetShaderInfoLog(tes));
-			}
-			glAttachShader(prog, tes);
-			glBindAttribLocation(prog, attr++, "tess_evaluation");
+			loadVertexShader(file);
+			loadFragmentShader(file);
+			loadGeometricShader(file);
+			loadTessControllingShader(file);
+			loadTessEvaluatingShader(file);
 			break;
+
 		default:
 			break;
 		}
@@ -218,6 +95,86 @@ public class Shader {
 			logger.error("ERROR AT VALIDATING A OPENGL SHADER!");
 			logger.error(glGetProgramInfoLog(prog));
 		}
+	}
+
+	public void loadVertexShader(String file) {
+		vs = glCreateShader(GL_VERTEX_SHADER);
+		try {
+			glShaderSource(vs, Utils.readFileToSingleString(file + ".vs"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		glCompileShader(vs);
+		if (glGetShaderi(vs, GL_COMPILE_STATUS) != 1) {
+			logger.error("ERROR AT LOADING A OPENGL VERTEX SHADER!");
+			logger.error(glGetShaderInfoLog(vs));
+		}
+		glAttachShader(prog, vs);
+		glBindAttribLocation(prog, attr++, "vertices");
+	}
+
+	public void loadFragmentShader(String file) {
+		fs = glCreateShader(GL_FRAGMENT_SHADER);
+		try {
+			glShaderSource(fs, Utils.readFileToSingleString(file + ".fs"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		glCompileShader(fs);
+		if (glGetShaderi(fs, GL_COMPILE_STATUS) != 1) {
+			logger.error("ERROR AT LOADING A OPENGL FRAGMENT SHADER!");
+			logger.error(glGetShaderInfoLog(fs));
+		}
+		glAttachShader(prog, fs);
+		glBindAttribLocation(prog, attr++, "textures");
+	}
+
+	public void loadGeometricShader(String file) {
+		gs = glCreateShader(GL_GEOMETRY_SHADER);
+		try {
+			glShaderSource(gs, Utils.readFileToSingleString(file + ".gs"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		glCompileShader(gs);
+		if (glGetShaderi(gs, GL_COMPILE_STATUS) != 1) {
+			logger.error("ERROR AT LOADING A OPENGL GEOMETRIC SHADER!");
+			logger.error(glGetShaderInfoLog(gs));
+		}
+		glAttachShader(prog, gs);
+		glBindAttribLocation(prog, attr++, "geometries");
+	}
+
+	public void loadTessControllingShader(String file) {
+		tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
+		try {
+			glShaderSource(tcs, Utils.readFileToSingleString(file + ".tcs"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		glCompileShader(tcs);
+		if (glGetShaderi(tcs, GL_COMPILE_STATUS) != 1) {
+			logger.error("ERROR AT LOADING A OPENGL TESSELLATION CONTROLLING SHADER!");
+			logger.error(glGetShaderInfoLog(tcs));
+		}
+		glAttachShader(prog, tcs);
+		glBindAttribLocation(prog, attr++, "tess_control");
+	}
+
+	public void loadTessEvaluatingShader(String file) {
+		tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
+		try {
+			glShaderSource(tes, Utils.readFileToSingleString(file + ".tes"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		glCompileShader(tes);
+		if (glGetShaderi(tes, GL_COMPILE_STATUS) != 1) {
+			logger.error("ERROR AT LOADING A OPENGL TESSELLATION EVALUATING SHADER!");
+			logger.error(glGetShaderInfoLog(tes));
+		}
+		glAttachShader(prog, tes);
+		glBindAttribLocation(prog, attr++, "tess_evaluation");
 	}
 
 	/**
