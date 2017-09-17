@@ -19,7 +19,6 @@ public class Shader {
 
 	enum ShaderType {
 		VERTEX, FRAGMENT, GEOMETRY, TESS_CONTROL, TESS_EVALUATION, ALL
-		// COMPUTE;
 	}
 
 	/**

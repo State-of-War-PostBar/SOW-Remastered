@@ -52,10 +52,8 @@ public class Window {
 
 		GLFWVidMode vid = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
-		if (fullScreen)
-			handle = glfwCreateWindow(vid.width(), vid.height(), title, glfwGetPrimaryMonitor(), NULL);
-		else
-			handle = glfwCreateWindow(width, height, title, NULL, NULL);
+		handle = glfwCreateWindow(vid.width(), vid.height(), title, fullScreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+
 		if (handle == NULL)
 			throw new RuntimeException("Failed to create a GLFW window.");
 
