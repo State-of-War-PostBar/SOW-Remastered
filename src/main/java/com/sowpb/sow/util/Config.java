@@ -79,8 +79,8 @@ public class Config {
 	 * Get a configuration directly by an index. This has lower efficiency than
 	 * declaring the block.
 	 * 
-	 * @param The
-	 *            index of the configuration in the ini.
+	 * @param index
+	 *            The index of the configuration in the ini.
 	 */
 	public static String get(String index) {
 		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet()) {
@@ -115,8 +115,8 @@ public class Config {
 	 * 
 	 * @throws IOException
 	 */
-	private static void putConfigs(LinkedHashMap<String, LinkedHashMap<String, String>> c) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet()) {
+	private static void putConfigs(LinkedHashMap<String, LinkedHashMap<String, String>> conf) {
+		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet()) {
 			for (Entry<String, String> entry2 : entry.getValue().entrySet()) {
 				file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
 			}
