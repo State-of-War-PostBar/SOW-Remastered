@@ -7,7 +7,7 @@ project.ext.jomlVersion = "1.9.4"
 project.ext.steamworks4jVersion = "1.6.2"
 project.ext.ini4jVersion = "0.5.4"
 
-archivesBaseName = "SOW-Remastered"
+archivesBaseName = "State-Of-War Remastered"
 version = "1.0.00"
 
 repositories {
