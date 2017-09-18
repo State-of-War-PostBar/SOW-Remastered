@@ -18,11 +18,11 @@ public class Shader {
 	private static final Logger logger = new Logger("Render");
 
 	enum ShaderType {
-		VERTEX, FRAGMENT, GEOMETRY, TESS_CONTROL, TESS_EVALUATION, ALL
+		VERTEX, FRAGMENT, GEOMETRY, TESS_CONTROL, TESS_EVALUATION
 	}
 
 	/**
-	 * The shader program consists of differnt types of shaders.
+	 * The shader program consists of different types of shader.
 	 */
 	private int prog;
 
@@ -42,7 +42,7 @@ public class Shader {
 	private int gs;
 
 	/**
-	 * The tessellation part of the shader if exists.
+	 * The tessellation parts of the shader if exists.
 	 */
 	private int tcs, tes;
 
@@ -68,14 +68,6 @@ public class Shader {
 			break;
 
 		case TESS_EVALUATION:
-			loadTessEvaluatingShader(file);
-			break;
-
-		case ALL:
-			loadVertexShader(file);
-			loadFragmentShader(file);
-			loadGeometricShader(file);
-			loadTessControllingShader(file);
 			loadTessEvaluatingShader(file);
 			break;
 

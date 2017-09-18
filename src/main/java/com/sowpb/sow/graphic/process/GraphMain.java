@@ -13,16 +13,17 @@ import static org.lwjgl.glfw.GLFW.*;
  */
 public class GraphMain {
 
-	private static Logger logger = new Logger("Render");
+	private static final Logger logger = new Logger("Render");
 
-	private static Window mainWin = new Window(References.PROG_NAME, Integer.parseInt(Config.get("GUI", "WinWidth")),
-			Integer.parseInt(Config.get("GUI", "WinHeight")), Boolean.getBoolean(Config.get("GUI", "FullScreen")),
-			Boolean.getBoolean(Config.get("GUI", "VSync")));
+	private static Window mainWin;
 
 	/**
 	 * Setup the graphic window.
 	 */
 	public static void startupGraphic() {
+		mainWin = new Window(References.PROG_NAME, Integer.parseInt(Config.get("GUI", "WinWidth")),
+				Integer.parseInt(Config.get("GUI", "WinHeight")), Boolean.parseBoolean(Config.get("GUI", "VSync")),
+				Boolean.parseBoolean(Config.get("GUI", "FullScreen")));
 		mainWin.initWindow();
 	}
 

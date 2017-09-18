@@ -12,8 +12,7 @@ import org.ini4j.Profile.Section;
 public class Config {
 
 	/**
-	 * The configurations read from the ini file. Please make sure that this is
-	 * private.
+	 * The configurations read from the ini file.
 	 */
 	private static LinkedHashMap<String, LinkedHashMap<String, String>> configs = new LinkedHashMap<>();
 
@@ -23,17 +22,15 @@ public class Config {
 	private static Ini file;
 
 	public static void init() {
-		Utils.createFile("SOW-Config.ini", false);
 		DefaultConfig.initDefault();
+		configs.putAll(DefaultConfig.defaults);
+		Utils.createFile("SOW-Config.ini", false);
 		try {
 			file = new Ini(new File("SOW-Config.ini"));
-			configs.putAll(DefaultConfig.defaults);
 			readAllConfig(file);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			Utils.createFile("SOW-Config.ini", true);
-			configs.clear();
-			configs.putAll(DefaultConfig.defaults);
 			return;
 		}
 	}
@@ -76,19 +73,19 @@ public class Config {
 	}
 
 	/**
-	 * Get a configuration directly by an index. This has lower efficiency than
-	 * declaring the block.
+	 * Get a configuration directly by an index. This method has lower
+	 * efficiency than declaring the block.
 	 * 
 	 * @param index
 	 *            The index of the configuration in the ini.
 	 */
 	public static String get(String index) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet()) {
+		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet())
 			if (entry.getValue().containsKey(index))
 				return entry.getValue().get(index);
 			else
 				return DefaultConfig.get(index);
-		}
+
 		return DefaultConfig.get(index);
 	}
 
@@ -102,7 +99,6 @@ public class Config {
 	 * @param value
 	 *            The value of the configuration.
 	 */
-	// Will rewrite this section.
 	public static void set(String block, String index, String value) {
 		LinkedHashMap<String, String> temp = new LinkedHashMap<>();
 		temp.putAll(configs.get(block));
@@ -116,11 +112,10 @@ public class Config {
 	 * @throws IOException
 	 */
 	private static void putConfigs(LinkedHashMap<String, LinkedHashMap<String, String>> conf) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet()) {
-			for (Entry<String, String> entry2 : entry.getValue().entrySet()) {
+		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet())
+			for (Entry<String, String> entry2 : entry.getValue().entrySet())
 				file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
-			}
-		}
+
 		try {
 			file.store();
 		} catch (IOException e) {
@@ -131,7 +126,7 @@ public class Config {
 	/**
 	 * Default configurations of the game system.
 	 */
-	// Yes, it's hard coding. Will consider storing the defualt configurations
+	// Yes, it's hard coding. Will consider storing the default configurations
 	// inside a resource file of archive later.
 	private static final class DefaultConfig {
 		static LinkedHashMap<String, LinkedHashMap<String, String>> defaults = new LinkedHashMap<>();
@@ -139,11 +134,12 @@ public class Config {
 		static void initDefault() {
 
 			LinkedHashMap<String, String> gui = new LinkedHashMap<>();
-			gui.put("WinWidth", "1024");
-			gui.put("WinHeight", "768");
-			gui.put("FullScreen", "True");
-			gui.put("WideScreen", "False");
-			gui.put("VSync", "true");
+			gui.put("WinWidth", "1280");
+			gui.put("WinHeight", "1024");
+			gui.put("FullScreen", "false");
+			gui.put("WideScreen", "false");
+			gui.put("VSync", "false");
+			gui.put("MaxFPS", "60");
 
 			defaults.put("GUI", gui);
 		}
@@ -152,14 +148,15 @@ public class Config {
 			if (defaults.containsKey(block))
 				if (defaults.get(block).containsKey(index))
 					return defaults.get(block).get(index);
+
 			throw new RuntimeException("No such field in default configurations.");
 		}
 
 		static String get(String index) {
-			for (Entry<String, LinkedHashMap<String, String>> entry : defaults.entrySet()) {
+			for (Entry<String, LinkedHashMap<String, String>> entry : defaults.entrySet())
 				if (entry.getValue().containsKey(index))
 					return entry.getValue().get(index);
-			}
+
 			throw new RuntimeException("No such field in default configurations.");
 		}
 

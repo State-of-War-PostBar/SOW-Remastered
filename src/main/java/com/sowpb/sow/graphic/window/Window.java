@@ -4,7 +4,6 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
 import com.sowpb.sow.util.Logger;
@@ -24,15 +23,7 @@ public class Window {
 
 	private boolean fullScreen;
 
-	public String title;
-
-	public Window(String title, int width, int height, boolean vSync) {
-		this.title = title;
-		this.width = width;
-		this.height = height;
-		this.vSync = vSync;
-		this.fullScreen = true;
-	}
+	private String title;
 
 	public Window(String title, int width, int height, boolean vSync, boolean fs) {
 		this.title = title;
@@ -50,14 +41,12 @@ public class Window {
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-		GLFWVidMode vid = glfwGetVideoMode(glfwGetPrimaryMonitor());
-
-		handle = glfwCreateWindow(vid.width(), vid.height(), title, fullScreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+		handle = glfwCreateWindow(width, height, title, fullScreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
 		if (handle == NULL)
 			throw new RuntimeException("Failed to create a GLFW window.");
 
-		logger.info("Successfully created a window with handle " + Double.toString(handle) + ".");
+		logger.info("Successfully created a window with handle " + handle + ".");
 		glfwShowWindow(handle);
 		glfwMakeContextCurrent(handle);
 
@@ -86,6 +75,10 @@ public class Window {
 
 	public int getHeight() {
 		return this.height;
+	}
+
+	public String getTitle() {
+		return this.title;
 	}
 
 	public boolean isvSync() {

@@ -11,7 +11,7 @@ public class Logger {
 	/**
 	 * The log file.
 	 */
-	private File log = new File(".\\SOW-Log.txt");
+	private File log = new File("SOW-Log.txt");
 
 	/**
 	 * The thread that this logger is recording.
@@ -22,8 +22,8 @@ public class Logger {
 		this.thread = "unknown";
 	}
 
-	public Logger(String _thread) {
-		this.thread = _thread;
+	public Logger(String thread) {
+		this.thread = thread;
 	}
 
 	/**
@@ -49,13 +49,13 @@ public class Logger {
 	 */
 	public void info(String msg) {
 		StringBuilder b = new StringBuilder();
-		b.append("[");
+		b.append('[');
 		b.append(getSysTimeStr());
-		b.append("]");
+		b.append(']');
 		b.append("[INFO]");
 		b.append("[Thread_");
 		b.append(thread);
-		b.append("]");
+		b.append(']');
 		b.append(msg);
 		System.out.println(b.toString());
 		writeToLog(b.toString());
@@ -67,13 +67,13 @@ public class Logger {
 	 */
 	public void debug(String msg) {
 		StringBuilder b = new StringBuilder();
-		b.append("[");
+		b.append('[');
 		b.append(getSysTimeStr());
-		b.append("]");
+		b.append(']');
 		b.append("[DEBUG]");
 		b.append("[Thread_");
 		b.append(thread);
-		b.append("]");
+		b.append(']');
 		b.append(msg);
 		System.out.println(b.toString());
 		writeToLog(b.toString());
@@ -89,13 +89,13 @@ public class Logger {
 	 */
 	public void warn(String msg) {
 		StringBuilder b = new StringBuilder();
-		b.append("[");
+		b.append('[');
 		b.append(getSysTimeStr());
-		b.append("]");
+		b.append(']');
 		b.append("[WARNING]");
 		b.append("[Thread_");
 		b.append(thread);
-		b.append("]");
+		b.append(']');
 		b.append(msg);
 		System.out.println(b.toString());
 		writeToLog(b.toString());
@@ -109,13 +109,13 @@ public class Logger {
 	 */
 	public void error(String msg) {
 		StringBuilder b = new StringBuilder();
-		b.append("[");
+		b.append('[');
 		b.append(getSysTimeStr());
-		b.append("]");
+		b.append(']');
 		b.append("[ERROR]");
 		b.append("[Thread_");
 		b.append(thread);
-		b.append("]");
+		b.append(']');
 		b.append(msg);
 		System.out.println(b.toString());
 		writeToLog(b.toString());
@@ -123,20 +123,20 @@ public class Logger {
 
 	/**
 	 * <b><i>Level: Fatal</b></i> <br>
-	 * This type of message indicates the critical errors that can dump the <br>
-	 * whole program. Users should immediately report this type of message to
+	 * This type of message indicates the critical errors that can destroy the
 	 * <br>
-	 * the developers.
+	 * whole program. Users should report this type of message to <br>
+	 * the developers immediately.
 	 */
 	public void fatal(String msg) {
 		StringBuilder b = new StringBuilder();
-		b.append("[");
+		b.append('[');
 		b.append(getSysTimeStr());
-		b.append("]");
+		b.append(']');
 		b.append("[FATAL ERROR]");
 		b.append("[Thread_");
 		b.append(thread);
-		b.append("]");
+		b.append(']');
 		b.append(msg);
 		System.out.println(b.toString());
 		writeToLog(b.toString());

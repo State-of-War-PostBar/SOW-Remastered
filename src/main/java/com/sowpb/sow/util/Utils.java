@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class Utils {
 
@@ -62,7 +63,7 @@ public class Utils {
 		}
 		StringBuilder sb = new StringBuilder();
 		for (String x : lns)
-			sb.append(x).append("\n");
+			sb.append(x).append('\n');
 		return sb.toString();
 	}
 
@@ -84,7 +85,14 @@ public class Utils {
 		try {
 			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true)));
 			out.write(msg);
-			out.write("\r\n");
+			switch (getOS()) {
+			case Windows:
+				out.write("\r\n");
+				break;
+			default:
+				out.write('\n');
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -130,7 +138,27 @@ public class Utils {
 	 */
 	public static String getSysTimeStr() {
 		Calendar c = Calendar.getInstance();
-		return c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
+		return "" + c.get(Calendar.HOUR_OF_DAY) + ':' + c.get(Calendar.MINUTE) + ':' + c.get(Calendar.SECOND);
+	}
+
+	public static enum OSType {
+		Windows, MacOS, Linux, Other
+	};
+
+	public static OSType getOS() {
+
+		OSType detectedOS = null;
+		String OS = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
+		if ((OS.indexOf("mac") >= 0) || (OS.indexOf("darwin") >= 0))
+			detectedOS = OSType.MacOS;
+		else if (OS.indexOf("win") >= 0)
+			detectedOS = OSType.Windows;
+		else if (OS.indexOf("nux") >= 0)
+			detectedOS = OSType.Linux;
+		else
+			detectedOS = OSType.Other;
+
+		return detectedOS;
 	}
 
 }
