@@ -10,4 +10,6 @@ public class References {
 
 	public static final String URL = "www.stateofwar.cn";
 
+	public static final String DEFAULT_ENCODE = "utf-16";
+
 }

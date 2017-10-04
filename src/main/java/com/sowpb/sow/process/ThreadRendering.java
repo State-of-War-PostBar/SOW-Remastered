@@ -7,7 +7,6 @@ public class ThreadRendering implements ISOWThread {
 
 	private static final Logger logger = new Logger("Render");
 
-	@Override
 	public void run() {
 		logger.info("Rendering thread thriggered.");
 

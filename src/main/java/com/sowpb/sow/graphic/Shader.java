@@ -17,62 +17,77 @@ public class Shader {
 
 	private static final Logger logger = new Logger("Render");
 
-	enum ShaderType {
-		VERTEX, FRAGMENT, GEOMETRY, TESS_CONTROL, TESS_EVALUATION
+	public static enum ShaderType {
+		VERTEX("Vertex"), FRAGMENT("Fragment"), GEOMETRY("Geometry"), TESS_CONTROL("Tess_Control"), TESS_EVALUATION(
+				"Tess_evaluation");
+
+		private String name;
+
+		private ShaderType(String n) {
+			name = n;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		/**
+		 * Parse an OpenGL GLuint name to String names.
+		 */
+		static String glShaderName(int shader) {
+			switch (glGetShaderi(shader, GL_SHADER_TYPE)) {
+			case GL_VERTEX_SHADER:
+				return VERTEX.getName();
+			case GL_FRAGMENT_SHADER:
+				return FRAGMENT.getName();
+			case GL_GEOMETRY_SHADER:
+				return GEOMETRY.getName();
+			case GL_TESS_CONTROL_SHADER:
+				return TESS_CONTROL.getName();
+			case GL_TESS_EVALUATION_SHADER:
+				return TESS_EVALUATION.getName();
+			default:
+				return null;
+			}
+		}
 	}
 
 	/**
-	 * The shader program consists of different types of shader.
+	 * Create an OpenGL shader.
 	 */
-	private int prog;
-
-	/**
-	 * The vertex part of the shader if exists.
-	 */
-	private int vs;
-
-	/**
-	 * The fragment part of the shader if exists.
-	 */
-	private int fs;
-
-	/**
-	 * The geometric part of the shader if exists.
-	 */
-	private int gs;
-
-	/**
-	 * The tessellation parts of the shader if exists.
-	 */
-	private int tcs, tes;
-
-	private int attr = 0;
-
-	private Shader(String file, ShaderType type) {
-		prog = glCreateProgram();
+	public static int createShader(String fn, ShaderType type) {
 		switch (type) {
 		case VERTEX:
-			loadVertexShader(file);
-			break;
+			return loadVertexShader(fn);
 
 		case FRAGMENT:
-			loadFragmentShader(file);
-			break;
+			return loadFragmentShader(fn);
 
 		case GEOMETRY:
-			loadGeometricShader(file);
-			break;
+			return loadGeometricShader(fn);
 
 		case TESS_CONTROL:
-			loadTessControllingShader(file);
-			break;
+			return loadTessControllingShader(fn);
 
 		case TESS_EVALUATION:
-			loadTessEvaluatingShader(file);
-			break;
+			return loadTessEvaluatingShader(fn);
 
 		default:
-			break;
+			logger.error("Failed to create a  " + type.getName() + " shader with file" + fn + '!');
+			return -1;
+		}
+	}
+
+	/**
+	 * Create an OpenGL shader program.
+	 */
+	public static int createProgram(int[] shaders) {
+		int prog = glCreateProgram();
+		int attr = 0;
+
+		for (int shader : shaders) {
+			glAttachShader(prog, shader);
+			glBindAttribLocation(prog, attr++, ShaderType.glShaderName(shader));
 		}
 
 		glLinkProgram(prog);
@@ -86,110 +101,117 @@ public class Shader {
 			logger.error("ERROR AT VALIDATING A OPENGL SHADER!");
 			logger.error(glGetProgramInfoLog(prog));
 		}
+
+		return prog;
 	}
 
-	public void loadVertexShader(String file) {
-		vs = glCreateShader(GL_VERTEX_SHADER);
+	/**
+	 * Bind an OpenGL program to current rendering.
+	 */
+	public static void bindProgram(int prog) {
+		glUseProgram(prog);
+	}
+
+	public static int loadVertexShader(String file) {
+		int vs = glCreateShader(GL_VERTEX_SHADER);
 		try {
 			glShaderSource(vs, Utils.readFileToSingleString(file + ".vs"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		glCompileShader(vs);
 		if (glGetShaderi(vs, GL_COMPILE_STATUS) != 1) {
 			logger.error("ERROR AT LOADING A OPENGL VERTEX SHADER!");
 			logger.error(glGetShaderInfoLog(vs));
 		}
-		glAttachShader(prog, vs);
-		glBindAttribLocation(prog, attr++, "vertices");
+
+		return vs;
 	}
 
-	public void loadFragmentShader(String file) {
-		fs = glCreateShader(GL_FRAGMENT_SHADER);
+	public static int loadFragmentShader(String file) {
+		int fs = glCreateShader(GL_FRAGMENT_SHADER);
 		try {
 			glShaderSource(fs, Utils.readFileToSingleString(file + ".fs"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		glCompileShader(fs);
 		if (glGetShaderi(fs, GL_COMPILE_STATUS) != 1) {
 			logger.error("ERROR AT LOADING A OPENGL FRAGMENT SHADER!");
 			logger.error(glGetShaderInfoLog(fs));
 		}
-		glAttachShader(prog, fs);
-		glBindAttribLocation(prog, attr++, "textures");
+
+		return fs;
 	}
 
-	public void loadGeometricShader(String file) {
-		gs = glCreateShader(GL_GEOMETRY_SHADER);
+	public static int loadGeometricShader(String file) {
+		int gs = glCreateShader(GL_GEOMETRY_SHADER);
 		try {
 			glShaderSource(gs, Utils.readFileToSingleString(file + ".gs"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		glCompileShader(gs);
 		if (glGetShaderi(gs, GL_COMPILE_STATUS) != 1) {
 			logger.error("ERROR AT LOADING A OPENGL GEOMETRIC SHADER!");
 			logger.error(glGetShaderInfoLog(gs));
 		}
-		glAttachShader(prog, gs);
-		glBindAttribLocation(prog, attr++, "geometries");
+
+		return gs;
 	}
 
-	public void loadTessControllingShader(String file) {
-		tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
+	public static int loadTessControllingShader(String file) {
+		int tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
 		try {
 			glShaderSource(tcs, Utils.readFileToSingleString(file + ".tcs"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		glCompileShader(tcs);
 		if (glGetShaderi(tcs, GL_COMPILE_STATUS) != 1) {
 			logger.error("ERROR AT LOADING A OPENGL TESSELLATION CONTROLLING SHADER!");
 			logger.error(glGetShaderInfoLog(tcs));
 		}
-		glAttachShader(prog, tcs);
-		glBindAttribLocation(prog, attr++, "tess_control");
+
+		return tcs;
 	}
 
-	public void loadTessEvaluatingShader(String file) {
-		tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
+	public static int loadTessEvaluatingShader(String file) {
+		int tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
 		try {
 			glShaderSource(tes, Utils.readFileToSingleString(file + ".tes"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		glCompileShader(tes);
 		if (glGetShaderi(tes, GL_COMPILE_STATUS) != 1) {
 			logger.error("ERROR AT LOADING A OPENGL TESSELLATION EVALUATING SHADER!");
 			logger.error(glGetShaderInfoLog(tes));
 		}
-		glAttachShader(prog, tes);
-		glBindAttribLocation(prog, attr++, "tess_evaluation");
+
+		return tes;
 	}
 
-	/**
-	 * Bind the current shader.
-	 */
-	public void bind() {
-		glUseProgram(prog);
-	}
-
-	public void setUniformI(String name, int val) {
+	public static void setUniformI(int prog, String name, int val) {
 		int loc = glGetUniformLocation(prog, name);
 		if (loc != -1) {
 			glUniform1i(loc, val);
 		}
 	}
 
-	public void setUniformF(String name, float val) {
+	public static void setUniformF(int prog, String name, float val) {
 		int loc = glGetUniformLocation(prog, name);
 		if (loc != -1) {
 			glUniform1f(loc, val);
 		}
 	}
 
-	public void setUniformM4f(String name, Matrix4f val) {
+	public static void setUniformM4f(int prog, String name, Matrix4f val) {
 		int loc = glGetUniformLocation(prog, name);
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(4 * 4);
 		val.get(buffer);
@@ -197,20 +219,4 @@ public class Shader {
 			glUniformMatrix4fv(loc, false, buffer);
 		}
 	}
-
-	protected void finalize() throws Throwable {
-		glDetachShader(prog, vs);
-		glDetachShader(prog, fs);
-		glDetachShader(prog, gs);
-		glDetachShader(prog, tcs);
-		glDetachShader(prog, tes);
-		glDeleteShader(vs);
-		glDeleteShader(fs);
-		glDeleteShader(gs);
-		glDeleteShader(tcs);
-		glDeleteShader(tes);
-		glDeleteProgram(prog);
-		super.finalize();
-	}
-
 }

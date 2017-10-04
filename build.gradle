@@ -1,8 +1,8 @@
 apply plugin: "java"
 
-project.ext.guavaVersion = "23.0"
-project.ext.nettyVersion = "4.1.15.Final"
-project.ext.lwjglVersion = "3.1.2"
+project.ext.guavaVersion = "23.1-jre"
+project.ext.nettyVersion = "4.1.16.Final"
+project.ext.lwjglVersion = "3.1.3"
 project.ext.jomlVersion = "1.9.4"
 project.ext.steamworks4jVersion = "1.6.2"
 project.ext.ini4jVersion = "0.5.4"

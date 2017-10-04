@@ -5,11 +5,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import com.google.common.io.Resources;
+import com.sowpb.sow.References;
 
 public class Utils {
 
@@ -85,14 +90,7 @@ public class Utils {
 		try {
 			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true)));
 			out.write(msg);
-			switch (getOS()) {
-			case Windows:
-				out.write("\r\n");
-				break;
-			default:
-				out.write('\n');
-			}
-
+			out.write(nl());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -134,11 +132,40 @@ public class Utils {
 	}
 
 	/**
+	 * Get the content of a resource file as a array of bytes.
+	 */
+	public static byte[] getRes(String path) throws IOException {
+		URL url = Resources.getResource(path);
+		return Resources.toByteArray(url);
+	}
+
+	/**
+	 * Get the content of a resource file as a list of string.
+	 */
+	public static List<String> getResContent(String path) throws IOException {
+		URL url = Resources.getResource(path);
+		Charset cs = Charset.forName(References.DEFAULT_ENCODE);
+		return Resources.readLines(url, cs);
+	}
+
+	/**
 	 * The system time in the format of hh:mm:ss.
 	 */
 	public static String getSysTimeStr() {
 		Calendar c = Calendar.getInstance();
 		return "" + c.get(Calendar.HOUR_OF_DAY) + ':' + c.get(Calendar.MINUTE) + ':' + c.get(Calendar.SECOND);
+	}
+
+	/**
+	 * Generate a new line.
+	 */
+	public static String nl() {
+		switch (getOS()) {
+		case Windows:
+			return "\r\n";
+		default:
+			return "\n";
+		}
 	}
 
 	public static enum OSType {

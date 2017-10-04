@@ -33,6 +33,7 @@ public class Logger {
 	 */
 	public void logFile() {
 		createFile(log.toString(), true);
+		info("Logger initialized.");
 	}
 
 	/**

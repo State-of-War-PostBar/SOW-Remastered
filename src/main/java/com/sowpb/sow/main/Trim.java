@@ -1,6 +1,7 @@
 package com.sowpb.sow.main;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.system.Library;
 
 import com.sowpb.sow.util.Config;
 import com.sowpb.sow.util.Logger;
@@ -14,6 +15,7 @@ public class Trim {
 	protected static void initiate() {
 		logger.logFile();
 
+		Library.initialize();
 		if (!glfwInit())
 			throw new IllegalStateException("Failed to initialize GLFW.");
 		GLFWErrorCallback.createPrint(System.err).set();

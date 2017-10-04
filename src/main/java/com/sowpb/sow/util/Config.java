@@ -126,8 +126,6 @@ public class Config {
 	/**
 	 * Default configurations of the game system.
 	 */
-	// Yes, it's hard coding. Will consider storing the default configurations
-	// inside a resource file of archive later.
 	private static final class DefaultConfig {
 		static LinkedHashMap<String, LinkedHashMap<String, String>> defaults = new LinkedHashMap<>();
 
