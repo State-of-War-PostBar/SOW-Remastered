@@ -90,7 +90,7 @@ public class Utils {
 		try {
 			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true)));
 			out.write(msg);
-			out.write(nl());
+			out.write(nL());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -142,7 +142,7 @@ public class Utils {
 	/**
 	 * Get the content of a resource file as a list of string.
 	 */
-	public static List<String> getResContent(String path) throws IOException {
+	public static List<String> getResAsStrings(String path) throws IOException {
 		URL url = Resources.getResource(path);
 		Charset cs = Charset.forName(References.DEFAULT_ENCODE);
 		return Resources.readLines(url, cs);
@@ -159,7 +159,7 @@ public class Utils {
 	/**
 	 * Generate a new line.
 	 */
-	public static String nl() {
+	public static String nL() {
 		switch (getOS()) {
 		case Windows:
 			return "\r\n";

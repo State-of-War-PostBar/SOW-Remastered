@@ -19,7 +19,7 @@ public class Logger {
 	private String thread;
 
 	public Logger() {
-		this.thread = "unknown";
+		this.thread = "Unknown";
 	}
 
 	public Logger(String thread) {
