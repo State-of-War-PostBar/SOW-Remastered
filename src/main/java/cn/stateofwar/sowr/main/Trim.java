@@ -1,24 +1,24 @@
-package com.sowpb.sow.main;
+package cn.stateofwar.sowr.main;
 
-import org.lwjgl.glfw.GLFWErrorCallback;
+import static org.lwjgl.glfw.GLFW.glfwInit;
+import static org.lwjgl.glfw.GLFW.glfwTerminate;
+
 import org.lwjgl.system.Library;
 
-import com.sowpb.sow.util.Config;
-import com.sowpb.sow.util.Logger;
+import cn.stateofwar.sowr.util.Config;
+import cn.stateofwar.sowr.util.Logger;
 
-import static org.lwjgl.glfw.GLFW.*;
-
+/**
+ * Preparations and terminations of the program.
+ */
 public class Trim {
 
 	private static final Logger logger = new Logger("Main");
 
-	protected static void initiate() {
-		logger.logFile();
-
+	protected static void init() {
 		Library.initialize();
 		if (!glfwInit())
 			throw new IllegalStateException("Failed to initialize GLFW.");
-		GLFWErrorCallback.createPrint(System.err).set();
 		logger.info("Successfully initialized the Lwjgl library.");
 
 		Config.init();
