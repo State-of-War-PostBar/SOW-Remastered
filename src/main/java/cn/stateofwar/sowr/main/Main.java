@@ -1,19 +1,26 @@
-package com.sowpb.sow.main;
+package cn.stateofwar.sowr.main;
 
-import com.sowpb.sow.util.Logger;
+import cn.stateofwar.sowr.core.SOW;
+import cn.stateofwar.sowr.util.Logger;
 
 public class Main {
 
 	private static final Logger logger = new Logger("Main");
 
 	public static void main(String[] args) {
-		Trim.initiate();
+
+		logger.init();
 		logger.info("Welcome to the new State of War!");
 		logger.info("Initializing the program...");
+		Trim.init();
+
+		SOW.startGame();
+		SOW.dispose();
 
 		logger.info("Shutting down client...");
 		Trim.abrogate();
 		logger.info("The client is successfully shut down.");
+
 	}
 
 }
