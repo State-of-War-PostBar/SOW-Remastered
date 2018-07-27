@@ -97,6 +97,8 @@ public class Shader {
 			logger.error(glGetShaderInfoLog(vs));
 		}
 
+		logger.info("Successfully created a OpenGL vertex shader.");
+
 		return new Shader(vs, ShaderType.VERTEX);
 	}
 
@@ -118,6 +120,8 @@ public class Shader {
 			logger.error("ERROR AT LOADING A OPENGL VERTEX SHADER!");
 			logger.error(glGetShaderInfoLog(vs));
 		}
+
+		logger.info("Successfully created a OpenGL vertex shader.");
 
 		return new Shader(vs, ShaderType.VERTEX);
 	}
@@ -141,6 +145,8 @@ public class Shader {
 			logger.error(glGetShaderInfoLog(fs));
 		}
 
+		logger.info("Successfully created a OpenGL fragment shader.");
+
 		return new Shader(fs, ShaderType.FRAGMENT);
 	}
 
@@ -162,6 +168,8 @@ public class Shader {
 			logger.error("ERROR AT LOADING A OPENGL FRAGMENT SHADER!");
 			logger.error(glGetShaderInfoLog(fs));
 		}
+
+		logger.info("Successfully created a OpenGL fragment shader.");
 
 		return new Shader(fs, ShaderType.FRAGMENT);
 	}
@@ -185,6 +193,8 @@ public class Shader {
 			logger.error(glGetShaderInfoLog(gs));
 		}
 
+		logger.info("Successfully created a OpenGL geometry shader.");
+
 		return new Shader(gs, ShaderType.GEOMETRY);
 	}
 
@@ -206,6 +216,8 @@ public class Shader {
 			logger.error("ERROR AT LOADING A OPENGL GEOMETRIC SHADER!");
 			logger.error(glGetShaderInfoLog(gs));
 		}
+
+		logger.info("Successfully created a OpenGL geometry shader.");
 
 		return new Shader(gs, ShaderType.GEOMETRY);
 	}
@@ -229,6 +241,8 @@ public class Shader {
 			logger.error(glGetShaderInfoLog(tcs));
 		}
 
+		logger.info("Successfully created a OpenGL tessellation controlling shader.");
+
 		return new Shader(tcs, ShaderType.TESS_CONTROL);
 	}
 
@@ -250,6 +264,8 @@ public class Shader {
 			logger.error("ERROR AT LOADING A OPENGL TESSELLATION CONTROLLING SHADER!");
 			logger.error(glGetShaderInfoLog(tcs));
 		}
+
+		logger.info("Successfully created a OpenGL tessellation controlling shader.");
 
 		return new Shader(tcs, ShaderType.TESS_CONTROL);
 	}
@@ -273,6 +289,8 @@ public class Shader {
 			logger.error(glGetShaderInfoLog(tes));
 		}
 
+		logger.info("Successfully created a OpenGL tessellation evaluating shader.");
+
 		return new Shader(tes, ShaderType.TESS_EVALUATION);
 	}
 
@@ -294,6 +312,8 @@ public class Shader {
 			logger.error("ERROR AT LOADING A OPENGL TESSELLATION EVALUATING SHADER!");
 			logger.error(glGetShaderInfoLog(tes));
 		}
+
+		logger.info("Successfully created a OpenGL tessellation evaluating shader.");
 
 		return new Shader(tes, ShaderType.TESS_EVALUATION);
 	}

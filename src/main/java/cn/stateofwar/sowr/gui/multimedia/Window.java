@@ -7,8 +7,6 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 import org.lwjgl.opengl.GL;
 
 import cn.stateofwar.sowr.util.Logger;
-import cn.stateofwar.sowr.util.Utils;
-import cn.stateofwar.sowr.util.Utils.OSType;
 
 /**
  * A regular GLFW window that is not resizable.
@@ -54,9 +52,7 @@ public class Window {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		/* GLFW_OPENGL_FORWARD_COMPAT does not seem very necessary except for MacOS. */
-		if (Utils.getOS() == OSType.MacOS)
-			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 		handle = glfwCreateWindow(width, height, title, fullScreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 

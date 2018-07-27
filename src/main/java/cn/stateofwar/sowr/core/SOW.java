@@ -1,7 +1,9 @@
 package cn.stateofwar.sowr.core;
 
+import static org.lwjgl.opengl.GL11.*;
+
 import cn.stateofwar.sowr.gui.Graphic;
-import cn.stateofwar.sowr.gui.render.Renderer;
+import cn.stateofwar.sowr.gui.multimedia.Window;
 import cn.stateofwar.sowr.util.Logger;
 
 /**
@@ -17,14 +19,11 @@ public class SOW {
 	public static boolean running;
 
 	/**
-	 * Renderer for the game.
-	 */
-	private static Renderer renderer = new Renderer();
-
-	/**
 	 * Timer for syncing fps and ups.
 	 */
 	private static Timer timer = new Timer();
+
+	private static Window win;
 
 	public static void startGame() {
 
@@ -33,17 +32,15 @@ public class SOW {
 		timer.init();
 
 		Graphic.initRenderCapabilities();
-		renderer.init();
+		win = Graphic.win;
 
 		logger.info("Starting game loop.");
 
-		while (running && !Graphic.win.closing()) {
+		while (running && !win.closing()) {
 
-			renderer.clear();
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			renderer.drawText("SB", Graphic.win.getWidth() / 2, Graphic.win.getHeight() / 2);
-
-			Graphic.win.update();
+			win.update();
 
 		}
 
@@ -51,7 +48,6 @@ public class SOW {
 	}
 
 	public static void dispose() {
-		renderer.dispose();
 		Graphic.abrogateRender();
 
 		logger.info("The game engine is shut down.");
