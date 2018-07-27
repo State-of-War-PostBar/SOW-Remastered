@@ -51,7 +51,7 @@ public class ShaderProgram {
 			shader.delete();
 		}
 
-		logger.info("Loaded a shader program.");
+		logger.info("Loaded a shader program with " + Integer.toString((attr + 1)) + "shaders.");
 
 	}
 
