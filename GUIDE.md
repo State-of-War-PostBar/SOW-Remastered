@@ -1,10 +1,10 @@
 # Development Guide
 ---
 ## Programming / 编程
-This program is mainly written in Java and Scala and the plugins are written in Lua. If you don't know how to use them, feel free to ask or search
-tutorials.
+This program is mainly written in Java, and the plugins are written in Lua. If you don't know how to use them, feel free to ask or search
+for tutorials.
 
-此程序主要使用Java和Scala编写，插件则主要使用Lua。若您不会使用，可以询问或者寻找教程。
+此程序主要使用Java编写，插件则主要使用Lua。若您不会使用，可以询问或者寻找教程。
 
 ## Workspace / 工作空间
 We are sorry for not providing the workspace for any IDEs in our repository.
@@ -23,22 +23,25 @@ use the cmd/shell to run
 ## Libraries / 库
 The followings are the libraries used in our program. For more information, please look forward to [build.gradle](build.gradle).
 
-[Google Guava - 23.5 (JRE)](https://github.com/google/guava)
+[Google Guava - 25.1 (JRE)](https://github.com/google/guava)
 
 
-[LWJGL - 3.1.5](https://www.lwjgl.org) For full list of used LWJGL features, see [here](LWJGL_features.md) ← 参阅此处以获知使用到的LWJGL特性列表。
+[LWJGL - 3.1.6](https://www.lwjgl.org) For full list of used LWJGL features, see [here](LWJGL_features.md) ← 参阅此处以获知使用到的LWJGL特性列表。
 
 
-[NIO(Netty) - 4.1.17.Final](http://netty.io)
+[NIO(Netty) - 4.1.27.Final](http://netty.io)
 
 
-[JOML - 1.9.6](https://github.com/JOML-CI/JOML)
+[JOML - 1.9.10](https://github.com/JOML-CI/JOML)
 
 
-[SteamWorks Java Wrapper - 1.6.2](https://github.com/code-disaster/steamworks4j)
+[SteamWorks Java Wrapper - 1.7.0](https://github.com/code-disaster/steamworks4j)
 
 
 [Ini4j - 0.5.4](http://ini4j.sourceforge.net/)
+
+
+[LuaJ - 3.0.1](http://www.luaj.org)
 
 
 以上为程序所使用到的库。更多信息请参阅[build.gradle](build.gradle)。
