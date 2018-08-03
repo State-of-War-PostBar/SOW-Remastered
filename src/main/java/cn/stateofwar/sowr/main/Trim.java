@@ -8,9 +8,6 @@ import org.lwjgl.system.Library;
 import cn.stateofwar.sowr.util.Config;
 import cn.stateofwar.sowr.util.Logger;
 
-/**
- * Preparations and terminations of the program.
- */
 public class Trim {
 
 	private static final Logger logger = new Logger("Main");
@@ -19,7 +16,7 @@ public class Trim {
 		Library.initialize();
 		if (!glfwInit())
 			throw new IllegalStateException("Failed to initialize GLFW.");
-		logger.info("Successfully initialized the Lwjgl library.");
+		logger.info("Initialized the Lwjgl library.");
 
 		Config.init();
 		logger.info("Initialized the configuration system.");
@@ -27,7 +24,7 @@ public class Trim {
 
 	protected static void abrogate() {
 		glfwTerminate();
-		logger.info("Successfully unloaded the Lwjgl library.");
+		logger.info("Unloaded the Lwjgl library.");
 
 		Config.abrogate();
 		logger.info("Configurations saved.");

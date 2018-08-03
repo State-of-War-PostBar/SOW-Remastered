@@ -3,31 +3,28 @@ package cn.stateofwar.sowr.gui.render;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
-/**
- * The color of a pixel.
- */
-public class RGBAColor {
+public class RGBA {
 
-	public static final RGBAColor WHITE = new RGBAColor(1.0f, 1.0f, 1.0f);
-	public static final RGBAColor BLACK = new RGBAColor(0.0f, 0.0f, 0.0f);
-	public static final RGBAColor RED = new RGBAColor(1.0f, 0.0f, 0.0f);
-	public static final RGBAColor GREEN = new RGBAColor(0.0f, 1.0f, 0.0f);
-	public static final RGBAColor BLUE = new RGBAColor(0.0f, 0.0f, 1.0f);
+	public static final RGBA WHITE = new RGBA(1.0f, 1.0f, 1.0f);
+	public static final RGBA BLACK = new RGBA(0.0f, 0.0f, 0.0f);
+	public static final RGBA RED = new RGBA(1.0f, 0.0f, 0.0f);
+	public static final RGBA GREEN = new RGBA(0.0f, 1.0f, 0.0f);
+	public static final RGBA BLUE = new RGBA(0.0f, 0.0f, 1.0f);
 
 	private float r, g, b, a;
 
-	public RGBAColor() {
+	public RGBA() {
 		this(0.0f, 0.0f, 0.0f);
 	}
 
-	public RGBAColor(float _r, float _g, float _b) {
+	public RGBA(float r, float g, float b) {
 		setRed(r);
 		setGreen(g);
 		setBlue(b);
 		setAlpha(1.0f);
 	}
 
-	public RGBAColor(float r, float g, float b, float a) {
+	public RGBA(float r, float g, float b, float a) {
 		setRed(r);
 		setGreen(g);
 		setBlue(b);

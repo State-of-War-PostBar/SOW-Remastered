@@ -15,25 +15,13 @@ import com.google.common.io.Resources;
 
 import cn.stateofwar.sowr.References;
 
-/**
- * Utilities of different usages, such as files reading and writing, system
- * properties managements, etc.
- */
 public class Utils {
 
 	/**
-	 * Get the current directory of the binaries (where the program is executed).
-	 */
-	public static String getDir() {
-		return System.getProperty("user.dir");
-	}
-
-	/**
-	 * Create a file in a specific path. Directories will be created if not exist.
+	 * Create a file safely.
 	 * 
-	 * @param fp       The path of the file.
-	 * 
-	 * @param override Delete the old file if there is file with same path and name.
+	 * @param fp       Path of the file.
+	 * @param override Whether override the old file (if exists) or not.
 	 */
 	public static void createFile(String fp, boolean override) {
 		File f = new File(fp);
@@ -41,7 +29,7 @@ public class Utils {
 		if (parent != null && !parent.exists())
 			parent.mkdirs();
 		if (f.exists())
-			if (override) /* if (f.exists() && override) is not applicable for some reason. */
+			if (override) // if(f.exist() && override) is not applicable.
 				f.delete();
 			else
 				return;
@@ -53,77 +41,63 @@ public class Utils {
 	}
 
 	/**
-	 * Read the context of a specified line in a text file.
+	 * Read a line of a text file.
 	 * 
-	 * @param fp   The path of the text file.
-	 * 
-	 * @param line The line desired to read, starts with 1.
-	 * 
-	 * @throws IOException
+	 * @param fp   Path of the text file.
+	 * @param line Line to read, starts by 1.
 	 */
 	public static String readLineS(String fp, int line) throws IOException {
-		List<String> lines = Files.readLines(new File(fp), Charset.forName(References.DEFAULT_ENCODE));
+		List<String> lines = Files.readLines(new File(fp), Charset.forName(References.DEFAULT_ENCODING));
 		return lines.get(line - 1);
 	}
 
 	/**
-	 * Read the context after a specified position of a line in a text file.
+	 * Read a line after a position of a text file.
 	 * 
-	 * @param fp   The path of the text file.
-	 * 
-	 * @param line The line desired to read, starts with 1.
-	 * 
-	 * @param pos  The position in the line desired to read, starts with 1.
-	 * 
-	 * @throws IOException
+	 * @param fp   Path of the text file.
+	 * @param line Line to read, starts by 1.
+	 * @param pos  Position to read, starts by 1.
 	 */
 	public static String readLineSP(String fp, int line, int pos) throws IOException {
 		pos--;
 		String l = readLineS(fp, line);
 		if (l.length() < pos)
-			pos = l.length();
+			pos = l.length(); // Start reading at the end of line if the position exceeds.
 		return l.substring(pos, l.length());
 	}
 
 	/**
-	 * Get the content of a text file as a single string.
+	 * Read a text file to a single string (including special characters).
 	 * 
-	 * @param fp The path of the text file.
-	 * 
-	 * @throws IOException
+	 * @param fp Path of the text file.
 	 */
 	public static String readFileToString(String fp) throws IOException {
-		return Files.asCharSource(new File(fp), Charset.forName(References.DEFAULT_ENCODE)).toString();
+		return Files.asCharSource(new File(fp), Charset.forName(References.DEFAULT_ENCODING)).toString();
 	}
 
 	/**
-	 * Get the total lines of a text file.
+	 * Get the lines count of a text file.
 	 * 
-	 * @param fp The path of the text file.
-	 * 
-	 * @throws IOException
+	 * @param fp Path of the text file.
 	 */
 	public static int getTotalLines(String fp) throws IOException {
 		File f = new File(fp);
-		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_ENCODE));
+		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_ENCODING));
 		return lines.size() + 1;
 	}
 
 	/**
-	 * Write a line to a text file. Automatically start a new line after the
-	 * writing, <br />
-	 * but will NOT start writing on a new line!
+	 * Write a new line to a text file.
 	 * 
-	 * @param fp  The path of the text file.
-	 * 
-	 * @param msg The text that is being written.
+	 * @param fp   Path of the text file.
+	 * @param data Data to write.
 	 */
-	public static void writeLine(String fp, String msg) {
+	public static void writeLine(String fp, String data) {
 		File f = new File(fp);
 		BufferedWriter out = null;
 		try {
 			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true)));
-			out.write(msg);
+			out.write(data);
 			out.write(nl());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -137,78 +111,62 @@ public class Utils {
 	}
 
 	/**
-	 * Write data to a specific line of a text file. <br />
-	 * <i>Will override the old data.</i>
+	 * Write a line of a text file.
 	 * 
-	 * @param fp   The path of the text file.
-	 * 
-	 * @param msg  The data.
-	 * 
-	 * @param line The line desired to write, starts with 1.
-	 * 
-	 * @throws IOException
+	 * @param fp   Path of the text file.
+	 * @param data Data to write.
+	 * @param line Line to write, starts by 1.
 	 */
-	public static void writeLineS(String fp, String msg, int line) throws IOException {
+	public static void writeLineS(String fp, String data, int line) throws IOException {
 		File f = new File(fp);
-		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_ENCODE));
-		lines.set(line - 1, msg);
-		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_ENCODE));
+		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_ENCODING));
+		lines.set(line - 1, data);
+		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_ENCODING));
 	}
 
 	/**
-	 * Write data to a specific position of a specific line of a text file. <br />
-	 * <i>Will override the old data after the position.</i>
+	 * Write after a position of a line of a text file.
 	 * 
-	 * @param fp   The path of the text file.
-	 * 
-	 * @param msg  The data.
-	 * 
-	 * @param line The line desired to write, starts with 1.
-	 * 
-	 * @param pos  The position in the line desired to write, starts with 1.
-	 * 
-	 * @throws IOException
+	 * @param fp   Path of the text file.
+	 * @param data Data to write.
+	 * @param line Line to write, starts by 1.
+	 * @param pos  Position to write, starts by 1.
 	 */
-	public static void writeLineSP(String fp, String msg, int line, int pos) throws IOException {
+	public static void writeLineSP(String fp, String data, int line, int pos) throws IOException {
 		pos--;
 		line--;
 		File f = new File(fp);
-		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_ENCODE));
+		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_ENCODING));
 		String l = lines.get(line);
 		if (l.length() < pos)
-			pos = l.length();
-		l = l.substring(l.length() - pos) + msg;
+			pos = l.length(); // Start writing at the end of line if the position exceeds.
+		l = l.substring(l.length() - pos) + data;
 		lines.set(line, l);
-		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_ENCODE));
+		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_ENCODING));
 	}
 
 	/**
-	 * Get the content of a resource file as a byte array.
+	 * Get a resource file as a byte array.
 	 * 
-	 * @param fp The path of the resource file.
-	 * 
-	 * @throws IOException
+	 * @param fp Path of the resource.
 	 */
 	public static byte[] getRes(String fp) throws IOException {
 		return Resources.toByteArray(Resources.getResource(fp));
 	}
 
 	/**
-	 * Get the content of a resource file as a list of string. The resource must be
-	 * a text file.
+	 * Read a resource text file to lines of string.
 	 * 
-	 * @param fp The path of the text file.
-	 * 
-	 * @throws IOException
+	 * @param fp Path of the resource.
 	 */
 	public static List<String> getResAsStrings(String fp) throws IOException {
-		return Resources.readLines(Resources.getResource(fp), Charset.forName(References.DEFAULT_ENCODE));
+		return Resources.readLines(Resources.getResource(fp), Charset.forName(References.DEFAULT_ENCODING));
 	}
 
 	/**
-	 * Get the system time in the format of HOUR:MINUTE:SECOND.
+	 * Get the system time in the format of <b>HH:MM:SS</b>.
 	 */
-	public static String getSysTimeStr() {
+	public static String getSysTime() {
 		Calendar c = Calendar.getInstance();
 		return "" + c.get(Calendar.HOUR_OF_DAY) + ':' + c.get(Calendar.MINUTE) + ':' + c.get(Calendar.SECOND);
 	}
@@ -221,18 +179,9 @@ public class Utils {
 	}
 
 	/**
-	 * Translate a Unicode code point.
+	 * Convert lines of string to a single string (including lines separator).
 	 * 
-	 * @param cp The code point of the Unicode character.
-	 */
-	public static String unicodeTrans(int cp) {
-		return String.valueOf(Character.toChars(cp));
-	}
-
-	/**
-	 * Convert a list of strings to a single line of string.
-	 * 
-	 * @param l The list desired to convert.
+	 * @param l Lines of string.
 	 */
 	public static String listToString(List<String> l) {
 		StringBuilder sb = new StringBuilder();
@@ -258,9 +207,6 @@ public class Utils {
 		return detectedOS;
 	}
 
-	/**
-	 * Types of operating systems.
-	 */
 	public static enum OSType {
 		Windows, MacOS, Linux, Other
 	};

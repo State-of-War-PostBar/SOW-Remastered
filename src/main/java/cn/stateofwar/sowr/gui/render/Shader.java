@@ -1,5 +1,6 @@
 package cn.stateofwar.sowr.gui.render;
 
+import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.opengl.GL40.*;
@@ -9,24 +10,15 @@ import java.io.IOException;
 import cn.stateofwar.sowr.util.Logger;
 import cn.stateofwar.sowr.util.Utils;
 
-/**
- * An OpenGL shader.
- */
 public class Shader {
 
 	private static final Logger logger = new Logger("Render");
 
-	/**
-	 * ID of this shader.
-	 */
 	private int id;
 
-	/**
-	 * Type of this shader.
-	 */
 	private ShaderType type;
 
-	public Shader(int _id, ShaderType _type) {
+	private Shader(int _id, ShaderType _type) {
 		id = _id;
 		type = _type;
 	}
@@ -39,21 +31,16 @@ public class Shader {
 		return type;
 	}
 
-	/**
-	 * Delete this shader.
-	 */
 	public void delete() {
 		glDeleteShader(id);
 	}
 
 	/**
-	 * Create an OpenGL shader.
+	 * Create a shader.
 	 * 
-	 * @param fp        The path of the shader source file.
-	 * 
-	 * @param type      The type of the shader.
-	 * 
-	 * @param inArchive If the shader source file is in the archive.
+	 * @param fp        Path of the shader source file.
+	 * @param type      Type of the shader.
+	 * @param inArchive If the source file is in the jar.
 	 */
 	public static Shader createShader(String fp, ShaderType type, boolean inArchive) {
 		switch (type) {
@@ -73,16 +60,11 @@ public class Shader {
 			return inArchive ? loadTessEvaluatingShaderA(fp) : loadTessEvaluatingShader(fp);
 
 		default:
-			logger.error("Failed to create a  " + type.getName() + " shader with file" + fp + '!');
+			logger.error("Failed to create a  " + type.getName() + " shader with file " + fp + '!');
 			return null;
 		}
 	}
 
-	/**
-	 * Load a vertex shader of a source file.
-	 * 
-	 * @param fp The path of the shader source file.
-	 */
 	private static Shader loadVertexShader(String fp) {
 		int vs = glCreateShader(GL_VERTEX_SHADER);
 		try {
@@ -92,21 +74,16 @@ public class Shader {
 		}
 
 		glCompileShader(vs);
-		if (glGetShaderi(vs, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING A OPENGL VERTEX SHADER!");
+		if (glGetShaderi(vs, GL_COMPILE_STATUS) == GL_FALSE) {
+			logger.error("ERROR AT LOADING AN OPENGL VERTEX SHADER!");
 			logger.error(glGetShaderInfoLog(vs));
 		}
 
-		logger.info("Successfully created a OpenGL vertex shader.");
+		logger.info("Created an OpenGL vertex shader.");
 
 		return new Shader(vs, ShaderType.VERTEX);
 	}
 
-	/**
-	 * Load a vertex shader in the archive.
-	 * 
-	 * @param fp The path of the resource file in archive.
-	 */
 	private static Shader loadVertexShaderA(String fp) {
 		int vs = glCreateShader(GL_VERTEX_SHADER);
 		try {
@@ -116,21 +93,16 @@ public class Shader {
 		}
 
 		glCompileShader(vs);
-		if (glGetShaderi(vs, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING A OPENGL VERTEX SHADER!");
+		if (glGetShaderi(vs, GL_COMPILE_STATUS) == GL_FALSE) {
+			logger.error("ERROR AT LOADING AN OPENGL VERTEX SHADER!");
 			logger.error(glGetShaderInfoLog(vs));
 		}
 
-		logger.info("Successfully created a OpenGL vertex shader.");
+		logger.info("Created an OpenGL vertex shader.");
 
 		return new Shader(vs, ShaderType.VERTEX);
 	}
 
-	/**
-	 * Load a fragment shader of a source file.
-	 * 
-	 * @param fp The path of the shader source file.
-	 */
 	private static Shader loadFragmentShader(String fp) {
 		int fs = glCreateShader(GL_FRAGMENT_SHADER);
 		try {
@@ -141,20 +113,15 @@ public class Shader {
 
 		glCompileShader(fs);
 		if (glGetShaderi(fs, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING A OPENGL FRAGMENT SHADER!");
+			logger.error("ERROR AT LOADING AN OPENGL FRAGMENT SHADER!");
 			logger.error(glGetShaderInfoLog(fs));
 		}
 
-		logger.info("Successfully created a OpenGL fragment shader.");
+		logger.info("Created an OpenGL fragment shader.");
 
 		return new Shader(fs, ShaderType.FRAGMENT);
 	}
 
-	/**
-	 * Load a fragment shader in the archive.
-	 * 
-	 * @param fp The path of the resource file in archive.
-	 */
 	private static Shader loadFragmentShaderA(String fp) {
 		int fs = glCreateShader(GL_FRAGMENT_SHADER);
 		try {
@@ -164,21 +131,16 @@ public class Shader {
 		}
 
 		glCompileShader(fs);
-		if (glGetShaderi(fs, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING A OPENGL FRAGMENT SHADER!");
+		if (glGetShaderi(fs, GL_COMPILE_STATUS) == GL_FALSE) {
+			logger.error("ERROR AT LOADING AN OPENGL FRAGMENT SHADER!");
 			logger.error(glGetShaderInfoLog(fs));
 		}
 
-		logger.info("Successfully created a OpenGL fragment shader.");
+		logger.info("Created an OpenGL fragment shader.");
 
 		return new Shader(fs, ShaderType.FRAGMENT);
 	}
 
-	/**
-	 * Load a geometric shader of a source file.
-	 * 
-	 * @param fp The path of the shader source file.
-	 */
 	private static Shader loadGeometricShader(String fp) {
 		int gs = glCreateShader(GL_GEOMETRY_SHADER);
 		try {
@@ -188,21 +150,16 @@ public class Shader {
 		}
 
 		glCompileShader(gs);
-		if (glGetShaderi(gs, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING A OPENGL GEOMETRIC SHADER!");
+		if (glGetShaderi(gs, GL_COMPILE_STATUS) == GL_FALSE) {
+			logger.error("ERROR AT LOADING AN OPENGL GEOMETRIC SHADER!");
 			logger.error(glGetShaderInfoLog(gs));
 		}
 
-		logger.info("Successfully created a OpenGL geometry shader.");
+		logger.info("Created an OpenGL geometry shader.");
 
 		return new Shader(gs, ShaderType.GEOMETRY);
 	}
 
-	/**
-	 * Load a geometric shader in the archive.
-	 * 
-	 * @param fp The path of the resource file in archive.
-	 */
 	private static Shader loadGeometricShaderA(String fp) {
 		int gs = glCreateShader(GL_GEOMETRY_SHADER);
 		try {
@@ -212,21 +169,16 @@ public class Shader {
 		}
 
 		glCompileShader(gs);
-		if (glGetShaderi(gs, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING A OPENGL GEOMETRIC SHADER!");
+		if (glGetShaderi(gs, GL_COMPILE_STATUS) == GL_FALSE) {
+			logger.error("ERROR AT LOADING AN OPENGL GEOMETRIC SHADER!");
 			logger.error(glGetShaderInfoLog(gs));
 		}
 
-		logger.info("Successfully created a OpenGL geometry shader.");
+		logger.info("Created an OpenGL geometry shader.");
 
 		return new Shader(gs, ShaderType.GEOMETRY);
 	}
 
-	/**
-	 * Load a tessellation controlling shader of a source file.
-	 * 
-	 * @param fp The path of the shader source file.
-	 */
 	private static Shader loadTessControllingShader(String fp) {
 		int tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
 		try {
@@ -236,21 +188,16 @@ public class Shader {
 		}
 
 		glCompileShader(tcs);
-		if (glGetShaderi(tcs, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING A OPENGL TESSELLATION CONTROLLING SHADER!");
+		if (glGetShaderi(tcs, GL_COMPILE_STATUS) == GL_FALSE) {
+			logger.error("ERROR AT LOADING AN OPENGL TESSELLATION CONTROLLING SHADER!");
 			logger.error(glGetShaderInfoLog(tcs));
 		}
 
-		logger.info("Successfully created a OpenGL tessellation controlling shader.");
+		logger.info("Created an OpenGL tessellation controlling shader.");
 
 		return new Shader(tcs, ShaderType.TESS_CONTROL);
 	}
 
-	/**
-	 * Load a fragment shader in the archive.
-	 * 
-	 * @param fp The path of the resource file in archive.
-	 */
 	private static Shader loadTessControllingShaderA(String fp) {
 		int tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
 		try {
@@ -260,21 +207,16 @@ public class Shader {
 		}
 
 		glCompileShader(tcs);
-		if (glGetShaderi(tcs, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING A OPENGL TESSELLATION CONTROLLING SHADER!");
+		if (glGetShaderi(tcs, GL_COMPILE_STATUS) == GL_FALSE) {
+			logger.error("ERROR AT LOADING AN OPENGL TESSELLATION CONTROLLING SHADER!");
 			logger.error(glGetShaderInfoLog(tcs));
 		}
 
-		logger.info("Successfully created a OpenGL tessellation controlling shader.");
+		logger.info("Created an OpenGL tessellation controlling shader.");
 
 		return new Shader(tcs, ShaderType.TESS_CONTROL);
 	}
 
-	/**
-	 * Load a tessellation evaluating shader of a source file.
-	 * 
-	 * @param fp The path of the shader source file.
-	 */
 	private static Shader loadTessEvaluatingShader(String fp) {
 		int tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
 		try {
@@ -284,21 +226,16 @@ public class Shader {
 		}
 
 		glCompileShader(tes);
-		if (glGetShaderi(tes, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING A OPENGL TESSELLATION EVALUATING SHADER!");
+		if (glGetShaderi(tes, GL_COMPILE_STATUS) == GL_FALSE) {
+			logger.error("ERROR AT LOADING AN OPENGL TESSELLATION EVALUATING SHADER!");
 			logger.error(glGetShaderInfoLog(tes));
 		}
 
-		logger.info("Successfully created a OpenGL tessellation evaluating shader.");
+		logger.info("Created an OpenGL tessellation evaluating shader.");
 
 		return new Shader(tes, ShaderType.TESS_EVALUATION);
 	}
 
-	/**
-	 * Load a fragment shader in the archive.
-	 * 
-	 * @param fp The path of the resource file in archive.
-	 */
 	private static Shader loadTessEvaluatingShaderA(String fp) {
 		int tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
 		try {
@@ -308,19 +245,16 @@ public class Shader {
 		}
 
 		glCompileShader(tes);
-		if (glGetShaderi(tes, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING A OPENGL TESSELLATION EVALUATING SHADER!");
+		if (glGetShaderi(tes, GL_COMPILE_STATUS) == GL_FALSE) {
+			logger.error("ERROR AT LOADING AN OPENGL TESSELLATION EVALUATING SHADER!");
 			logger.error(glGetShaderInfoLog(tes));
 		}
 
-		logger.info("Successfully created a OpenGL tessellation evaluating shader.");
+		logger.info("Created an OpenGL tessellation evaluating shader.");
 
 		return new Shader(tes, ShaderType.TESS_EVALUATION);
 	}
 
-	/**
-	 * Types of OpenGL shaders.
-	 */
 	public static enum ShaderType {
 		VERTEX("vertex"), FRAGMENT("fragment"), GEOMETRY("geometry"), TESS_CONTROL("tess_control"),
 		TESS_EVALUATION("tess_evaluation"), UNKNOWN("unknown");
@@ -346,10 +280,17 @@ public class Shader {
 		}
 
 		/**
-		 * Convert a ShaderType to OpenGL inner name.
+		 * Convert a regular name to an OpenGL constant.
 		 */
-		public static int t2gl(ShaderType t) {
-			switch (t) {
+		public static int n2gl(String name) {
+			return t2gl(n2t(name));
+		}
+
+		/**
+		 * Convert a ShaderType to an OpenGL constant.
+		 */
+		public static int t2gl(ShaderType type) {
+			switch (type) {
 			case VERTEX:
 				return GL_VERTEX_SHADER;
 			case FRAGMENT:
@@ -366,10 +307,30 @@ public class Shader {
 		}
 
 		/**
-		 * Convert a regular name to OpenGL inner name.
+		 * Convert an OpenGL constant to a ShaderType.
 		 */
-		public static int n2gl(String name) {
-			return t2gl(n2t(name));
+		public static ShaderType gl2t(int name) {
+			switch (name) {
+			case GL_VERTEX_SHADER:
+				return VERTEX;
+			case GL_FRAGMENT_SHADER:
+				return FRAGMENT;
+			case GL_GEOMETRY_SHADER:
+				return GEOMETRY;
+			case GL_TESS_CONTROL_SHADER:
+				return TESS_CONTROL;
+			case GL_TESS_EVALUATION_SHADER:
+				return TESS_EVALUATION;
+			default:
+				return UNKNOWN;
+			}
+		}
+
+		/**
+		 * Convert an OpenGL constant to a regular name.
+		 */
+		public static String gl2n(int name) {
+			return gl2t(name).getName();
 		}
 
 	}

@@ -2,19 +2,10 @@ package cn.stateofwar.sowr.core;
 
 import static org.lwjgl.glfw.GLFW.glfwGetTime;
 
-/**
- * The timer for FPS and UPS calculating and updating.
- */
 public class Timer {
 
-	/**
-	 * The time when last game update happened.
-	 */
 	private double lastLoopTime;
 
-	/**
-	 * Counter for time.
-	 */
 	private float timeCount;
 
 	private int fps, fpsCount;
@@ -25,16 +16,10 @@ public class Timer {
 		lastLoopTime = getTime();
 	}
 
-	/**
-	 * Get tge current time.
-	 */
 	public double getTime() {
 		return glfwGetTime();
 	}
 
-	/**
-	 * Get the time has passed since last game update.
-	 */
 	public float getDelta() {
 		double time = getTime();
 		float delta = (float) (time - lastLoopTime);
@@ -43,11 +28,9 @@ public class Timer {
 		return delta;
 	}
 
-	/**
-	 * Check if one second has passed and update fps and ups if so.
-	 */
 	public void update() {
-		if (timeCount > 1f) {
+		getDelta();
+		if (timeCount >= 1.0f) {
 			fps = fpsCount;
 			fpsCount = 0;
 
