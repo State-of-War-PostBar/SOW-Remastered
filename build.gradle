@@ -1,5 +1,4 @@
 apply plugin: "java"
-apply plugin: "scala"
 
 project.ext.guavaVersion = "25.1-jre"
 project.ext.nettyVersion = "4.1.27.Final"
@@ -10,7 +9,7 @@ project.ext.ini4jVersion = "0.5.4"
 project.ext.luajVersion = "3.0.1"
 
 archivesBaseName = "State-Of-War Remastered"
-version = "1.0.00"
+version = "1.00a"
 
 repositories {
 	mavenCentral()
