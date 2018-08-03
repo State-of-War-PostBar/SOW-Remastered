@@ -4,34 +4,23 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.opengl.GL;
 
 import cn.stateofwar.sowr.util.Logger;
 
-/**
- * A regular GLFW window that is not resizable.
- */
 public class Window {
 
 	private static final Logger logger = new Logger("Render");
 
-	/**
-	 * Handle of the window.
-	 */
 	private long handle;
 
 	private String title;
 
 	private int width, height;
 
-	/**
-	 * If this window enables vertical sync.
-	 */
 	private boolean vSync;
 
-	/**
-	 * If this window takes all of the screen.
-	 */
 	private boolean fullScreen;
 
 	public Window(String _title, int _width, int _height, boolean _vSync, boolean _fs) {
@@ -42,9 +31,6 @@ public class Window {
 		fullScreen = _fs;
 	}
 
-	/**
-	 * Initialize this window.
-	 */
 	public Window initWindow() {
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
@@ -59,16 +45,16 @@ public class Window {
 		if (handle == NULL)
 			throw new RuntimeException("Failed to create a GLFW window.");
 
-		logger.info("Successfully created a window with handle " + handle + ".");
+		logger.info("Created a GLFW window with handle " + handle + ".");
 		glfwShowWindow(handle);
 		glfwMakeContextCurrent(handle);
 
 		if (vSync)
 			glfwSwapInterval(1);
 
-		GL.createCapabilities();
+		GL.createCapabilities(true);
 		glViewport(0, 0, width, height);
-		glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 		return this;
 	}
@@ -83,10 +69,6 @@ public class Window {
 
 	public int getHeight() {
 		return height;
-	}
-
-	public String getTitle() {
-		return title;
 	}
 
 	public boolean isVSync() {
@@ -105,9 +87,22 @@ public class Window {
 		return glfwWindowShouldClose(handle);
 	}
 
+	public void setClosing(boolean val) {
+		glfwSetWindowShouldClose(handle, val);
+	}
+
 	public void update() {
 		glfwSwapBuffers(handle);
 		glfwPollEvents();
+	}
+
+	public void clear() {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+
+	public void abrogate() {
+		glfwDestroyWindow(handle);
+		Callbacks.glfwFreeCallbacks(handle);
 	}
 
 }

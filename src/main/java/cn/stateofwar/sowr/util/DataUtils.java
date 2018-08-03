@@ -8,62 +8,26 @@ import java.nio.IntBuffer;
 import org.joml.Matrix4f;
 import org.lwjgl.BufferUtils;
 
-/**
- * Utilities of data managements, mostly for OpenGL.
- */
 public class DataUtils {
 
-	/**
-	 * Create a byte buffer of the data. <i>The result buffer is not flipped!</i>
-	 * 
-	 * @param data The array for the buffer.
-	 */
 	public static ByteBuffer createByteBuffer(byte[] data) {
-		return BufferUtils.createByteBuffer(data.length).put(data);
+		return (ByteBuffer) BufferUtils.createByteBuffer(data.length).put(data).flip();
 	}
 
-	/**
-	 * Create a integer buffer of the data. <i>The result buffer is not flipped!</i>
-	 * 
-	 * @param data The array for the buffer.
-	 */
 	public static IntBuffer createIntBuffer(int[] data) {
-		return BufferUtils.createIntBuffer(data.length).put(data);
+		return (IntBuffer) BufferUtils.createIntBuffer(data.length).put(data).flip();
 	}
 
-	/**
-	 * Create a float buffer of the data. <i>The result buffer is not flipped!</i>
-	 * 
-	 * @param data The array for the buffer.
-	 */
 	public static FloatBuffer createFloatBuffer(float[] data) {
-		return BufferUtils.createFloatBuffer(data.length).put(data);
+		return (FloatBuffer) BufferUtils.createFloatBuffer(data.length).put(data).flip();
 	}
 
-	/**
-	 * Create a double buffer of the data. <i>The result buffer is not flipped!</i>
-	 * 
-	 * @param data The array for the buffer.
-	 */
 	public static DoubleBuffer createDoubleBuffer(double[] data) {
-		return BufferUtils.createDoubleBuffer(data.length).put(data);
+		return (DoubleBuffer) BufferUtils.createDoubleBuffer(data.length).put(data).flip();
 	}
 
 	/**
-	 * Convert a projection data to orthographic and creates a orthographic
-	 * projection matrix.
-	 * 
-	 * @param left   Coordinate for the left vertical clipping pane.
-	 * 
-	 * @param right  Coordinate for the right vertical clipping pane.
-	 * 
-	 * @param bottom Coordinate for the bottom horizontal clipping pane.
-	 * 
-	 * @param top    Coordinate for the bottom horizontal clipping pane.
-	 * 
-	 * @param near   Coordinate for the near depth clipping pane.
-	 * 
-	 * @param far    Coordinate for the far depth clipping pane.
+	 * Convert a projection data to orthographic and create a projection's matrix.
 	 * 
 	 * @see glOrtho
 	 */
@@ -74,9 +38,9 @@ public class DataUtils {
 		float ty = -(top + bottom) / (top - bottom);
 		float tz = -(far + near) / (far - near);
 
-		ortho._m00(2f / (right - left));
-		ortho._m11(2f / (top - bottom));
-		ortho._m22(-2f / (far - near));
+		ortho._m00(2.0f / (right - left));
+		ortho._m11(2.0f / (top - bottom));
+		ortho._m22(-2.0f / (far - near));
 		ortho._m03(tx);
 		ortho._m13(ty);
 		ortho._m23(tz);

@@ -11,19 +11,10 @@ import org.ini4j.Profile.Section;
 
 import cn.stateofwar.sowr.References;
 
-/**
- * A very basic configuration system based on project ini4j.
- */
 public class Config {
 
-	/**
-	 * The configurations read from the ini file.
-	 */
 	private static LinkedHashMap<String, LinkedHashMap<String, String>> configs = new LinkedHashMap<>();
 
-	/**
-	 * The ini file.
-	 */
 	private static Ini file;
 
 	public static void init() {
@@ -38,13 +29,6 @@ public class Config {
 		}
 	}
 
-	/**
-	 * Get a configuration.
-	 * 
-	 * @param block The block that the configuration is in.
-	 * 
-	 * @param index The index of the configuration in the block.
-	 */
 	public static String get(String block, String index) {
 		if (configs.containsKey(block))
 			if (configs.get(block).containsKey(index))
@@ -53,11 +37,8 @@ public class Config {
 	}
 
 	/**
-	 * Get a configuration directly by an index. This method has lower efficiency
-	 * than declaring the block. <br />
-	 * If multiple blocks have the same index, it will load the first one it found.
-	 * 
-	 * @param index The index of the configuration in the ini file.
+	 * Get a configuration from an index. <br />
+	 * If multiple blocks contain a same index, it will load the first one it finds.
 	 */
 	@Deprecated
 	public static String get(String index) {
@@ -67,15 +48,6 @@ public class Config {
 		return DefaultConfig.get(index);
 	}
 
-	/**
-	 * Set a configuration.
-	 * 
-	 * @param block The block of the configuration.
-	 * 
-	 * @param index The index of the configuration.
-	 * 
-	 * @param value The value of the configuration.
-	 */
 	public static void set(String block, String index, String value) {
 		LinkedHashMap<String, String> temp = new LinkedHashMap<>();
 		temp.putAll(configs.get(block));
@@ -83,18 +55,10 @@ public class Config {
 		configs.put(block, temp);
 	}
 
-	/***
-	 * Finalize and save the configurations.
-	 */
 	public static void abrogate() {
 		putAllConfig(configs);
 	}
 
-	/**
-	 * Read configurations from the ini file.
-	 * 
-	 * @param ini The file that stores the configurations.
-	 */
 	private static void readAllConfig(Ini ini) {
 		Set<Entry<String, Section>> sections = ini.entrySet();
 		for (Entry<String, Section> e : sections) {
@@ -108,11 +72,6 @@ public class Config {
 		}
 	}
 
-	/**
-	 * Put the configurations in the ini file.
-	 * 
-	 * @param conf The configurations.
-	 */
 	private static void putAllConfig(LinkedHashMap<String, LinkedHashMap<String, String>> conf) {
 		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet())
 			for (Entry<String, String> entry2 : entry.getValue().entrySet())
@@ -124,9 +83,6 @@ public class Config {
 		}
 	}
 
-	/**
-	 * Default configurations of the game.
-	 */
 	private static final class DefaultConfig {
 
 		private static LinkedHashMap<String, LinkedHashMap<String, String>> defaults = new LinkedHashMap<>();

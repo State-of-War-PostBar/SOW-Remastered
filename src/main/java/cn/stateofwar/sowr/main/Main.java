@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.main;
 
-import cn.stateofwar.sowr.core.SOW;
+import cn.stateofwar.sowr.core.Game;
 import cn.stateofwar.sowr.util.Logger;
 
 public class Main {
@@ -14,12 +14,13 @@ public class Main {
 		logger.info("Initializing the program...");
 		Trim.init();
 
-		SOW.startGame();
-		SOW.dispose();
+		Game.startGame();
+
+		Game.abrogate();
 
 		logger.info("Shutting down client...");
 		Trim.abrogate();
-		logger.info("The client is successfully shut down.");
+		logger.info("The client is shut down.");
 
 	}
 
