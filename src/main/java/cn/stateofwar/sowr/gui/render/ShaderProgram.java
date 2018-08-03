@@ -41,6 +41,11 @@ public class ShaderProgram {
 			logger.error(glGetProgramInfoLog(id));
 		}
 
+		for (Shader shader : shaders) {
+			glDetachShader(id, shader.getID());
+			shader.delete();
+		}
+
 		logger.info("Built a shader program with " + Integer.toString((count)) + " shaders.");
 	}
 
@@ -89,10 +94,6 @@ public class ShaderProgram {
 	}
 
 	public void delete() {
-		for (Shader shader : shaders) {
-			glDetachShader(id, shader.getID());
-			shader.delete();
-		}
 		glDeleteProgram(id);
 	}
 
