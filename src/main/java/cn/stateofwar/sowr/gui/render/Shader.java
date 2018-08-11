@@ -274,8 +274,9 @@ public class Shader {
 		 */
 		public static ShaderType n2t(String name) {
 			for (ShaderType e : ShaderType.values())
-				if (e.getName().equals(name))
+				if (e.getName().equals(name)) {
 					return e;
+				}
 			return UNKNOWN;
 		}
 

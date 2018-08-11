@@ -31,8 +31,9 @@ public class Texture {
 	}
 
 	public void bind(int sampler) {
-		if (sampler >= 0 && sampler <= 31)
+		if (sampler >= 0 && sampler <= 31) {
 			glActiveTexture(GL_TEXTURE0 + sampler);
+		}
 		glBindTexture(GL_TEXTURE_2D, id);
 	}
 
@@ -57,8 +58,9 @@ public class Texture {
 	}
 
 	public void setWidth(int width) {
-		if (width > 0)
+		if (width > 0) {
 			this.width = width;
+		}
 	}
 
 	public int getHeight() {
@@ -66,8 +68,9 @@ public class Texture {
 	}
 
 	public void setHeight(int height) {
-		if (height > 0)
+		if (height > 0) {
 			this.height = height;
+		}
 	}
 
 	public static Texture createTexture(int width, int height, ByteBuffer data) {
@@ -96,8 +99,9 @@ public class Texture {
 			stbi_set_flip_vertically_on_load(true);
 			image = stbi_load(fp, w, h, comp, 4);
 
-			if (image == null)
-				throw new RuntimeException("Failed to load a texture file!" + Utils.nl() + stbi_failure_reason());
+			if (image == null) {
+				logger.error("Failed to load a texture file!" + Utils.nl() + stbi_failure_reason());
+			}
 
 			width = w.get();
 			height = h.get();

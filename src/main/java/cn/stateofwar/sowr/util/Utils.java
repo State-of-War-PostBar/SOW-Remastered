@@ -26,13 +26,16 @@ public class Utils {
 	public static void createFile(String fp, boolean override) {
 		File f = new File(fp);
 		File parent = f.getParentFile();
-		if (parent != null && !parent.exists())
+		if (parent != null && !parent.exists()) {
 			parent.mkdirs();
-		if (f.exists())
-			if (override) // if(f.exist() && override) is not applicable.
+		}
+		if (f.exists()) {
+			if (override) { // if(f.exist() && override) is not applicable.
 				f.delete();
-			else
+			} else {
 				return;
+			}
+		}
 		try {
 			f.createNewFile();
 		} catch (IOException e) {
@@ -61,8 +64,9 @@ public class Utils {
 	public static String readLineSP(String fp, int line, int pos) throws IOException {
 		pos--;
 		String l = readLineS(fp, line);
-		if (l.length() < pos)
-			pos = l.length(); // Start reading at the end of line if the position exceeds.
+		if (l.length() < pos) {
+			pos = l.length();
+		} // Start reading at the end of line if the position exceeds.
 		return l.substring(pos, l.length());
 	}
 
@@ -138,8 +142,9 @@ public class Utils {
 		File f = new File(fp);
 		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_ENCODING));
 		String l = lines.get(line);
-		if (l.length() < pos)
-			pos = l.length(); // Start writing at the end of line if the position exceeds.
+		if (l.length() < pos) {
+			pos = l.length();
+		} // Start writing at the end of line if the position exceeds.
 		l = l.substring(l.length() - pos) + data;
 		lines.set(line, l);
 		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_ENCODING));
@@ -185,8 +190,9 @@ public class Utils {
 	 */
 	public static String listToString(List<String> l) {
 		StringBuilder sb = new StringBuilder();
-		for (String s : l)
+		for (String s : l) {
 			sb.append(s).append(nl());
+		}
 		return sb.toString();
 	}
 
@@ -196,14 +202,15 @@ public class Utils {
 	public static OSType getOS() {
 		OSType detectedOS;
 		String OS = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
-		if ((OS.indexOf("mac") >= 0) || (OS.indexOf("darwin") >= 0))
+		if ((OS.indexOf("mac") >= 0) || (OS.indexOf("darwin") >= 0)) {
 			detectedOS = OSType.MacOS;
-		else if (OS.indexOf("win") >= 0)
+		} else if (OS.indexOf("win") >= 0) {
 			detectedOS = OSType.Windows;
-		else if (OS.indexOf("nux") >= 0)
+		} else if (OS.indexOf("nux") >= 0) {
 			detectedOS = OSType.Linux;
-		else
+		} else {
 			detectedOS = OSType.Other;
+		}
 		return detectedOS;
 	}
 

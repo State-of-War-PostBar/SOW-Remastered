@@ -36,11 +36,13 @@ public class RGBA {
 	}
 
 	public void setRed(float _r) {
-		if (_r < 0.0f)
+		if (_r < 0.0f) {
 			_r = 0.0f;
+		}
 
-		if (_r > 1.0f)
+		if (_r > 1.0f) {
 			_r = 1.0f;
+		}
 
 		this.r = _r;
 	}
@@ -50,11 +52,13 @@ public class RGBA {
 	}
 
 	public void setGreen(float _g) {
-		if (_g < 0.0f)
+		if (_g < 0.0f) {
 			_g = 0.0f;
+		}
 
-		if (_g > 1.0f)
+		if (_g > 1.0f) {
 			_g = 1.0f;
+		}
 
 		g = _g;
 	}
@@ -64,11 +68,13 @@ public class RGBA {
 	}
 
 	public void setBlue(float _b) {
-		if (_b < 0.0f)
+		if (_b < 0.0f) {
 			_b = 0.0f;
+		}
 
-		if (_b > 1.0f)
+		if (_b > 1.0f) {
 			_b = 1.0f;
+		}
 
 		b = _b;
 	}
@@ -78,11 +84,13 @@ public class RGBA {
 	}
 
 	public void setAlpha(float _a) {
-		if (_a < 0.0f)
+		if (_a < 0.0f) {
 			_a = 0.0f;
+		}
 
-		if (_a > 1.0f)
+		if (_a > 1.0f) {
 			_a = 1.0f;
+		}
 
 		a = _a;
 	}
