@@ -59,22 +59,25 @@ public class ShaderProgram {
 
 	public void setUniform(String name, int val) {
 		int loc = getUniformLoc(name);
-		if (loc != 1)
+		if (loc != 1) {
 			glUniform1i(loc, val);
+		}
 	}
 
 	public void setUniform(String name, float val) {
 		int loc = getUniformLoc(name);
-		if (loc != 1)
+		if (loc != 1) {
 			glUniform1f(loc, val);
+		}
 	}
 
 	public void setUniform(String name, Matrix4f val) {
 		int loc = getUniformLoc(name);
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(4 * 4);
 		val.get(buffer);
-		if (loc != 1)
+		if (loc != 1) {
 			glUniformMatrix4fv(loc, false, buffer);
+		}
 	}
 
 	public void bindAttribute(int index, String loc) {

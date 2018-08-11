@@ -42,15 +42,17 @@ public class Window {
 
 		handle = glfwCreateWindow(width, height, title, fullScreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
-		if (handle == NULL)
+		if (handle == NULL) {
 			throw new RuntimeException("Failed to create a GLFW window.");
+		}
 
 		logger.info("Created a GLFW window with handle " + handle + ".");
 		glfwShowWindow(handle);
 		glfwMakeContextCurrent(handle);
 
-		if (vSync)
+		if (vSync) {
 			glfwSwapInterval(1);
+		}
 
 		GL.createCapabilities(true);
 		glViewport(0, 0, width, height);
@@ -77,10 +79,11 @@ public class Window {
 
 	public void setVSync(boolean _vSync) {
 		vSync = _vSync;
-		if (_vSync)
+		if (_vSync) {
 			glfwSwapInterval(1);
-		else
+		} else {
 			glfwSwapInterval(0);
+		}
 	}
 
 	public boolean closing() {

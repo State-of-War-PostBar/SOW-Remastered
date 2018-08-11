@@ -14,8 +14,9 @@ public class Trim {
 
 	protected static void init() {
 		Library.initialize();
-		if (!glfwInit())
+		if (!glfwInit()) {
 			throw new IllegalStateException("Failed to initialize GLFW.");
+		}
 		logger.info("Initialized the Lwjgl library.");
 
 		Config.init();

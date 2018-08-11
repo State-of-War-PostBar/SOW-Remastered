@@ -24,15 +24,17 @@ public class Config {
 		try {
 			file = new Ini(new File(References.CONFIG_FILE_NAME));
 			readAllConfig(file);
-		} catch (Exception e) {
+		} catch (IOException e) {
 			Utils.createFile(References.CONFIG_FILE_NAME, true);
 		}
 	}
 
 	public static String get(String block, String index) {
-		if (configs.containsKey(block))
-			if (configs.get(block).containsKey(index))
+		if (configs.containsKey(block)) {
+			if (configs.get(block).containsKey(index)) {
 				return configs.get(block).get(index);
+			}
+		}
 		return DefaultConfig.get(block, index);
 	}
 
@@ -42,9 +44,11 @@ public class Config {
 	 */
 	@Deprecated
 	public static String get(String index) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet())
-			if (entry.getValue().containsKey(index))
+		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet()) {
+			if (entry.getValue().containsKey(index)) {
 				return entry.getValue().get(index);
+			}
+		}
 		return DefaultConfig.get(index);
 	}
 
@@ -73,9 +77,11 @@ public class Config {
 	}
 
 	private static void putAllConfig(LinkedHashMap<String, LinkedHashMap<String, String>> conf) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet())
-			for (Entry<String, String> entry2 : entry.getValue().entrySet())
+		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet()) {
+			for (Entry<String, String> entry2 : entry.getValue().entrySet()) {
 				file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
+			}
+		}
 		try {
 			file.store();
 		} catch (IOException e) {
@@ -100,17 +106,21 @@ public class Config {
 		}
 
 		static String get(String block, String index) {
-			if (defaults.containsKey(block))
-				if (defaults.get(block).containsKey(index))
+			if (defaults.containsKey(block)) {
+				if (defaults.get(block).containsKey(index)) {
 					return defaults.get(block).get(index);
+				}
+			}
 			throw new RuntimeException("Failed to find [" + block + '.' + index + "] field in default configurations.");
 		}
 
 		@Deprecated
 		static String get(String index) {
-			for (Entry<String, LinkedHashMap<String, String>> entry : defaults.entrySet())
-				if (entry.getValue().containsKey(index))
+			for (Entry<String, LinkedHashMap<String, String>> entry : defaults.entrySet()) {
+				if (entry.getValue().containsKey(index)) {
 					return entry.getValue().get(index);
+				}
+			}
 			throw new RuntimeException("Failed to find [(unknown)." + index + "] field in default configurations.");
 		}
 
