@@ -20,4 +20,4 @@ All code and text files must use **UTF-8** encoding with new line at EOF.
 
 Use 'rebase' instead of 'merge' when local commits history is differnt from remote's.
 
-当本地与远程的commit历史出现差异时，使用'rebase'而不是'merge'.
+当本地与远程的commit历史出现差异时，使用 'rebase' 而不是 'merge'.

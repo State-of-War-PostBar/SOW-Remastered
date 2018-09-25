@@ -21,10 +21,10 @@ OpenAL
 
 OpenGL
 
-PAR
-
 RpMalloc
 
 STB
 
 XXHash
+
+以上为使用到的LWJGL库中的内容。
