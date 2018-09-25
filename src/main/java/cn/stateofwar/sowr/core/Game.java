@@ -6,22 +6,33 @@ import cn.stateofwar.sowr.gui.render.Renderer;
 import cn.stateofwar.sowr.util.Config;
 import cn.stateofwar.sowr.util.Logger;
 
+/**
+ * Manager of input, update and render.
+ */
 public class Game {
 
 	private static final Logger logger = new Logger("Game");
 
+	/** If the game is running. */
 	public static boolean running;
 
+	/** Timer for the game engine. */
 	public static Timer timer = new Timer();
 
+	/** Current game state. */
 	protected static GameState currentState = new GameState();
 
+	/** Window of the game engine. */
 	protected static Window win;
 
+	/** Renderer of the game engine. */
 	private static Renderer renderer;
 
+	/**
+	 * Start the game engine.
+	 */
 	public static void startGame() {
-		logger.info("The game is starting!");
+		logger.info("The game is starting.");
 
 		running = true;
 		Graphic.initRenderCapabilities();
@@ -31,7 +42,7 @@ public class Game {
 		currentState.enter(renderer);
 		timer.init();
 
-		while (running && !win.closing()) {
+		while (running && !win.isClosing()) {
 			win.clear();
 
 			currentState.input();
@@ -49,12 +60,18 @@ public class Game {
 		}
 	}
 
+	/**
+	 * End the game engine.
+	 */
 	public static void abrogate() {
 		Graphic.abrogateRender();
 
 		logger.info("The game is shut down.");
 	}
 
+	/**
+	 * Eliminating over frames and lock in vertical sync(only if enabled).
+	 */
 	private static void sync(int fps) {
 		double lastLoopTime = timer.getLastLoopTime();
 		double now = timer.getTime();
