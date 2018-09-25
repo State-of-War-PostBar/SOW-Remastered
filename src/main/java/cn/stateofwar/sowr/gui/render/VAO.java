@@ -2,28 +2,46 @@ package cn.stateofwar.sowr.gui.render;
 
 import static org.lwjgl.opengl.GL30.*;
 
+/**
+ * A vertex array object.
+ */
 public class VAO {
 
+	/** ID of this object. */
 	private final int id;
 
 	public VAO() {
 		id = glGenVertexArrays();
 	}
 
+	/**
+	 * Bind this array to current procedure.
+	 */
 	public void bind() {
 		glBindVertexArray(id);
 	}
 
+	/**
+	 * Get the ID of this object.
+	 * 
+	 * @return ID of the object.
+	 */
 	public int getID() {
 		return id;
 	}
 
-	public void delete() {
-		glDeleteVertexArrays(id);
+	/**
+	 * Unbind any array from current procedure.
+	 */
+	public void unbind() {
+		glBindVertexArray(0);
 	}
 
-	public void unBind() {
-		glBindVertexArray(0);
+	/**
+	 * Delete this object.
+	 */
+	public void delete() {
+		glDeleteVertexArrays(id);
 	}
 
 }

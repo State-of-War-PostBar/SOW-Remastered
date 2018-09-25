@@ -11,12 +11,21 @@ import org.ini4j.Profile.Section;
 
 import cn.stateofwar.sowr.References;
 
+/**
+ * The basic configuration system. All configurations are stored and proceeded
+ * by the format of <b><i>block.index=value</i></b>.
+ */
 public class Config {
 
+	/** Stored configurations. */
 	private static LinkedHashMap<String, LinkedHashMap<String, String>> configs = new LinkedHashMap<>();
 
+	/** The config ini file. */
 	private static Ini file;
 
+	/**
+	 * Initialize the default configurations and load user preferences.
+	 */
 	public static void init() {
 		DefaultConfig.initDefault();
 		configs.putAll(DefaultConfig.defaults);
@@ -29,29 +38,46 @@ public class Config {
 		}
 	}
 
+	/**
+	 * Get a configuration from a block and an index.
+	 * 
+	 * @param block Block of the configuration.
+	 * @param index Index of the configuration.
+	 * 
+	 * @return The configuration value.
+	 */
 	public static String get(String block, String index) {
-		if (configs.containsKey(block)) {
-			if (configs.get(block).containsKey(index)) {
+		if (configs.containsKey(block))
+			if (configs.get(block).containsKey(index))
 				return configs.get(block).get(index);
-			}
-		}
 		return DefaultConfig.get(block, index);
 	}
 
 	/**
-	 * Get a configuration from an index. <br />
-	 * If multiple blocks contain a same index, it will load the first one it finds.
+	 * Get a configuration from only an index.
+	 * 
+	 * @param index Index of the configuration.
+	 * 
+	 * @return The configuration value.
+	 * 
+	 * @deprecated If multiple blocks contain identical indices, it will only load
+	 *             the first one it found. It also has efficiency issues.
 	 */
 	@Deprecated
 	public static String get(String index) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet()) {
-			if (entry.getValue().containsKey(index)) {
+		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet())
+			if (entry.getValue().containsKey(index))
 				return entry.getValue().get(index);
-			}
-		}
 		return DefaultConfig.get(index);
 	}
 
+	/**
+	 * Set a configuration.
+	 * 
+	 * @param block Block of the configuration.
+	 * @param index Index of the configuration.
+	 * @param value The configuration value.
+	 */
 	public static void set(String block, String index, String value) {
 		LinkedHashMap<String, String> temp = new LinkedHashMap<>();
 		temp.putAll(configs.get(block));
@@ -59,10 +85,18 @@ public class Config {
 		configs.put(block, temp);
 	}
 
+	/**
+	 * Save all configurations to the file.
+	 */
 	public static void abrogate() {
 		putAllConfig(configs);
 	}
 
+	/**
+	 * Read all configurations from the file.
+	 * 
+	 * @param ini The configuration file.
+	 */
 	private static void readAllConfig(Ini ini) {
 		Set<Entry<String, Section>> sections = ini.entrySet();
 		for (Entry<String, Section> e : sections) {
@@ -76,12 +110,15 @@ public class Config {
 		}
 	}
 
+	/**
+	 * Put all the configurations to the ini file.
+	 * 
+	 * @param conf The configurations to save.
+	 */
 	private static void putAllConfig(LinkedHashMap<String, LinkedHashMap<String, String>> conf) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet()) {
-			for (Entry<String, String> entry2 : entry.getValue().entrySet()) {
+		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet())
+			for (Entry<String, String> entry2 : entry.getValue().entrySet())
 				file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
-			}
-		}
 		try {
 			file.store();
 		} catch (IOException e) {
@@ -89,11 +126,22 @@ public class Config {
 		}
 	}
 
+	/**
+	 * Default configurations of the program.
+	 */
 	private static final class DefaultConfig {
 
+		/** Stored configurations. */
 		private static LinkedHashMap<String, LinkedHashMap<String, String>> defaults = new LinkedHashMap<>();
 
+		/**
+		 * Initialize the default configurations.
+		 */
 		static void initDefault() {
+
+			LinkedHashMap<String, String> general = new LinkedHashMap<>();
+			general.put("Language", "EN_US");
+			defaults.put("General", general);
 
 			LinkedHashMap<String, String> gui = new LinkedHashMap<>();
 			gui.put("Window Width", "1280");
@@ -105,23 +153,37 @@ public class Config {
 
 		}
 
+		/**
+		 * Get a configuration from a block and an index.
+		 * 
+		 * @param block Block of the configuration.
+		 * @param index Index of the configuration.
+		 * 
+		 * @return The configuration value.
+		 */
 		static String get(String block, String index) {
-			if (defaults.containsKey(block)) {
-				if (defaults.get(block).containsKey(index)) {
+			if (defaults.containsKey(block))
+				if (defaults.get(block).containsKey(index))
 					return defaults.get(block).get(index);
-				}
-			}
 			throw new RuntimeException("Failed to find [" + block + '.' + index + "] field in default configurations.");
 		}
 
+		/**
+		 * Get a configuration from only an index.
+		 * 
+		 * @param index Index of the configuration.
+		 * 
+		 * @return The configuration value.
+		 * 
+		 * @deprecated If multiple blocks contain identical indices, it will only load
+		 *             the first one it found. It also has efficiency issues.
+		 */
 		@Deprecated
 		static String get(String index) {
-			for (Entry<String, LinkedHashMap<String, String>> entry : defaults.entrySet()) {
-				if (entry.getValue().containsKey(index)) {
+			for (Entry<String, LinkedHashMap<String, String>> entry : defaults.entrySet())
+				if (entry.getValue().containsKey(index))
 					return entry.getValue().get(index);
-				}
-			}
-			throw new RuntimeException("Failed to find [(unknown)." + index + "] field in default configurations.");
+			throw new RuntimeException("Failed to find [unknown." + index + "] field in default configurations.");
 		}
 
 	}

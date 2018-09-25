@@ -10,42 +10,45 @@ import java.nio.IntBuffer;
 import cn.stateofwar.sowr.util.DataUtils;
 
 /**
- * A model with texture.
+ * A render object with texture.
  */
 public class TexturedModel extends Model {
 
+	/** Vertex array object for the model. */
 	protected VAO vao;
 
+	/** Vertex data buffer for the model. */
 	protected VBO vbo;
 
+	/** Vertex indices data buffer for the model. */
 	protected VBO ebo;
 
+	/** Total number of vertices of the object. */
 	protected int vertexCount;
 
+	/** Coordinates of the vertices. */
 	protected float[] vertices;
 
+	/** Coordinates of the texture file. */
 	protected float[] texureCoords;
 
+	/** Vertex indices. */
 	protected int[] indices;
 
+	/** The texture of the object. */
 	protected Texture texture;
 
-	/**
-	 * Initialize a textured model.
-	 * 
-	 * @param _vertices      Coordinates of this model.
-	 * @param _textureCoords Parts of the texture need to be rendered.
-	 * @param _indices       Indices for vertices.
-	 * @param textureFile    File for the texture of this model.
-	 */
 	public TexturedModel(float[] _vertices, float[] _textureCoords, int[] _indices, String textureFile) {
 		vertices = _vertices;
 		indices = _indices;
 		vertexCount = _indices.length;
 		texture = Texture.loadTexture(textureFile);
+		create();
 	}
 
-	@Override
+	/**
+	 * Create the OpenGL render model of the object.
+	 */
 	public void create() {
 		FloatBuffer verticesBuffer = DataUtils.createFloatBuffer(vertices);
 		IntBuffer indicesBuffer = DataUtils.createIntBuffer(indices);
@@ -63,11 +66,13 @@ public class TexturedModel extends Model {
 
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
-		vao.unBind();
+		vao.unbind();
 		glDisableVertexAttribArray(0);
 	}
 
-	@Override
+	/**
+	 * Delete and release spaces of data from this object.
+	 */
 	public void abrogate() {
 		vao.delete();
 		vbo.delete();

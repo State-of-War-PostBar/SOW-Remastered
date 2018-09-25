@@ -10,28 +10,38 @@ import java.nio.IntBuffer;
 import cn.stateofwar.sowr.util.DataUtils;
 
 /**
- * A raw model with only shape and no color(white).
+ * A raw render object with no texture and color(white).
  */
 public class RawModel extends Model {
 
+	/** Vertex array object for the model. */
 	protected VAO vao;
 
+	/** Vertex data buffer for the model. */
 	protected VBO vbo;
 
+	/** Vertex indices data buffer for the model. */
 	protected VBO ebo;
 
+	/** Total number of vertices of the object. */
 	protected int vertexCount;
 
+	/** Coordinates of the vertices. */
 	protected float[] vertices;
 
+	/** Vertex indices. */
 	protected int[] indices;
 
 	public RawModel(float[] _vertices, int[] _indices) {
 		vertices = _vertices;
 		indices = _indices;
 		vertexCount = _indices.length;
+		create();
 	}
 
+	/**
+	 * Create the OpenGL render model of the object.
+	 */
 	public void create() {
 		FloatBuffer verticesBuffer = DataUtils.createFloatBuffer(vertices);
 		IntBuffer indicesBuffer = DataUtils.createIntBuffer(indices);
@@ -49,10 +59,13 @@ public class RawModel extends Model {
 
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
-		vao.unBind();
+		vao.unbind();
 		glDisableVertexAttribArray(0);
 	}
 
+	/**
+	 * Delete and release spaces of data from this object.
+	 */
 	public void abrogate() {
 		vao.delete();
 		vbo.delete();
