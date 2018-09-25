@@ -1,7 +1,7 @@
-All people contributed to this project!
+All people contributed to this project please add your signature here.
 
 Format: Name aka alias (if you have one) aka alias... (your email or address)
 
 
 
-Taxerap aka SBest (maxbeokes@gmail.com)
+Taxerap (maxbeokes@gmail.com)
