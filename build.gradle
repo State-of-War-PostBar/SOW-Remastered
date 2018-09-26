@@ -8,8 +8,18 @@ project.ext.steamworks4jVersion = "1.7.0"
 project.ext.ini4jVersion = "0.5.4"
 project.ext.luajVersion = "3.0.1"
 
+project.ext.default_text_encode = "utf-8"
+
+group = "cn.stateofwar"
 archivesBaseName = "sowr"
 version = "1"
+
+compileJava.options.encoding = "${default_text_encode}"
+
+sourceCompatibility = targetCompatibility = "10"
+compileJava {
+	sourceCompatibility = targetCompatibility = "10"
+}
 
 repositories {
 	mavenCentral()
