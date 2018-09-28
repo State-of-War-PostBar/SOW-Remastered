@@ -1,7 +1,7 @@
 package cn.stateofwar.sowr.gui.multimedia;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL45.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 import org.lwjgl.glfw.Callbacks;
@@ -86,7 +86,7 @@ public class Window {
 
 		GL.createCapabilities(true);
 		glViewport(0, 0, width, height);
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
 		return this;
 	}

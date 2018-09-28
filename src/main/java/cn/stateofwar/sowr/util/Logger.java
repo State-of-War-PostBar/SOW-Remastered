@@ -1,6 +1,8 @@
 package cn.stateofwar.sowr.util;
 
-import static cn.stateofwar.sowr.util.Utils.*;
+import static cn.stateofwar.sowr.util.Utils.createFile;
+import static cn.stateofwar.sowr.util.Utils.getSysTime;
+import static cn.stateofwar.sowr.util.Utils.writeLine;
 
 import java.io.File;
 import java.io.IOException;

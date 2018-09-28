@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.gui.render.ogl;
 
-import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL45.*;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -39,7 +39,7 @@ public class VBO {
 	 * 
 	 * @see GL_STATIC_DRAW
 	 */
-	public void upload(int target, long size, int usage) {
+	public void bufferData(int target, long size, int usage) {
 		glBufferData(target, size, usage);
 	}
 
@@ -54,7 +54,7 @@ public class VBO {
 	 * 
 	 * @see GL_STATIC_DRAW
 	 */
-	public void upload(int target, FloatBuffer data, int usage) {
+	public void bufferData(int target, FloatBuffer data, int usage) {
 		glBufferData(target, data, usage);
 	}
 
@@ -71,7 +71,7 @@ public class VBO {
 	 * 
 	 * @see GL_STATIC_DRAW
 	 */
-	public void upload(int target, IntBuffer data, int usage) {
+	public void bufferData(int target, IntBuffer data, int usage) {
 		glBufferData(target, data, usage);
 	}
 
@@ -86,7 +86,7 @@ public class VBO {
 	 * 
 	 * @see GL_ARRAY_BUFFER
 	 */
-	public void uploadSub(int target, long offset, FloatBuffer data) {
+	public void bufferSubData(int target, long offset, FloatBuffer data) {
 		glBufferSubData(target, offset, data);
 	}
 
@@ -97,6 +97,13 @@ public class VBO {
 	 */
 	public int getID() {
 		return id;
+	}
+
+	/**
+	 * Unbind VBO.
+	 */
+	public void unBind(int target) {
+		glBindBuffer(target, 0);
 	}
 
 	/**

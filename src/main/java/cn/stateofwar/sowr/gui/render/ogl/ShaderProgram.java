@@ -1,8 +1,6 @@
 package cn.stateofwar.sowr.gui.render.ogl;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL45.*;
 
 import java.nio.FloatBuffer;
 
