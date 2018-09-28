@@ -3,6 +3,7 @@ package cn.stateofwar.sowr.util;
 import static cn.stateofwar.sowr.util.Utils.*;
 
 import java.io.File;
+import java.io.IOException;
 
 import cn.stateofwar.sowr.References;
 
@@ -30,7 +31,11 @@ public class Logger {
 	 * Initialize the log file.
 	 */
 	public void init() {
-		createFile(log.toString(), true);
+		try {
+			createFile(log.toString(), true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

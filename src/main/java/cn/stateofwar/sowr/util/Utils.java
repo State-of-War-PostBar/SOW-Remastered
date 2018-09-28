@@ -23,7 +23,7 @@ public class Utils {
 	/**
 	 * Check if the program is running in a normal universe.
 	 * 
-	 * @return If this universe is normal.
+	 * @return If this universe is normal for the program.
 	 */
 	public static boolean inNormalUniverse() {
 		if (Integer.compare(1 + 1, 2) == 0)
@@ -35,46 +35,48 @@ public class Utils {
 	 * Safely create a file.
 	 * 
 	 * @param fp       Path of the file.
-	 * @param override Override the old file (if exists).
+	 * @param override Override the old file (if that exists).
+	 * @throws IOException
 	 */
-	public static void createFile(String fp, boolean override) {
+	public static void createFile(String fp, boolean override) throws IOException {
 		File f = new File(fp);
 		File parent = f.getParentFile();
 		if (parent != null && !parent.exists())
 			parent.mkdirs();
 		if (f.exists())
-			if (override)
+			if (override) /* if (f.exists() && override) is not applicable. */
 				f.delete();
 			else
 				return;
-		try {
-			f.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		f.createNewFile();
 	}
 
 	/**
-	 * Read a specific line in a text file.
+	 * Read a specific line in a text file.<br />
+	 * <i>Does not read any line separators.</i>
 	 * 
 	 * @param fp   Path of the text file.
 	 * @param line Line to read, starts with 1.
 	 * 
 	 * @return The text read.
+	 * 
+	 * @throws IOException
 	 */
-	public static String readLineS(String fp, int line) {
+	public static String readLineS(String fp, int line) throws IOException {
 		line--;
 		List<String> lines = null;
-		try {
-			lines = Files.readLines(new File(fp), Charset.forName(References.DEFAULT_TEXT_ENCODE));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return lines.get(line);
+		lines = Files.readLines(new File(fp), Charset.forName(References.DEFAULT_TEXT_ENCODE));
+		if (lines.size() < line)
+			line = lines.size(); /*
+									 * Read the last line of file (not EOF line) instead if desired line is
+									 * unreachable.
+									 */
+		return lines.get(line).replaceAll(nl(), "");
 	}
 
 	/**
-	 * Read a specific position after a line in a text file.
+	 * Read a specific position after a line in a text file.<br />
+	 * <i>Does not read any line separators.</i>
 	 * 
 	 * @param fp   Path of the text file.
 	 * @param line Line to read, starts with 1.
@@ -82,24 +84,32 @@ public class Utils {
 	 *             be read.
 	 * 
 	 * @return The text read.
+	 * 
+	 * @throws IOException
 	 */
-	public static String readLineSP(String fp, int line, int pos) {
+	public static String readLineSP(String fp, int line, int pos) throws IOException {
 		pos--;
 		String l = readLineS(fp, line);
 		if (l.length() < pos)
-			pos = l.length();
-		return l.substring(pos, l.length());
+			pos = l.length(); /*
+								 * Read the last position of the line instead if desired position is
+								 * unreachable.
+								 */
+		return l.substring(pos, l.length()).replaceAll(nl(), "");
 	}
 
 	/**
-	 * Read a text file to a single string, with line separators.
+	 * Read a text file to a single string, with line separator characters and
+	 * spaces.
 	 * 
 	 * @param fp Path of the text file.
 	 * 
 	 * @return The text read.
+	 * 
+	 * @throws IOException
 	 */
-	public static String readFileToString(String fp) {
-		return Files.asCharSource(new File(fp), Charset.forName(References.DEFAULT_TEXT_ENCODE)).toString();
+	public static String readFileToString(String fp) throws IOException {
+		return Files.asCharSource(new File(fp), Charset.forName(References.DEFAULT_TEXT_ENCODE)).read();
 	}
 
 	/**
@@ -108,16 +118,14 @@ public class Utils {
 	 * @param fp Path of the text file.
 	 * 
 	 * @return The lines count.
+	 * 
+	 * @throws IOException
 	 */
-	public static int getTotalLines(String fp) {
+	public static int getTotalLines(String fp) throws IOException {
 		File f = new File(fp);
 		List<String> lines = null;
-		try {
-			lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODE));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return lines.size() + 1;
+		lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODE));
+		return lines.size();
 	}
 
 	/**
@@ -151,22 +159,20 @@ public class Utils {
 	 * 
 	 * @param fp   Path of the text file.
 	 * @param data The text to write.
-	 * @param line The line to write, starts with 1.
+	 * @param line The line to write, starts with 1. Text starts replacing in this
+	 *             position, not after.
+	 * @throws IOException
 	 */
-	public static void writeLineS(String fp, String data, int line) {
+	public static void writeLineS(String fp, String data, int line) throws IOException {
 		line--;
 		File f = new File(fp);
 		List<String> lines;
-		try {
-			lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODE));
-			java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODE));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODE));
+		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODE));
 	}
 
 	/**
-	 * Write to a text file in a specific position of a line. <br />
+	 * Write to a text file after a specific position of a line. <br />
 	 * <i>The old data will be erased.</i>
 	 * 
 	 * @param fp   Path of the text file.
@@ -199,8 +205,8 @@ public class Utils {
 	}
 
 	/**
-	 * Get the data of the resource text file as a list of strings. <i>Works only if
-	 * the resource file is a pure text file.</i>
+	 * Get the data of the resource text file as a list of strings.<br />
+	 * <i>Works only if the resource file is a pure text file.</i>
 	 * 
 	 * @param fp Path of the resource file.
 	 * 
