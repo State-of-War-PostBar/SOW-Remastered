@@ -18,7 +18,33 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# Please customize this file to fit your current requirements, but be aware not to upload this file to the remote.
+# Generated gradle workspace
+/.gradle/
+
+# Eclipse configuration folder
+/.settings/
+
+# Visual Studio configuration folder
+/.vs/
+
+# Binaries folder or Eclipse build temps
+/bin/
+
+# Custom libraries folder
+/libs/
+
+# Gradle build folder
+/build/
+
+# Eclipse configurations
+.classpath
+.project
+
+# Settings file
+*.ini
+
+# Text file
+*.txt
