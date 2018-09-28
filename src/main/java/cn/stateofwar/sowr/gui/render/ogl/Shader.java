@@ -94,7 +94,11 @@ public class Shader {
 	 */
 	private static Shader loadVertexShader(String fp) {
 		int vs = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vs, Utils.readFileToString(fp));
+		try {
+			glShaderSource(vs, Utils.readFileToString(fp));
+		} catch (IOException e) {
+			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
+		}
 
 		glCompileShader(vs);
 		if (glGetShaderi(vs, GL_COMPILE_STATUS) == GL_FALSE) {
@@ -119,7 +123,7 @@ public class Shader {
 		try {
 			glShaderSource(vs, Utils.listToString(Utils.getResAsStrings(fp), true));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(vs);
@@ -142,7 +146,11 @@ public class Shader {
 	 */
 	private static Shader loadFragmentShader(String fp) {
 		int fs = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fs, Utils.readFileToString(fp));
+		try {
+			glShaderSource(fs, Utils.readFileToString(fp));
+		} catch (IOException e) {
+			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
+		}
 
 		glCompileShader(fs);
 		if (glGetShaderi(fs, GL_COMPILE_STATUS) != 1) {
@@ -167,7 +175,7 @@ public class Shader {
 		try {
 			glShaderSource(fs, Utils.listToString(Utils.getResAsStrings(fp), true));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(fs);
@@ -190,7 +198,11 @@ public class Shader {
 	 */
 	private static Shader loadGeometricShader(String fp) {
 		int gs = glCreateShader(GL_GEOMETRY_SHADER);
-		glShaderSource(gs, Utils.readFileToString(fp));
+		try {
+			glShaderSource(gs, Utils.readFileToString(fp));
+		} catch (IOException e) {
+			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
+		}
 
 		glCompileShader(gs);
 		if (glGetShaderi(gs, GL_COMPILE_STATUS) == GL_FALSE) {
@@ -215,7 +227,7 @@ public class Shader {
 		try {
 			glShaderSource(gs, Utils.listToString(Utils.getResAsStrings(fp), true));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(gs);
@@ -238,7 +250,11 @@ public class Shader {
 	 */
 	private static Shader loadTessControllingShader(String fp) {
 		int tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
-		glShaderSource(tcs, Utils.readFileToString(fp));
+		try {
+			glShaderSource(tcs, Utils.readFileToString(fp));
+		} catch (IOException e) {
+			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
+		}
 
 		glCompileShader(tcs);
 		if (glGetShaderi(tcs, GL_COMPILE_STATUS) == GL_FALSE) {
@@ -263,7 +279,7 @@ public class Shader {
 		try {
 			glShaderSource(tcs, Utils.listToString(Utils.getResAsStrings(fp), true));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(tcs);
@@ -286,7 +302,11 @@ public class Shader {
 	 */
 	private static Shader loadTessEvaluatingShader(String fp) {
 		int tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
-		glShaderSource(tes, Utils.readFileToString(fp));
+		try {
+			glShaderSource(tes, Utils.readFileToString(fp));
+		} catch (IOException e) {
+			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
+		}
 
 		glCompileShader(tes);
 		if (glGetShaderi(tes, GL_COMPILE_STATUS) == GL_FALSE) {
@@ -311,7 +331,7 @@ public class Shader {
 		try {
 			glShaderSource(tes, Utils.listToString(Utils.getResAsStrings(fp), true));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(tes);
