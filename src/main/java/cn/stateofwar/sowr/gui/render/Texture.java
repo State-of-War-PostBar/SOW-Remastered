@@ -181,7 +181,7 @@ public class Texture {
 			image = stbi_load(fp, w, h, comp, 4);
 
 			if (image == null)
-				logger.error("Failed to load a texture file!" + Utils.nl() + stbi_failure_reason());
+				logger.error("Failed to load a texture file from " + fp + " !" + Utils.nl() + stbi_failure_reason());
 
 			width = w.get();
 			height = h.get();
