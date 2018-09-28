@@ -5,8 +5,12 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 import org.lwjgl.glfw.Callbacks;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.opengl.GL;
 
+import cn.stateofwar.sowr.input.InputHooks;
 import cn.stateofwar.sowr.util.Logger;
 
 /**
@@ -64,6 +68,18 @@ public class Window {
 		logger.info("Created a GLFW window with handle " + handle + ".");
 		glfwShowWindow(handle);
 		glfwMakeContextCurrent(handle);
+
+		glfwSetKeyCallback(handle, GLFWKeyCallback.create((window, key, scancode, action, mods) -> {
+			InputHooks.keyboardTrigger(key, scancode, action, mods);
+		}));
+
+		glfwSetMouseButtonCallback(handle, GLFWMouseButtonCallback.create((window, button, action, mods) -> {
+			InputHooks.mouseTrigger(button, action, mods);
+		}));
+
+		glfwSetCursorPosCallback(handle, GLFWCursorPosCallback.create((window, x, y) -> {
+			InputHooks.cursorTrigger(x, y);
+		}));
 
 		if (vSync)
 			glfwSwapInterval(1);

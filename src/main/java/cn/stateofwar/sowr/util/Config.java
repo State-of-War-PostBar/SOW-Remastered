@@ -29,12 +29,20 @@ public class Config {
 	public static void init() {
 		DefaultConfig.initDefault();
 		configs.putAll(DefaultConfig.defaults);
-		Utils.createFile(References.CONFIG_FILE_NAME, false);
+		try {
+			Utils.createFile(References.CONFIG_FILE_NAME, false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		try {
 			file = new Ini(new File(References.CONFIG_FILE_NAME));
 			readAllConfig(file);
 		} catch (IOException e) {
-			Utils.createFile(References.CONFIG_FILE_NAME, true);
+			try {
+				Utils.createFile(References.CONFIG_FILE_NAME, true);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
