@@ -1,14 +1,18 @@
 apply plugin: "java"
 
-project.ext.guavaVersion = "26.0-jre"
-project.ext.nettyVersion = "4.1.29.Final"
-project.ext.lwjglVersion = "3.2.0"
-project.ext.jomlVersion = "1.9.11"
-project.ext.steamworks4jVersion = "1.7.0"
-project.ext.ini4jVersion = "0.5.4"
-project.ext.luajVersion = "3.0.1"
+ext {
 
-project.ext.default_text_encode = "utf-8"
+	guavaVersion = "26.0-jre"
+	nettyVersion = "4.1.29.Final"
+	lwjglVersion = "3.2.0"
+	jomlVersion = "1.9.11"
+	steamworks4jVersion = "1.7.0"
+	ini4jVersion = "0.5.4"
+	luajVersion = "3.0.1"
+
+	default_text_encode = "utf-8"
+
+}
 
 group = "cn.stateofwar"
 archivesBaseName = "sowr"
