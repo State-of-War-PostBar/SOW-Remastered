@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL45.*;
 import java.nio.FloatBuffer;
 
 import org.joml.Matrix4f;
+import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
 
 import cn.stateofwar.sowr.util.Logger;
@@ -93,6 +94,21 @@ public class ShaderProgram {
 		int loc = getUniformLoc(name);
 		if (loc != 1)
 			glUniform1f(loc, val);
+	}
+
+	/**
+	 * Set a uniform variable.
+	 * 
+	 * @param name Name of the variable.
+	 * 
+	 * @param val  Value to set.
+	 */
+	public void setUniform(String name, Vector4f val) {
+		int loc = getUniformLoc(name);
+		FloatBuffer buffer = BufferUtils.createFloatBuffer(4);
+		val.get(buffer);
+		if (loc != 1)
+			glUniform4fv(loc, buffer);
 	}
 
 	/**
