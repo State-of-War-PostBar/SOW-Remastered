@@ -6,13 +6,13 @@ The main program is written in Java, and the plugins (including most game featur
 此程序主要使用Java编写，插件则主要使用Lua。若您不会使用，可以询问或者寻找教程。
 
 ## Workspace / 工作空间
-We are sorry for not providing the workspace for any IDEs in our repository.
+We are sorry for not providing workspace for any IDEs in our repository.
 
 很抱歉我们并不提供任何IDE的工作环境。
 
 ## Compiling / 编译
-Please install [Gradle](https://gradle.org/) in your PC. Then, go to the directory where build.gradle is located,
-use the cmd/shell to run
+Please install [Gradle](https://gradle.org/) in your PC. Then, go to the directory where [build.gradle](build.gradle) is located,
+use your remote to run
 
 	'gradle build'
 
@@ -22,25 +22,25 @@ use the cmd/shell to run
 ## Libraries / 库
 The followings are the libraries used in our program. For more information, please look forward to [build.gradle](build.gradle).
 
-[Google Guava - 26.0 (JRE ver.)](https://github.com/google/guava)
+[Google Guava](https://github.com/google/guava)
 
 
-[LWJGL - 3.2.0](https://www.lwjgl.org) For full list of used LWJGL features, see [here](LWJGL_features.md) ← 参阅此处以获知使用到的LWJGL特性列表。
+[LWJGL](https://www.lwjgl.org) For a full list of implemented LWJGL features, see [here](LWJGL_features.md) ← 参阅此处以获取使用到的LWJGL特性列表。
 
 
-[NIO(Netty) - 4.1.29.Final](http://netty.io)
+[NIO(Netty)](http://netty.io)
 
 
-[JOML - 1.9.11](https://github.com/JOML-CI/JOML)
+[JOML](https://github.com/JOML-CI/JOML)
 
 
-[SteamWorks Java Wrapper - 1.7.0](https://github.com/code-disaster/steamworks4j)
+[SteamWorks Java Wrapper](https://github.com/code-disaster/steamworks4j)
 
 
-[Ini4j - 0.5.4](http://ini4j.sourceforge.net/)
+[Ini4j](http://ini4j.sourceforge.net/)
 
 
-[LuaJ - 3.0.1](http://www.luaj.org)
+[LuaJ](http://www.luaj.org)
 
 
 以上为程序所使用到的库。更多信息请参阅[build.gradle](build.gradle)。

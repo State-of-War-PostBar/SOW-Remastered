@@ -1,4 +1,4 @@
-# List of LWJGL features used
+# List of LWJGL features implemented
 ---
 
 LWJGL Core
