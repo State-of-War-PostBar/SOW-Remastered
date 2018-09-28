@@ -1,6 +1,7 @@
 package cn.stateofwar.sowr.main;
 
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.glfwInit;
+import static org.lwjgl.glfw.GLFW.glfwTerminate;
 
 import org.lwjgl.system.Library;
 
