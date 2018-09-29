@@ -65,10 +65,15 @@ public class DataUtils {
 	 * Create a OpenGL orthographic by specific positions.
 	 * 
 	 * @param left   Farthest left of the scene box.
+	 * 
 	 * @param right  Farthest right of the scene box.
+	 * 
 	 * @param bottom Farthest bottom of the scene box.
+	 * 
 	 * @param top    Farthest top of the scene box.
+	 * 
 	 * @param near   Farthest front of the scene box.
+	 * 
 	 * @param far    Farthest back of the scene box.
 	 * 
 	 * @return The matrix of the orthographic data of the canonical view box.

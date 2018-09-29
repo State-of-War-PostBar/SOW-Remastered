@@ -1,9 +1,12 @@
 package cn.stateofwar.sowr.gui.render;
 
 import static org.lwjgl.opengl.GL45.*;
-import static org.lwjgl.stb.STBImage.*;
+import static org.lwjgl.stb.STBImage.stbi_failure_reason;
+import static org.lwjgl.stb.STBImage.stbi_load;
+import static org.lwjgl.stb.STBImage.stbi_set_flip_vertically_on_load;
 
 import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import org.lwjgl.system.MemoryStack;
@@ -59,6 +62,10 @@ public class Texture {
 		glTexParameteri(GL_TEXTURE_2D, par, val);
 	}
 
+	public void setPar(int par, FloatBuffer val) {
+		glTexParameterfv(GL_TEXTURE_2D, par, val);
+	}
+
 	/**
 	 * Upload image data with specified width and height.
 	 * 
@@ -88,6 +95,7 @@ public class Texture {
 	 */
 	public void upload(int internalFormat, int width, int height, int format, ByteBuffer data) {
 		glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
 	/**
@@ -136,32 +144,6 @@ public class Texture {
 	}
 
 	/**
-	 * Create a texture with specified width, height and data.
-	 * 
-	 * @param width  Width of the texture.
-	 * 
-	 * @param height Height of the texture.
-	 * 
-	 * @param data   Picture Data in RGBA format.
-	 * 
-	 * @return Instance of the created texture.
-	 */
-	public static Texture createTexture(int width, int height, ByteBuffer data) {
-		Texture texture = new Texture();
-		texture.setWidth(width);
-		texture.setHeight(height);
-
-		texture.bind();
-		texture.setPar(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-		texture.setPar(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-		texture.setPar(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		texture.setPar(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		texture.upload(GL_RGBA8, width, height, GL_RGBA, data);
-
-		return texture;
-	}
-
-	/**
 	 * Load texture from file.
 	 *
 	 * @param fp Path of the texture file.
@@ -188,6 +170,33 @@ public class Texture {
 
 		logger.info("Loaded a texture at path " + fp + ".");
 		return createTexture(width, height, image);
+	}
+
+	/**
+	 * Create a texture with specified width, height and data.
+	 * 
+	 * @param width  Width of the texture.
+	 * 
+	 * @param height Height of the texture.
+	 * 
+	 * @param data   Picture Data in RGBA format.
+	 * 
+	 * @return Instance of the created texture.
+	 */
+	private static Texture createTexture(int width, int height, ByteBuffer data) {
+		Texture texture = new Texture();
+		texture.setWidth(width);
+		texture.setHeight(height);
+
+		texture.bind();
+		texture.setPar(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+		texture.setPar(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+		texture.setPar(GL_TEXTURE_BORDER_COLOR, RGBA.WHITE.toFloatBuffer());
+		texture.setPar(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		texture.setPar(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		texture.upload(GL_RGBA8, width, height, GL_RGBA, data);
+
+		return texture;
 	}
 
 }

@@ -1,7 +1,11 @@
 package cn.stateofwar.sowr.gui.render;
 
+import java.nio.FloatBuffer;
+
 import org.joml.Vector3f;
 import org.joml.Vector4f;
+
+import cn.stateofwar.sowr.util.DataUtils;
 
 /**
  * Red, Green, Blue and Alpha (transparent) value storage.
@@ -161,13 +165,23 @@ public class RGBA {
 	}
 
 	/**
+	 * Convert the color components to a float buffer with 4 elements (red, green,
+	 * blue, alpha).
+	 * 
+	 * @return The float buffer created.
+	 */
+	public FloatBuffer toFloatBuffer() {
+		return DataUtils.createFloatBuffer(new float[] { r, g, b, a });
+	}
+
+	/**
 	 * Convert a percentage (0.0 - 1.0) value to great value (0.0 - 255.0).
 	 * 
 	 * @param percentage The percentage value.
 	 * 
 	 * @return The great value.
 	 */
-	public static float toGreatVal(float percentage) {
+	public static float to255(float percentage) {
 		return percentage * 255.0f;
 	}
 
@@ -178,7 +192,7 @@ public class RGBA {
 	 * 
 	 * @return The percentage value.
 	 */
-	public static float toPerc(float gv) {
+	public static float to100(float gv) {
 		return gv / 255.0f;
 	}
 
