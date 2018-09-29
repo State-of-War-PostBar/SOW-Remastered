@@ -26,7 +26,7 @@ public class Graphic {
 	 * Register the window and establish render capabilities.
 	 */
 	public static void initRenderCapabilities() {
-		win = new Window(I18n.t(References.PROGRAM_NAME), Integer.parseInt(Config.get("GUI", "Window Width")),
+		win = new Window(I18n.dk(References.PROGRAM_NAME), Integer.parseInt(Config.get("GUI", "Window Width")),
 				Integer.parseInt(Config.get("GUI", "Window Height")),
 				Boolean.parseBoolean(Config.get("GUI", "Vertical Sync")),
 				Boolean.parseBoolean(Config.get("GUI", "Full Screen")));

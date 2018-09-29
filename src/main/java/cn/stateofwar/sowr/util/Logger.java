@@ -1,17 +1,13 @@
 package cn.stateofwar.sowr.util;
 
-import static cn.stateofwar.sowr.util.Utils.createFile;
-import static cn.stateofwar.sowr.util.Utils.getSysTime;
-import static cn.stateofwar.sowr.util.Utils.writeLine;
-
 import java.io.File;
 import java.io.IOException;
 
 import cn.stateofwar.sowr.References;
 
 /**
- * Logger for the program. For every class that needs log recording, it needs a
- * private instance of this class.
+ * Logger for the program. For every class that requires log recording, it needs
+ * a private static final instance of this class.
  */
 public class Logger {
 
@@ -21,20 +17,31 @@ public class Logger {
 	/** The source that processes logging. */
 	private String source;
 
+	/**
+	 * Create a logger for the class constructed it. It should be private static
+	 * final to avoid anything strange...
+	 * 
+	 * @param _source Who is recording the log massage.
+	 */
+	public Logger(String _source) {
+		source = _source;
+	}
+
+	/**
+	 * Create a logger for the class constructed it. It should be private static
+	 * final to avoid anything strange...
+	 */
 	public Logger() {
 		source = "Unknown";
 	}
 
-	public Logger(String _thread) {
-		source = _thread;
-	}
-
 	/**
-	 * Initialize the log file.
+	 * Initialize the log file. This should only be called once, otherwise the old
+	 * log file will be erased.
 	 */
 	public void init() {
 		try {
-			createFile(log.toString(), true);
+			Utils.createFile(log.toString(), true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -44,14 +51,14 @@ public class Logger {
 	 * <i>Message Level: <b>Information</b></i><br />
 	 * This type of log messages records the procedures of the program.
 	 * 
-	 * @param msg The message to record.
+	 * @param message The message to record.
 	 */
-	public void info(String msg) {
+	public void info(String message) {
 		StringBuilder b = new StringBuilder();
-		b.append('[').append(getSysTime()).append(']');
+		b.append('[').append(Utils.getSysTime()).append(']');
 		b.append("[INFO]");
 		b.append('[').append(source).append(']');
-		b.append(msg);
+		b.append(message);
 		System.out.println(b.toString());
 		writeToLog(b.toString());
 	}
@@ -61,14 +68,14 @@ public class Logger {
 	 * This type of log messages records something that is not expected when
 	 * running, but they might not trigger huge impact.
 	 * 
-	 * @param msg The message to record.
+	 * @param message The message to record.
 	 */
-	public void warn(String msg) {
+	public void warn(String message) {
 		StringBuilder b = new StringBuilder();
-		b.append('[').append(getSysTime()).append(']');
+		b.append('[').append(Utils.getSysTime()).append(']');
 		b.append("[WARNING]");
 		b.append('[').append(source).append(']');
-		b.append(msg);
+		b.append(message);
 		System.out.println(b.toString());
 		writeToLog(b.toString());
 	}
@@ -79,14 +86,14 @@ public class Logger {
 	 * program. Although they might not be very dangerous, users should take a look
 	 * at this and report to the development team.
 	 * 
-	 * @param msg The message to record.
+	 * @param message The message to record.
 	 */
-	public void error(String msg) {
+	public void error(String message) {
 		StringBuilder b = new StringBuilder();
-		b.append('[').append(getSysTime()).append(']');
+		b.append('[').append(Utils.getSysTime()).append(']');
 		b.append("[ERROR]");
 		b.append('[').append(source).append(']');
-		b.append(msg);
+		b.append(message);
 		System.out.println(b.toString());
 		writeToLog(b.toString());
 	}
@@ -96,27 +103,26 @@ public class Logger {
 	 * This type of log messages records some critical error that makes it
 	 * impossible to run anymore.
 	 * 
-	 * @param msg The message to record.
+	 * @param message The message to record.
 	 */
-	public void fatal(String msg) {
+	public void fatal(String message) {
 		StringBuilder b = new StringBuilder();
-		b.append('[').append(getSysTime()).append(']');
+		b.append('[').append(Utils.getSysTime()).append(']');
 		b.append("[FATAL ERROR]");
 		b.append('[').append(source).append(']');
-		b.append(msg);
+		b.append(message);
 		System.out.println(b.toString());
 		writeToLog(b.toString());
 	}
 
 	/**
-	 * Debug messages when debug mode is on.
+	 * Debug messages when debug mode is on, or when developers try to detect bugs.
 	 * 
 	 * @param msg The message to record.
 	 */
 	public void debug(String msg) {
 		StringBuilder b = new StringBuilder();
-		b.append('[').append(getSysTime()).append(']');
-		b.append("[DEBUG]");
+		b.append("[========DEBUG========]");
 		b.append('[').append(source).append(']');
 		b.append(msg);
 		System.out.println(b.toString());
@@ -129,7 +135,12 @@ public class Logger {
 	 * @param msg The message to write.
 	 */
 	private void writeToLog(String msg) {
-		writeLine(log.toString(), msg);
+		try {
+			Utils.writeLine(log.toString(), msg);
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -9,7 +9,6 @@ public class Main {
 	private static final Logger logger = new Logger("Main");
 
 	public static void main(String[] args) {
-
 		logger.init();
 
 		if (!Utils.inNormalUniverse()) {
@@ -27,7 +26,6 @@ public class Main {
 		logger.info("Shutting down client...");
 		Trim.abrogate();
 		logger.info("The client is shut down. Thank you for playing!");
-
 	}
 
 }

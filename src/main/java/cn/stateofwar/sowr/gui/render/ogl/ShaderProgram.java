@@ -26,6 +26,12 @@ public class ShaderProgram {
 	/** Array of shaders. */
 	private Shader[] shaders;
 
+	/**
+	 * Create a shader program with some shaders.
+	 * 
+	 * @param _shaders Shaders for this program. Please be aware that they will be
+	 *                 deleted after this program is completed.
+	 */
 	public ShaderProgram(Shader[] _shaders) {
 		shaders = _shaders;
 		id = glCreateProgram();

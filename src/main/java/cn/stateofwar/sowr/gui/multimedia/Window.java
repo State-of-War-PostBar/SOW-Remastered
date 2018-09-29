@@ -38,6 +38,19 @@ public class Window {
 	/** If the window takes all the screen. */
 	private boolean fullScreen;
 
+	/**
+	 * Initialize window properties.
+	 * 
+	 * @param _title  Title of the program.
+	 * 
+	 * @param _width  With of the window.
+	 * 
+	 * @param _height Height of the window.
+	 * 
+	 * @param _vSync  Vertical sync for the window.
+	 * 
+	 * @param fs      Full screen capturing.
+	 */
 	public Window(String _title, int _width, int _height, boolean _vSync, boolean fs) {
 		title = _title;
 		width = _width;

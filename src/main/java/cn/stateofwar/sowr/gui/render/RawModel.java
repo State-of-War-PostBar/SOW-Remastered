@@ -68,7 +68,8 @@ public class RawModel extends Model {
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 		glDisableVertexAttribArray(0);
 
-		ebo.unBind(GL_ARRAY_BUFFER);
+		vbo.unBind(GL_ARRAY_BUFFER);
+		ebo.unBind(GL_ELEMENT_ARRAY_BUFFER);
 		vao.unbind();
 	}
 
@@ -83,6 +84,9 @@ public class RawModel extends Model {
 		glDisableVertexAttribArray(0);
 	}
 
+	/**
+	 * Delete the model and release spaces.
+	 */
 	public void abrogate() {
 		prog.delete();
 		vao.delete();

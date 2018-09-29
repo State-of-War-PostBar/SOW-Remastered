@@ -7,6 +7,9 @@ import java.io.IOException;
 import cn.stateofwar.sowr.util.Logger;
 import cn.stateofwar.sowr.util.Utils;
 
+/**
+ * An OpenGL shader.
+ */
 public class Shader {
 
 	private static final Logger logger = new Logger("Render");

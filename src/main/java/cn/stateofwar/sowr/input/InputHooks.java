@@ -6,8 +6,8 @@ package cn.stateofwar.sowr.input;
 public class InputHooks {
 
 	/**
-	 * A key has been triggered by listener. This method receives the parameters
-	 * from the listener automatically.
+	 * A key has been triggered. This method receives the parameters from the
+	 * listener automatically.
 	 * 
 	 * @param key      The key triggered.
 	 * 

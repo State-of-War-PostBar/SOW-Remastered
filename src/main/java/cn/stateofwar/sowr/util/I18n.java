@@ -2,29 +2,25 @@ package cn.stateofwar.sowr.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
- * Internationalization of the program.
+ * Internationalization for the program.
  */
 public class I18n {
 
-	/** The parser to separate translation keys and translation results. */
+	/** The parser to separate translation keys and results. */
 	private static final String PARSER = "=";
 
 	/** The current language preference of the program. */
 	private static Locales locale;
 
 	/** All the languages this program supports. */
-	private static final ArrayList<String> LEGAL_VAL = new ArrayList<>() {
-		private static final long serialVersionUID = 233666998L;
-		{
-			add("EN_US");
-			add("ZH_CN");
-		}
-	};
+	private static final List<String> LEGAL_VAL = Stream.of("EN_US", "ZH_CN").collect(Collectors.toList());
 
 	/**
 	 * Initialize the translations.
@@ -60,7 +56,7 @@ public class I18n {
 	/**
 	 * Switch the current language locale.
 	 * 
-	 * @param Name of the new locale.
+	 * @param loc Name of the new locale.
 	 */
 	public static void switchLoc(String loc) {
 		if (LEGAL_VAL.contains(loc))
@@ -76,7 +72,7 @@ public class I18n {
 	 * 
 	 * @return The translation result.
 	 */
-	public static String t(String key) {
+	public static String dk(String key) {
 		return locale.reveal(key);
 	}
 
@@ -91,7 +87,7 @@ public class I18n {
 		private String name;
 
 		/** All the translation keys and results. */
-		private Map<String, String> translations = new HashMap<>();
+		private Map<String, String> translations = new LinkedHashMap<>();
 
 		private Locales() {
 		}
@@ -111,11 +107,24 @@ public class I18n {
 		}
 
 		/**
+		 * Parse a locale from a name. If the value is not valid, default <i>(English -
+		 * United States)</i> will be selected.
+		 * 
+		 * @param name Name of the locale.
+		 */
+		public static Locales parseLoc(String name) {
+			for (Locales loc : Locales.values())
+				if (loc.name.equals(name))
+					return loc;
+			return EN_US;
+		}
+
+		/**
 		 * Read all the translations from the language files.
 		 */
 		private void readValues() throws IOException {
 			List<String> trans = new ArrayList<>();
-			trans = Utils.getResAsStrings("sowr/languages/" + name + ".lang");
+			trans = Utils.getResAsStrings("sowr/language/" + name + ".lang");
 			for (String x : trans)
 				if (x.indexOf(PARSER) != -1) {
 					int index = x.indexOf(PARSER);
@@ -124,7 +133,8 @@ public class I18n {
 		}
 
 		/**
-		 * Reveal a translation.
+		 * Reveal a translation. If there is no translation available it will return the
+		 * key itself.
 		 * 
 		 * @param key The translation key.
 		 * 
@@ -134,17 +144,6 @@ public class I18n {
 			if (translations.containsKey(key))
 				return translations.get(key);
 			return key;
-		}
-
-		/**
-		 * Parse a locale from a name. If the value is not valid, default <i>(English -
-		 * United States)</i> will be selected.
-		 */
-		public static Locales parseLoc(String x) {
-			for (Locales loc : Locales.values())
-				if (loc.name.equals(x))
-					return loc;
-			return EN_US;
 		}
 	}
 

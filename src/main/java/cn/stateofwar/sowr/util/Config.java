@@ -20,7 +20,7 @@ public class Config {
 	/** Stored configurations. */
 	private static LinkedHashMap<String, LinkedHashMap<String, String>> configs = new LinkedHashMap<>();
 
-	/** The config ini file. */
+	/** The configuration storage file. */
 	private static Ini file;
 
 	/**
@@ -32,6 +32,7 @@ public class Config {
 		try {
 			Utils.createFile(References.CONFIG_FILE_NAME, false);
 		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 		try {
@@ -41,6 +42,7 @@ public class Config {
 			try {
 				Utils.createFile(References.CONFIG_FILE_NAME, true);
 			} catch (IOException e1) {
+				System.out.println(e.getLocalizedMessage());
 				e1.printStackTrace();
 			}
 		}
@@ -50,6 +52,7 @@ public class Config {
 	 * Get a configuration from a block and an index.
 	 * 
 	 * @param block Block of the configuration.
+	 * 
 	 * @param index Index of the configuration.
 	 * 
 	 * @return The configuration value.
@@ -83,7 +86,9 @@ public class Config {
 	 * Set a configuration.
 	 * 
 	 * @param block Block of the configuration.
+	 * 
 	 * @param index Index of the configuration.
+	 * 
 	 * @param value The configuration value.
 	 */
 	public static void set(String block, String index, String value) {
@@ -130,6 +135,7 @@ public class Config {
 		try {
 			file.store();
 		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 	}
@@ -145,31 +151,30 @@ public class Config {
 		/**
 		 * Initialize the default configurations.
 		 */
-		static void initDefault() {
-
+		private static void initDefault() {
 			LinkedHashMap<String, String> general = new LinkedHashMap<>();
 			general.put("Language", "EN_US");
 			defaults.put("General", general);
 
 			LinkedHashMap<String, String> gui = new LinkedHashMap<>();
-			gui.put("Window Width", "1280");
+			gui.put("Window Width", "1366");
 			gui.put("Window Height", "768");
-			gui.put("Full Screen", "false");
-			gui.put("Vertical Sync", "true");
+			gui.put("Full Screen", "False");
+			gui.put("Vertical Sync", "True");
 			gui.put("Max FPS", "60");
 			defaults.put("GUI", gui);
-
 		}
 
 		/**
 		 * Get a configuration from a block and an index.
 		 * 
 		 * @param block Block of the configuration.
+		 * 
 		 * @param index Index of the configuration.
 		 * 
 		 * @return The configuration value.
 		 */
-		static String get(String block, String index) {
+		private static String get(String block, String index) {
 			if (defaults.containsKey(block))
 				if (defaults.get(block).containsKey(index))
 					return defaults.get(block).get(index);
@@ -187,7 +192,7 @@ public class Config {
 		 *             the first one it found. It also has efficiency issues.
 		 */
 		@Deprecated
-		static String get(String index) {
+		private static String get(String index) {
 			for (Entry<String, LinkedHashMap<String, String>> entry : defaults.entrySet())
 				if (entry.getValue().containsKey(index))
 					return entry.getValue().get(index);
