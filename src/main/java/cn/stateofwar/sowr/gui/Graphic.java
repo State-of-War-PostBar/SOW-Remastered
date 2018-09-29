@@ -35,9 +35,9 @@ public class Graphic {
 		desiredFPS = win.isVSync() ? References.VERTICAL_SYNC_FPS : Integer.parseInt(Config.get("GUI", "Max FPS"));
 
 		StringBuilder s = new StringBuilder();
-		s.append("OpenGL information: ").append(nl());
-		s.append("OpenGL Vendor: ").append(glGetString(GL_VENDOR)).append(nl());
-		s.append("OpenGL Renderer: ").append(glGetString(GL_RENDERER)).append(nl());
+		s.append("Graphic Adaptor information: ").append(nl());
+		s.append("GPU Vendor: ").append(glGetString(GL_VENDOR)).append(nl());
+		s.append("GPU Renderer: ").append(glGetString(GL_RENDERER)).append(nl());
 		s.append("OpenGL Version: ").append(glGetString(GL_VERSION)).append(nl());
 		s.append("GLSL Version: ").append(glGetString(GL_SHADING_LANGUAGE_VERSION));
 		logger.info(s.toString());
