@@ -61,8 +61,10 @@ public class I18n {
 	public static void switchLoc(String loc) {
 		if (LEGAL_VAL.contains(loc))
 			locale = Locales.parseLoc(loc);
-		else
+		else {
+			locale = Locales.EN_US;
 			throw new IllegalArgumentException("No such locale!");
+		}
 	}
 
 	/**
