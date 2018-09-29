@@ -100,7 +100,7 @@ public class DataUtils {
 	}
 
 	/**
-	 * Convert a pair of x-y coordinate of the screen (starts at the borrom left
+	 * Convert a pair of x-y coordinate of the screen (starts at the bottom left
 	 * corner, and x→, y↑) to OpenGL coordinates.
 	 * 
 	 * @param x The x coordinate.
