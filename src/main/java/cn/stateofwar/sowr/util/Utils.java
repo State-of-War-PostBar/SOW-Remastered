@@ -170,6 +170,9 @@ public class Utils {
 		File f = new File(path);
 		List<String> lines;
 		lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODE));
+		if (lines.size() < line)
+			line = lines.size();
+		lines.set(line, text);
 		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODE));
 	}
 
