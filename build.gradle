@@ -1,7 +1,6 @@
 apply plugin: "java"
 
 ext {
-
 	guavaVersion = "26.0-jre"
 	nettyVersion = "4.1.29.Final"
 	lwjglVersion = "3.2.0"
@@ -11,16 +10,13 @@ ext {
 	luajVersion = "3.0.1"
 
 	default_text_encode = "utf-8"
-
 }
 
 group = "cn.stateofwar"
 archivesBaseName = "sowr"
-version = "1"
+version = "indev"
 
 compileJava.options.encoding = "${default_text_encode}"
-
-sourceCompatibility = targetCompatibility = "10"
 compileJava {
 	sourceCompatibility = targetCompatibility = "10"
 }
