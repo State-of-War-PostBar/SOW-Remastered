@@ -1,7 +1,7 @@
-All people contributed to this project please add your signature here.
+For all people contributed to this project, please add your signature here.
 
-Format: Name aka alias (if you have one) aka alias... (your email or address)
+_Format: Name aka alias (if you have one) aka alias... (your email or other contact information)_
 
 
 
-Taxerap (maxbeokes@gmail.com)
+Taxerap (maxbeokes@gmail.com, QQ 1070601686)

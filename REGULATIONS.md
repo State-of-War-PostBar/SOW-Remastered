@@ -5,7 +5,7 @@ All code and text files must encode with **UTF-8** with a line at EOF.
 
 所有的代码及文本文件必须使用**UTF-8**编码，末尾加空行。
 
-*DO NOT* change the license without permission.
+_DO NOT_ change the license without permission.
 
 严禁擅自修改许可证。
 
@@ -20,12 +20,12 @@ For others, please reduce it as possible.
 
 对于非这一类情况的，尽量减少之。
 
-For listing of methods and variables, put in the order of public > private (except for private constructors) and non-static > static.
+For listing of methods and variables, put in the order of _non-static > static_ and _public > protected > private_, except for class constructors and the logger instance.
 
-对于方法和变量的排序，请按照 public > private （私有构造方法除外）和非静态 > 静态来排序。
+对于方法和变量的排序，请按照 _public > protected > private_ 和_非静态 > 静态来排序_。 构造方法和logger的实例除外。
 
 ## Git
-*DO NOT* upload binary files unless there's no other way.
+_DO NOT_ upload binary files unless there's no other way.
 
 除非别无他法，否则请勿上传二进制文件。
 
