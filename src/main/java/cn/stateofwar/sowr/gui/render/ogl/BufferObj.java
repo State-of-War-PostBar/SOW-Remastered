@@ -79,6 +79,19 @@ public class BufferObj {
 	}
 
 	/**
+	 * Upload sub data to this VBO with specified target, offset and data.
+	 * 
+	 * @param target Target to upload.
+	 * 
+	 * @param offset Offset where the data should go in bytes.
+	 * 
+	 * @param data   Buffer with the data to upload.
+	 */
+	public void bufferSub(int target, long offset, IntBuffer data) {
+		glBufferSubData(target, offset, data);
+	}
+
+	/**
 	 * Get the ID of this buffer.
 	 * 
 	 * @return ID of this buffer.
@@ -90,7 +103,7 @@ public class BufferObj {
 	/**
 	 * Unbind VBO.
 	 */
-	public void unBind(int target) {
+	public void unbind(int target) {
 		glBindBuffer(target, 0);
 	}
 

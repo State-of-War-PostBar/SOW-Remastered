@@ -1,5 +1,7 @@
 package cn.stateofwar.sowr.gui.render;
 
+import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15.GL_ELEMENT_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL45.*;
 
 import cn.stateofwar.sowr.gui.render.ogl.Shader;
@@ -41,7 +43,7 @@ public class TexturedModel extends Model {
 	public Texture texture;
 
 	/** Preset shader program for the model. */
-	public static final ShaderProgram prog = new ShaderProgram(new Shader[] {
+	private static final ShaderProgram prog = new ShaderProgram(new Shader[] {
 			Shader.createShader("sowr/gui/render/shader/samplerless_texture.glsl_vertex", ShaderType.VERTEX, true),
 			Shader.createShader("sowr/gui/render/shader/samplerless_texture.glsl_fragment", ShaderType.FRAGMENT,
 					true) });
@@ -93,8 +95,8 @@ public class TexturedModel extends Model {
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(0);
 
-		vbo_texcoords.unBind(GL_ARRAY_BUFFER);
-		ebo.unBind(GL_ARRAY_BUFFER);
+		vbo_texcoords.unbind(GL_ARRAY_BUFFER);
+		ebo.unbind(GL_ARRAY_BUFFER);
 		vao.unbind();
 	}
 
@@ -116,6 +118,55 @@ public class TexturedModel extends Model {
 		glDisableVertexAttribArray(0);
 
 		vao.unbind();
+	}
+
+	/**
+	 * Change the vertices of the model.
+	 * 
+	 * @param _vertices New vertices.
+	 */
+	public void modifyVertices(float[] _vertices, int[] _indices) {
+		vertices = _vertices;
+		indices = _indices;
+
+		vao.bind();
+
+		vbo_vertices.bind(GL_ARRAY_BUFFER);
+		vbo_vertices.bufferSub(GL_ARRAY_BUFFER, 0, DataUtils.createFloatBuffer(vertices));
+
+		ebo.bind(GL_ELEMENT_ARRAY_BUFFER);
+		ebo.bufferSub(GL_ELEMENT_ARRAY_BUFFER, 0, DataUtils.createIntBuffer(indices));
+
+		vbo_vertices.unbind(GL_ARRAY_BUFFER);
+		ebo.unbind(GL_ELEMENT_ARRAY_BUFFER);
+
+		vao.unbind();
+	}
+
+	/**
+	 * Change the texture coordinates of the model.
+	 * 
+	 * @param _texture_coords New texture coordinates.
+	 */
+	public void modifyTexCoords(float[] _texture_coords) {
+		texture_coords = _texture_coords;
+
+		vao.bind();
+
+		vbo_texcoords.bind(GL_ARRAY_BUFFER);
+		vbo_texcoords.bufferSub(GL_ARRAY_BUFFER, 0, DataUtils.createFloatBuffer(texture_coords));
+		vbo_texcoords.unbind(GL_ARRAY_BUFFER);
+
+		vao.unbind();
+	}
+
+	/**
+	 * Change the texture.
+	 * 
+	 * @param _texture New texture.
+	 */
+	public void modifyTexture(Texture _texture) {
+		texture = _texture;
 	}
 
 	/**

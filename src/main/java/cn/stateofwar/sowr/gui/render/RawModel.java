@@ -32,7 +32,7 @@ public class RawModel extends Model {
 	/** Element buffer object for vertex indices. */
 	private BufferObj ebo;
 
-	public static final ShaderProgram prog = new ShaderProgram(
+	private static final ShaderProgram prog = new ShaderProgram(
 			new Shader[] { Shader.createShader("sowr/gui/render/shader/raw.glsl_vertex", ShaderType.VERTEX, true),
 					Shader.createShader("sowr/gui/render/shader/raw.glsl_fragment", ShaderType.FRAGMENT, true) });
 
@@ -78,14 +78,55 @@ public class RawModel extends Model {
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(0);
 
-		vbo_color.unBind(GL_ARRAY_BUFFER);
-		ebo.unBind(GL_ELEMENT_ARRAY_BUFFER);
+		vbo_color.unbind(GL_ARRAY_BUFFER);
+		ebo.unbind(GL_ELEMENT_ARRAY_BUFFER);
+		vao.unbind();
+	}
+
+	/**
+	 * Change the vertices of the model.
+	 * 
+	 * @param _vertices New vertices.
+	 * 
+	 * @param _indices  New vertex indices.
+	 */
+	public void modifyVertices(float[] _vertices, int[] _indices) {
+		vertices = _vertices;
+		indices = _indices;
+
+		vao.bind();
+
+		vbo_vertices.bind(GL_ARRAY_BUFFER);
+		vbo_vertices.bufferSub(GL_ARRAY_BUFFER, 0, DataUtils.createFloatBuffer(vertices));
+
+		ebo.bind(GL_ELEMENT_ARRAY_BUFFER);
+		ebo.bufferSub(GL_ELEMENT_ARRAY_BUFFER, 0, DataUtils.createIntBuffer(indices));
+
+		vbo_vertices.unbind(GL_ARRAY_BUFFER);
+		ebo.unbind(GL_ELEMENT_ARRAY_BUFFER);
+
+		vao.unbind();
+	}
+
+	/**
+	 * Change the color of the model.
+	 * 
+	 * @param color New color.
+	 */
+	public void modifyColor(RGBA color) {
+		vao.bind();
+
+		vbo_color.bind(GL_ARRAY_BUFFER);
+		vbo_color.bufferSub(GL_ARRAY_BUFFER, 0, DataUtils.createFloatBuffer(color.toFloatArray()));
+		vbo_color.unbind(GL_ARRAY_BUFFER);
+
 		vao.unbind();
 	}
 
 	/**
 	 * Draw the model.
 	 */
+	@Override
 	public void draw() {
 		prog.use();
 		vao.bind();
@@ -104,6 +145,7 @@ public class RawModel extends Model {
 	/**
 	 * Delete the model and release spaces.
 	 */
+	@Override
 	public void abrogate() {
 		vbo_vertices.delete();
 		vbo_color.delete();
