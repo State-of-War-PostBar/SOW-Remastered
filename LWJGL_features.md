@@ -9,13 +9,9 @@ BGFX
 
 GLFW
 
-JeMalloc
-
 LMDB
 
 LZ4
-
-Nuklear
 
 OpenAL
 
