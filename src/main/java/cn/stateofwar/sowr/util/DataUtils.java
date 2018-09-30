@@ -123,6 +123,32 @@ public class DataUtils {
 	}
 
 	/**
+	 * Convert a pair of s-t coordinate of a texture (starts at the bottom left
+	 * corner, and u→, v↑) to OpenGL texture coordinate.
+	 * 
+	 * @param s The s coordinate.
+	 * 
+	 * @param t The t coordinate.
+	 * 
+	 * @return A vector contains their percentages toward the texture size, which is
+	 *         also the OpenGL texture coordinate.
+	 */
+	public static Vector2f toTexCoord(int s, int t, Texture texture) {
+		s = Math.abs(s);
+		t = Math.abs(t);
+		int w = texture.getWidth();
+		int h = texture.getHeight();
+
+		s = s > w ? w : s;
+		t = t > h ? h : t;
+
+		float sPerc = (float) s / (float) w;
+		float tPerc = (float) t / (float) h;
+
+		return new Vector2f(sPerc, tPerc);
+	}
+
+	/**
 	 * Convert a x-y coordinate to their ratios to the resolution of screen.
 	 * 
 	 * @param x The x coordinate.
