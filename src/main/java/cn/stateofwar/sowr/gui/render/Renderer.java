@@ -11,13 +11,13 @@ import cn.stateofwar.sowr.util.DataUtils;
 public class Renderer {
 
 	/** Vertex indices for a triangle. */
-	public static final int[] trig_indices = new int[] { 0, 1, 2 };
+	public static final int[] indices_trig = new int[] { 0, 1, 2 };
 
 	/**
 	 * Vertex indices for a rectangle, for 4 vertices, their listing is TR -> BR ->
 	 * BL -> TL.
 	 */
-	public static final int[] rect_indices = new int[] { 0, 1, 3, 1, 2, 3 };
+	public static final int[] indices_rect = new int[] { 0, 1, 3, 1, 2, 3 };
 
 	/**
 	 * Draw a rectangle and render a color on it.
@@ -26,9 +26,9 @@ public class Renderer {
 	 * 
 	 * @param y     Y coordinate of the bottom-left vertex of the rectangle.
 	 * 
-	 * @param w     The width of the rectangle, from left to right.
+	 * @param w     Width of the rectangle, from left to right.
 	 * 
-	 * @param h     The height of the rectangle, from down to up.
+	 * @param h     Height of the rectangle, from down to up.
 	 * 
 	 * @param color Color to render on the rectangle.
 	 */
@@ -38,7 +38,7 @@ public class Renderer {
 		Vector3f coord3 = DataUtils.toGlCoord(x, y);
 		Vector3f coord4 = DataUtils.toGlCoord(x, y + h);
 		RawModel model = new RawModel(new float[] { coord1.x, coord1.y, coord1.z, coord2.x, coord2.y, coord2.z,
-				coord3.x, coord3.y, coord3.z, coord4.x, coord4.y, coord4.z }, rect_indices, color);
+				coord3.x, coord3.y, coord3.z, coord4.x, coord4.y, coord4.z }, indices_rect, color);
 		model.draw();
 		model.abrogate();
 	}
@@ -93,7 +93,7 @@ public class Renderer {
 		TexturedModel mod = new TexturedModel(
 				new float[] { coord1.x, coord1.y, coord1.z, coord2.x, coord2.y, coord2.z, coord3.x, coord3.y, coord3.z,
 						coord4.x, coord4.y, coord4.z },
-				rect_indices, texture,
+				indices_rect, texture,
 				new float[] { coord5.x, coord5.y, coord6.x, coord6.y, coord7.x, coord7.y, coord8.x, coord8.y });
 		mod.draw();
 		mod.abrogate();

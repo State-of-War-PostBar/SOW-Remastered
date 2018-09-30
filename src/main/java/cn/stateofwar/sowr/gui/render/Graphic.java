@@ -1,4 +1,4 @@
-package cn.stateofwar.sowr.gui;
+package cn.stateofwar.sowr.gui.render;
 
 import static cn.stateofwar.sowr.util.Utils.nl;
 import static org.lwjgl.opengl.GL45.*;
