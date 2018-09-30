@@ -33,9 +33,6 @@ The followings are the libraries used in our program. For more information, plea
 [JOML](https://github.com/JOML-CI/JOML)
 
 
-[SteamWorks Java Wrapper](https://github.com/code-disaster/steamworks4j)
-
-
 [Ini4j](http://ini4j.sourceforge.net/)
 
 
