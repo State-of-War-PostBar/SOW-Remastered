@@ -6,14 +6,14 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 /**
- * A vertex buffer object or elements buffer object.
+ * An OpenGL buffer object.
  */
-public class VBO {
+public class BufferObj {
 
 	/** ID of this object. */
 	private final int id;
 
-	public VBO() {
+	public BufferObj() {
 		id = glGenBuffers();
 	}
 

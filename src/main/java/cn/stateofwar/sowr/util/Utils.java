@@ -25,7 +25,7 @@ public class Utils {
 	 * 
 	 * @return If this universe is normal.
 	 */
-	public static boolean inNormalUniverse() {
+	public static final boolean inNormalUniverse() {
 		if (Integer.compare(1 + 1, 2) == 0)
 			return true;
 		return false;
@@ -70,10 +70,7 @@ public class Utils {
 		List<String> lines = null;
 		lines = Files.readLines(new File(path), Charset.forName(References.DEFAULT_TEXT_ENCODE));
 		if (lines.size() < line)
-			line = lines.size(); /*
-									 * Read the last line of file (not EOF line) instead if desired line is
-									 * unreachable.
-									 */
+			line = lines.size();
 		return lines.get(line).replaceAll(nl(), "");
 	}
 
@@ -96,10 +93,7 @@ public class Utils {
 		pos--;
 		String l = readLineS(path, line);
 		if (l.length() < pos)
-			pos = l.length(); /*
-								 * Read the last position of the line instead if desired position is
-								 * unreachable.
-								 */
+			pos = l.length();
 		return l.substring(pos, l.length()).replaceAll(nl(), "");
 	}
 
@@ -134,8 +128,9 @@ public class Utils {
 	}
 
 	/**
-	 * Write a line to the end of the text file. Will set a line separator at the
-	 * end, but will not automatically start writing at a new line in the beginning!
+	 * Write a line to the end of the text file.<br />
+	 * Will set a line separator at the end, but will not automatically start
+	 * writing at a new line in the beginning!
 	 * 
 	 * @param path Path of the text file.
 	 * 
@@ -156,12 +151,11 @@ public class Utils {
 	 * Write to a text file in a specific line. <br />
 	 * <i>The old data will be erased.</i>
 	 * 
-	 * @param fp   Path of the text file.
+	 * @param path Path of the text file.
 	 * 
 	 * @param text The text to write.
 	 * 
-	 * @param line The line to write, starts with 1. Text starts replacing in this
-	 *             position, not after.
+	 * @param line The line to write, starts with 1.
 	 * 
 	 * @throws IOException
 	 */
@@ -186,7 +180,8 @@ public class Utils {
 	 * 
 	 * @param line The line to write, starts with 1.
 	 * 
-	 * @param pos  The position to write, starts with 1.
+	 * @param pos  The position to write, starts with 1. Text starts replacing by
+	 *             this position, not after.
 	 * 
 	 * @throws IOException
 	 */
@@ -248,16 +243,16 @@ public class Utils {
 	/**
 	 * Convert a list of strings to a single string.
 	 * 
-	 * @param list    The list of strings.
+	 * @param list  The list of strings.
 	 * 
-	 * @param newLine Insert a line separator at the end of each line.
+	 * @param enter Insert a line separator at the end of each line.
 	 * 
 	 * @return The converted string.
 	 */
-	public static String listToString(List<String> list, boolean newLine) {
+	public static String listToString(List<String> list, boolean enter) {
 		StringBuilder sb = new StringBuilder();
 		for (String s : list)
-			if (newLine)
+			if (enter)
 				sb.append(s).append(nl());
 			else
 				sb.append(s);

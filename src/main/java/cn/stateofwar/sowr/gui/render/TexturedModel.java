@@ -5,8 +5,8 @@ import static org.lwjgl.opengl.GL45.*;
 import cn.stateofwar.sowr.gui.render.ogl.Shader;
 import cn.stateofwar.sowr.gui.render.ogl.Shader.ShaderType;
 import cn.stateofwar.sowr.gui.render.ogl.ShaderProgram;
-import cn.stateofwar.sowr.gui.render.ogl.VAO;
-import cn.stateofwar.sowr.gui.render.ogl.VBO;
+import cn.stateofwar.sowr.gui.render.ogl.ArrayObj;
+import cn.stateofwar.sowr.gui.render.ogl.BufferObj;
 import cn.stateofwar.sowr.util.DataUtils;
 
 /**
@@ -17,16 +17,16 @@ public class TexturedModel extends Model {
 	/**
 	 * Vertex array object for this model.
 	 */
-	public VAO vao;
+	public ArrayObj vao;
 
-	/** Vertices buffer object. */
-	public VBO vbo_vertices;
+	/** Buffer for vertices. */
+	public BufferObj vbo_vertices;
 
-	/** Coordinates of textures buffer object. */
-	public VBO vbo_texcoords;
+	/** Buffer for coordinates of the texture. */
+	public BufferObj vbo_texcoords;
 
-	/** Vertex indices buffer object. */
-	public VBO ebo;
+	/** Buffer for vertex indices. */
+	public BufferObj ebo;
 
 	/** Coordinates of vertices. */
 	private float[] vertices;
@@ -41,7 +41,7 @@ public class TexturedModel extends Model {
 	public Texture texture;
 
 	/** Preset shader program for the model. */
-	public ShaderProgram prog = new ShaderProgram(new Shader[] {
+	public static final ShaderProgram prog = new ShaderProgram(new Shader[] {
 			Shader.createShader("sowr/gui/render/shader/samplerless_texture.glsl_vertex", ShaderType.VERTEX, true),
 			Shader.createShader("sowr/gui/render/shader/samplerless_texture.glsl_fragment", ShaderType.FRAGMENT,
 					true) });
@@ -63,10 +63,10 @@ public class TexturedModel extends Model {
 		texture = _texture;
 		texture_coords = _texture_coords;
 
-		vao = new VAO();
-		vbo_vertices = new VBO();
-		vbo_texcoords = new VBO();
-		ebo = new VBO();
+		vao = new ArrayObj();
+		vbo_vertices = new BufferObj();
+		vbo_texcoords = new BufferObj();
+		ebo = new BufferObj();
 
 		prog.use();
 
@@ -75,11 +75,11 @@ public class TexturedModel extends Model {
 		vbo_vertices.bind(GL_ARRAY_BUFFER);
 		vbo_vertices.buffer(GL_ARRAY_BUFFER, DataUtils.createFloatBuffer(vertices), GL_STATIC_DRAW);
 
-		ebo.bind(GL_ELEMENT_ARRAY_BUFFER);
-		ebo.buffer(GL_ELEMENT_ARRAY_BUFFER, DataUtils.createIntBuffer(indices), GL_STATIC_DRAW);
-
 		vbo_texcoords.bind(GL_ARRAY_BUFFER);
 		vbo_texcoords.buffer(GL_ARRAY_BUFFER, DataUtils.createFloatBuffer(texture_coords), GL_STATIC_DRAW);
+
+		ebo.bind(GL_ELEMENT_ARRAY_BUFFER);
+		ebo.buffer(GL_ELEMENT_ARRAY_BUFFER, DataUtils.createIntBuffer(indices), GL_STATIC_DRAW);
 
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
@@ -90,10 +90,10 @@ public class TexturedModel extends Model {
 		vbo_texcoords.bind(GL_ARRAY_BUFFER);
 		glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
 
-		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(0);
 
-		vbo_vertices.unBind(GL_ARRAY_BUFFER);
+		vbo_texcoords.unBind(GL_ARRAY_BUFFER);
 		ebo.unBind(GL_ARRAY_BUFFER);
 		vao.unbind();
 	}
@@ -106,11 +106,16 @@ public class TexturedModel extends Model {
 		prog.use();
 		texture.bind();
 		vao.bind();
+
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+
 		glDrawElements(GL_TRIANGLES, indices.length, GL_UNSIGNED_INT, 0);
-		glDisableVertexAttribArray(0);
+
 		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(0);
+
+		vao.unbind();
 	}
 
 	/**
@@ -118,11 +123,10 @@ public class TexturedModel extends Model {
 	 */
 	@Override
 	public void abrogate() {
-		vao.delete();
 		vbo_vertices.delete();
 		vbo_texcoords.delete();
 		ebo.delete();
-		prog.delete();
+		vao.delete();
 	}
 
 }

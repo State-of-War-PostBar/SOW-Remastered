@@ -118,13 +118,13 @@ public class Logger {
 	/**
 	 * Debug messages when debug mode is on, or when developers try to detect bugs.
 	 * 
-	 * @param msg The message to record.
+	 * @param message The message to record.
 	 */
-	public void debug(String msg) {
+	public void debug(String message) {
 		StringBuilder b = new StringBuilder();
 		b.append("[========DEBUG========]");
 		b.append('[').append(source).append(']');
-		b.append(msg);
+		b.append(message);
 		System.out.println(b.toString());
 		writeToLog(b.toString());
 	}
@@ -132,11 +132,11 @@ public class Logger {
 	/**
 	 * Write the recorded information to the log file.
 	 * 
-	 * @param msg The message to write.
+	 * @param message The message to write.
 	 */
-	private void writeToLog(String msg) {
+	private void writeToLog(String message) {
 		try {
-			Utils.writeLine(log.toString(), msg);
+			Utils.writeLine(log.toString(), message);
 		} catch (IOException e) {
 			System.out.println(e.getLocalizedMessage());
 			e.printStackTrace();

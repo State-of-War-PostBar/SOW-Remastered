@@ -20,7 +20,7 @@ public class GameState {
 	}
 
 	/**
-	 * Render to the screen.
+	 * Render the screen contents.
 	 */
 	public void render() {
 

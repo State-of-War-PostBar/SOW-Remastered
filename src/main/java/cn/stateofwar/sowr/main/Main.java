@@ -21,6 +21,7 @@ public class Main {
 		Trim.init();
 
 		Game.startGame();
+
 		Game.abrogate();
 
 		logger.info("Shutting down client...");

@@ -16,8 +16,7 @@ use your remote to run
 
 	'gradle build'
 
-请在您的机器上安装[Gradle](https://gradle.org/). 之后视您的操作系统，启动终端并在build.gradle目录下
-执行上述命令。
+请在您的机器上安装[Gradle](https://gradle.org/). 之后视您的操作系统，启动终端并在build.gradle目录下执行上述命令。
 
 ## Libraries / 库
 The followings are the libraries used in our program. For more information, please look forward to [build.gradle](build.gradle).

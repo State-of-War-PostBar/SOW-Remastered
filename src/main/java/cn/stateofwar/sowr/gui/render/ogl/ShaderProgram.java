@@ -18,12 +18,9 @@ public class ShaderProgram {
 	private static final Logger logger = new Logger("Render");
 
 	/** ID of the shader program. */
-	private int id;
+	private final int id;
 
-	/** Counter for number of shaders in this shader program. */
-	private int count = 0;
-
-	/** Array of shaders. */
+	/** Shaders of this program. */
 	private Shader[] shaders;
 
 	/**
@@ -35,10 +32,8 @@ public class ShaderProgram {
 	public ShaderProgram(Shader[] _shaders) {
 		shaders = _shaders;
 		id = glCreateProgram();
-		for (Shader shader : _shaders) {
+		for (Shader shader : _shaders)
 			glAttachShader(id, shader.getID());
-			count++;
-		}
 
 		glLinkProgram(id);
 		if ((glGetProgrami(id, GL_LINK_STATUS)) == GL_FALSE) {
@@ -56,8 +51,6 @@ public class ShaderProgram {
 			glDetachShader(id, shader.getID());
 			shader.delete();
 		}
-
-		logger.info("Built a shader program with " + Integer.toString((count)) + " shaders.");
 	}
 
 	/**
@@ -139,7 +132,7 @@ public class ShaderProgram {
 	 * 
 	 * @param loc   Name of the attribute variable.
 	 */
-	public void bindAttribute(int index, CharSequence loc) {
+	public void bindAttribute(int index, String loc) {
 		glBindAttribLocation(id, index, loc);
 	}
 
@@ -150,7 +143,7 @@ public class ShaderProgram {
 	 * 
 	 * @param loc   Variable name.
 	 */
-	public void bindFragmentDataLoc(int number, CharSequence name) {
+	public void bindFragmentDataLoc(int number, String name) {
 		glBindFragDataLocation(id, number, name);
 	}
 

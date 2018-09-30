@@ -12,8 +12,8 @@ import org.ini4j.Profile.Section;
 import cn.stateofwar.sowr.References;
 
 /**
- * The basic configuration system. All configurations are stored and proceeded
- * by the format of <b><i>block.index=value</i></b>.
+ * A basic configuration system. All configurations are stored and proceeded by
+ * the format of <b><i>block.index=value</i></b>.
  */
 public class Config {
 
@@ -72,7 +72,7 @@ public class Config {
 	 * @return The configuration value.
 	 * 
 	 * @deprecated If multiple blocks contain identical indices, it will only load
-	 *             the first one it found. It also has efficiency issues.
+	 *             the first one it found. It also has very low efficiency.
 	 */
 	@Deprecated
 	public static String get(String index) {
@@ -189,7 +189,7 @@ public class Config {
 		 * @return The configuration value.
 		 * 
 		 * @deprecated If multiple blocks contain identical indices, it will only load
-		 *             the first one it found. It also has efficiency issues.
+		 *             the first one it found. It also has very low efficiency.
 		 */
 		@Deprecated
 		private static String get(String index) {
