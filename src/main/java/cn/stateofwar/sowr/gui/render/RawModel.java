@@ -72,7 +72,10 @@ public class RawModel extends Model {
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 
+		vbo_vertices.bind(GL_ARRAY_BUFFER);
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+
+		vbo_color.bind(GL_ARRAY_BUFFER);
 		glVertexAttribPointer(1, 4, GL_FLOAT, false, 0, 0);
 
 		glDisableVertexAttribArray(1);
