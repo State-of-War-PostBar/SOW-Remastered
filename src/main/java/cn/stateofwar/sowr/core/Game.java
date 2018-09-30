@@ -2,6 +2,7 @@ package cn.stateofwar.sowr.core;
 
 import cn.stateofwar.sowr.gui.multimedia.Window;
 import cn.stateofwar.sowr.gui.render.Graphic;
+import cn.stateofwar.sowr.gui.render.Renderer;
 import cn.stateofwar.sowr.util.Logger;
 
 /**
@@ -23,6 +24,8 @@ public class Game {
 	/** Window of the game engine. */
 	protected static Window win;
 
+	public static Renderer renderer = new Renderer();
+
 	/**
 	 * Start the game engine.
 	 */
@@ -33,7 +36,7 @@ public class Game {
 		Graphic.initRenderCapabilities();
 		win = Graphic.win;
 
-		state.enter();
+		state.enter(renderer);
 		timer.init();
 
 		do {

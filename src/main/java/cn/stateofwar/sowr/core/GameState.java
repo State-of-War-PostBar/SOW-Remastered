@@ -1,9 +1,13 @@
 package cn.stateofwar.sowr.core;
 
+import cn.stateofwar.sowr.gui.render.Renderer;
+
 /**
  * A state controller of the game.
  */
 public class GameState {
+
+	private Renderer renderer;
 
 	/**
 	 * Handle input from the user.
@@ -29,8 +33,8 @@ public class GameState {
 	/**
 	 * Enter this game state controller.
 	 */
-	public void enter() {
-
+	public void enter(Renderer _renderer) {
+		renderer = _renderer;
 	}
 
 	/**

@@ -32,7 +32,7 @@ public class Renderer {
 	 * 
 	 * @param color Color to render on the rectangle.
 	 */
-	public static void drawColoredRect(int x, int y, int w, int h, RGBA color) {
+	public void drawColoredRect(int x, int y, int w, int h, RGBA color) {
 		Vector3f coord1 = DataUtils.toGlCoord(x + w, y + h);
 		Vector3f coord2 = DataUtils.toGlCoord(x + w, y);
 		Vector3f coord3 = DataUtils.toGlCoord(x, y);
@@ -56,7 +56,7 @@ public class Renderer {
 	 * 
 	 * @param texture Texture to use.
 	 */
-	public static void drawTexturedRect(int x, int y, int w, int h, Texture texture) {
+	public void drawTexturedRect(int x, int y, int w, int h, Texture texture) {
 		drawTexturedRect(x, y, w, h, texture, 0, 0, texture.getWidth(), texture.getHeight());
 	}
 
@@ -81,7 +81,7 @@ public class Renderer {
 	 * 
 	 * @param v       Height of selecting area in pixels.
 	 */
-	public static void drawTexturedRect(int x, int y, int w, int h, Texture texture, int s, int t, int u, int v) {
+	public void drawTexturedRect(int x, int y, int w, int h, Texture texture, int s, int t, int u, int v) {
 		Vector3f coord1 = DataUtils.toGlCoord(x + w, y + h);
 		Vector3f coord2 = DataUtils.toGlCoord(x + w, y);
 		Vector3f coord3 = DataUtils.toGlCoord(x, y);
