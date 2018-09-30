@@ -1,7 +1,7 @@
 package cn.stateofwar.sowr.core;
 
-import cn.stateofwar.sowr.gui.Graphic;
 import cn.stateofwar.sowr.gui.multimedia.Window;
+import cn.stateofwar.sowr.gui.render.Graphic;
 import cn.stateofwar.sowr.util.Logger;
 
 /**
