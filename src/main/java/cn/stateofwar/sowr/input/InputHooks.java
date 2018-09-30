@@ -17,7 +17,7 @@ public class InputHooks {
 	 * 
 	 * @param mods     Which modifiers keys were held down.
 	 */
-	public static void keyboardTrigger(int key, int scancode, int action, int mods) {
+	public static void keyboard(int key, int scancode, int action, int mods) {
 
 	}
 
@@ -31,7 +31,7 @@ public class InputHooks {
 	 * 
 	 * @param mods   Which modifiers keys were held down.
 	 */
-	public static void mouseTrigger(int button, int action, int mods) {
+	public static void mouse(int button, int action, int mods) {
 
 	}
 
@@ -42,7 +42,7 @@ public class InputHooks {
 	 * 
 	 * @param y Y position (in pixels) of the cursor.
 	 */
-	public static void cursorTrigger(double x, double y) {
+	public static void cursor(double x, double y) {
 
 	}
 

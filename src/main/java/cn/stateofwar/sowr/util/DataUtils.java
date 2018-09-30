@@ -11,6 +11,7 @@ import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 
 import cn.stateofwar.sowr.gui.Graphic;
+import cn.stateofwar.sowr.gui.render.Texture;
 
 /**
  * Utilities for data calculation and conversion. Mostly for OpenGL.
@@ -66,7 +67,7 @@ public class DataUtils {
 	}
 
 	/**
-	 * Create a OpenGL orthographic by specific positions.
+	 * Create an OpenGL orthographic by specific positions.
 	 * 
 	 * @param left   Farthest left of the scene box.
 	 * 
@@ -85,33 +86,36 @@ public class DataUtils {
 	public static Matrix4f orthographic(float left, float right, float bottom, float top, float near, float far) {
 		Matrix4f ortho = new Matrix4f();
 
-		float tx = -(right + left) / (right - left);
-		float ty = -(top + bottom) / (top - bottom);
-		float tz = -(far + near) / (far - near);
+		float x = -(right + left) / (right - left);
+		float y = -(top + bottom) / (top - bottom);
+		float z = -(far + near) / (far - near);
 
 		ortho._m00(2.0f / (right - left));
 		ortho._m11(2.0f / (top - bottom));
 		ortho._m22(-2.0f / (far - near));
-		ortho._m03(tx);
-		ortho._m13(ty);
-		ortho._m23(tz);
+		ortho._m03(x);
+		ortho._m13(y);
+		ortho._m23(z);
 
 		return ortho;
 	}
 
 	/**
 	 * Convert a pair of x-y coordinate of the screen (starts at the bottom left
-	 * corner, and x→, y↑) to OpenGL coordinates.
+	 * corner, and x→, y↑) to OpenGL coordinate.
 	 * 
 	 * @param x The x coordinate.
 	 * 
 	 * @param y The y coordinate.
 	 * 
-	 * @return The OpenGL coordinate based on this pair of x-y coordinate.
+	 * @return The OpenGL coordinate based on this pair of x-y coordinate. <i>The Z
+	 *         value is always 0.</i>
 	 */
 	public static Vector3f toGlCoord(int x, int y) {
 		x = Math.abs(x);
 		y = Math.abs(y);
+		x = x > Graphic.win.getWidth() ? Graphic.win.getWidth() : x;
+		y = y > Graphic.win.getHeight() ? Graphic.win.getHeight() : y;
 
 		Vector2f vec = toScrPerc(x, y);
 
@@ -156,13 +160,10 @@ public class DataUtils {
 	 *         8 -> Middle of 1st and 4th quadrant.<br />
 	 */
 	public static int getQuadrant(int x, int y) {
-		x = Math.abs(x);
-		y = Math.abs(y);
+		y = Graphic.win.getHeight() - y;
 
 		int xMid = Graphic.win.getWidth() / 2;
 		int yMid = Graphic.win.getHeight() / 2;
-
-		y = Graphic.win.getHeight() - y;
 
 		if (x == y && x == 0)
 			return 3;

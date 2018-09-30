@@ -64,7 +64,7 @@ public class Timer {
 			ups = upsCount;
 			upsCount = 0;
 
-			timeCount -= 1f;
+			timeCount -= 1.0f;
 		}
 	}
 

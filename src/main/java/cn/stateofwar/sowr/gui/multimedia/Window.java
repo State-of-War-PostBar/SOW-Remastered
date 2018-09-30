@@ -14,7 +14,7 @@ import cn.stateofwar.sowr.input.InputHooks;
 import cn.stateofwar.sowr.util.Logger;
 
 /**
- * An instance of GLFW window.
+ * An instance of a GLFW window.
  */
 public class Window {
 
@@ -83,15 +83,15 @@ public class Window {
 		glfwMakeContextCurrent(handle);
 
 		glfwSetKeyCallback(handle, GLFWKeyCallback.create((window, key, scancode, action, mods) -> {
-			InputHooks.keyboardTrigger(key, scancode, action, mods);
+			InputHooks.keyboard(key, scancode, action, mods);
 		}));
 
 		glfwSetMouseButtonCallback(handle, GLFWMouseButtonCallback.create((window, button, action, mods) -> {
-			InputHooks.mouseTrigger(button, action, mods);
+			InputHooks.mouse(button, action, mods);
 		}));
 
 		glfwSetCursorPosCallback(handle, GLFWCursorPosCallback.create((window, x, y) -> {
-			InputHooks.cursorTrigger(x, y);
+			InputHooks.cursor(x, y);
 		}));
 
 		if (vSync)

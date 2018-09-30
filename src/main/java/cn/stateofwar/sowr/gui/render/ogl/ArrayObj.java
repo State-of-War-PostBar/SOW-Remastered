@@ -5,12 +5,12 @@ import static org.lwjgl.opengl.GL45.*;
 /**
  * A vertex array object.
  */
-public class VAO {
+public class ArrayObj {
 
 	/** ID of this object. */
 	private final int id;
 
-	public VAO() {
+	public ArrayObj() {
 		id = glGenVertexArrays();
 	}
 
