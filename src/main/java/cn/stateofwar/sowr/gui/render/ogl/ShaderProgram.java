@@ -20,17 +20,12 @@ public class ShaderProgram {
 	/** ID of the shader program. */
 	private final int id;
 
-	/** Shaders of this program. */
-	private Shader[] shaders;
-
 	/**
 	 * Create a shader program with some shaders.
 	 * 
-	 * @param _shaders Shaders for this program. Please be aware that they will be
-	 *                 deleted after this program is completed.
+	 * @param _shaders Shaders for this program.
 	 */
 	public ShaderProgram(Shader[] _shaders) {
-		shaders = _shaders;
 		id = glCreateProgram();
 		for (Shader shader : _shaders)
 			glAttachShader(id, shader.getID());
@@ -46,18 +41,6 @@ public class ShaderProgram {
 			logger.error("ERROR AT VALIDATING A OPENGL SHADER!");
 			logger.error(glGetProgramInfoLog(id));
 		}
-
-		for (Shader shader : shaders) {
-			glDetachShader(id, shader.getID());
-			shader.delete();
-		}
-	}
-
-	/**
-	 * Bind this program to current rendering.
-	 */
-	public void use() {
-		glUseProgram(id);
 	}
 
 	/**
@@ -70,20 +53,51 @@ public class ShaderProgram {
 	}
 
 	/**
-	 * Set a uniform variable.
+	 * Get the location of an attribute.
 	 * 
-	 * @param name Name of the variable.
+	 * @param name Attribute variable name.
 	 * 
-	 * @param val  Value to set.
+	 * @return Location of the attribute.
 	 */
-	public void setUniform(String name, int val) {
-		int loc = getUniformLoc(name);
-		if (loc != 1)
-			glUniform1i(loc, val);
+	public int getAttributeLoc(String name) {
+		return glGetAttribLocation(id, name);
 	}
 
 	/**
-	 * Set a uniform variable.
+	 * Bind an attribute index to an attribute variable.
+	 * 
+	 * @param index Index of the attribute.
+	 * 
+	 * @param loc   Attribute variable name.
+	 */
+	public void bindAttribute(int index, String loc) {
+		glBindAttribLocation(id, index, loc);
+	}
+
+	/**
+	 * Bind the fragment out color variable.
+	 *
+	 * @param number Color number binds.
+	 * 
+	 * @param loc    Variable name.
+	 */
+	public void bindFragmentDataLoc(int number, String loc) {
+		glBindFragDataLocation(id, number, loc);
+	}
+
+	/**
+	 * Get the location of an uniform variable.
+	 * 
+	 * @param name Uniform variable name.
+	 * 
+	 * @return Uniform variable location.
+	 */
+	public int getUniformLoc(String name) {
+		return glGetUniformLocation(id, name);
+	}
+
+	/**
+	 * Set an uniform variable.
 	 * 
 	 * @param name Name of the variable.
 	 * 
@@ -96,22 +110,20 @@ public class ShaderProgram {
 	}
 
 	/**
-	 * Set a uniform variable.
+	 * Set an uniform variable.
 	 * 
 	 * @param name Name of the variable.
 	 * 
 	 * @param val  Value to set.
 	 */
-	public void setUniform(String name, Vector4f val) {
+	public void setUniform(String name, int val) {
 		int loc = getUniformLoc(name);
-		FloatBuffer buffer = BufferUtils.createFloatBuffer(4);
-		val.get(buffer);
 		if (loc != 1)
-			glUniform4fv(loc, buffer);
+			glUniform1i(loc, val);
 	}
 
 	/**
-	 * Set a uniform variable.
+	 * Set an uniform variable.
 	 * 
 	 * @param name Name of the variable.
 	 * 
@@ -126,51 +138,31 @@ public class ShaderProgram {
 	}
 
 	/**
-	 * Bind a attribute index to an attribute variable.
+	 * Set an uniform variable.
 	 * 
-	 * @param index Index of the attribute.
+	 * @param name Name of the variable.
 	 * 
-	 * @param loc   Name of the attribute variable.
+	 * @param val  Value to set.
 	 */
-	public void bindAttribute(int index, String loc) {
-		glBindAttribLocation(id, index, loc);
+	public void setUniform(String name, Vector4f val) {
+		int loc = getUniformLoc(name);
+		FloatBuffer buffer = BufferUtils.createFloatBuffer(4);
+		val.get(buffer);
+		if (loc != 1)
+			glUniform4fv(loc, buffer);
 	}
 
 	/**
-	 * Bind the fragment out color variable.
-	 *
-	 * @param index Color number binds.
-	 * 
-	 * @param loc   Variable name.
+	 * Bind this program to current rendering.
 	 */
-	public void bindFragmentDataLoc(int number, String name) {
-		glBindFragDataLocation(id, number, name);
-	}
-
-	/**
-	 * Get the location of an attribute.
-	 * 
-	 * @param name Attribute name.
-	 * 
-	 * @return Location of the attribute.
-	 */
-	public int getAttributeLoc(String name) {
-		return glGetAttribLocation(id, name);
-	}
-
-	/**
-	 * Get the location of an uniform variable.
-	 * 
-	 * @return The uniform variable location.
-	 */
-	public int getUniformLoc(String name) {
-		return glGetUniformLocation(id, name);
+	public void use() {
+		glUseProgram(id);
 	}
 
 	/**
 	 * Delete the shader program.
 	 */
-	public void delete() {
+	public void abrogate() {
 		glDeleteProgram(id);
 	}
 

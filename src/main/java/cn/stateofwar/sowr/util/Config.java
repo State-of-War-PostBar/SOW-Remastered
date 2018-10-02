@@ -49,6 +49,13 @@ public class Config {
 	}
 
 	/**
+	 * Save all configurations to the file.
+	 */
+	public static void abrogate() {
+		putAllConfig(configs);
+	}
+
+	/**
 	 * Get a configuration from a block and an index.
 	 * 
 	 * @param block Block of the configuration.
@@ -99,10 +106,20 @@ public class Config {
 	}
 
 	/**
-	 * Save all configurations to the file.
+	 * Put all the configurations to the file.
+	 * 
+	 * @param conf The configurations to save.
 	 */
-	public static void abrogate() {
-		putAllConfig(configs);
+	private static void putAllConfig(LinkedHashMap<String, LinkedHashMap<String, String>> conf) {
+		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet())
+			for (Entry<String, String> entry2 : entry.getValue().entrySet())
+				file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
+		try {
+			file.store();
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -120,23 +137,6 @@ public class Config {
 				sectionValues.put(e2.getKey(), e2.getValue());
 				configs.put(e.getKey(), sectionValues);
 			}
-		}
-	}
-
-	/**
-	 * Put all the configurations to the ini file.
-	 * 
-	 * @param conf The configurations to save.
-	 */
-	private static void putAllConfig(LinkedHashMap<String, LinkedHashMap<String, String>> conf) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet())
-			for (Entry<String, String> entry2 : entry.getValue().entrySet())
-				file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
-		try {
-			file.store();
-		} catch (IOException e) {
-			System.out.println(e.getLocalizedMessage());
-			e.printStackTrace();
 		}
 	}
 
@@ -200,4 +200,5 @@ public class Config {
 		}
 
 	}
+
 }

@@ -15,16 +15,17 @@ public class Game {
 	/** If the game is running. */
 	public static boolean running;
 
+	/** Current game state. */
+	public static GameState state = new GameState();
+
+	/** Renderer for the game. */
+	public static Renderer renderer = new Renderer();
+
 	/** Timer for the game engine. */
 	public static Timer timer = new Timer();
 
-	/** Current game state. */
-	protected static GameState state = new GameState();
-
 	/** Window of the game engine. */
 	protected static Window win;
-
-	public static Renderer renderer = new Renderer();
 
 	/**
 	 * Start the game engine.
@@ -69,7 +70,7 @@ public class Game {
 	}
 
 	/**
-	 * Eliminating over frames and lock in vertical sync (only if enabled).
+	 * Eliminating over frames and lock in vertical sync (only if it's enabled).
 	 */
 	private static void sync(int fps) {
 		double lastLoopTime = timer.getLastLoopTime();

@@ -23,7 +23,7 @@ public class Texture {
 	private static final Logger logger = new Logger("Render");
 
 	/** ID of this texture. */
-	private int id;
+	private final int id;
 
 	/** Width of the texture. */
 	private int width;
@@ -33,6 +33,44 @@ public class Texture {
 
 	public Texture() {
 		id = glGenTextures();
+	}
+
+	/**
+	 * Get the width of the texture.
+	 * 
+	 * @return Width of the texture.
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * Get the height of the texture.
+	 * 
+	 * @return Height of the texture.
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * Set the width of the texture.
+	 * 
+	 * @param _width Width of the texture.
+	 */
+	public void setWidth(int _width) {
+		if (_width > 0)
+			width = _width;
+	}
+
+	/**
+	 * Set the height of the texture.
+	 * 
+	 * @param _height Height of the texture.
+	 */
+	public void setHeight(int _height) {
+		if (_height > 0)
+			height = _height;
 	}
 
 	/**
@@ -62,6 +100,13 @@ public class Texture {
 		glTexParameteri(GL_TEXTURE_2D, par, val);
 	}
 
+	/**
+	 * Set a parameter of the texture.
+	 * 
+	 * @param par Name of the parameter.
+	 * 
+	 * @param val Value to set.
+	 */
 	public void setPar(int par, FloatBuffer val) {
 		glTexParameterfv(GL_TEXTURE_2D, par, val);
 	}
@@ -103,44 +148,6 @@ public class Texture {
 	 */
 	public void delete() {
 		glDeleteTextures(id);
-	}
-
-	/**
-	 * Get the width of the texture.
-	 * 
-	 * @return Width of the texture.
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * Set the width of the texture.
-	 * 
-	 * @param width Width of the texture.
-	 */
-	public void setWidth(int _width) {
-		if (_width > 0)
-			width = _width;
-	}
-
-	/**
-	 * Get the height of the texture.
-	 * 
-	 * @return Height of the texture.
-	 */
-	public int getHeight() {
-		return height;
-	}
-
-	/**
-	 * Get the height of the texture.
-	 * 
-	 * @return Height of the texture.
-	 */
-	public void setHeight(int _height) {
-		if (_height > 0)
-			height = _height;
 	}
 
 	/**

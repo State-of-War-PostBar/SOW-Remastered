@@ -5,12 +5,12 @@ import static org.lwjgl.opengl.GL45.*;
 /**
  * A vertex array object.
  */
-public class ArrayObj {
+public class ArrayObject {
 
 	/** ID of this object. */
 	private final int id;
 
-	public ArrayObj() {
+	public ArrayObject() {
 		id = glGenVertexArrays();
 	}
 
@@ -40,7 +40,7 @@ public class ArrayObj {
 	/**
 	 * Delete this object.
 	 */
-	public void delete() {
+	public void abrogate() {
 		glDeleteVertexArrays(id);
 	}
 

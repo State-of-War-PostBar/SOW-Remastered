@@ -1,9 +1,6 @@
 package cn.stateofwar.sowr.main;
 
-import static org.lwjgl.glfw.GLFW.glfwInit;
-import static org.lwjgl.glfw.GLFW.glfwTerminate;
-
-import org.lwjgl.system.Library;
+import static org.lwjgl.glfw.GLFW.*;
 
 import cn.stateofwar.sowr.util.Config;
 import cn.stateofwar.sowr.util.I18n;
@@ -18,11 +15,10 @@ public class Trim {
 
 	/**
 	 * Initialize the program.
+	 * 
+	 * @throws IllegalStateException
 	 */
 	protected static void init() {
-		Library.initialize();
-		logger.info("Initialized the Lwjgl library.");
-
 		Config.init();
 		logger.info("Loaded user configurations.");
 
