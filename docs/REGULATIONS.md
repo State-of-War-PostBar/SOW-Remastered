@@ -1,7 +1,7 @@
 # Development Regulations
 ---
 ## Codes
-All code and text files must encode with **UTF-8** with a line at EOF.
+All code and text files must encode in **UTF-8** with a line at EOF.
 
 所有的代码及文本文件必须使用**UTF-8**编码，末尾加空行。
 
@@ -16,7 +16,7 @@ For *import static* OpenGL or GLFW who have extraordinary number of constants an
 
 For others, please reduce it as possible.
 
-对于 *import static* 的操作，如果是与OpenGL或者GLFW这一类有着超凡的常量和方法的类有关，无论有多少使用，请直接import static其所有内容。
+对于 *import static* 的操作，如果是与OpenGL或者GLFW这一类有着超凡的常量和方法的类有关，则无论有多少使用，请直接import static其所有内容。
 对于非这一类情况的，尽量减少之。
 
 For listing of methods and variables, put in the order of *non-static > static* and *public > protected > private*, except for class constructors and the logger instance.
