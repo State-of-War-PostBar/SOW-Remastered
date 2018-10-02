@@ -6,8 +6,18 @@ package cn.stateofwar.sowr.input;
 public class InputHooks {
 
 	/**
-	 * A key has been triggered. This method receives the parameters from the
-	 * listener automatically.
+	 * A cursor position listener.
+	 * 
+	 * @param x X position (in pixels) of the cursor.
+	 * 
+	 * @param y Y position (in pixels) of the cursor.
+	 */
+	public static void cursor(double x, double y) {
+
+	}
+
+	/**
+	 * A key has been triggered.
 	 * 
 	 * @param key      The key triggered.
 	 * 
@@ -22,8 +32,7 @@ public class InputHooks {
 	}
 
 	/**
-	 * A mouse button has been triggered. This method receives the parameters from
-	 * the listener automatically.
+	 * A mouse button has been triggered.
 	 * 
 	 * @param button The button triggered.
 	 * 
@@ -32,17 +41,6 @@ public class InputHooks {
 	 * @param mods   Which modifiers keys were held down.
 	 */
 	public static void mouse(int button, int action, int mods) {
-
-	}
-
-	/**
-	 * A cursor position listener.
-	 * 
-	 * @param x X position (in pixels) of the cursor.
-	 * 
-	 * @param y Y position (in pixels) of the cursor.
-	 */
-	public static void cursor(double x, double y) {
 
 	}
 

@@ -2,11 +2,11 @@ package cn.stateofwar.sowr.gui.render;
 
 import static org.lwjgl.opengl.GL45.*;
 
+import cn.stateofwar.sowr.gui.render.ogl.ArrayObject;
+import cn.stateofwar.sowr.gui.render.ogl.BufferObject;
 import cn.stateofwar.sowr.gui.render.ogl.Shader;
 import cn.stateofwar.sowr.gui.render.ogl.Shader.ShaderType;
 import cn.stateofwar.sowr.gui.render.ogl.ShaderProgram;
-import cn.stateofwar.sowr.gui.render.ogl.ArrayObj;
-import cn.stateofwar.sowr.gui.render.ogl.BufferObj;
 import cn.stateofwar.sowr.util.DataUtils;
 
 /**
@@ -14,23 +14,23 @@ import cn.stateofwar.sowr.util.DataUtils;
  */
 public class RawModel extends Model {
 
-	/** Vertices for this model, with a minimum of 3 vertices in total. */
-	public float[] vertices;
-
-	/** Indices for lessening vertices. */
-	public int[] indices;
-
 	/** Vertex array object. */
-	private ArrayObj vao;
+	private ArrayObject vao;
 
 	/** Vertex buffer object for vertices. */
-	private BufferObj vbo_vertices;
+	private BufferObject vbo_vertices;
 
 	/** Vertex buffer object for coloring. */
-	private BufferObj vbo_color;
+	private BufferObject vbo_color;
 
 	/** Element buffer object for vertex indices. */
-	private BufferObj ebo;
+	private BufferObject ebo;
+
+	/** Vertices for this model, with a minimum of 3 vertices in total. */
+	private float[] vertices;
+
+	/** Indices for lessening vertices. */
+	private int[] indices;
 
 	private static final ShaderProgram prog = new ShaderProgram(
 			new Shader[] { Shader.createShader("sowr/gui/render/shader/raw.glsl_vertex", ShaderType.VERTEX, true),
@@ -49,10 +49,10 @@ public class RawModel extends Model {
 		vertices = _vertices;
 		indices = _indices;
 
-		vao = new ArrayObj();
-		vbo_vertices = new BufferObj();
-		vbo_color = new BufferObj();
-		ebo = new BufferObj();
+		vao = new ArrayObject();
+		vbo_vertices = new BufferObject();
+		vbo_color = new BufferObject();
+		ebo = new BufferObject();
 
 		if (color == null)
 			color = RGBA.WHITE;
@@ -87,46 +87,6 @@ public class RawModel extends Model {
 	}
 
 	/**
-	 * Change the vertices of the model.
-	 * 
-	 * @param _vertices New vertices.
-	 * 
-	 * @param _indices  New vertex indices.
-	 */
-	public void modifyVertices(float[] _vertices, int[] _indices) {
-		vertices = _vertices;
-		indices = _indices;
-
-		vao.bind();
-
-		vbo_vertices.bind(GL_ARRAY_BUFFER);
-		vbo_vertices.bufferSub(GL_ARRAY_BUFFER, 0, DataUtils.createFloatBuffer(vertices));
-
-		ebo.bind(GL_ELEMENT_ARRAY_BUFFER);
-		ebo.bufferSub(GL_ELEMENT_ARRAY_BUFFER, 0, DataUtils.createIntBuffer(indices));
-
-		vbo_vertices.unbind(GL_ARRAY_BUFFER);
-		ebo.unbind(GL_ELEMENT_ARRAY_BUFFER);
-
-		vao.unbind();
-	}
-
-	/**
-	 * Change the color of the model.
-	 * 
-	 * @param color New color.
-	 */
-	public void modifyColor(RGBA color) {
-		vao.bind();
-
-		vbo_color.bind(GL_ARRAY_BUFFER);
-		vbo_color.bufferSub(GL_ARRAY_BUFFER, 0, DataUtils.createFloatBuffer(color.toFloatArray()));
-		vbo_color.unbind(GL_ARRAY_BUFFER);
-
-		vao.unbind();
-	}
-
-	/**
 	 * Draw the model.
 	 */
 	@Override
@@ -150,10 +110,10 @@ public class RawModel extends Model {
 	 */
 	@Override
 	public void abrogate() {
-		vbo_vertices.delete();
-		vbo_color.delete();
-		ebo.delete();
-		vao.delete();
+		vbo_vertices.abrogate();
+		vbo_color.abrogate();
+		ebo.abrogate();
+		vao.abrogate();
 	}
 
 }

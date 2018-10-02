@@ -7,9 +7,12 @@ import cn.stateofwar.sowr.References;
 
 /**
  * Logger for the program. For every class that requires log recording, it needs
- * a private static final instance of this class.
+ * an instance of this class.
  */
 public class Logger {
+
+	/** A public logger, just in case. */
+	public static final Logger public_logger = new Logger();
 
 	/** The file to store logs. */
 	private File log = new File(References.LOG_FILE_NAME);
@@ -20,19 +23,19 @@ public class Logger {
 	/**
 	 * Create a logger for the class constructed it. It should be private static
 	 * final to avoid anything strange...
-	 * 
-	 * @param _source Who is recording the log massage.
 	 */
-	public Logger(String _source) {
-		source = _source;
+	public Logger() {
+		source = "UNKNOWN";
 	}
 
 	/**
 	 * Create a logger for the class constructed it. It should be private static
 	 * final to avoid anything strange...
+	 * 
+	 * @param _source Who is recording the log massage.
 	 */
-	public Logger() {
-		source = "Unknown";
+	public Logger(String _source) {
+		source = _source;
 	}
 
 	/**
@@ -66,7 +69,7 @@ public class Logger {
 	/**
 	 * <i>Message Level: <b>Warning</b></i><br />
 	 * This type of log messages records something that is not expected when
-	 * running, but they might not trigger huge impact.
+	 * running, but they might not trigger huge impacts.
 	 * 
 	 * @param message The message to record.
 	 */

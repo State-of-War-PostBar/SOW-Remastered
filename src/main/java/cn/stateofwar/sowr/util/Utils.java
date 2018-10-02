@@ -32,11 +32,56 @@ public class Utils {
 	}
 
 	/**
+	 * Types of operating systems.
+	 */
+	public static enum OSType {
+		Linux, Other, MacOS, Windows
+	}
+
+	/**
+	 * Get the current operating system.
+	 * 
+	 * @return The operating system.
+	 */
+	public static OSType getOS() {
+		OSType detectedOS;
+		String OS = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
+		if ((OS.indexOf("mac") >= 0) || (OS.indexOf("darwin") >= 0))
+			detectedOS = OSType.MacOS;
+		else if (OS.indexOf("win") >= 0)
+			detectedOS = OSType.Windows;
+		else if (OS.indexOf("nux") >= 0)
+			detectedOS = OSType.Linux;
+		else
+			detectedOS = OSType.Other;
+		return detectedOS;
+	}
+
+	/**
+	 * Create a line separator.
+	 * 
+	 * @return The line separator for current OS.
+	 */
+	public static String nl() {
+		return System.lineSeparator();
+	}
+
+	/**
+	 * Get the current system time.
+	 * 
+	 * @return The current time in the format of <i>Hour:Minute:Second</i>
+	 */
+	public static String getSysTime() {
+		Calendar c = Calendar.getInstance();
+		return "" + c.get(Calendar.HOUR_OF_DAY) + ':' + c.get(Calendar.MINUTE) + ':' + c.get(Calendar.SECOND);
+	}
+
+	/**
 	 * Create a file.
 	 * 
 	 * @param path     Path of the file.
 	 * 
-	 * @param override Override the old file (if that exists).
+	 * @param override Override the old file (if there is one).
 	 * 
 	 * @throws IOException
 	 */
@@ -54,6 +99,82 @@ public class Utils {
 	}
 
 	/**
+	 * Get the data of a resource file as a byte array.
+	 * 
+	 * @param url Path of the resource file.
+	 * 
+	 * @return The converted byte array of the resource file.
+	 * 
+	 * @throws IOException
+	 */
+	public static byte[] getRes(String url) throws IOException {
+		return Resources.toByteArray(Resources.getResource(url));
+	}
+
+	/**
+	 * Get the data of a resource text file as a list of strings.<br />
+	 * <i>Works only if the resource file is a pure text file.</i>
+	 * 
+	 * @param url Path of the resource file.
+	 * 
+	 * @return The list of strings of the resource text file.
+	 * 
+	 * @throws IOException
+	 */
+	public static List<String> getResAsStrings(String url) throws IOException {
+		return Resources.readLines(Resources.getResource(url), Charset.forName(References.DEFAULT_TEXT_ENCODING));
+	}
+
+	/**
+	 * Read a text file to a single string, with line separator characters and
+	 * spaces.
+	 * 
+	 * @param path Path of the text file.
+	 * 
+	 * @return The text read.
+	 * 
+	 * @throws IOException
+	 */
+	public static String readFileToString(String path) throws IOException {
+		return Files.asCharSource(new File(path), Charset.forName(References.DEFAULT_TEXT_ENCODING)).read();
+	}
+
+	/**
+	 * Convert a list of strings to a single string.
+	 * 
+	 * @param list  The list of strings.
+	 * 
+	 * @param enter Insert a line separator at the end of each line.
+	 * 
+	 * @return The converted string.
+	 */
+	public static String listToString(List<String> list, boolean enter) {
+		StringBuilder sb = new StringBuilder();
+		for (String s : list)
+			if (enter)
+				sb.append(s).append(nl());
+			else
+				sb.append(s);
+		return sb.toString();
+	}
+
+	/**
+	 * Get the total count of lines of a text file.
+	 * 
+	 * @param path Path of the text file.
+	 * 
+	 * @return The lines count.
+	 * 
+	 * @throws IOException
+	 */
+	public static int getTotalLines(String path) throws IOException {
+		File f = new File(path);
+		List<String> lines = null;
+		lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODING));
+		return lines.size();
+	}
+
+	/**
 	 * Read a specific line in a text file.<br />
 	 * <i>Does not read any line separators.</i>
 	 * 
@@ -68,7 +189,7 @@ public class Utils {
 	public static String readLineS(String path, int line) throws IOException {
 		line--;
 		List<String> lines = null;
-		lines = Files.readLines(new File(path), Charset.forName(References.DEFAULT_TEXT_ENCODE));
+		lines = Files.readLines(new File(path), Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		if (lines.size() < line)
 			line = lines.size();
 		return lines.get(line).replaceAll(nl(), "");
@@ -94,43 +215,13 @@ public class Utils {
 		String l = readLineS(path, line);
 		if (l.length() < pos)
 			pos = l.length();
-		return l.substring(pos, l.length()).replaceAll(nl(), "");
-	}
-
-	/**
-	 * Read a text file to a single string, with line separator characters and
-	 * spaces.
-	 * 
-	 * @param path Path of the text file.
-	 * 
-	 * @return The text read.
-	 * 
-	 * @throws IOException
-	 */
-	public static String readFileToString(String path) throws IOException {
-		return Files.asCharSource(new File(path), Charset.forName(References.DEFAULT_TEXT_ENCODE)).read();
-	}
-
-	/**
-	 * Get the total count of lines of a text file.
-	 * 
-	 * @param path Path of the text file.
-	 * 
-	 * @return The lines count.
-	 * 
-	 * @throws IOException
-	 */
-	public static int getTotalLines(String path) throws IOException {
-		File f = new File(path);
-		List<String> lines = null;
-		lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODE));
-		return lines.size();
+		return l.substring(pos, l.length());
 	}
 
 	/**
 	 * Write a line to the end of the text file.<br />
-	 * Will set a line separator at the end, but will not automatically start
-	 * writing at a new line in the beginning!
+	 * <i>Will set a line separator at the end, but will not automatically start
+	 * writing at a new line in the beginning!</i>
 	 * 
 	 * @param path Path of the text file.
 	 * 
@@ -148,7 +239,7 @@ public class Utils {
 	}
 
 	/**
-	 * Write to a text file in a specific line. <br />
+	 * Write to a text file in a specific line.<br />
 	 * <i>The old data will be erased.</i>
 	 * 
 	 * @param path Path of the text file.
@@ -163,15 +254,15 @@ public class Utils {
 		line--;
 		File f = new File(path);
 		List<String> lines;
-		lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODE));
+		lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		if (lines.size() < line)
 			line = lines.size();
 		lines.set(line, text);
-		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODE));
+		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 	}
 
 	/**
-	 * Write to a text file after a specific position of a line. <br />
+	 * Write to a text file after a specific position of a line.<br />
 	 * <i>The old data will be erased.</i>
 	 * 
 	 * @param path Path of the text file.
@@ -189,100 +280,13 @@ public class Utils {
 		pos--;
 		line--;
 		File f = new File(path);
-		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODE));
+		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		String l = lines.get(line);
 		if (l.length() < pos)
 			pos = l.length();
 		l = l.substring(l.length() - pos) + text;
 		lines.set(line, l);
-		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODE));
-	}
-
-	/**
-	 * Get the data of a resource file as a byte array.
-	 * 
-	 * @param url Path of the resource file.
-	 * 
-	 * @return The converted byte array of the resource file.
-	 */
-	public static byte[] getRes(String url) throws IOException {
-		return Resources.toByteArray(Resources.getResource(url));
-	}
-
-	/**
-	 * Get the data of a resource text file as a list of strings.<br />
-	 * <i>Works only if the resource file is a pure text file.</i>
-	 * 
-	 * @param url Path of the resource file.
-	 * 
-	 * @return The list of strings of the resource text file.
-	 */
-	public static List<String> getResAsStrings(String url) throws IOException {
-		return Resources.readLines(Resources.getResource(url), Charset.forName(References.DEFAULT_TEXT_ENCODE));
-	}
-
-	/**
-	 * Get the current system time.
-	 * 
-	 * @return The current time in the format of <i>Hour:Minute:Second</i>
-	 */
-	public static String getSysTime() {
-		Calendar c = Calendar.getInstance();
-		return "" + c.get(Calendar.HOUR_OF_DAY) + ':' + c.get(Calendar.MINUTE) + ':' + c.get(Calendar.SECOND);
-	}
-
-	/**
-	 * Create a line separator.
-	 * 
-	 * @return The line separator for current OS.
-	 */
-	public static String nl() {
-		return System.lineSeparator();
-	}
-
-	/**
-	 * Convert a list of strings to a single string.
-	 * 
-	 * @param list  The list of strings.
-	 * 
-	 * @param enter Insert a line separator at the end of each line.
-	 * 
-	 * @return The converted string.
-	 */
-	public static String listToString(List<String> list, boolean enter) {
-		StringBuilder sb = new StringBuilder();
-		for (String s : list)
-			if (enter)
-				sb.append(s).append(nl());
-			else
-				sb.append(s);
-		return sb.toString();
-	}
-
-	/**
-	 * Get the current operating system.
-	 * 
-	 * @return The operating system.
-	 */
-	public static OSType getOS() {
-		OSType detectedOS;
-		String OS = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
-		if ((OS.indexOf("mac") >= 0) || (OS.indexOf("darwin") >= 0))
-			detectedOS = OSType.MacOS;
-		else if (OS.indexOf("win") >= 0)
-			detectedOS = OSType.Windows;
-		else if (OS.indexOf("nux") >= 0)
-			detectedOS = OSType.Linux;
-		else
-			detectedOS = OSType.Other;
-		return detectedOS;
-	}
-
-	/**
-	 * Types of operating systems.
-	 */
-	public static enum OSType {
-		Linux, MacOS, Other, Windows
+		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 	};
 
 }

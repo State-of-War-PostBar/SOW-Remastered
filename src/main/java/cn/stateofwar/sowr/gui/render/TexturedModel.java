@@ -1,14 +1,12 @@
 package cn.stateofwar.sowr.gui.render;
 
-import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
-import static org.lwjgl.opengl.GL15.GL_ELEMENT_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL45.*;
 
+import cn.stateofwar.sowr.gui.render.ogl.ArrayObject;
+import cn.stateofwar.sowr.gui.render.ogl.BufferObject;
 import cn.stateofwar.sowr.gui.render.ogl.Shader;
-import cn.stateofwar.sowr.gui.render.ogl.Shader.ShaderType;
 import cn.stateofwar.sowr.gui.render.ogl.ShaderProgram;
-import cn.stateofwar.sowr.gui.render.ogl.ArrayObj;
-import cn.stateofwar.sowr.gui.render.ogl.BufferObj;
+import cn.stateofwar.sowr.gui.render.ogl.Shaders;
 import cn.stateofwar.sowr.util.DataUtils;
 
 /**
@@ -16,21 +14,22 @@ import cn.stateofwar.sowr.util.DataUtils;
  */
 public class TexturedModel extends Model {
 
-	/**
-	 * Vertex array object for this model.
-	 */
-	public ArrayObj vao;
+	/** The texture for the model. */
+	private Texture texture;
 
-	/** Buffer for vertices. */
-	public BufferObj vbo_vertices;
+	/** Vertex array object for this model. */
+	private ArrayObject vao;
 
 	/** Buffer for coordinates of the texture. */
-	public BufferObj vbo_texcoords;
+	private BufferObject vbo_texcoords;
+
+	/** Buffer for vertices. */
+	private BufferObject vbo_vertices;
 
 	/** Buffer for vertex indices. */
-	public BufferObj ebo;
+	private BufferObject ebo;
 
-	/** Coordinates of vertices. */
+	/** Coordinates of vertices, with a minimum of 3 vertices in total. */
 	private float[] vertices;
 
 	/** Vertex indices. */
@@ -39,14 +38,9 @@ public class TexturedModel extends Model {
 	/** Coordinates of used texture part. */
 	private float[] texture_coords;
 
-	/** The texture for the model. */
-	public Texture texture;
-
 	/** Preset shader program for the model. */
-	private static final ShaderProgram prog = new ShaderProgram(new Shader[] {
-			Shader.createShader("sowr/gui/render/shader/samplerless_texture.glsl_vertex", ShaderType.VERTEX, true),
-			Shader.createShader("sowr/gui/render/shader/samplerless_texture.glsl_fragment", ShaderType.FRAGMENT,
-					true) });
+	private static final ShaderProgram prog = new ShaderProgram(
+			new Shader[] { Shaders.VERTEX_SAMPLERLESS_TEXTURE, Shaders.FRAGMENT_SAMPLERLESS_TEXTURE });
 
 	/**
 	 * Create a model with texture.
@@ -65,10 +59,10 @@ public class TexturedModel extends Model {
 		texture = _texture;
 		texture_coords = _texture_coords;
 
-		vao = new ArrayObj();
-		vbo_vertices = new BufferObj();
-		vbo_texcoords = new BufferObj();
-		ebo = new BufferObj();
+		vao = new ArrayObject();
+		vbo_vertices = new BufferObject();
+		vbo_texcoords = new BufferObject();
+		ebo = new BufferObject();
 
 		prog.use();
 
@@ -121,63 +115,14 @@ public class TexturedModel extends Model {
 	}
 
 	/**
-	 * Change the vertices of the model.
-	 * 
-	 * @param _vertices New vertices.
-	 */
-	public void modifyVertices(float[] _vertices, int[] _indices) {
-		vertices = _vertices;
-		indices = _indices;
-
-		vao.bind();
-
-		vbo_vertices.bind(GL_ARRAY_BUFFER);
-		vbo_vertices.bufferSub(GL_ARRAY_BUFFER, 0, DataUtils.createFloatBuffer(vertices));
-
-		ebo.bind(GL_ELEMENT_ARRAY_BUFFER);
-		ebo.bufferSub(GL_ELEMENT_ARRAY_BUFFER, 0, DataUtils.createIntBuffer(indices));
-
-		vbo_vertices.unbind(GL_ARRAY_BUFFER);
-		ebo.unbind(GL_ELEMENT_ARRAY_BUFFER);
-
-		vao.unbind();
-	}
-
-	/**
-	 * Change the texture coordinates of the model.
-	 * 
-	 * @param _texture_coords New texture coordinates.
-	 */
-	public void modifyTexCoords(float[] _texture_coords) {
-		texture_coords = _texture_coords;
-
-		vao.bind();
-
-		vbo_texcoords.bind(GL_ARRAY_BUFFER);
-		vbo_texcoords.bufferSub(GL_ARRAY_BUFFER, 0, DataUtils.createFloatBuffer(texture_coords));
-		vbo_texcoords.unbind(GL_ARRAY_BUFFER);
-
-		vao.unbind();
-	}
-
-	/**
-	 * Change the texture.
-	 * 
-	 * @param _texture New texture.
-	 */
-	public void modifyTexture(Texture _texture) {
-		texture = _texture;
-	}
-
-	/**
 	 * Delete this model and release the spaces.
 	 */
 	@Override
 	public void abrogate() {
-		vbo_vertices.delete();
-		vbo_texcoords.delete();
-		ebo.delete();
-		vao.delete();
+		vbo_vertices.abrogate();
+		vbo_texcoords.abrogate();
+		ebo.abrogate();
+		vao.abrogate();
 	}
 
 }

@@ -12,20 +12,20 @@ import cn.stateofwar.sowr.util.DataUtils;
  */
 public class RGBA {
 
-	/** A preset of white color. */
-	public static final RGBA WHITE = new RGBA(1.0f, 1.0f, 1.0f);
-
 	/** A preset of black color. */
 	public static final RGBA BLACK = new RGBA(0.0f, 0.0f, 0.0f);
 
-	/** A preset of red color. */
-	public static final RGBA RED = new RGBA(1.0f, 0.0f, 0.0f);
+	/** A preset of blue color. */
+	public static final RGBA BLUE = new RGBA(0.0f, 0.0f, 1.0f);
 
 	/** A preset of green color. */
 	public static final RGBA GREEN = new RGBA(0.0f, 1.0f, 0.0f);
 
-	/** A preset of blue color. */
-	public static final RGBA BLUE = new RGBA(0.0f, 0.0f, 1.0f);
+	/** A preset of red color. */
+	public static final RGBA RED = new RGBA(1.0f, 0.0f, 0.0f);
+
+	/** A preset of white color. */
+	public static final RGBA WHITE = new RGBA(1.0f, 1.0f, 1.0f);
 
 	/** Color component. */
 	private float r, g, b, a;
@@ -58,6 +58,33 @@ public class RGBA {
 	}
 
 	/**
+	 * Get the green component.
+	 * 
+	 * @return The green component.
+	 */
+	public float getG() {
+		return g;
+	}
+
+	/**
+	 * Get the blue component.
+	 * 
+	 * @return The blue component.
+	 */
+	public float getB() {
+		return b;
+	}
+
+	/**
+	 * Get the alpha component.
+	 * 
+	 * @return The alpha component.
+	 */
+	public float getA() {
+		return a;
+	}
+
+	/**
 	 * Set the red component.
 	 * 
 	 * @param _r The red component.
@@ -70,15 +97,6 @@ public class RGBA {
 			_r = 1.0f;
 
 		r = _r;
-	}
-
-	/**
-	 * Get the green component.
-	 * 
-	 * @return The green component.
-	 */
-	public float getG() {
-		return g;
 	}
 
 	/**
@@ -97,15 +115,6 @@ public class RGBA {
 	}
 
 	/**
-	 * Get the blue component.
-	 * 
-	 * @return The blue component.
-	 */
-	public float getB() {
-		return b;
-	}
-
-	/**
 	 * Set the blue component.
 	 * 
 	 * @param _b The blue component.
@@ -121,15 +130,6 @@ public class RGBA {
 	}
 
 	/**
-	 * Get the alpha component.
-	 * 
-	 * @return The alpha component.
-	 */
-	public float getA() {
-		return a;
-	}
-
-	/**
 	 * Set the alpha component.
 	 * 
 	 * @param _a The alpha component.
@@ -142,6 +142,26 @@ public class RGBA {
 			_a = 1.0f;
 
 		a = _a;
+	}
+
+	/**
+	 * Convert the color components to a float array with 4 elements (red, green,
+	 * blue, alpha).
+	 * 
+	 * @return The array created.
+	 */
+	public float[] toFloatArray() {
+		return new float[] { r, g, b, a };
+	}
+
+	/**
+	 * Convert the color components to a float buffer with 4 elements (red, green,
+	 * blue, alpha).
+	 * 
+	 * @return The float buffer created.
+	 */
+	public FloatBuffer toFloatBuffer() {
+		return DataUtils.createFloatBuffer(new float[] { r, g, b, a });
 	}
 
 	/**
@@ -165,23 +185,14 @@ public class RGBA {
 	}
 
 	/**
-	 * Convert the color components to a float buffer with 4 elements (red, green,
-	 * blue, alpha).
+	 * Convert a grate value (0.0 - 255.0) to percentage (0.0 - 1.0) value.
 	 * 
-	 * @return The array created.
-	 */
-	public float[] toFloatArray() {
-		return new float[] { r, g, b, a };
-	}
-
-	/**
-	 * Convert the color components to a float buffer with 4 elements (red, green,
-	 * blue, alpha).
+	 * @param gv The great value.
 	 * 
-	 * @return The float buffer created.
+	 * @return The percentage value.
 	 */
-	public FloatBuffer toFloatBuffer() {
-		return DataUtils.createFloatBuffer(new float[] { r, g, b, a });
+	public static float to100(float gv) {
+		return gv / 255.0f;
 	}
 
 	/**
@@ -193,17 +204,6 @@ public class RGBA {
 	 */
 	public static float to255(float percentage) {
 		return percentage * 255.0f;
-	}
-
-	/**
-	 * Convert a grate value (0.0 - 255.0) to percentage (0.0 - 1.0) value.
-	 * 
-	 * @param gv The great value.
-	 * 
-	 * @return The percentage value.
-	 */
-	public static float to100(float gv) {
-		return gv / 255.0f;
 	}
 
 }

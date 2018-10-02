@@ -14,8 +14,92 @@ public class Shader {
 
 	private static final Logger logger = new Logger("Render");
 
+	/**
+	 * Types of shaders. <i>Computing shader is not included.</i>
+	 */
+	public static enum ShaderType {
+		VERTEX("vertex"), FRAGMENT("fragment"), GEOMETRY("geometry"), TESS_CONTROL("tess_control"),
+		TESS_EVALUATION("tess_evaluation"), UNKNOWN("unknown");
+
+		/** Name of the shader type. */
+		private String name;
+
+		ShaderType(String _name) {
+			name = _name;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		/**
+		 * Convert an OpenGL constant to a shader name.
+		 */
+		public static String gl2n(int name) {
+			return gl2t(name).getName();
+		}
+
+		/**
+		 * Convert an OpenGL constant to a shader type.
+		 */
+		public static ShaderType gl2t(int name) {
+			switch (name) {
+			case GL_VERTEX_SHADER:
+				return VERTEX;
+			case GL_FRAGMENT_SHADER:
+				return FRAGMENT;
+			case GL_GEOMETRY_SHADER:
+				return GEOMETRY;
+			case GL_TESS_CONTROL_SHADER:
+				return TESS_CONTROL;
+			case GL_TESS_EVALUATION_SHADER:
+				return TESS_EVALUATION;
+			default:
+				return UNKNOWN;
+			}
+		}
+
+		/**
+		 * Convert a shader name to an OpenGL constant.
+		 */
+		public static int n2gl(String name) {
+			return t2gl(n2t(name));
+		}
+
+		/**
+		 * Convert a shader name to a shader type.
+		 */
+		public static ShaderType n2t(String name) {
+			for (ShaderType e : ShaderType.values())
+				if (e.getName().equals(name))
+					return e;
+			return UNKNOWN;
+		}
+
+		/**
+		 * Convert a shader type to an OpenGL constant.
+		 */
+		public static int t2gl(ShaderType type) {
+			switch (type) {
+			case VERTEX:
+				return GL_VERTEX_SHADER;
+			case FRAGMENT:
+				return GL_FRAGMENT_SHADER;
+			case GEOMETRY:
+				return GL_GEOMETRY_SHADER;
+			case TESS_CONTROL:
+				return GL_TESS_CONTROL_SHADER;
+			case TESS_EVALUATION:
+				return GL_TESS_EVALUATION_SHADER;
+			default:
+				return 0;
+			}
+		}
+
+	}
+
 	/** ID of the shader. */
-	private int id;
+	private final int id;
 
 	/** Type of the shader. */
 	private ShaderType type;
@@ -47,7 +131,7 @@ public class Shader {
 	/**
 	 * Delete this shader and release spaces.
 	 */
-	public void delete() {
+	public void abrogate() {
 		glDeleteShader(id);
 	}
 
@@ -102,7 +186,7 @@ public class Shader {
 
 		glCompileShader(vs);
 		if (glGetShaderi(vs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("ERROR AT LOADING AN OPENGL VERTEX SHADER!");
+			logger.error("Error at compiling an OpenGL vertex shader!");
 			logger.error(glGetShaderInfoLog(vs));
 		}
 
@@ -118,6 +202,7 @@ public class Shader {
 	 */
 	private static Shader loadVertexShaderA(String fp) {
 		int vs = glCreateShader(GL_VERTEX_SHADER);
+
 		try {
 			glShaderSource(vs, Utils.listToString(Utils.getResAsStrings(fp), true));
 		} catch (IOException e) {
@@ -126,7 +211,7 @@ public class Shader {
 
 		glCompileShader(vs);
 		if (glGetShaderi(vs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("ERROR AT LOADING AN OPENGL VERTEX SHADER!");
+			logger.error("Error at compiling an OpenGL vertex shader!");
 			logger.error(glGetShaderInfoLog(vs));
 		}
 
@@ -150,7 +235,7 @@ public class Shader {
 
 		glCompileShader(fs);
 		if (glGetShaderi(fs, GL_COMPILE_STATUS) != 1) {
-			logger.error("ERROR AT LOADING AN OPENGL FRAGMENT SHADER!");
+			logger.error("Error at compiling an OpenGL Fragment shader!");
 			logger.error(glGetShaderInfoLog(fs));
 		}
 
@@ -174,7 +259,7 @@ public class Shader {
 
 		glCompileShader(fs);
 		if (glGetShaderi(fs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("ERROR AT LOADING AN OPENGL FRAGMENT SHADER!");
+			logger.error("Error at compiling an OpenGL Fragment shader!");
 			logger.error(glGetShaderInfoLog(fs));
 		}
 
@@ -198,7 +283,7 @@ public class Shader {
 
 		glCompileShader(gs);
 		if (glGetShaderi(gs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("ERROR AT LOADING AN OPENGL GEOMETRIC SHADER!");
+			logger.error("Error at compiling an OpenGL Geometric shader!");
 			logger.error(glGetShaderInfoLog(gs));
 		}
 
@@ -214,6 +299,7 @@ public class Shader {
 	 */
 	private static Shader loadGeometricShaderA(String fp) {
 		int gs = glCreateShader(GL_GEOMETRY_SHADER);
+
 		try {
 			glShaderSource(gs, Utils.listToString(Utils.getResAsStrings(fp), true));
 		} catch (IOException e) {
@@ -222,7 +308,7 @@ public class Shader {
 
 		glCompileShader(gs);
 		if (glGetShaderi(gs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("ERROR AT LOADING AN OPENGL GEOMETRIC SHADER!");
+			logger.error("Error at compiling an OpenGL Geometric shader!");
 			logger.error(glGetShaderInfoLog(gs));
 		}
 
@@ -238,6 +324,7 @@ public class Shader {
 	 */
 	private static Shader loadTessControllingShader(String fp) {
 		int tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
+
 		try {
 			glShaderSource(tcs, Utils.readFileToString(fp));
 		} catch (IOException e) {
@@ -246,7 +333,7 @@ public class Shader {
 
 		glCompileShader(tcs);
 		if (glGetShaderi(tcs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("ERROR AT LOADING AN OPENGL TESSELLATION CONTROLLING SHADER!");
+			logger.error("Error at compiling an OpenGL Tessellation Controlling shader!");
 			logger.error(glGetShaderInfoLog(tcs));
 		}
 
@@ -262,6 +349,7 @@ public class Shader {
 	 */
 	private static Shader loadTessControllingShaderA(String fp) {
 		int tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
+
 		try {
 			glShaderSource(tcs, Utils.listToString(Utils.getResAsStrings(fp), true));
 		} catch (IOException e) {
@@ -270,7 +358,7 @@ public class Shader {
 
 		glCompileShader(tcs);
 		if (glGetShaderi(tcs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("ERROR AT LOADING AN OPENGL TESSELLATION CONTROLLING SHADER!");
+			logger.error("Error at compiling an OpenGL Tessellation Controlling shader!");
 			logger.error(glGetShaderInfoLog(tcs));
 		}
 
@@ -286,6 +374,7 @@ public class Shader {
 	 */
 	private static Shader loadTessEvaluatingShader(String fp) {
 		int tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
+
 		try {
 			glShaderSource(tes, Utils.readFileToString(fp));
 		} catch (IOException e) {
@@ -294,7 +383,7 @@ public class Shader {
 
 		glCompileShader(tes);
 		if (glGetShaderi(tes, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("ERROR AT LOADING AN OPENGL TESSELLATION EVALUATING SHADER!");
+			logger.error("Error at compiling an OpenGL Tessellation Evaluating shader!");
 			logger.error(glGetShaderInfoLog(tes));
 		}
 
@@ -310,6 +399,7 @@ public class Shader {
 	 */
 	private static Shader loadTessEvaluatingShaderA(String fp) {
 		int tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
+
 		try {
 			glShaderSource(tes, Utils.listToString(Utils.getResAsStrings(fp), true));
 		} catch (IOException e) {
@@ -318,95 +408,11 @@ public class Shader {
 
 		glCompileShader(tes);
 		if (glGetShaderi(tes, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("ERROR AT LOADING AN OPENGL TESSELLATION EVALUATING SHADER!");
+			logger.error("Error at compiling an OpenGL Tessellation Evaluating shader!");
 			logger.error(glGetShaderInfoLog(tes));
 		}
 
 		return new Shader(tes, ShaderType.TESS_EVALUATION);
-	}
-
-	/**
-	 * Types of shaders. <i>Computing shader is not included.</i>
-	 */
-	public static enum ShaderType {
-		VERTEX("vertex"), FRAGMENT("fragment"), GEOMETRY("geometry"), TESS_CONTROL("tess_control"),
-		TESS_EVALUATION("tess_evaluation"), UNKNOWN("unknown");
-
-		/** Name of the shader type. */
-		private String name;
-
-		ShaderType(String _name) {
-			name = _name;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		/**
-		 * Convert a shader name to a shader type.
-		 */
-		public static ShaderType n2t(String name) {
-			for (ShaderType e : ShaderType.values())
-				if (e.getName().equals(name))
-					return e;
-			return UNKNOWN;
-		}
-
-		/**
-		 * Convert a shader name to an OpenGL constant.
-		 */
-		public static int n2gl(String name) {
-			return t2gl(n2t(name));
-		}
-
-		/**
-		 * Convert a shader type to an OpenGL constant.
-		 */
-		public static int t2gl(ShaderType type) {
-			switch (type) {
-			case VERTEX:
-				return GL_VERTEX_SHADER;
-			case FRAGMENT:
-				return GL_FRAGMENT_SHADER;
-			case GEOMETRY:
-				return GL_GEOMETRY_SHADER;
-			case TESS_CONTROL:
-				return GL_TESS_CONTROL_SHADER;
-			case TESS_EVALUATION:
-				return GL_TESS_EVALUATION_SHADER;
-			default:
-				return 0;
-			}
-		}
-
-		/**
-		 * Convert an OpenGL constant to a shader type.
-		 */
-		public static ShaderType gl2t(int name) {
-			switch (name) {
-			case GL_VERTEX_SHADER:
-				return VERTEX;
-			case GL_FRAGMENT_SHADER:
-				return FRAGMENT;
-			case GL_GEOMETRY_SHADER:
-				return GEOMETRY;
-			case GL_TESS_CONTROL_SHADER:
-				return TESS_CONTROL;
-			case GL_TESS_EVALUATION_SHADER:
-				return TESS_EVALUATION;
-			default:
-				return UNKNOWN;
-			}
-		}
-
-		/**
-		 * Convert an OpenGL constant to a shader name.
-		 */
-		public static String gl2n(int name) {
-			return gl2t(name).getName();
-		}
-
 	}
 
 }

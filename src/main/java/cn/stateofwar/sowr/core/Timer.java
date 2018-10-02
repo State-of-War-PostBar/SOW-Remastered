@@ -26,20 +26,6 @@ public class Timer {
 	private int upsCount;
 
 	/**
-	 * Initialize the timer.
-	 */
-	public void init() {
-		lastLoopTime = getTime();
-	}
-
-	/**
-	 * Get the current time of GLFW timer.
-	 */
-	public double getTime() {
-		return glfwGetTime();
-	}
-
-	/**
 	 * Calculate the total time passed since the last game loop.
 	 * 
 	 * @return The time passed.
@@ -50,6 +36,43 @@ public class Timer {
 		lastLoopTime = time;
 		timeCount += delta;
 		return delta;
+	}
+
+	/**
+	 * Get the current FPS. If time passed is less then 1 second it will return 0.
+	 */
+	public int getFPS() {
+		return fps;
+	}
+
+	/**
+	 * Get the time when last loop started.
+	 * 
+	 * @return Time when last loop started.
+	 */
+	public double getLastLoopTime() {
+		return lastLoopTime;
+	}
+
+	/**
+	 * Get the current time of GLFW timer.
+	 */
+	public double getTime() {
+		return glfwGetTime();
+	}
+
+	/**
+	 * Get the current UPS. If time passed is less then 1 second it will return 0.
+	 */
+	public int getUPS() {
+		return ups;
+	}
+
+	/**
+	 * Initialize the timer.
+	 */
+	public void init() {
+		lastLoopTime = getTime();
 	}
 
 	/**
@@ -80,29 +103,6 @@ public class Timer {
 	 */
 	public void updateUPS() {
 		upsCount++;
-	}
-
-	/**
-	 * Get the current FPS. If time passed is less then 1 second it will return 0.
-	 */
-	public int getFPS() {
-		return fps;
-	}
-
-	/**
-	 * Get the current UPS. If time passed is less then 1 second it will return 0.
-	 */
-	public int getUPS() {
-		return ups;
-	}
-
-	/**
-	 * Get the time when last loop started.
-	 * 
-	 * @return Time when last loop started.
-	 */
-	public double getLastLoopTime() {
-		return lastLoopTime;
 	}
 
 }

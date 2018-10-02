@@ -105,6 +105,21 @@ public class Window {
 	}
 
 	/**
+	 * A general clear of window's rendering.
+	 */
+	public void clear() {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+
+	/**
+	 * Upload the rendering procedures to this window.
+	 */
+	public void update() {
+		glfwSwapBuffers(handle);
+		glfwPollEvents();
+	}
+
+	/**
 	 * Get the handle of this window.
 	 * 
 	 * @return Handle of this window.
@@ -132,6 +147,24 @@ public class Window {
 	}
 
 	/**
+	 * Get the closing status of this window.
+	 * 
+	 * @return Closing status.
+	 */
+	public boolean isClosing() {
+		return glfwWindowShouldClose(handle);
+	}
+
+	/**
+	 * Set the closing status of this window.
+	 * 
+	 * @param val Closing status.
+	 */
+	public void setClosing(boolean val) {
+		glfwSetWindowShouldClose(handle, val);
+	}
+
+	/**
 	 * Get the vertical sync status of this window.
 	 * 
 	 * @param Vertical sync status.
@@ -151,39 +184,6 @@ public class Window {
 			glfwSwapInterval(1);
 		else
 			glfwSwapInterval(0);
-	}
-
-	/**
-	 * Get the closing status of this window.
-	 * 
-	 * @return Closing status.
-	 */
-	public boolean isClosing() {
-		return glfwWindowShouldClose(handle);
-	}
-
-	/**
-	 * Set the closing status of this window.
-	 * 
-	 * @param val Closing status.
-	 */
-	public void setClosing(boolean val) {
-		glfwSetWindowShouldClose(handle, val);
-	}
-
-	/**
-	 * Upload the rendering procedures to this window.
-	 */
-	public void update() {
-		glfwSwapBuffers(handle);
-		glfwPollEvents();
-	}
-
-	/**
-	 * A general clear of window's rendering.
-	 */
-	public void clear() {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	/**

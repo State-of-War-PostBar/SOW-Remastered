@@ -16,11 +16,22 @@ public class I18n {
 	/** The parser to separate translation keys and results. */
 	private static final String PARSER = "=";
 
+	/** All the languages this program supports. */
+	private static final List<String> LEGAL_VAL = Stream.of("EN_US", "ZH_CN").collect(Collectors.toList());
+
 	/** The current language preference of the program. */
 	private static Locales locale;
 
-	/** All the languages this program supports. */
-	private static final List<String> LEGAL_VAL = Stream.of("EN_US", "ZH_CN").collect(Collectors.toList());
+	/**
+	 * Reveal a translation.
+	 * 
+	 * @param key The translation key.
+	 * 
+	 * @return The translation result.
+	 */
+	public static String t(String key) {
+		return locale.reveal(key);
+	}
 
 	/**
 	 * Initialize the translations.
@@ -63,19 +74,9 @@ public class I18n {
 			locale = Locales.parseLoc(loc);
 		else {
 			locale = Locales.EN_US;
-			throw new IllegalArgumentException("No such locale!");
+			Logger.public_logger.error(
+					"Attemption of selecting a locale that doesn't exist. Default language setting (English-United States is selected.");
 		}
-	}
-
-	/**
-	 * Reveal a translation.
-	 * 
-	 * @param key The translation key.
-	 * 
-	 * @return The translation result.
-	 */
-	public static String dk(String key) {
-		return locale.reveal(key);
 	}
 
 	/**
@@ -109,20 +110,9 @@ public class I18n {
 		}
 
 		/**
-		 * Parse a locale from a name. If the value is not valid, default <i>(English -
-		 * United States)</i> will be selected.
-		 * 
-		 * @param name Name of the locale.
-		 */
-		public static Locales parseLoc(String name) {
-			for (Locales loc : Locales.values())
-				if (loc.name.equals(name))
-					return loc;
-			return EN_US;
-		}
-
-		/**
 		 * Read all the translations from the language files.
+		 * 
+		 * @throws IOException
 		 */
 		private void readValues() throws IOException {
 			List<String> trans = new ArrayList<>();
@@ -146,6 +136,19 @@ public class I18n {
 			if (translations.containsKey(key))
 				return translations.get(key);
 			return key;
+		}
+
+		/**
+		 * Parse a locale from a name. If the value is not valid, default <i>(English -
+		 * United States)</i> will be selected.
+		 * 
+		 * @param name Name of the locale.
+		 */
+		public static Locales parseLoc(String name) {
+			for (Locales loc : Locales.values())
+				if (loc.name.equals(name))
+					return loc;
+			return EN_US;
 		}
 	}
 

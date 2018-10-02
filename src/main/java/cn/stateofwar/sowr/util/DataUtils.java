@@ -31,15 +31,15 @@ public class DataUtils {
 	}
 
 	/**
-	 * Create a integer buffer from an integer array.<br />
+	 * Create a double buffer from a double array.<br />
 	 * <i>The data buffer created is fliped.</i>
 	 * 
 	 * @param data Array of the data.
 	 * 
 	 * @return The buffer created from the array.
 	 */
-	public static IntBuffer createIntBuffer(int[] data) {
-		return (IntBuffer) BufferUtils.createIntBuffer(data.length).put(data).flip();
+	public static DoubleBuffer createDoubleBuffer(double[] data) {
+		return (DoubleBuffer) BufferUtils.createDoubleBuffer(data.length).put(data).flip();
 	}
 
 	/**
@@ -55,19 +55,65 @@ public class DataUtils {
 	}
 
 	/**
-	 * Create a double buffer from a double array.<br />
+	 * Create an integer buffer from an integer array.<br />
 	 * <i>The data buffer created is fliped.</i>
 	 * 
 	 * @param data Array of the data.
 	 * 
 	 * @return The buffer created from the array.
 	 */
-	public static DoubleBuffer createDoubleBuffer(double[] data) {
-		return (DoubleBuffer) BufferUtils.createDoubleBuffer(data.length).put(data).flip();
+	public static IntBuffer createIntBuffer(int[] data) {
+		return (IntBuffer) BufferUtils.createIntBuffer(data.length).put(data).flip();
 	}
 
 	/**
-	 * Create an OpenGL orthographic by specific positions.
+	 * Determine the quadrant of a x-y coordinate.
+	 * 
+	 * @param x The x coordinate.
+	 * 
+	 * @param y The y coordinate.
+	 * 
+	 * @return A number indicates the quadrant of the coordinate.<br />
+	 *         <b>0</b> -> Origin;<br />
+	 *         <b>1</b> -> 1st quadrant;<br />
+	 *         <b>2</b> -> 2nd quadrant;<br />
+	 *         <b>3</b> -> 3rd quadrant;<br />
+	 *         <b>4</b> -> 4th quadrant;<br />
+	 *         <b>5</b> -> Middle of 1st and 2nd quadrant;<br />
+	 *         <b>6</b> -> Middle of 2nd and 3rd quadrant;<br />
+	 *         <b>7</b> -> Middle of 3rd and 4th quadrant;<br />
+	 *         <b>8</b> -> Middle of 1st and 4th quadrant.
+	 */
+	public static int getQuadrant(int x, int y) {
+		y = Graphic.win.getHeight() - y;
+
+		int xMid = Graphic.win.getWidth() / 2;
+		int yMid = Graphic.win.getHeight() / 2;
+
+		if (x == y && x == 0)
+			return 3;
+		else if (x == xMid && y == yMid)
+			return 0;
+		else if (x > xMid && y < yMid)
+			return 1;
+		else if (x < xMid && y < yMid)
+			return 2;
+		else if (x < xMid && y > yMid)
+			return 3;
+		else if (x > xMid && y > yMid)
+			return 4;
+		else if (x == xMid && y < yMid)
+			return 5;
+		else if (x < xMid && y == yMid)
+			return 6;
+		else if (x == xMid && y > yMid)
+			return 7;
+		else
+			return 8;
+	}
+
+	/**
+	 * Create an OpenGL orthographic box by specific positions.
 	 * 
 	 * @param left   Farthest left of the scene box.
 	 * 
@@ -102,7 +148,7 @@ public class DataUtils {
 
 	/**
 	 * Convert a pair of x-y coordinate of the screen (starts at the bottom left
-	 * corner, and x→, y↑) to OpenGL coordinate.
+	 * corner, and x→ y↑) to OpenGL coordinate.
 	 * 
 	 * @param x The x coordinate.
 	 * 
@@ -112,40 +158,15 @@ public class DataUtils {
 	 *         value is always 0.</i>
 	 */
 	public static Vector3f toGlCoord(int x, int y) {
-		x = Math.abs(x);
-		y = Math.abs(y);
-		x = x > Graphic.win.getWidth() ? Graphic.win.getWidth() : x;
-		y = y > Graphic.win.getHeight() ? Graphic.win.getHeight() : y;
+		int w = Graphic.win.getWidth();
+		int h = Graphic.win.getHeight();
+
+		x = x > w ? w : x;
+		y = y > h ? h : y;
 
 		Vector2f vec = toScrPerc(x, y);
 
 		return new Vector3f(vec.x * 2.0f - 1.0f, vec.y * 2.0f - 1.0f, 0.0f);
-	}
-
-	/**
-	 * Convert a pair of s-t coordinate of a texture (starts at the bottom left
-	 * corner, and u→, v↑) to OpenGL texture coordinate.
-	 * 
-	 * @param s The s coordinate.
-	 * 
-	 * @param t The t coordinate.
-	 * 
-	 * @return A vector contains their percentages toward the texture size, which is
-	 *         also the OpenGL texture coordinate.
-	 */
-	public static Vector2f toTexCoord(int s, int t, Texture texture) {
-		s = Math.abs(s);
-		t = Math.abs(t);
-		int w = texture.getWidth();
-		int h = texture.getHeight();
-
-		s = s > w ? w : s;
-		t = t > h ? h : t;
-
-		float sPerc = (float) s / (float) w;
-		float tPerc = (float) t / (float) h;
-
-		return new Vector2f(sPerc, tPerc);
 	}
 
 	/**
@@ -158,9 +179,6 @@ public class DataUtils {
 	 * @return A vector contains their percentages toward the screen.
 	 */
 	public static Vector2f toScrPerc(int x, int y) {
-		x = Math.abs(x);
-		y = Math.abs(y);
-
 		float xPerc = (float) x / (float) Graphic.win.getWidth();
 		float yPerc = (float) y / (float) Graphic.win.getHeight();
 
@@ -168,49 +186,28 @@ public class DataUtils {
 	}
 
 	/**
-	 * Determine the quadrant of a x-y coordinate.
+	 * Convert a pair of s-t coordinate of a texture (starts at the bottom left
+	 * corner, and s→ t↑) to OpenGL texture coordinate.
 	 * 
-	 * @param x The x coordinate.
+	 * @param s       The s coordinate.
 	 * 
-	 * @param y The y coordinate.
+	 * @param t       The t coordinate.
 	 * 
-	 * @return A number indicates the quadrant of the coordinate.<br />
-	 *         0 -> At origin;<br />
-	 *         1 -> 1st quadrant;<br />
-	 *         2 -> 2nd quadrant;<br />
-	 *         3 -> 3rd quadrant;<br />
-	 *         4 -> 4th quadrant;<br />
-	 *         5 -> Middle of 1st and 2nd quadrant;<br />
-	 *         6 -> Middle of 2nd and 3rd quadrant;<br />
-	 *         7 -> Middle of 3rd and 4th quadrant;<br />
-	 *         8 -> Middle of 1st and 4th quadrant.<br />
+	 * @param texture The texture.
+	 * 
+	 * @return The OpenGL texture coordinate based on this pair of s-t coordinate.
 	 */
-	public static int getQuadrant(int x, int y) {
-		y = Graphic.win.getHeight() - y;
+	public static Vector2f toTexCoord(int s, int t, Texture texture) {
+		int w = texture.getWidth();
+		int h = texture.getHeight();
 
-		int xMid = Graphic.win.getWidth() / 2;
-		int yMid = Graphic.win.getHeight() / 2;
+		s = s > w ? w : s;
+		t = t > h ? h : t;
 
-		if (x == y && x == 0)
-			return 3;
-		else if (x == xMid && y == yMid)
-			return 0;
-		else if (x > xMid && y < yMid)
-			return 1;
-		else if (x < xMid && y < yMid)
-			return 2;
-		else if (x < xMid && y > yMid)
-			return 3;
-		else if (x > xMid && y > yMid)
-			return 4;
-		else if (x == xMid && y < yMid)
-			return 5;
-		else if (x < xMid && y == yMid)
-			return 6;
-		else if (x == xMid && y > yMid)
-			return 7;
-		else
-			return 8;
+		float sPerc = (float) s / (float) w;
+		float tPerc = (float) t / (float) h;
+
+		return new Vector2f(sPerc, tPerc);
 	}
 
 }

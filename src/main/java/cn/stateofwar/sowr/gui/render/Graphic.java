@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL45.*;
 
 import cn.stateofwar.sowr.References;
 import cn.stateofwar.sowr.gui.multimedia.Window;
+import cn.stateofwar.sowr.gui.render.ogl.Shaders;
 import cn.stateofwar.sowr.util.Config;
 import cn.stateofwar.sowr.util.I18n;
 import cn.stateofwar.sowr.util.Logger;
@@ -26,7 +27,7 @@ public class Graphic {
 	 * Register the window and establish render capabilities.
 	 */
 	public static void initRenderCapabilities() {
-		win = new Window(I18n.dk(References.PROGRAM_NAME), Integer.parseInt(Config.get("GUI", "Window Width")),
+		win = new Window(I18n.t(References.PROGRAM_NAME), Integer.parseInt(Config.get("GUI", "Window Width")),
 				Integer.parseInt(Config.get("GUI", "Window Height")),
 				Boolean.parseBoolean(Config.get("GUI", "Vertical Sync")),
 				Boolean.parseBoolean(Config.get("GUI", "Full Screen")));
@@ -42,6 +43,8 @@ public class Graphic {
 		s.append("GLSL Version: ").append(glGetString(GL_SHADING_LANGUAGE_VERSION));
 		logger.info(s.toString());
 
+		Shaders.init();
+
 		logger.info("Initialized rendering capabilities.");
 	}
 
@@ -49,6 +52,8 @@ public class Graphic {
 	 * Unload the graphic capabilities.
 	 */
 	public static void abrogateRender() {
+		Shaders.abrogate();
+
 		win.abrogate();
 	}
 

@@ -12,9 +12,8 @@ public class Renderer {
 
 	/** Vertex indices for a triangle. */
 	public static final int[] indices_trig = new int[] { 0, 1, 2 };
-
 	/**
-	 * Vertex indices for a rectangle, for 4 vertices, their listing is TR -> BR ->
+	 * Vertex indices for a rectangle; for 4 vertices, their listing is TR -> BR ->
 	 * BL -> TL.
 	 */
 	public static final int[] indices_rect = new int[] { 0, 1, 3, 1, 2, 3 };
