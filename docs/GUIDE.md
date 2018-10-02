@@ -11,7 +11,7 @@ We are sorry for not providing workspace for any IDEs in our repository.
 很抱歉我们并不提供任何IDE的工作环境。
 
 ## Compiling / 编译
-Please install [Gradle](https://gradle.org/) in your system. Then, go to the directory where [build.gradle](..\build.gradle) is located,
+Please install [Gradle](https://gradle.org/) in your system. Then, go to the directory where [build.gradle](../build.gradle) is located,
 use your remote to run
 
 	'gradle build'
@@ -19,7 +19,7 @@ use your remote to run
 请在您的机器上安装[Gradle](https://gradle.org/). 之后视您的操作系统，启动终端并在根目录下执行上述命令。
 
 ## Libraries / 库
-The followings are the libraries used in our program. For more information, please look forward to [build.gradle](..\build.gradle).
+The followings are the libraries used in our program. For more information, please look forward to [build.gradle](../build.gradle).
 
 [Google Guava](https://github.com/google/guava)
 
@@ -39,4 +39,4 @@ The followings are the libraries used in our program. For more information, plea
 [LuaJ](http://www.luaj.org)
 
 
-以上为程序所使用到的库。更多信息请参阅[build.gradle](..\build.gradle).
+以上为程序所使用到的库。更多信息请参阅[build.gradle](../build.gradle).

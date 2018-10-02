@@ -17,9 +17,9 @@ microcontrolling, observing and managing to defeat your enemy!
 
 For additional information about developing, please look forward to these references:
 
-[Development Regulations / 开发规范](docs\REGULATIONS.md)
+[Development Regulations / 开发规范](docs/REGULATIONS.md)
 
-[Development Guide / 开发向导](docs\GUIDE.md)
+[Development Guide / 开发向导](docs/GUIDE.md)
 
 ---
 
