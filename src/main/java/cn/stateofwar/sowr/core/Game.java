@@ -52,7 +52,7 @@ public class Game {
 			win.update();
 			timer.updateFPS();
 			if (win.isVSync())
-				sync(Graphic.desiredFPS);
+				syncFrame(Graphic.desiredFPS);
 
 			timer.update();
 		} while (running && !win.isClosing());
@@ -72,7 +72,7 @@ public class Game {
 	/**
 	 * Eliminating over frames and lock in vertical sync (only if it's enabled).
 	 */
-	private static void sync(int fps) {
+	private static void syncFrame(int fps) {
 		double lastLoopTime = timer.getLastLoopTime();
 		double now = timer.getTime();
 		float targetTime = 1.0f / fps;

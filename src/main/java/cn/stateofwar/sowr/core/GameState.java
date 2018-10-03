@@ -10,6 +10,7 @@ public class GameState {
 
 	private static final Logger logger = new Logger("Game");
 
+	/** Renderer for the frame. */
 	private Renderer renderer;
 
 	/**
