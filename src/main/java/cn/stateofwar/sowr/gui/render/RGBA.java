@@ -165,8 +165,9 @@ public class RGBA {
 	}
 
 	/**
-	 * Convert the color components to 4 float arrays with 4 elements (red, green,
-	 * blue, alpha).
+	 * Convert the color components to a float array with 4 elements (red, green,
+	 * blue, alpha) repeated for 4 times.<br />
+	 * <i>This is used for rendering 4 vertices of a rectangle.</i>
 	 * 
 	 * @return The array created.
 	 */
