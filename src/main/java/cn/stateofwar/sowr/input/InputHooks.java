@@ -1,5 +1,9 @@
 package cn.stateofwar.sowr.input;
 
+import static org.lwjgl.glfw.GLFW.*;
+
+import cn.stateofwar.sowr.gui.DkInputs;
+
 /**
  * Hooks for different type of inputs.
  */
@@ -13,7 +17,8 @@ public class InputHooks {
 	 * @param y Y position (in pixels) of the cursor.
 	 */
 	public static void cursor(double x, double y) {
-
+		DkInputs.cursPosX = x;
+		DkInputs.cursPosY = y;
 	}
 
 	/**
@@ -28,7 +33,10 @@ public class InputHooks {
 	 * @param mods     Which modifiers keys were held down.
 	 */
 	public static void keyboard(int key, int scancode, int action, int mods) {
-
+		if (action == GLFW_PRESS)
+			DkInputs.DK_Keys[key] = true;
+		if (action == GLFW_RELEASE)
+			DkInputs.DK_Keys[key] = false;
 	}
 
 	/**
@@ -41,7 +49,10 @@ public class InputHooks {
 	 * @param mods   Which modifiers keys were held down.
 	 */
 	public static void mouse(int button, int action, int mods) {
-
+		if (action == GLFW_PRESS)
+			DkInputs.DK_Mouse[button] = true;
+		if (action == GLFW_RELEASE)
+			DkInputs.DK_Mouse[button] = false;
 	}
 
 }
