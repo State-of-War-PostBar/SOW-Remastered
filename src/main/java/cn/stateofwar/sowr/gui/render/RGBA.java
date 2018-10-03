@@ -146,11 +146,21 @@ public class RGBA {
 
 	/**
 	 * Convert the color components to a float array with 4 elements (red, green,
+	 * blue).
+	 * 
+	 * @return The array created.
+	 */
+	public float[] toFloatArray3() {
+		return new float[] { r, g, b };
+	}
+
+	/**
+	 * Convert the color components to a float array with 4 elements (red, green,
 	 * blue, alpha).
 	 * 
 	 * @return The array created.
 	 */
-	public float[] toFloatArray() {
+	public float[] toFloatArray4() {
 		return new float[] { r, g, b, a };
 	}
 
