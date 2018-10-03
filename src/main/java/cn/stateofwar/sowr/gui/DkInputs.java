@@ -1,7 +1,7 @@
 package cn.stateofwar.sowr.gui;
 
 /**
- * Input for GUI.
+ * Input manager for GUI.
  */
 public class DkInputs {
 
