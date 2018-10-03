@@ -21,6 +21,8 @@ For additional information about developing, please look forward to these refere
 
 [Development Guide / 开发向导](docs/GUIDE.md)
 
+[Development Specifications / 开发指南](docs/SPECIFICATIONS.md)
+
 ---
 
 This project is published under the [LGPLv3 License](https://www.gnu.org/licenses/lgpl.html).
