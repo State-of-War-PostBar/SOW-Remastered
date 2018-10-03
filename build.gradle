@@ -72,8 +72,9 @@ dependencies {
 	compile "org.lwjgl:lwjgl-xxhash:${lwjgl_version}:natives-macos"
 }
 
-compileJava.options.encoding = "${default_text_encoding}"
 compileJava {
+	options.encoding = "${default_text_encoding}"
+
 	sourceCompatibility = targetCompatibility = "10"
 }
 
