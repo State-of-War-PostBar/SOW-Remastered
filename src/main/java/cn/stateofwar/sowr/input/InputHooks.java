@@ -3,6 +3,7 @@ package cn.stateofwar.sowr.input;
 import static org.lwjgl.glfw.GLFW.*;
 
 import cn.stateofwar.sowr.gui.DkInputs;
+import cn.stateofwar.sowr.gui.render.Graphic;
 
 /**
  * Hooks for different type of inputs.
@@ -17,8 +18,9 @@ public class InputHooks {
 	 * @param y Y position (in pixels) of the cursor.
 	 */
 	public static void cursor(double x, double y) {
-		DkInputs.cursPosX = x;
-		DkInputs.cursPosY = y;
+		DkInputs.cursPosX = x < 0 ? 0 : x > Graphic.win.getWidth() ? Graphic.win.getWidth() : x;
+		DkInputs.cursPosY = y < 0 ? 0
+				: y > Graphic.win.getHeight() ? Graphic.win.getHeight() : Graphic.win.getHeight() - y;
 	}
 
 	/**
