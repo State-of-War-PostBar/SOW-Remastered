@@ -5,9 +5,10 @@ import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import org.joml.Matrix4f;
 import org.joml.Vector2f;
+import org.joml.Vector2i;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
 
 import cn.stateofwar.sowr.gui.render.Graphic;
@@ -113,37 +114,19 @@ public class DataUtils {
 	}
 
 	/**
-	 * Create an OpenGL orthographic box by specific positions.
+	 * If a point is in a rectangle.
 	 * 
-	 * @param left   Farthest left of the scene box.
+	 * @param point Coordinate of the point.
 	 * 
-	 * @param right  Farthest right of the scene box.
+	 * @param rect  Coordinates of the rectangle, x/y are the bottom left corner of
+	 *              the rectangle and z/w are its width and height.
 	 * 
-	 * @param bottom Farthest bottom of the scene box.
-	 * 
-	 * @param top    Farthest top of the scene box.
-	 * 
-	 * @param near   Farthest front of the scene box.
-	 * 
-	 * @param far    Farthest back of the scene box.
-	 * 
-	 * @return The matrix of the orthographic data of the canonical view box.
+	 * @return If the point is in the range of the rectangle.
 	 */
-	public static Matrix4f orthographic(float left, float right, float bottom, float top, float near, float far) {
-		Matrix4f ortho = new Matrix4f();
-
-		float x = -(right + left) / (right - left);
-		float y = -(top + bottom) / (top - bottom);
-		float z = -(far + near) / (far - near);
-
-		ortho._m00(2.0f / (right - left));
-		ortho._m11(2.0f / (top - bottom));
-		ortho._m22(-2.0f / (far - near));
-		ortho._m03(x);
-		ortho._m13(y);
-		ortho._m23(z);
-
-		return ortho;
+	public static boolean pointInRect(Vector2i point, Vector4f rect) {
+		if (point.x >= rect.x && point.x <= rect.x + rect.z && point.y >= rect.y && point.y <= rect.y + rect.z)
+			return true;
+		return false;
 	}
 
 	/**
