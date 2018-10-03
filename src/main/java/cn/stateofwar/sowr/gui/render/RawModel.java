@@ -5,8 +5,8 @@ import static org.lwjgl.opengl.GL45.*;
 import cn.stateofwar.sowr.gui.render.ogl.ArrayObject;
 import cn.stateofwar.sowr.gui.render.ogl.BufferObject;
 import cn.stateofwar.sowr.gui.render.ogl.Shader;
-import cn.stateofwar.sowr.gui.render.ogl.Shader.ShaderType;
 import cn.stateofwar.sowr.gui.render.ogl.ShaderProgram;
+import cn.stateofwar.sowr.gui.render.ogl.Shaders;
 import cn.stateofwar.sowr.util.DataUtils;
 
 /**
@@ -33,8 +33,7 @@ public class RawModel extends Model {
 	private int[] indices;
 
 	private static final ShaderProgram prog = new ShaderProgram(
-			new Shader[] { Shader.createShader("sowr/gui/render/shader/raw.glsl_vertex", ShaderType.VERTEX, true),
-					Shader.createShader("sowr/gui/render/shader/raw.glsl_fragment", ShaderType.FRAGMENT, true) });
+			new Shader[] { Shaders.VERTEX_RAW, Shaders.FRAGMENT_RAW });
 
 	/**
 	 * Construct the class while building the OpenGL model.
@@ -60,6 +59,7 @@ public class RawModel extends Model {
 		prog.use();
 
 		vao.bind();
+
 		vbo_vertices.bind(GL_ARRAY_BUFFER);
 		vbo_vertices.buffer(GL_ARRAY_BUFFER, DataUtils.createFloatBuffer(vertices), GL_STATIC_DRAW);
 
@@ -84,6 +84,7 @@ public class RawModel extends Model {
 		vbo_color.unbind(GL_ARRAY_BUFFER);
 		ebo.unbind(GL_ELEMENT_ARRAY_BUFFER);
 		vao.unbind();
+		prog.unuse();
 	}
 
 	/**
@@ -103,6 +104,7 @@ public class RawModel extends Model {
 		glDisableVertexAttribArray(0);
 
 		vao.unbind();
+		prog.unuse();
 	}
 
 	/**

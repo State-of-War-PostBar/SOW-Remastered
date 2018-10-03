@@ -160,6 +160,13 @@ public class ShaderProgram {
 	}
 
 	/**
+	 * Unbind any program from rendering.
+	 */
+	public void unuse() {
+		glUseProgram(0);
+	}
+
+	/**
 	 * Delete the shader program.
 	 */
 	public void abrogate() {
