@@ -64,7 +64,7 @@ public class RawModel extends Model {
 		vbo_vertices.buffer(GL_ARRAY_BUFFER, DataUtils.createFloatBuffer(vertices), GL_STATIC_DRAW);
 
 		vbo_color.bind(GL_ARRAY_BUFFER);
-		vbo_color.buffer(GL_ARRAY_BUFFER, DataUtils.createFloatBuffer(color.toFloatArray()), GL_STATIC_DRAW);
+		vbo_color.buffer(GL_ARRAY_BUFFER, DataUtils.createFloatBuffer(color.toFloatArray4()), GL_STATIC_DRAW);
 
 		ebo.bind(GL_ELEMENT_ARRAY_BUFFER);
 		ebo.buffer(GL_ELEMENT_ARRAY_BUFFER, DataUtils.createIntBuffer(indices), GL_STATIC_DRAW);
@@ -78,11 +78,10 @@ public class RawModel extends Model {
 		vbo_color.bind(GL_ARRAY_BUFFER);
 		glVertexAttribPointer(1, 4, GL_FLOAT, false, 0, 0);
 
-		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 
 		vbo_color.unbind(GL_ARRAY_BUFFER);
-		ebo.unbind(GL_ELEMENT_ARRAY_BUFFER);
 		vao.unbind();
 		prog.unuse();
 	}

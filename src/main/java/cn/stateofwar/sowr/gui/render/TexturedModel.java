@@ -90,7 +90,6 @@ public class TexturedModel extends Model {
 		glDisableVertexAttribArray(0);
 
 		vbo_texcoords.unbind(GL_ARRAY_BUFFER);
-		ebo.unbind(GL_ARRAY_BUFFER);
 		vao.unbind();
 		prog.unuse();
 	}
