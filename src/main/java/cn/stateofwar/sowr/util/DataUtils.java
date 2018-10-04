@@ -9,6 +9,7 @@ import org.joml.Vector2f;
 import org.joml.Vector2i;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
+import org.joml.Vector4i;
 import org.lwjgl.BufferUtils;
 
 import cn.stateofwar.sowr.gui.render.Graphic;
@@ -65,6 +66,10 @@ public class DataUtils {
 	 */
 	public static IntBuffer createIntBuffer(int[] data) {
 		return (IntBuffer) BufferUtils.createIntBuffer(data.length).put(data).flip();
+	}
+
+	public static Vector4f vec4iToVec4f(Vector4i veci) {
+		return new Vector4f(veci.x, veci.y, veci.z, veci.w);
 	}
 
 	/**

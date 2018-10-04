@@ -1,5 +1,6 @@
 package cn.stateofwar.sowr.core;
 
+import cn.stateofwar.sowr.gui.DkSElementManager;
 import cn.stateofwar.sowr.gui.multimedia.Window;
 import cn.stateofwar.sowr.gui.render.Graphic;
 import cn.stateofwar.sowr.gui.render.Renderer;
@@ -40,13 +41,15 @@ public class Game {
 		state.enter(renderer);
 		timer.init();
 
-		do {
+		while (running && !win.isClosing()) {
 			win.clear();
 
 			state.input();
 
 			state.update();
 			timer.updateUPS();
+
+			DkSElementManager.updateAll();
 
 			state.render();
 			win.update();
@@ -55,7 +58,9 @@ public class Game {
 				syncFrame(Graphic.desiredFPS);
 
 			timer.update();
-		} while (running && !win.isClosing());
+		}
+
+		DkSElementManager.abrogateAll();
 
 		state.exit();
 	}

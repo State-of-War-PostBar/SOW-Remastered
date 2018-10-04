@@ -2,7 +2,7 @@ package cn.stateofwar.sowr.input;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-import cn.stateofwar.sowr.gui.DkInputs;
+import cn.stateofwar.sowr.gui.DkSInputs;
 import cn.stateofwar.sowr.gui.render.Graphic;
 
 /**
@@ -18,8 +18,8 @@ public class InputHooks {
 	 * @param y Y position (in pixels) of the cursor.
 	 */
 	public static void cursor(double x, double y) {
-		DkInputs.cursPosX = x < 0 ? 0 : x > Graphic.win.getWidth() ? Graphic.win.getWidth() : x;
-		DkInputs.cursPosY = y < 0 ? 0
+		DkSInputs.cursPosX = x < 0 ? 0 : x > Graphic.win.getWidth() ? Graphic.win.getWidth() : x;
+		DkSInputs.cursPosY = y < 0 ? 0
 				: y > Graphic.win.getHeight() ? Graphic.win.getHeight() : Graphic.win.getHeight() - y;
 	}
 
@@ -36,9 +36,9 @@ public class InputHooks {
 	 */
 	public static void keyboard(int key, int scancode, int action, int mods) {
 		if (action == GLFW_PRESS)
-			DkInputs.DK_Keys[key] = true;
+			DkSInputs.DK_Keys[key] = true;
 		if (action == GLFW_RELEASE)
-			DkInputs.DK_Keys[key] = false;
+			DkSInputs.DK_Keys[key] = false;
 	}
 
 	/**
@@ -52,9 +52,9 @@ public class InputHooks {
 	 */
 	public static void mouse(int button, int action, int mods) {
 		if (action == GLFW_PRESS)
-			DkInputs.DK_Mouse[button] = true;
+			DkSInputs.DK_Mouse[button] = true;
 		if (action == GLFW_RELEASE)
-			DkInputs.DK_Mouse[button] = false;
+			DkSInputs.DK_Mouse[button] = false;
 	}
 
 }
