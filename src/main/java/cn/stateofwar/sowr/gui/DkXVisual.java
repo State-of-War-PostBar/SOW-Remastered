@@ -21,8 +21,9 @@ public abstract class DkXVisual extends DkXElement {
 	 * @param coord The new coordinate information.
 	 */
 	public void resize(Object coord) {
-		for (DkXElement e : children)
-			((DkXVisual) e).onParentResize(coord);
+		if (hasChild())
+			for (DkXElement e : children)
+				((DkXVisual) e).onParentResize(coord);
 	}
 
 	/**
@@ -59,8 +60,9 @@ public abstract class DkXVisual extends DkXElement {
 	 * Render the element and all of its children.
 	 */
 	public void render() {
-		for (DkXElement e : children)
-			((DkXVisual) e).render();
+		if (hasChild())
+			for (DkXElement e : children)
+				((DkXVisual) e).render();
 	}
 
 }

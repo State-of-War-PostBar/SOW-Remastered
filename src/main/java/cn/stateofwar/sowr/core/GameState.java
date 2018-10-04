@@ -1,5 +1,6 @@
 package cn.stateofwar.sowr.core;
 
+import cn.stateofwar.sowr.gui.DkSElementManager;
 import cn.stateofwar.sowr.gui.render.Renderer;
 import cn.stateofwar.sowr.util.Logger;
 
@@ -42,7 +43,7 @@ public class GameState {
 	 * Handle input from the user.
 	 */
 	public void input() {
-
+		DkSElementManager.updateAll();
 	}
 
 	/**
@@ -56,7 +57,7 @@ public class GameState {
 	 * Render the screen contents.
 	 */
 	public void render() {
-
+		DkSElementManager.renderVisuals();
 	}
 
 }

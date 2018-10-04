@@ -49,8 +49,6 @@ public class Game {
 			state.update();
 			timer.updateUPS();
 
-			DkSElementManager.updateAll();
-
 			state.render();
 			win.update();
 			timer.updateFPS();
