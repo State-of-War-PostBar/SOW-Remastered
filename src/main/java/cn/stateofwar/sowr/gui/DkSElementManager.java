@@ -67,6 +67,9 @@ public class DkSElementManager {
 		}
 	}
 
+	/**
+	 * Render all the visual elements.
+	 */
 	public static void renderVisuals() {
 		for (Entry<String, DkXElement> entry : roots.entrySet()) {
 			DkXElement e = entry.getValue();
