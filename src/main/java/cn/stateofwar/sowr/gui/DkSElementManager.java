@@ -61,6 +61,8 @@ public class DkSElementManager {
 	public static void updateAll() {
 		for (Entry<String, DkXElement> entry : roots.entrySet()) {
 			DkXElement e = entry.getValue();
+			if (e instanceof DkIClickable)
+				((DkIClickable) e).updateCursor();
 			e.update();
 			if (e instanceof DkXVisual)
 				((DkXVisual) e).render();
