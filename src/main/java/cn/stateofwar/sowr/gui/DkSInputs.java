@@ -3,7 +3,7 @@ package cn.stateofwar.sowr.gui;
 /**
  * Input manager for DKUI.
  */
-public class DkInputs {
+public class DkSInputs {
 
 	/** QWER keyboard keys; implement them from GLFW directly. */
 	public static boolean[] DK_Keys = new boolean[350];
