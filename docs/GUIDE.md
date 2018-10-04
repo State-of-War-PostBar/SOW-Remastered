@@ -14,7 +14,7 @@ We are sorry for not providing workspace for any IDEs in our repository.
 Please install [Gradle](https://gradle.org/) in your system. Then, go to the directory where [build.gradle](../build.gradle) is located,
 use your remote to run
 
-	'gradle build'
+	gradle build
 
 请在您的机器上安装[Gradle](https://gradle.org/). 之后视您的操作系统，启动终端并在根目录下执行上述命令。
 
