@@ -51,8 +51,10 @@ public interface DkIClickable {
 				(Vector4f) getCoordInfo())) {
 			cursorOn();
 			for (int button : getButtons())
-				if (DkSInputs.DK_Mouse[button])
+				if (DkSInputs.DK_Mouse[button]) {
 					clicked();
+					break;
+				}
 		}
 		cursorOut();
 	}
