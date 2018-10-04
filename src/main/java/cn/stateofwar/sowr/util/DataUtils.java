@@ -123,8 +123,8 @@ public class DataUtils {
 	 * 
 	 * @return If the point is in the range of the rectangle.
 	 */
-	public static boolean pointInRect(Vector2i point, Vector4f rect) {
-		if (point.x >= rect.x && point.x <= rect.x + rect.z && point.y >= rect.y && point.y <= rect.y + rect.z)
+	public static boolean pir(Vector2i point, Vector4f rect) {
+		if (point.x >= rect.x && point.x <= rect.x + rect.z && point.y >= rect.y && point.y <= rect.y + rect.w)
 			return true;
 		return false;
 	}
