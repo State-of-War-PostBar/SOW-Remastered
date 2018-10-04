@@ -86,16 +86,18 @@ public abstract class DkXElement {
 	 * Update the element and all of its children.
 	 */
 	public void update() {
-		for (DkXElement e : children)
-			e.update();
+		if (hasChild())
+			for (DkXElement e : children)
+				e.update();
 	}
 
 	/**
 	 * Delete the element and all of its children.
 	 */
 	public void abrogate() {
-		for (DkXElement e : children)
-			e.abrogate();
+		if (hasChild())
+			for (DkXElement e : children)
+				e.abrogate();
 	}
 
 }
