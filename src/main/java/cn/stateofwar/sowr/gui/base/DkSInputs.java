@@ -1,5 +1,7 @@
 package cn.stateofwar.sowr.gui.base;
 
+import cn.stateofwar.sowr.util.Config;
+
 /**
  * Input manager for DKUI.
  */
@@ -13,5 +15,8 @@ public class DkSInputs {
 
 	/** Cursor position. */
 	public static double cursPosX, cursPosY;
+
+	/** Interval between double clicking. */
+	public static double double_click_interval = Double.parseDouble(Config.get("Control", "Double Click Interval"));
 
 }

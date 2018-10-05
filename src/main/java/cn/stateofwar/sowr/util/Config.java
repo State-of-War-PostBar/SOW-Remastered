@@ -156,6 +156,10 @@ public class Config {
 			general.put("Language", "EN_US");
 			defaults.put("General", general);
 
+			LinkedHashMap<String, String> control = new LinkedHashMap<>();
+			control.put("Double Click Interval", "0.3");
+			defaults.put("Control", control);
+
 			LinkedHashMap<String, String> gui = new LinkedHashMap<>();
 			gui.put("Window Width", "1366");
 			gui.put("Window Height", "768");
