@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.core;
 
-import static org.lwjgl.glfw.GLFW.*;
+import org.lwjgl.glfw.GLFW;
 
 /**
  * Timer for the game engine.
@@ -58,7 +58,7 @@ public class Timer {
 	 * Get the current time of GLFW timer.
 	 */
 	public double getTime() {
-		return glfwGetTime();
+		return GLFW.glfwGetTime();
 	}
 
 	/**

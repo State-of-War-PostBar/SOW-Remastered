@@ -68,6 +68,13 @@ public class DataUtils {
 		return (IntBuffer) BufferUtils.createIntBuffer(data.length).put(data).flip();
 	}
 
+	/**
+	 * Convert a Vector4i to a Vector4f.
+	 * 
+	 * @param veci The integer vector.
+	 * 
+	 * @return The float value vector.
+	 */
 	public static Vector4f vec4iToVec4f(Vector4i veci) {
 		return new Vector4f(veci.x, veci.y, veci.z, veci.w);
 	}

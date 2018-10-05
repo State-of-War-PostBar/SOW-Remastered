@@ -1,12 +1,9 @@
-package cn.stateofwar.sowr.gui;
+package cn.stateofwar.sowr.gui.base;
 
 /**
  * A visible element.
  */
 public abstract class DkXVisual extends DkXElement {
-
-	/** If this element is hidden. */
-	protected boolean hidden;
 
 	/**
 	 * Get the coordinate information of the element.
@@ -14,6 +11,9 @@ public abstract class DkXVisual extends DkXElement {
 	 * @return Coordinate information.
 	 */
 	public abstract Object getCoordInfo();
+
+	/** If this element is hidden. */
+	protected boolean hidden;
 
 	/**
 	 * Resize the element.
@@ -23,7 +23,10 @@ public abstract class DkXVisual extends DkXElement {
 	public void resize(Object coord) {
 		if (hasChild())
 			for (DkXElement e : children)
-				((DkXVisual) e).onParentResize(coord);
+				if (e instanceof DkXVisual)
+					((DkXVisual) e).onParentResize(coord);
+				else
+					continue;
 	}
 
 	/**
@@ -47,6 +50,11 @@ public abstract class DkXVisual extends DkXElement {
 	 */
 	public void hide() {
 		hidden = true;
+		for (DkXElement e : children)
+			if (e instanceof DkXVisual)
+				((DkXVisual) e).hide();
+			else
+				continue;
 	}
 
 	/**
@@ -54,6 +62,11 @@ public abstract class DkXVisual extends DkXElement {
 	 */
 	public void show() {
 		hidden = false;
+		for (DkXElement e : children)
+			if (e instanceof DkXVisual)
+				((DkXVisual) e).show();
+			else
+				continue;
 	}
 
 	/**
@@ -62,7 +75,10 @@ public abstract class DkXVisual extends DkXElement {
 	public void render() {
 		if (hasChild())
 			for (DkXElement e : children)
-				((DkXVisual) e).render();
+				if (e instanceof DkXVisual)
+					((DkXVisual) e).render();
+				else
+					continue;
 	}
 
 }

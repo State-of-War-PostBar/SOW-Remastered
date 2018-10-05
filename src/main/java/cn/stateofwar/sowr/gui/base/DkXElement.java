@@ -1,4 +1,4 @@
-package cn.stateofwar.sowr.gui;
+package cn.stateofwar.sowr.gui.base;
 
 import java.util.ArrayList;
 import java.util.List;

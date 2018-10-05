@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.core;
 
-import cn.stateofwar.sowr.gui.DkSElementManager;
+import cn.stateofwar.sowr.gui.base.DkSElementManager;
 import cn.stateofwar.sowr.gui.render.Renderer;
 import cn.stateofwar.sowr.util.Logger;
 
@@ -27,7 +27,7 @@ public class GameState {
 	 * Exit out of this game state controller.
 	 */
 	public void exit() {
-
+		DkSElementManager.abrogateAll();
 	}
 
 	/**
