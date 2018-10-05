@@ -1,4 +1,4 @@
-package cn.stateofwar.sowr.gui;
+package cn.stateofwar.sowr.gui.base;
 
 /**
  * <B>D</b>ragoon<b>k</b>iller UI is the graphical user interface designed for

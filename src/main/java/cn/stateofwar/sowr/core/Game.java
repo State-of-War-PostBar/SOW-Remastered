@@ -1,6 +1,5 @@
 package cn.stateofwar.sowr.core;
 
-import cn.stateofwar.sowr.gui.DkSElementManager;
 import cn.stateofwar.sowr.gui.multimedia.Window;
 import cn.stateofwar.sowr.gui.render.Graphic;
 import cn.stateofwar.sowr.gui.render.Renderer;
@@ -57,8 +56,6 @@ public class Game {
 
 			timer.update();
 		}
-
-		DkSElementManager.abrogateAll();
 
 		state.exit();
 	}

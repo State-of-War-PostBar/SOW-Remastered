@@ -2,7 +2,7 @@ package cn.stateofwar.sowr.input;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-import cn.stateofwar.sowr.gui.DkSInputs;
+import cn.stateofwar.sowr.gui.base.DkSInputs;
 import cn.stateofwar.sowr.gui.render.Graphic;
 
 /**
