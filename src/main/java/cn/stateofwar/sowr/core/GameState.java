@@ -43,14 +43,14 @@ public class GameState {
 	 * Handle input from the user.
 	 */
 	public void input() {
-		GuiManager.updateAll();
+		GuiManager.updateInputs();
 	}
 
 	/**
 	 * Update the game contents.
 	 */
 	public void update() {
-
+		GuiManager.updateAll();
 	}
 
 	/**

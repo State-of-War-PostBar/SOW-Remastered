@@ -60,10 +60,9 @@ public class GuiManager {
 	}
 
 	/**
-	 * Update all the elements.
+	 * Update all the input listeners.
 	 */
-	public static void updateAll() {
-		DkSTimer.update();
+	public static void updateInputs() {
 		for (Entry<String, DkXElement> entry : roots.entrySet()) {
 			DkXElement e = entry.getValue();
 
@@ -76,8 +75,16 @@ public class GuiManager {
 			if (e instanceof DkIKeyboardSensitive)
 				((DkIKeyboardSensitive) e).updateKey();
 
-			e.update();
 		}
+	}
+
+	/**
+	 * Update all the elements.
+	 */
+	public static void updateAll() {
+		DkSTimer.update();
+		for (Entry<String, DkXElement> entry : roots.entrySet())
+			entry.getValue().update();
 	}
 
 	/**
