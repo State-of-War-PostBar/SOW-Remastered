@@ -2,7 +2,7 @@
 ---
 ## Coordinate System
 
-For any type of positioning in this program, either rendering or game calculating or anything else, the coordinate system is always the same:
+For any type of positioning in this program, e.g. rendering or game calculating or anything else, the coordinate system is always the same:
 
 *Starts from **bottom left corner**, and apply the rule of x→ y↑.*
 

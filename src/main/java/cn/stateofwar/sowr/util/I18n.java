@@ -13,25 +13,14 @@ import java.util.stream.Stream;
  */
 public class I18n {
 
-	/** The parser to separate translation keys and results. */
+	/** Parser to separate translation keys and results in language files. */
 	private static final String PARSER = "=";
 
 	/** All the languages this program supports. */
 	private static final List<String> LEGAL_VAL = Stream.of("EN_US", "ZH_CN").collect(Collectors.toList());
 
-	/** The current language preference of the program. */
+	/** Current language preference of the program. */
 	private static Locales locale;
-
-	/**
-	 * Reveal a translation.
-	 * 
-	 * @param key The translation key.
-	 * 
-	 * @return The translation result.
-	 */
-	public static String t(String key) {
-		return locale.reveal(key);
-	}
 
 	/**
 	 * Initialize the translations.
@@ -44,6 +33,17 @@ public class I18n {
 				e.printStackTrace();
 			}
 		locale = Locales.parseLoc(Config.get("General", "Language"));
+	}
+
+	/**
+	 * Reveal a translation.
+	 * 
+	 * @param key Translation key.
+	 * 
+	 * @return Translation result.
+	 */
+	public static String t(String key) {
+		return locale.reveal(key);
 	}
 
 	/**
@@ -74,8 +74,8 @@ public class I18n {
 			locale = Locales.parseLoc(loc);
 		else {
 			locale = Locales.EN_US;
-			Logger.public_logger.error(
-					"Attemption of selecting a locale that doesn't exist. Default language setting (English-United States is selected.");
+			Logger.PUBLIC_LOGGER.error(
+					"Attemption of selecting a language locale that doesn't exist. Default language locale (English-United States) is selected.");
 		}
 	}
 
@@ -95,7 +95,7 @@ public class I18n {
 		private Locales() {
 		}
 
-		Locales(String x) {
+		private Locales(String x) {
 			if (I18n.LEGAL_VAL.contains(x))
 				name = x;
 		}
@@ -128,9 +128,9 @@ public class I18n {
 		 * Reveal a translation. If there is no translation available it will return the
 		 * key itself.
 		 * 
-		 * @param key The translation key.
+		 * @param key Translation key.
 		 * 
-		 * @return The translation result.
+		 * @return Translation result.
 		 */
 		private String reveal(String key) {
 			if (translations.containsKey(key))
@@ -139,10 +139,12 @@ public class I18n {
 		}
 
 		/**
-		 * Parse a locale from a name. If the value is not valid, default <i>(English -
-		 * United States)</i> will be selected.
+		 * Parse a locale from a name.
 		 * 
 		 * @param name Name of the locale.
+		 * 
+		 * @return The locale parsed.If the value is not valid, default <i>(English -
+		 *         United States)</i> will be selected.
 		 */
 		public static Locales parseLoc(String name) {
 			for (Locales loc : Locales.values())

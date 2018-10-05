@@ -31,10 +31,11 @@ public interface DkIClickable extends DkICursorSensitive {
 	public default void updateButton() {
 		if (isCursorOn())
 			for (int button : getButtons())
-				if (DkSInputs.DK_Mouse[button]) {
+				if (DkSInputs.DK_mouse[button]) {
 					clicked();
 					return;
 				}
+
 		released();
 	}
 

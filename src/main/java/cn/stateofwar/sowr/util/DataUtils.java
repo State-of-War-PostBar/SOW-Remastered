@@ -16,7 +16,7 @@ import cn.stateofwar.sowr.gui.render.Graphic;
 import cn.stateofwar.sowr.gui.render.Texture;
 
 /**
- * Utilities for data calculation and conversion. Mostly for OpenGL.
+ * Utilities for data calculation and conversion, mostly for OpenGL.
  */
 public class DataUtils {
 
@@ -26,22 +26,10 @@ public class DataUtils {
 	 * 
 	 * @param data Array of the data.
 	 * 
-	 * @return The buffer created from the array.
+	 * @return Buffer created from the array.
 	 */
 	public static ByteBuffer createByteBuffer(byte[] data) {
 		return (ByteBuffer) BufferUtils.createByteBuffer(data.length).put(data).flip();
-	}
-
-	/**
-	 * Create a double buffer from a double array.<br />
-	 * <i>The data buffer created is fliped.</i>
-	 * 
-	 * @param data Array of the data.
-	 * 
-	 * @return The buffer created from the array.
-	 */
-	public static DoubleBuffer createDoubleBuffer(double[] data) {
-		return (DoubleBuffer) BufferUtils.createDoubleBuffer(data.length).put(data).flip();
 	}
 
 	/**
@@ -50,10 +38,22 @@ public class DataUtils {
 	 * 
 	 * @param data Array of the data.
 	 * 
-	 * @return The buffer created from the array.
+	 * @return Buffer created from the array.
 	 */
 	public static FloatBuffer createFloatBuffer(float[] data) {
 		return (FloatBuffer) BufferUtils.createFloatBuffer(data.length).put(data).flip();
+	}
+
+	/**
+	 * Create a double buffer from a double array.<br />
+	 * <i>The data buffer created is fliped.</i>
+	 * 
+	 * @param data Array of the data.
+	 * 
+	 * @return Buffer created from the array.
+	 */
+	public static DoubleBuffer createDoubleBuffer(double[] data) {
+		return (DoubleBuffer) BufferUtils.createDoubleBuffer(data.length).put(data).flip();
 	}
 
 	/**
@@ -62,40 +62,40 @@ public class DataUtils {
 	 * 
 	 * @param data Array of the data.
 	 * 
-	 * @return The buffer created from the array.
+	 * @return Buffer created from the array.
 	 */
 	public static IntBuffer createIntBuffer(int[] data) {
 		return (IntBuffer) BufferUtils.createIntBuffer(data.length).put(data).flip();
 	}
 
 	/**
-	 * Convert a Vector4i to a Vector4f.
+	 * Convert a {@code Vector4i} to a {@code Vector4f}.
 	 * 
-	 * @param veci The integer vector.
+	 * @param veci Integers vector.
 	 * 
-	 * @return The float value vector.
+	 * @return Float values vector.
 	 */
 	public static Vector4f vec4iToVec4f(Vector4i veci) {
 		return new Vector4f(veci.x, veci.y, veci.z, veci.w);
 	}
 
 	/**
-	 * Determine the quadrant of a x-y coordinate.
+	 * Determine the quadrant of a x-y coordinate on the screen.
 	 * 
-	 * @param x The x coordinate.
+	 * @param x X coordinate.
 	 * 
-	 * @param y The y coordinate.
+	 * @param y Y coordinate.
 	 * 
-	 * @return A number indicates the quadrant of the coordinate.<br />
-	 *         <b>0</b> -> Origin;<br />
-	 *         <b>1</b> -> 1st quadrant;<br />
-	 *         <b>2</b> -> 2nd quadrant;<br />
-	 *         <b>3</b> -> 3rd quadrant;<br />
-	 *         <b>4</b> -> 4th quadrant;<br />
-	 *         <b>5</b> -> Middle of 1st and 2nd quadrant;<br />
-	 *         <b>6</b> -> Middle of 2nd and 3rd quadrant;<br />
-	 *         <b>7</b> -> Middle of 3rd and 4th quadrant;<br />
-	 *         <b>8</b> -> Middle of 1st and 4th quadrant.
+	 * @return A number indicates the quadrant of the coordinate:<br />
+	 *         <b>0</b> → Origin;<br />
+	 *         <b>1</b> → 1st quadrant;<br />
+	 *         <b>2</b> → 2nd quadrant;<br />
+	 *         <b>3</b> → 3rd quadrant;<br />
+	 *         <b>4</b> → 4th quadrant;<br />
+	 *         <b>5</b> → Middle of 1st and 2nd quadrant;<br />
+	 *         <b>6</b> → Middle of 2nd and 3rd quadrant;<br />
+	 *         <b>7</b> → Middle of 3rd and 4th quadrant;<br />
+	 *         <b>8</b> → Middle of 1st and 4th quadrant.
 	 */
 	public static int getQuadrant(int x, int y) {
 		y = Graphic.win.getHeight() - y;
@@ -126,12 +126,12 @@ public class DataUtils {
 	}
 
 	/**
-	 * If a point is in a rectangle.
+	 * Check if a point is in a rectangle.
 	 * 
 	 * @param point Coordinate of the point.
 	 * 
-	 * @param rect  Coordinates of the rectangle, x/y are the bottom left corner of
-	 *              the rectangle and z/w are its width and height.
+	 * @param rect  Coordinates of the rectangle, x-y are the bottom left corner of
+	 *              the rectangle and z-w are its width and height.
 	 * 
 	 * @return If the point is in the range of the rectangle.
 	 */
@@ -142,17 +142,16 @@ public class DataUtils {
 	}
 
 	/**
-	 * Convert a pair of x-y coordinate of the screen (starts at the bottom left
-	 * corner, and x→ y↑) to OpenGL coordinate.
+	 * Convert a pair of x-y coordinate of the screen to OpenGL coordinate.
 	 * 
-	 * @param x The x coordinate.
+	 * @param x X coordinate.
 	 * 
-	 * @param y The y coordinate.
+	 * @param y Y coordinate.
 	 * 
-	 * @return The OpenGL coordinate based on this pair of x-y coordinate. <i>The Z
-	 *         value is always 0.</i>
+	 * @return OpenGL coordinate based on the coordinate. <i>The Z value is always
+	 *         0.</i>
 	 */
-	public static Vector3f toGlCoord(int x, int y) {
+	public static Vector3f toGLCoord(int x, int y) {
 		int w = Graphic.win.getWidth();
 		int h = Graphic.win.getHeight();
 
@@ -167,9 +166,9 @@ public class DataUtils {
 	/**
 	 * Convert a x-y coordinate to their ratios to the resolution of screen.
 	 * 
-	 * @param x The x coordinate.
+	 * @param x X coordinate.
 	 * 
-	 * @param y The y coordinate.
+	 * @param y Y coordinate.
 	 * 
 	 * @return A vector contains their percentages toward the screen.
 	 */
@@ -181,16 +180,15 @@ public class DataUtils {
 	}
 
 	/**
-	 * Convert a pair of s-t coordinate of a texture (starts at the bottom left
-	 * corner, and s→ t↑) to OpenGL texture coordinate.
+	 * Convert a pair of s-t coordinate of a texture to OpenGL texture coordinate.
 	 * 
-	 * @param s       The s coordinate.
+	 * @param s       S coordinate.
 	 * 
-	 * @param t       The t coordinate.
+	 * @param t       T coordinate.
 	 * 
-	 * @param texture The texture.
+	 * @param texture Texture, used for getting its width and height.
 	 * 
-	 * @return The OpenGL texture coordinate based on this pair of s-t coordinate.
+	 * @return OpenGL texture coordinate based on this pair of s-t coordinate.
 	 */
 	public static Vector2f toTexCoord(int s, int t, Texture texture) {
 		int w = texture.getWidth();

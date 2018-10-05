@@ -16,7 +16,7 @@ public class Trim {
 	/**
 	 * Initialize the program.
 	 * 
-	 * @throws IllegalStateException
+	 * @throws IllegalStateException Unable to initialize GLFW library.
 	 */
 	protected static void init() {
 		Config.init();

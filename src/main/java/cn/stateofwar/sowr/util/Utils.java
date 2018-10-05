@@ -16,14 +16,14 @@ import com.google.common.io.Resources;
 import cn.stateofwar.sowr.References;
 
 /**
- * Utilities for other code.
+ * Mini utility library for other code.
  */
 public class Utils {
 
 	/**
 	 * Check if the program is running in a normal universe.
 	 * 
-	 * @return If this universe is normal.
+	 * @return If the universe running this program is normal.
 	 */
 	public static final boolean inNormalUniverse() {
 		if (Integer.compare(1 + 1, 2) == 0)
@@ -41,7 +41,7 @@ public class Utils {
 	/**
 	 * Get the current operating system.
 	 * 
-	 * @return The operating system.
+	 * @return Current operating system.
 	 */
 	public static OSType getOS() {
 		OSType detectedOS;
@@ -54,13 +54,14 @@ public class Utils {
 			detectedOS = OSType.Linux;
 		else
 			detectedOS = OSType.Other;
+
 		return detectedOS;
 	}
 
 	/**
-	 * Create a line separator.
+	 * Generate a line separator.
 	 * 
-	 * @return The line separator for current OS.
+	 * @return Line separator for current OS.
 	 */
 	public static String nl() {
 		return System.lineSeparator();
@@ -69,7 +70,7 @@ public class Utils {
 	/**
 	 * Get the current system time.
 	 * 
-	 * @return The current time in the format of <i>Hour:Minute:Second</i>
+	 * @return Current time in the format of <i>Hour:Minute:Second</i>
 	 */
 	public static String getSysTime() {
 		Calendar c = Calendar.getInstance();
@@ -91,7 +92,7 @@ public class Utils {
 		if (parent != null && !parent.exists())
 			parent.mkdirs();
 		if (f.exists())
-			if (override) /* if (f.exists() && override) is not applicable. */
+			if (override)
 				f.delete();
 			else
 				return;
@@ -101,28 +102,28 @@ public class Utils {
 	/**
 	 * Get the data of a resource file as a byte array.
 	 * 
-	 * @param url Path of the resource file.
+	 * @param path Path of the resource file.
 	 * 
-	 * @return The converted byte array of the resource file.
+	 * @return Byte array read from the resource file.
 	 * 
 	 * @throws IOException
 	 */
-	public static byte[] getRes(String url) throws IOException {
-		return Resources.toByteArray(Resources.getResource(url));
+	public static byte[] getRes(String path) throws IOException {
+		return Resources.toByteArray(Resources.getResource(path));
 	}
 
 	/**
 	 * Get the data of a resource text file as a list of strings.<br />
 	 * <i>Works only if the resource file is a pure text file.</i>
 	 * 
-	 * @param url Path of the resource file.
+	 * @param path Path of the resource file.
 	 * 
-	 * @return The list of strings of the resource text file.
+	 * @return List of strings of the resource text file.
 	 * 
 	 * @throws IOException
 	 */
-	public static List<String> getResAsStrings(String url) throws IOException {
-		return Resources.readLines(Resources.getResource(url), Charset.forName(References.DEFAULT_TEXT_ENCODING));
+	public static List<String> getResAsStrings(String path) throws IOException {
+		return Resources.readLines(Resources.getResource(path), Charset.forName(References.DEFAULT_TEXT_ENCODING));
 	}
 
 	/**
@@ -131,7 +132,7 @@ public class Utils {
 	 * 
 	 * @param path Path of the text file.
 	 * 
-	 * @return The text read.
+	 * @return Text read.
 	 * 
 	 * @throws IOException
 	 */
@@ -142,19 +143,20 @@ public class Utils {
 	/**
 	 * Convert a list of strings to a single string.
 	 * 
-	 * @param list  The list of strings.
+	 * @param list    List of strings.
 	 * 
-	 * @param enter Insert a line separator at the end of each line.
+	 * @param newLine Insert a line separator at the end of each line.
 	 * 
 	 * @return The converted string.
 	 */
-	public static String listToString(List<String> list, boolean enter) {
+	public static String listToString(List<String> list, boolean newLine) {
 		StringBuilder sb = new StringBuilder();
 		for (String s : list)
-			if (enter)
+			if (newLine)
 				sb.append(s).append(nl());
 			else
 				sb.append(s);
+
 		return sb.toString();
 	}
 
@@ -163,7 +165,7 @@ public class Utils {
 	 * 
 	 * @param path Path of the text file.
 	 * 
-	 * @return The lines count.
+	 * @return Lines count.
 	 * 
 	 * @throws IOException
 	 */
@@ -171,18 +173,19 @@ public class Utils {
 		File f = new File(path);
 		List<String> lines = null;
 		lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODING));
+
 		return lines.size();
 	}
 
 	/**
 	 * Read a specific line in a text file.<br />
-	 * <i>Does not read any line separators.</i>
+	 * <i>Does not read line separators.</i>
 	 * 
 	 * @param path Path of the text file.
 	 * 
 	 * @param line Line to read, starts with 1.
 	 * 
-	 * @return The text read.
+	 * @return Text read.
 	 * 
 	 * @throws IOException
 	 */
@@ -192,12 +195,13 @@ public class Utils {
 		lines = Files.readLines(new File(path), Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		if (lines.size() < line)
 			line = lines.size();
+
 		return lines.get(line).replaceAll(nl(), "");
 	}
 
 	/**
 	 * Read a specific position after a line in a text file.<br />
-	 * <i>Does not read any line separators.</i>
+	 * <i>Does not read line separators.</i>
 	 * 
 	 * @param path Path of the text file.
 	 * 
@@ -206,7 +210,7 @@ public class Utils {
 	 * @param pos  Position to read, starts with 1. Text in this position will also
 	 *             be read.
 	 * 
-	 * @return The text read.
+	 * @return Text read.
 	 * 
 	 * @throws IOException
 	 */
@@ -215,6 +219,7 @@ public class Utils {
 		String l = readLineS(path, line);
 		if (l.length() < pos)
 			pos = l.length();
+
 		return l.substring(pos, l.length());
 	}
 
@@ -225,7 +230,7 @@ public class Utils {
 	 * 
 	 * @param path Path of the text file.
 	 * 
-	 * @param text The text to write.
+	 * @param text Text to write.
 	 * 
 	 * @throws IOException
 	 */
@@ -244,9 +249,9 @@ public class Utils {
 	 * 
 	 * @param path Path of the text file.
 	 * 
-	 * @param text The text to write.
+	 * @param text Text to write.
 	 * 
-	 * @param line The line to write, starts with 1.
+	 * @param line Line to write, starts with 1.
 	 * 
 	 * @throws IOException
 	 */
@@ -267,12 +272,12 @@ public class Utils {
 	 * 
 	 * @param path Path of the text file.
 	 * 
-	 * @param text The text to write.
+	 * @param text Text to write.
 	 * 
-	 * @param line The line to write, starts with 1.
+	 * @param line Line to write, starts with 1.
 	 * 
-	 * @param pos  The position to write, starts with 1. Text starts replacing by
-	 *             this position, not after.
+	 * @param pos  Position to write, starts with 1. Text starts replacing by this
+	 *             position, not after.
 	 * 
 	 * @throws IOException
 	 */

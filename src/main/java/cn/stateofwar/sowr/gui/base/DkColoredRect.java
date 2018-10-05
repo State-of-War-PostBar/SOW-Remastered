@@ -63,6 +63,7 @@ public class DkColoredRect extends DkXVisual {
 			super.render();
 			return;
 		}
+
 		Game.state.getRenderer().drawColoredRect(coord.x, coord.y, coord.z, coord.w, color);
 
 		super.render();

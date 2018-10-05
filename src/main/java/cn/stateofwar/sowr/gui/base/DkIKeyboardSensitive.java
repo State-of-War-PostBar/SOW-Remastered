@@ -24,6 +24,8 @@ public interface DkIKeyboardSensitive {
 
 	/**
 	 * Get the keys bind to the element.
+	 * 
+	 * @return Keys bind to the element.
 	 */
 	public int[] getKeys();
 
@@ -32,10 +34,11 @@ public interface DkIKeyboardSensitive {
 	 */
 	public default void updateKey() {
 		for (int key : getKeys())
-			if (DkSInputs.DK_Keys[key]) {
+			if (DkSInputs.DK_keys[key]) {
 				pressed();
 				return;
 			}
+
 		released();
 	}
 

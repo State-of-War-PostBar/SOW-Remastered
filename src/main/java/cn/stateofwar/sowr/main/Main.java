@@ -13,7 +13,7 @@ public class Main {
 
 		if (!Utils.inNormalUniverse()) {
 			logger.fatal("You cannot run this program in an abnormal universe!");
-			System.exit(-1);
+			System.exit(Integer.MAX_VALUE);
 		}
 
 		logger.info("Welcome to the new State of War!");

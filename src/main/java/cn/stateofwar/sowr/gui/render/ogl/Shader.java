@@ -24,7 +24,7 @@ public class Shader {
 		/** Name of the shader type. */
 		private String name;
 
-		ShaderType(String _name) {
+		private ShaderType(String _name) {
 			name = _name;
 		}
 
@@ -73,6 +73,7 @@ public class Shader {
 			for (ShaderType e : ShaderType.values())
 				if (e.getName().equals(name))
 					return e;
+
 			return UNKNOWN;
 		}
 
@@ -138,33 +139,33 @@ public class Shader {
 	/**
 	 * Create an OpenGL shader from file.
 	 * 
-	 * @param fp        Path of the shader source file.
+	 * @param path    Path of the shader source file.
 	 * 
-	 * @param type      Type of the shader.
+	 * @param type    Type of the shader.
 	 * 
-	 * @param inArchive If the shader source file is in the archive.
+	 * @param archive If the shader source file is in the jar archive.
 	 * 
-	 * @return The shader created.
+	 * @return Shader created.
 	 */
-	public static Shader createShader(String fp, ShaderType type, boolean inArchive) {
+	public static Shader createShader(String path, ShaderType type, boolean archive) {
 		switch (type) {
 		case VERTEX:
-			return inArchive ? loadVertexShaderA(fp) : loadVertexShader(fp);
+			return archive ? loadVertexShaderA(path) : loadVertexShader(path);
 
 		case FRAGMENT:
-			return inArchive ? loadFragmentShaderA(fp) : loadFragmentShader(fp);
+			return archive ? loadFragmentShaderA(path) : loadFragmentShader(path);
 
 		case GEOMETRY:
-			return inArchive ? loadGeometricShaderA(fp) : loadGeometricShader(fp);
+			return archive ? loadGeometricShaderA(path) : loadGeometricShader(path);
 
 		case TESS_CONTROL:
-			return inArchive ? loadTessControllingShaderA(fp) : loadTessControllingShader(fp);
+			return archive ? loadTessControllingShaderA(path) : loadTessControllingShader(path);
 
 		case TESS_EVALUATION:
-			return inArchive ? loadTessEvaluatingShaderA(fp) : loadTessEvaluatingShader(fp);
+			return archive ? loadTessEvaluatingShaderA(path) : loadTessEvaluatingShader(path);
 
 		default:
-			logger.error("Failed to create a  " + type.getName() + " shader with file " + fp + '!');
+			logger.error("Failed to create a  " + type.getName() + " shader with file " + path + '!');
 			return null;
 		}
 	}
@@ -172,14 +173,14 @@ public class Shader {
 	/**
 	 * Load a vertex shader of a source file.
 	 * 
-	 * @param fp Path of the shader source file.
+	 * @param path Path of the shader source file.
 	 * 
-	 * @return The vertex shader created.
+	 * @return Vertex shader created.
 	 */
-	private static Shader loadVertexShader(String fp) {
+	private static Shader loadVertexShader(String path) {
 		int vs = glCreateShader(GL_VERTEX_SHADER);
 		try {
-			glShaderSource(vs, Utils.readFileToString(fp));
+			glShaderSource(vs, Utils.readFileToString(path));
 		} catch (IOException e) {
 			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
@@ -196,15 +197,15 @@ public class Shader {
 	/**
 	 * Load a vertex shader in the archive.
 	 * 
-	 * @param fp Path of the resource file in archive.
+	 * @param path Path of the resource file in archive.
 	 * 
-	 * @return The vertex shader created.
+	 * @return Vertex shader created.
 	 */
-	private static Shader loadVertexShaderA(String fp) {
+	private static Shader loadVertexShaderA(String path) {
 		int vs = glCreateShader(GL_VERTEX_SHADER);
 
 		try {
-			glShaderSource(vs, Utils.listToString(Utils.getResAsStrings(fp), true));
+			glShaderSource(vs, Utils.listToString(Utils.getResAsStrings(path), true));
 		} catch (IOException e) {
 			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
@@ -221,21 +222,21 @@ public class Shader {
 	/**
 	 * Load a fragment shader of a source file.
 	 * 
-	 * @param fp Path of the shader source file.
+	 * @param path Path of the shader source file.
 	 * 
-	 * @return The fragment shader created.
+	 * @return Fragment shader created.
 	 */
-	private static Shader loadFragmentShader(String fp) {
+	private static Shader loadFragmentShader(String path) {
 		int fs = glCreateShader(GL_FRAGMENT_SHADER);
 		try {
-			glShaderSource(fs, Utils.readFileToString(fp));
+			glShaderSource(fs, Utils.readFileToString(path));
 		} catch (IOException e) {
 			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(fs);
 		if (glGetShaderi(fs, GL_COMPILE_STATUS) != 1) {
-			logger.error("Error at compiling an OpenGL Fragment shader!");
+			logger.error("Error at compiling an OpenGL fragment shader!");
 			logger.error(glGetShaderInfoLog(fs));
 		}
 
@@ -245,21 +246,21 @@ public class Shader {
 	/**
 	 * Load a fragment shader in the archive.
 	 * 
-	 * @param fp Path of the resource file in archive.
+	 * @param path Path of the resource file in archive.
 	 * 
-	 * @return The fragment shader created.
+	 * @return Fragment shader created.
 	 */
-	private static Shader loadFragmentShaderA(String fp) {
+	private static Shader loadFragmentShaderA(String path) {
 		int fs = glCreateShader(GL_FRAGMENT_SHADER);
 		try {
-			glShaderSource(fs, Utils.listToString(Utils.getResAsStrings(fp), true));
+			glShaderSource(fs, Utils.listToString(Utils.getResAsStrings(path), true));
 		} catch (IOException e) {
 			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(fs);
 		if (glGetShaderi(fs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("Error at compiling an OpenGL Fragment shader!");
+			logger.error("Error at compiling an OpenGL fragment shader!");
 			logger.error(glGetShaderInfoLog(fs));
 		}
 
@@ -269,21 +270,21 @@ public class Shader {
 	/**
 	 * Load a geometric shader of a source file.
 	 * 
-	 * @param fp Path of the shader source file.
+	 * @param path Path of the shader source file.
 	 * 
-	 * @return The geometric shader created.
+	 * @return Geometric shader created.
 	 */
-	private static Shader loadGeometricShader(String fp) {
+	private static Shader loadGeometricShader(String path) {
 		int gs = glCreateShader(GL_GEOMETRY_SHADER);
 		try {
-			glShaderSource(gs, Utils.readFileToString(fp));
+			glShaderSource(gs, Utils.readFileToString(path));
 		} catch (IOException e) {
 			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(gs);
 		if (glGetShaderi(gs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("Error at compiling an OpenGL Geometric shader!");
+			logger.error("Error at compiling an OpenGL geometric shader!");
 			logger.error(glGetShaderInfoLog(gs));
 		}
 
@@ -293,22 +294,22 @@ public class Shader {
 	/**
 	 * Load a geometric shader in the archive.
 	 * 
-	 * @param fp Path of the resource file in archive.
+	 * @param path Path of the resource file in archive.
 	 * 
-	 * @return The geometric shader created.
+	 * @return Geometric shader created.
 	 */
-	private static Shader loadGeometricShaderA(String fp) {
+	private static Shader loadGeometricShaderA(String path) {
 		int gs = glCreateShader(GL_GEOMETRY_SHADER);
 
 		try {
-			glShaderSource(gs, Utils.listToString(Utils.getResAsStrings(fp), true));
+			glShaderSource(gs, Utils.listToString(Utils.getResAsStrings(path), true));
 		} catch (IOException e) {
 			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(gs);
 		if (glGetShaderi(gs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("Error at compiling an OpenGL Geometric shader!");
+			logger.error("Error at compiling an OpenGL geometric shader!");
 			logger.error(glGetShaderInfoLog(gs));
 		}
 
@@ -318,22 +319,22 @@ public class Shader {
 	/**
 	 * Load a tessellation controlling shader of a source file.
 	 * 
-	 * @param fp Path of the shader source file.
+	 * @param path Path of the shader source file.
 	 * 
-	 * @return The tessellation controlling shader created.
+	 * @return Tessellation controlling shader created.
 	 */
-	private static Shader loadTessControllingShader(String fp) {
+	private static Shader loadTessControllingShader(String path) {
 		int tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
 
 		try {
-			glShaderSource(tcs, Utils.readFileToString(fp));
+			glShaderSource(tcs, Utils.readFileToString(path));
 		} catch (IOException e) {
 			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(tcs);
 		if (glGetShaderi(tcs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("Error at compiling an OpenGL Tessellation Controlling shader!");
+			logger.error("Error at compiling an OpenGL tessellation controlling shader!");
 			logger.error(glGetShaderInfoLog(tcs));
 		}
 
@@ -343,22 +344,22 @@ public class Shader {
 	/**
 	 * Load a tessellation controlling shader in the archive.
 	 * 
-	 * @param fp Path of the resource file in archive.
+	 * @param path Path of the resource file in archive.
 	 * 
-	 * @return The tessellation controlling shader created.
+	 * @return Tessellation controlling shader created.
 	 */
-	private static Shader loadTessControllingShaderA(String fp) {
+	private static Shader loadTessControllingShaderA(String path) {
 		int tcs = glCreateShader(GL_TESS_CONTROL_SHADER);
 
 		try {
-			glShaderSource(tcs, Utils.listToString(Utils.getResAsStrings(fp), true));
+			glShaderSource(tcs, Utils.listToString(Utils.getResAsStrings(path), true));
 		} catch (IOException e) {
 			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(tcs);
 		if (glGetShaderi(tcs, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("Error at compiling an OpenGL Tessellation Controlling shader!");
+			logger.error("Error at compiling an OpenGL tessellation controlling shader!");
 			logger.error(glGetShaderInfoLog(tcs));
 		}
 
@@ -368,22 +369,22 @@ public class Shader {
 	/**
 	 * Load a tessellation evaluating shader of a source file.
 	 * 
-	 * @param fp Path of the shader source file.
+	 * @param path Path of the shader source file.
 	 * 
-	 * @return The tessellation evaluating shader created.
+	 * @return Tessellation evaluating shader created.
 	 */
-	private static Shader loadTessEvaluatingShader(String fp) {
+	private static Shader loadTessEvaluatingShader(String path) {
 		int tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
 
 		try {
-			glShaderSource(tes, Utils.readFileToString(fp));
+			glShaderSource(tes, Utils.readFileToString(path));
 		} catch (IOException e) {
 			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(tes);
 		if (glGetShaderi(tes, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("Error at compiling an OpenGL Tessellation Evaluating shader!");
+			logger.error("Error at compiling an OpenGL tessellation evaluating shader!");
 			logger.error(glGetShaderInfoLog(tes));
 		}
 
@@ -393,22 +394,22 @@ public class Shader {
 	/**
 	 * Load a tessellation evaluating shader in the archive.
 	 * 
-	 * @param fp Path of the resource file in archive.
+	 * @param path Path of the resource file in archive.
 	 * 
-	 * @return The tessellation evaluating shader created.
+	 * @return Tessellation evaluating shader created.
 	 */
-	private static Shader loadTessEvaluatingShaderA(String fp) {
+	private static Shader loadTessEvaluatingShaderA(String path) {
 		int tes = glCreateShader(GL_TESS_EVALUATION_SHADER);
 
 		try {
-			glShaderSource(tes, Utils.listToString(Utils.getResAsStrings(fp), true));
+			glShaderSource(tes, Utils.listToString(Utils.getResAsStrings(path), true));
 		} catch (IOException e) {
 			logger.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
 
 		glCompileShader(tes);
 		if (glGetShaderi(tes, GL_COMPILE_STATUS) == GL_FALSE) {
-			logger.error("Error at compiling an OpenGL Tessellation Evaluating shader!");
+			logger.error("Error at compiling an OpenGL tessellation evaluating shader!");
 			logger.error(glGetShaderInfoLog(tes));
 		}
 

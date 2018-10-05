@@ -29,7 +29,7 @@ public class BufferObject {
 	/**
 	 * Bind the object to an OpenGL instance.
 	 * 
-	 * @param target The target to bind.
+	 * @param target Target to bind.
 	 */
 	public void bind(int target) {
 		glBindBuffer(target, id);
@@ -66,7 +66,7 @@ public class BufferObject {
 	 * 
 	 * @param target Target to upload.
 	 * 
-	 * @param size   Size in bytes of the VBO data store.
+	 * @param size   Size in bytes of the buffer data store.
 	 * 
 	 * @param usage  Usage of the data.
 	 */

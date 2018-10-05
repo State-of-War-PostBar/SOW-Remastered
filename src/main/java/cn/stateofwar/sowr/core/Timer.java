@@ -7,7 +7,7 @@ import org.lwjgl.glfw.GLFW;
  */
 public class Timer {
 
-	/** The time when last game loop started. */
+	/** Time when last game loop started. */
 	private double lastLoopTime;
 
 	/** Time passed since the last game loop. */
@@ -26,9 +26,18 @@ public class Timer {
 	private int upsCount;
 
 	/**
+	 * Get the current time of GLFW timer.
+	 * 
+	 * @return Current time.
+	 */
+	public double getTime() {
+		return GLFW.glfwGetTime();
+	}
+
+	/**
 	 * Calculate the total time passed since the last game loop.
 	 * 
-	 * @return The time passed.
+	 * @return Time passed.
 	 */
 	public float getDelta() {
 		double time = getTime();
@@ -40,9 +49,20 @@ public class Timer {
 
 	/**
 	 * Get the current FPS. If time passed is less then 1 second it will return 0.
+	 * 
+	 * @return Current FPS.
 	 */
 	public int getFPS() {
 		return fps;
+	}
+
+	/**
+	 * Get the current UPS. If time passed is less then 1 second it will return 0.
+	 * 
+	 * @return Current UPS.
+	 */
+	public int getUPS() {
+		return ups;
 	}
 
 	/**
@@ -52,20 +72,6 @@ public class Timer {
 	 */
 	public double getLastLoopTime() {
 		return lastLoopTime;
-	}
-
-	/**
-	 * Get the current time of GLFW timer.
-	 */
-	public double getTime() {
-		return GLFW.glfwGetTime();
-	}
-
-	/**
-	 * Get the current UPS. If time passed is less then 1 second it will return 0.
-	 */
-	public int getUPS() {
-		return ups;
 	}
 
 	/**
