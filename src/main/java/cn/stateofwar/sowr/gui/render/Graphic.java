@@ -53,7 +53,6 @@ public class Graphic {
 	 */
 	public static void abrogateRender() {
 		Shaders.abrogate();
-
 		win.abrogate();
 	}
 

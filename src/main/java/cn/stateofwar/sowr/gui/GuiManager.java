@@ -1,13 +1,13 @@
 package cn.stateofwar.sowr.gui;
 
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import cn.stateofwar.sowr.gui.base.DkIClickable;
 import cn.stateofwar.sowr.gui.base.DkICursorSensitive;
 import cn.stateofwar.sowr.gui.base.DkIKeyboardSensitive;
-import cn.stateofwar.sowr.gui.base.DkTimer;
+import cn.stateofwar.sowr.gui.base.DkSTimer;
 import cn.stateofwar.sowr.gui.base.DkXElement;
 import cn.stateofwar.sowr.gui.base.DkXVisual;
 
@@ -43,7 +43,7 @@ public class GuiManager {
 	 * 
 	 * @param identifier Identifier of the element.
 	 * 
-	 * @return The element requested.
+	 * @return Element requested.
 	 */
 	public static DkXElement getElement(String identifier) {
 		return roots.get(identifier);
@@ -63,7 +63,7 @@ public class GuiManager {
 	 * Update all the elements.
 	 */
 	public static void updateAll() {
-		DkTimer.updateTime();
+		DkSTimer.update();
 		for (Entry<String, DkXElement> entry : roots.entrySet()) {
 			DkXElement e = entry.getValue();
 
@@ -86,6 +86,7 @@ public class GuiManager {
 	public static void renderVisuals() {
 		for (Entry<String, DkXElement> entry : roots.entrySet()) {
 			DkXElement e = entry.getValue();
+
 			if (e instanceof DkXVisual)
 				((DkXVisual) e).render();
 		}

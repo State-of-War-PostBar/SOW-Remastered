@@ -11,7 +11,7 @@ import cn.stateofwar.sowr.gui.render.Texture;
  */
 public class TextureManager {
 
-	/** The textures storage. */
+	/** Textures storage. */
 	public static Map<String, Texture> textures = new HashMap<>();
 
 	/**

@@ -39,7 +39,7 @@ public class DkImage extends DkXVisual {
 	/**
 	 * Resize the element.
 	 * 
-	 * @param _coord The new coordinate information.
+	 * @param _coord New coordinate information.
 	 */
 	public void resize(Vector4i _coord) {
 		coord = _coord;
@@ -58,8 +58,12 @@ public class DkImage extends DkXVisual {
 	 */
 	@Override
 	public void render() {
-		if (!hidden)
-			Game.state.getRenderer().drawTexturedRect(coord.x, coord.y, coord.w, coord.z, texture);
+		if (hidden) {
+			super.render();
+			return;
+		}
+
+		Game.state.getRenderer().drawTexturedRect(coord.x, coord.y, coord.w, coord.z, texture);
 
 		super.render();
 	}

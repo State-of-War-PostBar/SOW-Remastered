@@ -5,6 +5,9 @@ package cn.stateofwar.sowr.gui.base;
  */
 public abstract class DkXVisual extends DkXElement {
 
+	/** If this element is hidden. */
+	protected boolean hidden;
+
 	/**
 	 * Get the coordinate information of the element.
 	 * 
@@ -12,13 +15,10 @@ public abstract class DkXVisual extends DkXElement {
 	 */
 	public abstract Object getCoordInfo();
 
-	/** If this element is hidden. */
-	protected boolean hidden;
-
 	/**
 	 * Resize the element.
 	 * 
-	 * @param coord The new coordinate information.
+	 * @param coord New coordinate information.
 	 */
 	public void resize(Object coord) {
 		if (hasChild())
@@ -46,7 +46,7 @@ public abstract class DkXVisual extends DkXElement {
 	}
 
 	/**
-	 * Hide the element from rendering.
+	 * Hide the element and all of its children from rendering.
 	 */
 	public void hide() {
 		hidden = true;
@@ -58,7 +58,7 @@ public abstract class DkXVisual extends DkXElement {
 	}
 
 	/**
-	 * Show the element from rendering.
+	 * Show the element and all of its children from rendering.
 	 */
 	public void show() {
 		hidden = false;

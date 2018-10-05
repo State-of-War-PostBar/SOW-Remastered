@@ -159,10 +159,10 @@ public class Window {
 	/**
 	 * Set the closing status of this window.
 	 * 
-	 * @param val Closing status.
+	 * @param value Closing status.
 	 */
-	public void setClosing(boolean val) {
-		glfwSetWindowShouldClose(handle, val);
+	public void setClosing(boolean value) {
+		glfwSetWindowShouldClose(handle, value);
 	}
 
 	/**

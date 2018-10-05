@@ -28,8 +28,8 @@ public interface DkICursorSensitive {
 	public boolean isCursorOn();
 
 	/**
-	 * /** Get the coordinate information of the element. <i>This method is only a
-	 * reference for the interface to get coordinate.</i>
+	 * /** Get the coordinate information of the element.<br />
+	 * <i>This method is only a reference for the interface to get coordinate.</i>
 	 * 
 	 * @return Coordinate information.
 	 */
@@ -39,9 +39,10 @@ public interface DkICursorSensitive {
 	 * Update cursor events.
 	 */
 	public default void updateCursor() {
-		if (DataUtils.pir(new Vector2i((int) DkSInputs.cursPosX, (int) DkSInputs.cursPosY), (Vector4f) getCoordInfo()))
+		if (DataUtils.pir(new Vector2i((int) DkSInputs.cursor_x, (int) DkSInputs.cursor_y), (Vector4f) getCoordInfo()))
 			cursorOn();
-		cursorOut();
+		else
+			cursorOut();
 	}
 
 }

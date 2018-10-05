@@ -8,21 +8,21 @@ import org.joml.Vector4f;
 import cn.stateofwar.sowr.util.DataUtils;
 
 /**
- * Red, Green, Blue and Alpha (transparent) value storage.
+ * Red, Green, Blue and Alpha value storage.
  */
 public class RGBA {
 
 	/** A preset of black color. */
 	public static final RGBA BLACK = new RGBA(0.0f, 0.0f, 0.0f);
 
-	/** A preset of blue color. */
-	public static final RGBA BLUE = new RGBA(0.0f, 0.0f, 1.0f);
+	/** A preset of red color. */
+	public static final RGBA RED = new RGBA(1.0f, 0.0f, 0.0f);
 
 	/** A preset of green color. */
 	public static final RGBA GREEN = new RGBA(0.0f, 1.0f, 0.0f);
 
-	/** A preset of red color. */
-	public static final RGBA RED = new RGBA(1.0f, 0.0f, 0.0f);
+	/** A preset of blue color. */
+	public static final RGBA BLUE = new RGBA(0.0f, 0.0f, 1.0f);
 
 	/** A preset of white color. */
 	public static final RGBA WHITE = new RGBA(1.0f, 1.0f, 1.0f);
@@ -51,7 +51,7 @@ public class RGBA {
 	/**
 	 * Get the red component.
 	 * 
-	 * @return The red component.
+	 * @return Red component.
 	 */
 	public float getR() {
 		return r;
@@ -60,7 +60,7 @@ public class RGBA {
 	/**
 	 * Get the green component.
 	 * 
-	 * @return The green component.
+	 * @return Green component.
 	 */
 	public float getG() {
 		return g;
@@ -69,7 +69,7 @@ public class RGBA {
 	/**
 	 * Get the blue component.
 	 * 
-	 * @return The blue component.
+	 * @return Blue component.
 	 */
 	public float getB() {
 		return b;
@@ -78,7 +78,7 @@ public class RGBA {
 	/**
 	 * Get the alpha component.
 	 * 
-	 * @return The alpha component.
+	 * @return Alpha component.
 	 */
 	public float getA() {
 		return a;
@@ -87,7 +87,7 @@ public class RGBA {
 	/**
 	 * Set the red component.
 	 * 
-	 * @param _r The red component.
+	 * @param _r Red component.
 	 */
 	public void setR(float _r) {
 		if (_r < 0.0f)
@@ -102,7 +102,7 @@ public class RGBA {
 	/**
 	 * Set the green component.
 	 * 
-	 * @param _g The green component.
+	 * @param _g Green component.
 	 */
 	public void setG(float _g) {
 		if (_g < 0.0f)
@@ -117,7 +117,7 @@ public class RGBA {
 	/**
 	 * Set the blue component.
 	 * 
-	 * @param _b The blue component.
+	 * @param _b Blue component.
 	 */
 	public void setB(float _b) {
 		if (_b < 0.0f)
@@ -132,7 +132,7 @@ public class RGBA {
 	/**
 	 * Set the alpha component.
 	 * 
-	 * @param _a The alpha component.
+	 * @param _a Alpha component.
 	 */
 	public void setA(float _a) {
 		if (_a < 0.0f)
@@ -148,7 +148,7 @@ public class RGBA {
 	 * Convert the color components to a float array with 4 elements (red, green,
 	 * blue).
 	 * 
-	 * @return The array created.
+	 * @return Array created.
 	 */
 	public float[] toFloatArray3() {
 		return new float[] { r, g, b };
@@ -158,7 +158,7 @@ public class RGBA {
 	 * Convert the color components to a float array with 4 elements (red, green,
 	 * blue, alpha).
 	 * 
-	 * @return The array created.
+	 * @return Array created.
 	 */
 	public float[] toFloatArray4() {
 		return new float[] { r, g, b, a };
@@ -169,7 +169,7 @@ public class RGBA {
 	 * blue, alpha) repeated for 4 times.<br />
 	 * <i>This is used for rendering 4 vertices of a rectangle.</i>
 	 * 
-	 * @return The array created.
+	 * @return Array created.
 	 */
 	public float[] toFloatArray44() {
 		return new float[] { r, g, b, a, r, g, b, a, r, g, b, a, r, g, b, a };
@@ -179,7 +179,7 @@ public class RGBA {
 	 * Convert the color components to a float buffer with 4 elements (red, green,
 	 * blue, alpha).
 	 * 
-	 * @return The float buffer created.
+	 * @return Float buffer created.
 	 */
 	public FloatBuffer toFloatBuffer() {
 		return DataUtils.createFloatBuffer(new float[] { r, g, b, a });
@@ -189,7 +189,7 @@ public class RGBA {
 	 * Convert the color components to a float vector with 3 elements (red, green,
 	 * blue).
 	 * 
-	 * @return The float vector created.
+	 * @return Float vector created.
 	 */
 	public Vector3f toVec3f() {
 		return new Vector3f(r, g, b);
@@ -199,7 +199,7 @@ public class RGBA {
 	 * Convert the color components to a float vector with 4 elements (red, green,
 	 * blue, alpha).
 	 * 
-	 * @return The float vector created.
+	 * @return Float vector created.
 	 */
 	public Vector4f toVec4f() {
 		return new Vector4f(r, g, b, a);
@@ -208,23 +208,23 @@ public class RGBA {
 	/**
 	 * Convert a grate value (0.0 - 255.0) to percentage (0.0 - 1.0) value.
 	 * 
-	 * @param gv The great value.
+	 * @param value The great value.
 	 * 
-	 * @return The percentage value.
+	 * @return Percentage value.
 	 */
-	public static float to100(float gv) {
-		return gv / 255.0f;
+	public static float to100(float value) {
+		return value / 255.0f;
 	}
 
 	/**
 	 * Convert a percentage (0.0 - 1.0) value to great value (0.0 - 255.0).
 	 * 
-	 * @param percentage The percentage value.
+	 * @param value The percentage value.
 	 * 
-	 * @return The great value.
+	 * @return Great value.
 	 */
-	public static float to255(float percentage) {
-		return percentage * 255.0f;
+	public static float to255(float value) {
+		return value * 255.0f;
 	}
 
 }

@@ -14,17 +14,17 @@ import cn.stateofwar.sowr.util.DataUtils;
  */
 public class TexturedModel extends Model {
 
-	/** The texture for the model. */
+	/** Texture for the model. */
 	private Texture texture;
 
 	/** Vertex array object for this model. */
 	private ArrayObject vao;
 
-	/** Buffer for coordinates of the texture. */
-	private BufferObject vbo_texcoords;
-
 	/** Buffer for vertices. */
 	private BufferObject vbo_vertices;
+
+	/** Buffer for coordinates of the texture. */
+	private BufferObject vbo_texcoords;
 
 	/** Buffer for vertex indices. */
 	private BufferObject ebo;
@@ -40,7 +40,7 @@ public class TexturedModel extends Model {
 
 	/** Preset shader program for the model. */
 	private static final ShaderProgram prog = new ShaderProgram(
-			new Shader[] { Shaders.VERTEX_SAMPLERLESS_TEXTURE, Shaders.FRAGMENT_SAMPLERLESS_TEXTURE });
+			new Shader[] { Shaders.vertex_sampleless_texture, Shaders.fragment_sampleless_texture });
 
 	/**
 	 * Create a model with texture.

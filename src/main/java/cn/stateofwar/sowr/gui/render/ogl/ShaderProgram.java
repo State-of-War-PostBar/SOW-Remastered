@@ -32,13 +32,13 @@ public class ShaderProgram {
 
 		glLinkProgram(id);
 		if ((glGetProgrami(id, GL_LINK_STATUS)) == GL_FALSE) {
-			logger.error("ERROR AT LINKING A OPENGL SHADER!");
+			logger.error("Error at linking an OpenGL shader program!");
 			logger.error(glGetProgramInfoLog(id));
 		}
 
 		glValidateProgram(id);
 		if ((glGetProgrami(id, GL_VALIDATE_STATUS)) == GL_FALSE) {
-			logger.error("ERROR AT VALIDATING A OPENGL SHADER!");
+			logger.error("Error at validating an OpenGL shader program!");
 			logger.error(glGetProgramInfoLog(id));
 		}
 	}
@@ -66,23 +66,23 @@ public class ShaderProgram {
 	/**
 	 * Bind an attribute index to an attribute variable.
 	 * 
-	 * @param index Index of the attribute.
+	 * @param index    Index of the attribute.
 	 * 
-	 * @param loc   Attribute variable name.
+	 * @param location Attribute variable name.
 	 */
-	public void bindAttribute(int index, String loc) {
-		glBindAttribLocation(id, index, loc);
+	public void bindAttribute(int index, String location) {
+		glBindAttribLocation(id, index, location);
 	}
 
 	/**
 	 * Bind the fragment out color variable.
 	 *
-	 * @param number Color number binds.
+	 * @param number   Color number binds.
 	 * 
-	 * @param loc    Variable name.
+	 * @param location Variable name.
 	 */
-	public void bindFragmentDataLoc(int number, String loc) {
-		glBindFragDataLocation(id, number, loc);
+	public void bindFragmentDataLoc(int number, String location) {
+		glBindFragDataLocation(id, number, location);
 	}
 
 	/**
@@ -99,57 +99,57 @@ public class ShaderProgram {
 	/**
 	 * Set an uniform variable.
 	 * 
-	 * @param name Name of the variable.
+	 * @param name  Name of the variable.
 	 * 
-	 * @param val  Value to set.
+	 * @param value Value to set.
 	 */
-	public void setUniform(String name, float val) {
+	public void setUniform(String name, float value) {
 		int loc = getUniformLoc(name);
 		if (loc != 1)
-			glUniform1f(loc, val);
+			glUniform1f(loc, value);
 	}
 
 	/**
 	 * Set an uniform variable.
 	 * 
-	 * @param name Name of the variable.
+	 * @param name  Name of the variable.
 	 * 
-	 * @param val  Value to set.
+	 * @param value Value to set.
 	 */
-	public void setUniform(String name, int val) {
+	public void setUniform(String name, int value) {
 		int loc = getUniformLoc(name);
 		if (loc != 1)
-			glUniform1i(loc, val);
+			glUniform1i(loc, value);
 	}
 
 	/**
 	 * Set an uniform variable.
 	 * 
-	 * @param name Name of the variable.
+	 * @param name  Name of the variable.
 	 * 
-	 * @param val  Value to set.
+	 * @param value Value to set.
 	 */
-	public void setUniform(String name, Matrix4f val) {
-		int loc = getUniformLoc(name);
-		FloatBuffer buffer = BufferUtils.createFloatBuffer(4 * 4);
-		val.get(buffer);
-		if (loc != 1)
-			glUniformMatrix4fv(loc, false, buffer);
-	}
-
-	/**
-	 * Set an uniform variable.
-	 * 
-	 * @param name Name of the variable.
-	 * 
-	 * @param val  Value to set.
-	 */
-	public void setUniform(String name, Vector4f val) {
+	public void setUniform(String name, Vector4f value) {
 		int loc = getUniformLoc(name);
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(4);
-		val.get(buffer);
+		value.get(buffer);
 		if (loc != 1)
 			glUniform4fv(loc, buffer);
+	}
+
+	/**
+	 * Set an uniform variable.
+	 * 
+	 * @param name  Name of the variable.
+	 * 
+	 * @param value Value to set.
+	 */
+	public void setUniform(String name, Matrix4f value) {
+		int loc = getUniformLoc(name);
+		FloatBuffer buffer = BufferUtils.createFloatBuffer(4 * 4);
+		value.get(buffer);
+		if (loc != 1)
+			glUniformMatrix4fv(loc, false, buffer);
 	}
 
 	/**

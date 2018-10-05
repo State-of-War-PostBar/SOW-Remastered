@@ -15,8 +15,7 @@ import cn.stateofwar.sowr.util.Logger;
 import cn.stateofwar.sowr.util.Utils;
 
 /**
- * A reference of the 2D texture of OpenGL. All textures of SOW-R must be .png
- * format.
+ * A reference of the 2D texture of OpenGL.
  */
 public class Texture {
 
@@ -31,7 +30,7 @@ public class Texture {
 	/** Height of the texture. */
 	private int height;
 
-	public Texture() {
+	private Texture() {
 		id = glGenTextures();
 	}
 
@@ -92,23 +91,23 @@ public class Texture {
 	/**
 	 * Set a parameter of the texture.
 	 * 
-	 * @param par Name of the parameter.
+	 * @param parameter Name of the parameter.
 	 * 
-	 * @param val Value to set.
+	 * @param value     Value to set.
 	 */
-	public void setPar(int par, int val) {
-		glTexParameteri(GL_TEXTURE_2D, par, val);
+	public void setPar(int parameter, int value) {
+		glTexParameteri(GL_TEXTURE_2D, parameter, value);
 	}
 
 	/**
 	 * Set a parameter of the texture.
 	 * 
-	 * @param par Name of the parameter.
+	 * @param parameter Name of the parameter.
 	 * 
-	 * @param val Value to set.
+	 * @param value     Value to set.
 	 */
-	public void setPar(int par, FloatBuffer val) {
-		glTexParameterfv(GL_TEXTURE_2D, par, val);
+	public void setPar(int parameter, FloatBuffer value) {
+		glTexParameterfv(GL_TEXTURE_2D, parameter, value);
 	}
 
 	/**
@@ -153,11 +152,11 @@ public class Texture {
 	/**
 	 * Load texture from file.
 	 *
-	 * @param fp Path of the texture file.
+	 * @param path Path of the texture file.
 	 * 
 	 * @return Instance of the created texture.
 	 */
-	public static Texture loadTexture(String fp) {
+	public static Texture loadTexture(String path) {
 		ByteBuffer image;
 		int width, height;
 		try (MemoryStack stack = MemoryStack.stackPush()) {
@@ -166,16 +165,16 @@ public class Texture {
 			IntBuffer comp = stack.mallocInt(1);
 
 			stbi_set_flip_vertically_on_load(true);
-			image = stbi_load(fp, w, h, comp, 4);
+			image = stbi_load(path, w, h, comp, 4);
 
 			if (image == null)
-				logger.error("Failed to load a texture file from " + fp + " !" + Utils.nl() + stbi_failure_reason());
+				logger.error("Failed to load a texture file from " + path + " !" + Utils.nl() + stbi_failure_reason());
 
 			width = w.get();
 			height = h.get();
 		}
 
-		logger.info("Loaded a texture at path " + fp + ".");
+		logger.info("Loaded a texture at path " + path + ".");
 		return createTexture(width, height, image);
 	}
 
@@ -198,7 +197,7 @@ public class Texture {
 		texture.bind();
 		texture.setPar(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 		texture.setPar(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-		texture.setPar(GL_TEXTURE_BORDER_COLOR, RGBA.WHITE.toFloatBuffer());
+		texture.setPar(GL_TEXTURE_BORDER_COLOR, RGBA.BLACK.toFloatBuffer());
 		texture.setPar(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		texture.setPar(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		texture.upload(GL_RGBA8, width, height, GL_RGBA, data);

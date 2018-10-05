@@ -73,9 +73,8 @@ dependencies {
 }
 
 compileJava {
-	options.encoding = "${default_text_encoding}"
-
 	sourceCompatibility = targetCompatibility = "10"
+	options.encoding = "${default_text_encoding}"
 }
 
 task run(type: JavaExec, dependsOn: classes) {

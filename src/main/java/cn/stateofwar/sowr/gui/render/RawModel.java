@@ -32,8 +32,9 @@ public class RawModel extends Model {
 	/** Indices for lessening vertices. */
 	private int[] indices;
 
+	/** Preset shader program for the model. */
 	private static final ShaderProgram prog = new ShaderProgram(
-			new Shader[] { Shaders.VERTEX_RAW, Shaders.FRAGMENT_RAW });
+			new Shader[] { Shaders.vertex_raw, Shaders.fragment_raw });
 
 	/**
 	 * Construct the class while building the OpenGL model.
@@ -42,7 +43,7 @@ public class RawModel extends Model {
 	 * 
 	 * @param _indices  Vertex indices for the model.
 	 * 
-	 * @param color     Color for the model. Will be white if left null.
+	 * @param color     Color for the model. Will be white if it's null.
 	 */
 	public RawModel(float[] _vertices, int[] _indices, RGBA color) {
 		vertices = _vertices;

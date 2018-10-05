@@ -20,7 +20,7 @@ public class Config {
 	/** Stored configurations. */
 	private static LinkedHashMap<String, LinkedHashMap<String, String>> configs = new LinkedHashMap<>();
 
-	/** The configuration storage file. */
+	/** Configuration storage file. */
 	private static Ini file;
 
 	/**
@@ -49,20 +49,13 @@ public class Config {
 	}
 
 	/**
-	 * Save all configurations to the file.
-	 */
-	public static void abrogate() {
-		putAllConfig(configs);
-	}
-
-	/**
 	 * Get a configuration from a block and an index.
 	 * 
 	 * @param block Block of the configuration.
 	 * 
 	 * @param index Index of the configuration.
 	 * 
-	 * @return The configuration value.
+	 * @return Configuration value.
 	 */
 	public static String get(String block, String index) {
 		if (configs.containsKey(block))
@@ -76,7 +69,7 @@ public class Config {
 	 * 
 	 * @param index Index of the configuration.
 	 * 
-	 * @return The configuration value.
+	 * @return Configuration value.
 	 * 
 	 * @deprecated If multiple blocks contain identical indices, it will only load
 	 *             the first one it found. It also has very low efficiency.
@@ -96,7 +89,7 @@ public class Config {
 	 * 
 	 * @param index Index of the configuration.
 	 * 
-	 * @param value The configuration value.
+	 * @param value Configuration value.
 	 */
 	public static void set(String block, String index, String value) {
 		LinkedHashMap<String, String> temp = new LinkedHashMap<>();
@@ -106,12 +99,19 @@ public class Config {
 	}
 
 	/**
+	 * Save all configurations to the file.
+	 */
+	public static void abrogate() {
+		putAllConfig(configs);
+	}
+
+	/**
 	 * Put all the configurations to the file.
 	 * 
-	 * @param conf The configurations to save.
+	 * @param configs Configurations to save.
 	 */
-	private static void putAllConfig(LinkedHashMap<String, LinkedHashMap<String, String>> conf) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : conf.entrySet())
+	private static void putAllConfig(LinkedHashMap<String, LinkedHashMap<String, String>> configs) {
+		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet())
 			for (Entry<String, String> entry2 : entry.getValue().entrySet())
 				file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
 		try {
@@ -125,7 +125,7 @@ public class Config {
 	/**
 	 * Read all configurations from the file.
 	 * 
-	 * @param ini The configuration file.
+	 * @param ini Configuration file.
 	 */
 	private static void readAllConfig(Ini ini) {
 		Set<Entry<String, Section>> sections = ini.entrySet();
@@ -151,7 +151,7 @@ public class Config {
 		/**
 		 * Initialize the default configurations.
 		 */
-		private static void initDefault() {
+		private static final void initDefault() {
 			LinkedHashMap<String, String> general = new LinkedHashMap<>();
 			general.put("Language", "EN_US");
 			defaults.put("General", general);
@@ -176,13 +176,16 @@ public class Config {
 		 * 
 		 * @param index Index of the configuration.
 		 * 
-		 * @return The configuration value.
+		 * @return Configuration value.
+		 * 
+		 * @throws IllegalStateException Unable to find a default configuration.
 		 */
-		private static String get(String block, String index) {
+		private static final String get(String block, String index) {
 			if (defaults.containsKey(block))
 				if (defaults.get(block).containsKey(index))
 					return defaults.get(block).get(index);
-			throw new RuntimeException("Failed to find [" + block + '.' + index + "] field in default configurations.");
+			throw new IllegalStateException(
+					"Failed to find [" + block + '.' + index + "] field in default configurations.");
 		}
 
 		/**
@@ -190,17 +193,19 @@ public class Config {
 		 * 
 		 * @param index Index of the configuration.
 		 * 
-		 * @return The configuration value.
+		 * @return Configuration value.
+		 * 
+		 * @throws IllegalStateException Unable to find a default configuration.
 		 * 
 		 * @deprecated If multiple blocks contain identical indices, it will only load
 		 *             the first one it found. It also has very low efficiency.
 		 */
 		@Deprecated
-		private static String get(String index) {
+		private static final String get(String index) {
 			for (Entry<String, LinkedHashMap<String, String>> entry : defaults.entrySet())
 				if (entry.getValue().containsKey(index))
 					return entry.getValue().get(index);
-			throw new RuntimeException("Failed to find [unknown." + index + "] field in default configurations.");
+			throw new IllegalStateException("Failed to find [unknown." + index + "] field in default configurations.");
 		}
 
 	}

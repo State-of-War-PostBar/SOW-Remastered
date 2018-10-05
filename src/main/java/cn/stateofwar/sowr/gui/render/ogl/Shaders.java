@@ -7,24 +7,28 @@ import cn.stateofwar.sowr.gui.render.ogl.Shader.ShaderType;
  */
 public class Shaders {
 
-	public static Shader VERTEX_RAW;
+	/** Vertex shader for raw models. */
+	public static Shader vertex_raw;
 
-	public static Shader FRAGMENT_RAW;
+	/** Fragment shader for raw models. */
+	public static Shader fragment_raw;
 
-	public static Shader VERTEX_SAMPLERLESS_TEXTURE;
+	/** Vertex shader for textured models. */
+	public static Shader vertex_sampleless_texture;
 
-	public static Shader FRAGMENT_SAMPLERLESS_TEXTURE;
+	/** Fragment shader for textured models. */
+	public static Shader fragment_sampleless_texture;
 
 	/**
 	 * Initialize the shaders.
 	 */
 	public static void init() {
-		VERTEX_RAW = Shader.createShader("sowr/gui/render/shader/raw.glsl_vertex", ShaderType.VERTEX, true);
-		FRAGMENT_RAW = Shader.createShader("sowr/gui/render/shader/raw.glsl_fragment", ShaderType.FRAGMENT, true);
+		vertex_raw = Shader.createShader("sowr/gui/render/shader/raw.glsl_vertex", ShaderType.VERTEX, true);
+		fragment_raw = Shader.createShader("sowr/gui/render/shader/raw.glsl_fragment", ShaderType.FRAGMENT, true);
 
-		VERTEX_SAMPLERLESS_TEXTURE = Shader.createShader("sowr/gui/render/shader/samplerless_texture.glsl_vertex",
+		vertex_sampleless_texture = Shader.createShader("sowr/gui/render/shader/samplerless_texture.glsl_vertex",
 				ShaderType.VERTEX, true);
-		FRAGMENT_SAMPLERLESS_TEXTURE = Shader.createShader("sowr/gui/render/shader/samplerless_texture.glsl_fragment",
+		fragment_sampleless_texture = Shader.createShader("sowr/gui/render/shader/samplerless_texture.glsl_fragment",
 				ShaderType.FRAGMENT, true);
 	}
 
@@ -32,11 +36,11 @@ public class Shaders {
 	 * Delete the shaders.
 	 */
 	public static void abrogate() {
-		VERTEX_RAW.abrogate();
-		FRAGMENT_RAW.abrogate();
+		vertex_raw.abrogate();
+		fragment_raw.abrogate();
 
-		VERTEX_SAMPLERLESS_TEXTURE.abrogate();
-		FRAGMENT_SAMPLERLESS_TEXTURE.abrogate();
+		vertex_sampleless_texture.abrogate();
+		fragment_sampleless_texture.abrogate();
 	}
 
 }

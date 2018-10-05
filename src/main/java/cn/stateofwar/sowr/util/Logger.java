@@ -12,12 +12,12 @@ import cn.stateofwar.sowr.References;
 public class Logger {
 
 	/** A public logger, just in case. */
-	public static final Logger public_logger = new Logger();
+	public static final Logger PUBLIC_LOGGER = new Logger();
 
-	/** The file to store logs. */
+	/** File to store logs. */
 	private File log = new File(References.LOG_FILE_NAME);
 
-	/** The source that processes logging. */
+	/** Source that processes logging. */
 	private String source;
 
 	/**

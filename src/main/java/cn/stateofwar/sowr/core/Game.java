@@ -1,5 +1,6 @@
 package cn.stateofwar.sowr.core;
 
+import cn.stateofwar.sowr.References;
 import cn.stateofwar.sowr.gui.multimedia.Window;
 import cn.stateofwar.sowr.gui.render.Graphic;
 import cn.stateofwar.sowr.gui.render.Renderer;
@@ -32,8 +33,8 @@ public class Game {
 	 */
 	public static void startGame() {
 		logger.info("The game is starting.");
-
 		running = true;
+
 		Graphic.initRenderCapabilities();
 		win = Graphic.win;
 
@@ -52,6 +53,8 @@ public class Game {
 			win.update();
 			timer.updateFPS();
 			if (win.isVSync())
+				syncFrame(References.VERTICAL_SYNC_FPS);
+			else
 				syncFrame(Graphic.desiredFPS);
 
 			timer.update();
