@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.core;
 
-import cn.stateofwar.sowr.gui.base.DkSElementManager;
+import cn.stateofwar.sowr.gui.GuiManager;
 import cn.stateofwar.sowr.gui.render.Renderer;
 import cn.stateofwar.sowr.util.Logger;
 
@@ -27,7 +27,7 @@ public class GameState {
 	 * Exit out of this game state controller.
 	 */
 	public void exit() {
-		DkSElementManager.abrogateAll();
+		GuiManager.abrogateAll();
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class GameState {
 	 * Handle input from the user.
 	 */
 	public void input() {
-		DkSElementManager.updateAll();
+		GuiManager.updateAll();
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class GameState {
 	 * Render the screen contents.
 	 */
 	public void render() {
-		DkSElementManager.renderVisuals();
+		GuiManager.renderVisuals();
 	}
 
 }

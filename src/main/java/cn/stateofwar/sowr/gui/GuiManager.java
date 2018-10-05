@@ -1,13 +1,17 @@
-package cn.stateofwar.sowr.gui.base;
+package cn.stateofwar.sowr.gui;
 
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
-/**
- * Current element list.
- */
-public class DkSElementManager {
+import cn.stateofwar.sowr.gui.base.DkIClickable;
+import cn.stateofwar.sowr.gui.base.DkICursorSensitive;
+import cn.stateofwar.sowr.gui.base.DkIKeyboardSensitive;
+import cn.stateofwar.sowr.gui.base.DkTimer;
+import cn.stateofwar.sowr.gui.base.DkXElement;
+import cn.stateofwar.sowr.gui.base.DkXVisual;
+
+public class GuiManager {
 
 	/** All the <b>ROOT</b> elements. */
 	private static Map<String, DkXElement> roots = new TreeMap<>();
@@ -59,10 +63,19 @@ public class DkSElementManager {
 	 * Update all the elements.
 	 */
 	public static void updateAll() {
+		DkTimer.updateTime();
 		for (Entry<String, DkXElement> entry : roots.entrySet()) {
 			DkXElement e = entry.getValue();
+
+			if (e instanceof DkICursorSensitive)
+				((DkICursorSensitive) e).updateCursor();
+
 			if (e instanceof DkIClickable)
 				((DkIClickable) e).updateCursor();
+
+			if (e instanceof DkIKeyboardSensitive)
+				((DkIKeyboardSensitive) e).updateKey();
+
 			e.update();
 		}
 	}
