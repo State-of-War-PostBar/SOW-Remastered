@@ -111,26 +111,26 @@ public class Shader {
 	}
 
 	/**
-	 * Get the ID of this shader.
+	 * Get the ID of the shader.
 	 * 
-	 * @return ID of this shader.
+	 * @return ID of the shader.
 	 */
 	public int getID() {
 		return id;
 	}
 
 	/**
-	 * Get the type of this shader.
+	 * Get the type of the shader.
 	 * 
 	 * 
-	 * @return Type of this shader.
+	 * @return Type of the shader.
 	 */
 	public ShaderType getType() {
 		return type;
 	}
 
 	/**
-	 * Delete this shader and release spaces.
+	 * Delete the shader and release spaces.
 	 */
 	public void abrogate() {
 		glDeleteShader(id);
@@ -139,30 +139,30 @@ public class Shader {
 	/**
 	 * Create an OpenGL shader from file.
 	 * 
-	 * @param path    Path of the shader source file.
+	 * @param path       Path of the shader source file.
 	 * 
-	 * @param type    Type of the shader.
+	 * @param type       Type of the shader.
 	 * 
-	 * @param archive If the shader source file is in the jar archive.
+	 * @param in_archive If the shader source file is in the jar archive.
 	 * 
 	 * @return Shader created.
 	 */
-	public static Shader createShader(String path, ShaderType type, boolean archive) {
+	public static Shader createShader(String path, ShaderType type, boolean in_archive) {
 		switch (type) {
 		case VERTEX:
-			return archive ? loadVertexShaderA(path) : loadVertexShader(path);
+			return in_archive ? loadVertexShaderA(path) : loadVertexShader(path);
 
 		case FRAGMENT:
-			return archive ? loadFragmentShaderA(path) : loadFragmentShader(path);
+			return in_archive ? loadFragmentShaderA(path) : loadFragmentShader(path);
 
 		case GEOMETRY:
-			return archive ? loadGeometricShaderA(path) : loadGeometricShader(path);
+			return in_archive ? loadGeometricShaderA(path) : loadGeometricShader(path);
 
 		case TESS_CONTROL:
-			return archive ? loadTessControllingShaderA(path) : loadTessControllingShader(path);
+			return in_archive ? loadTessControllingShaderA(path) : loadTessControllingShader(path);
 
 		case TESS_EVALUATION:
-			return archive ? loadTessEvaluatingShaderA(path) : loadTessEvaluatingShader(path);
+			return in_archive ? loadTessEvaluatingShaderA(path) : loadTessEvaluatingShader(path);
 
 		default:
 			logger.error("Failed to create a  " + type.getName() + " shader with file " + path + '!');

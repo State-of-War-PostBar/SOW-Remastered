@@ -10,7 +10,7 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.opengl.GL;
 
-import cn.stateofwar.sowr.input.InputHooks;
+import cn.stateofwar.sowr.core.Inputs;
 import cn.stateofwar.sowr.util.Logger;
 
 /**
@@ -36,27 +36,27 @@ public class Window {
 	private boolean vSync;
 
 	/** If the window takes all the screen. */
-	private boolean fullScreen;
+	private boolean full_screen;
 
 	/**
 	 * Initialize window properties.
 	 * 
-	 * @param _title  Title of the program.
+	 * @param _title       Title of the program.
 	 * 
-	 * @param _width  With of the window.
+	 * @param _width       With of the window.
 	 * 
-	 * @param _height Height of the window.
+	 * @param _height      Height of the window.
 	 * 
-	 * @param _vSync  Vertical sync for the window.
+	 * @param _vSync       Vertical sync for the window.
 	 * 
-	 * @param fs      Full screen capturing.
+	 * @param _full_screen Full screen capturing.
 	 */
-	public Window(String _title, int _width, int _height, boolean _vSync, boolean fs) {
+	public Window(String _title, int _width, int _height, boolean _vSync, boolean _full_screen) {
 		title = _title;
 		width = _width;
 		height = _height;
 		vSync = _vSync;
-		fullScreen = fs;
+		full_screen = _full_screen;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Window {
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
-		handle = glfwCreateWindow(width, height, title, fullScreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+		handle = glfwCreateWindow(width, height, title, full_screen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
 		if (handle == NULL) {
 			logger.fatal("Failed to create a GLFW window!");
@@ -84,15 +84,15 @@ public class Window {
 		glfwMakeContextCurrent(handle);
 
 		glfwSetKeyCallback(handle, GLFWKeyCallback.create((window, key, scancode, action, mods) -> {
-			InputHooks.keyboard(key, scancode, action, mods);
+			Inputs.keyboard(key, scancode, action, mods);
 		}));
 
 		glfwSetMouseButtonCallback(handle, GLFWMouseButtonCallback.create((window, button, action, mods) -> {
-			InputHooks.mouse(button, action, mods);
+			Inputs.mouse(button, action, mods);
 		}));
 
 		glfwSetCursorPosCallback(handle, GLFWCursorPosCallback.create((window, x, y) -> {
-			InputHooks.cursor(x, y);
+			Inputs.cursor(x, y);
 		}));
 
 		if (vSync)
@@ -121,34 +121,34 @@ public class Window {
 	}
 
 	/**
-	 * Get the handle of this window.
+	 * Get the handle of the window.
 	 * 
-	 * @return Handle of this window.
+	 * @return Handle of the window.
 	 */
 	public long getHandle() {
 		return handle;
 	}
 
 	/**
-	 * Get the width of this window.
+	 * Get the width of the window.
 	 * 
-	 * @return Width of this window.
+	 * @return Width of the window.
 	 */
 	public int getWidth() {
 		return width;
 	}
 
 	/**
-	 * Get the height of this window.
+	 * Get the height of the window.
 	 * 
-	 * @return Height of this window.
+	 * @return Height of the window.
 	 */
 	public int getHeight() {
 		return height;
 	}
 
 	/**
-	 * Get the closing status of this window.
+	 * Get the closing status of the window.
 	 * 
 	 * @return Closing status.
 	 */
@@ -157,7 +157,7 @@ public class Window {
 	}
 
 	/**
-	 * Set the closing status of this window.
+	 * Set the closing status of the window.
 	 * 
 	 * @param value Closing status.
 	 */
@@ -166,7 +166,7 @@ public class Window {
 	}
 
 	/**
-	 * Get the vertical sync status of this window.
+	 * Get the vertical sync status of the window.
 	 * 
 	 * @param Vertical sync status.
 	 */
@@ -175,7 +175,7 @@ public class Window {
 	}
 
 	/**
-	 * Set the vertical sync status of this window.
+	 * Set the vertical sync status of the window.
 	 * 
 	 * @param vSync Vertical sync status.
 	 */
@@ -188,11 +188,11 @@ public class Window {
 	}
 
 	/**
-	 * Delete and release resources of this window.
+	 * Delete and release resources of the window.
 	 */
 	public void abrogate() {
-		glfwDestroyWindow(handle);
 		Callbacks.glfwFreeCallbacks(handle);
+		glfwDestroyWindow(handle);
 	}
 
 }

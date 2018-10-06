@@ -5,11 +5,10 @@ import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+import org.joml.Vector2d;
 import org.joml.Vector2f;
-import org.joml.Vector2i;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
-import org.joml.Vector4i;
+import org.joml.Vector4d;
 import org.lwjgl.BufferUtils;
 
 import cn.stateofwar.sowr.gui.render.Graphic;
@@ -69,17 +68,6 @@ public class DataUtils {
 	}
 
 	/**
-	 * Convert a {@code Vector4i} to a {@code Vector4f}.
-	 * 
-	 * @param veci Integers vector.
-	 * 
-	 * @return Float values vector.
-	 */
-	public static Vector4f vec4iToVec4f(Vector4i veci) {
-		return new Vector4f(veci.x, veci.y, veci.z, veci.w);
-	}
-
-	/**
 	 * Determine the quadrant of a x-y coordinate on the screen.
 	 * 
 	 * @param x X coordinate.
@@ -97,7 +85,7 @@ public class DataUtils {
 	 *         <b>7</b> → Middle of 3rd and 4th quadrant;<br />
 	 *         <b>8</b> → Middle of 1st and 4th quadrant.
 	 */
-	public static int getQuadrant(int x, int y) {
+	public static int getQuadrant(double x, double y) {
 		y = Graphic.win.getHeight() - y;
 
 		int xMid = Graphic.win.getWidth() / 2;
@@ -135,7 +123,7 @@ public class DataUtils {
 	 * 
 	 * @return If the point is in the range of the rectangle.
 	 */
-	public static boolean pir(Vector2i point, Vector4f rect) {
+	public static boolean pir(Vector2d point, Vector4d rect) {
 		if (point.x >= rect.x && point.x <= rect.x + rect.z && point.y >= rect.y && point.y <= rect.y + rect.w)
 			return true;
 		return false;

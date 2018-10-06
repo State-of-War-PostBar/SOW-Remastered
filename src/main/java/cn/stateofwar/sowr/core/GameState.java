@@ -1,6 +1,5 @@
 package cn.stateofwar.sowr.core;
 
-import cn.stateofwar.sowr.gui.GuiManager;
 import cn.stateofwar.sowr.gui.render.Renderer;
 import cn.stateofwar.sowr.util.Logger;
 
@@ -15,7 +14,7 @@ public class GameState {
 	private Renderer renderer;
 
 	/**
-	 * Enter this game state controller.
+	 * Enter the game state controller.
 	 */
 	public void enter(Renderer _renderer) {
 		renderer = _renderer;
@@ -24,10 +23,10 @@ public class GameState {
 	}
 
 	/**
-	 * Exit out of this game state controller.
+	 * Exit out of the game state controller.
 	 */
 	public void exit() {
-		GuiManager.abrogateAll();
+
 	}
 
 	/**
@@ -43,21 +42,21 @@ public class GameState {
 	 * Handle input from the user.
 	 */
 	public void input() {
-		GuiManager.updateInputs();
+
 	}
 
 	/**
 	 * Update the game contents.
 	 */
 	public void update() {
-		GuiManager.updateAll();
+
 	}
 
 	/**
 	 * Render the screen contents.
 	 */
 	public void render() {
-		GuiManager.renderVisuals();
+
 	}
 
 }

@@ -21,7 +21,7 @@ public class Texture {
 
 	private static final Logger logger = new Logger("Render");
 
-	/** ID of this texture. */
+	/** ID of the texture. */
 	private final int id;
 
 	/** Width of the texture. */

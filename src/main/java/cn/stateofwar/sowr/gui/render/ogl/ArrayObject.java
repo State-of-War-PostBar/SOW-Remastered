@@ -7,7 +7,7 @@ import static org.lwjgl.opengl.GL45.*;
  */
 public class ArrayObject {
 
-	/** ID of this object. */
+	/** ID of the object. */
 	private final int id;
 
 	public ArrayObject() {
@@ -15,14 +15,14 @@ public class ArrayObject {
 	}
 
 	/**
-	 * Bind this array to current procedure.
+	 * Bind the array to current procedure.
 	 */
 	public void bind() {
 		glBindVertexArray(id);
 	}
 
 	/**
-	 * Get the ID of this object.
+	 * Get the ID of the object.
 	 * 
 	 * @return ID of the object.
 	 */
@@ -38,7 +38,7 @@ public class ArrayObject {
 	}
 
 	/**
-	 * Delete this object.
+	 * Delete the object.
 	 */
 	public void abrogate() {
 		glDeleteVertexArrays(id);

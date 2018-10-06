@@ -24,7 +24,7 @@ public class Trim {
 
 		I18n.init();
 		logger.info("Loaded internationalization files.");
-		logger.info("Current language setting is: " + I18n.getLocName() + ".");
+		logger.info("Current language setting is: " + I18n.getLocaleName() + ".");
 
 		if (!glfwInit()) {
 			logger.fatal("Cannot initialize GLFW!");

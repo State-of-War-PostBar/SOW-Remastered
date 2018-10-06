@@ -35,6 +35,7 @@ public class Config {
 			System.out.println(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
+
 		try {
 			file = new Ini(new File(References.CONFIG_FILE_NAME));
 			readAllConfig(file);
