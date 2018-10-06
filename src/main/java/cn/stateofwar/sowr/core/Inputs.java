@@ -3,6 +3,7 @@ package cn.stateofwar.sowr.core;
 import static org.lwjgl.glfw.GLFW.*;
 
 import cn.stateofwar.sowr.gui.render.Graphic;
+import cn.stateofwar.sowr.util.Config;
 
 /**
  * Hooks for inputs.
@@ -20,6 +21,8 @@ public class Inputs {
 
 	/** Mouse button inputs from mouse; implements them from GLFW directly. */
 	public static boolean[] mouse = new boolean[11];
+
+	public static double double_click_interval = Double.parseDouble(Config.get("Control", "Double Click Interval"));
 
 	/**
 	 * A cursor position listener.
