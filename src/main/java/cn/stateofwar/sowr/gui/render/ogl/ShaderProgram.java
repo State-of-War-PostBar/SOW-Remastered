@@ -44,9 +44,9 @@ public class ShaderProgram {
 	}
 
 	/**
-	 * Get the ID of this program.
+	 * Get the ID of the program.
 	 * 
-	 * @return ID of this program.
+	 * @return ID of the program.
 	 */
 	public int getID() {
 		return id;
@@ -153,7 +153,7 @@ public class ShaderProgram {
 	}
 
 	/**
-	 * Bind this program to current rendering.
+	 * Bind the program to current rendering.
 	 */
 	public void use() {
 		glUseProgram(id);

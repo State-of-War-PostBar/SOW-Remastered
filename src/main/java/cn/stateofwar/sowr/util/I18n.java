@@ -51,7 +51,7 @@ public class I18n {
 	 * 
 	 * @return The current locale.
 	 */
-	public static Locales getLoc() {
+	public static Locales getLocale() {
 		return locale;
 	}
 
@@ -60,18 +60,18 @@ public class I18n {
 	 * 
 	 * @return Name of the current locale.
 	 */
-	public static String getLocName() {
+	public static String getLocaleName() {
 		return locale.getName();
 	}
 
 	/**
 	 * Switch the current language locale.
 	 * 
-	 * @param loc Name of the new locale.
+	 * @param _locale Name of the new locale.
 	 */
-	public static void switchLoc(String loc) {
-		if (LEGAL_VAL.contains(loc))
-			locale = Locales.parseLoc(loc);
+	public static void switchLocale(String _locale) {
+		if (LEGAL_VAL.contains(_locale))
+			locale = Locales.parseLoc(_locale);
 		else {
 			locale = Locales.EN_US;
 			Logger.PUBLIC_LOGGER.error(
@@ -92,12 +92,9 @@ public class I18n {
 		/** All the translation keys and results. */
 		private Map<String, String> translations = new LinkedHashMap<>();
 
-		private Locales() {
-		}
-
-		private Locales(String x) {
-			if (I18n.LEGAL_VAL.contains(x))
-				name = x;
+		private Locales(String _name) {
+			if (I18n.LEGAL_VAL.contains(_name))
+				name = _name;
 		}
 
 		/**

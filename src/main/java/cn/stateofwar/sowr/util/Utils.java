@@ -16,20 +16,9 @@ import com.google.common.io.Resources;
 import cn.stateofwar.sowr.References;
 
 /**
- * Mini utility library for other code.
+ * Small utility library for other code.
  */
 public class Utils {
-
-	/**
-	 * Check if the program is running in a normal universe.
-	 * 
-	 * @return If the universe running this program is normal.
-	 */
-	public static final boolean inNormalUniverse() {
-		if (Integer.compare(1 + 1, 2) == 0)
-			return true;
-		return false;
-	}
 
 	/**
 	 * Types of operating systems.
@@ -143,16 +132,16 @@ public class Utils {
 	/**
 	 * Convert a list of strings to a single string.
 	 * 
-	 * @param list    List of strings.
+	 * @param list     List of strings.
 	 * 
-	 * @param newLine Insert a line separator at the end of each line.
+	 * @param new_line Insert a line separator at the end of each line.
 	 * 
 	 * @return The converted string.
 	 */
-	public static String listToString(List<String> list, boolean newLine) {
+	public static String listToString(List<String> list, boolean new_line) {
 		StringBuilder sb = new StringBuilder();
 		for (String s : list)
-			if (newLine)
+			if (new_line)
 				sb.append(s).append(nl());
 			else
 				sb.append(s);
@@ -203,24 +192,24 @@ public class Utils {
 	 * Read a specific position after a line in a text file.<br />
 	 * <i>Does not read line separators.</i>
 	 * 
-	 * @param path Path of the text file.
+	 * @param path     Path of the text file.
 	 * 
-	 * @param line Line to read, starts with 1.
+	 * @param line     Line to read, starts with 1.
 	 * 
-	 * @param pos  Position to read, starts with 1. Text in this position will also
-	 *             be read.
+	 * @param position Position to read, starts with 1. Text in this position will
+	 *                 also be read.
 	 * 
 	 * @return Text read.
 	 * 
 	 * @throws IOException
 	 */
-	public static String readLineSP(String path, int line, int pos) throws IOException {
-		pos--;
+	public static String readLineSP(String path, int line, int position) throws IOException {
+		position--;
 		String l = readLineS(path, line);
-		if (l.length() < pos)
-			pos = l.length();
+		if (l.length() < position)
+			position = l.length();
 
-		return l.substring(pos, l.length());
+		return l.substring(position, l.length());
 	}
 
 	/**
@@ -270,26 +259,26 @@ public class Utils {
 	 * Write to a text file after a specific position of a line.<br />
 	 * <i>The old data will be erased.</i>
 	 * 
-	 * @param path Path of the text file.
+	 * @param path     Path of the text file.
 	 * 
-	 * @param text Text to write.
+	 * @param text     Text to write.
 	 * 
-	 * @param line Line to write, starts with 1.
+	 * @param line     Line to write, starts with 1.
 	 * 
-	 * @param pos  Position to write, starts with 1. Text starts replacing by this
-	 *             position, not after.
+	 * @param position Position to write, starts with 1. Text starts replacing by
+	 *                 this position, not after.
 	 * 
 	 * @throws IOException
 	 */
-	public static void writeLineSP(String path, String text, int line, int pos) throws IOException {
-		pos--;
+	public static void writeLineSP(String path, String text, int line, int position) throws IOException {
+		position--;
 		line--;
 		File f = new File(path);
 		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		String l = lines.get(line);
-		if (l.length() < pos)
-			pos = l.length();
-		l = l.substring(l.length() - pos) + text;
+		if (l.length() < position)
+			position = l.length();
+		l = l.substring(l.length() - position) + text;
 		lines.set(line, l);
 		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 	};

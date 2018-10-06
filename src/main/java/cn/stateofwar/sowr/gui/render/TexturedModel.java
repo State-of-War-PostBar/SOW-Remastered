@@ -14,10 +14,14 @@ import cn.stateofwar.sowr.util.DataUtils;
  */
 public class TexturedModel extends Model {
 
+	/** Preset shader program for the model. */
+	private static final ShaderProgram prog = new ShaderProgram(
+			new Shader[] { Shaders.vertex_sampleless_texture, Shaders.fragment_sampleless_texture });
+
 	/** Texture for the model. */
 	private Texture texture;
 
-	/** Vertex array object for this model. */
+	/** Vertex array object for the model. */
 	private ArrayObject vao;
 
 	/** Buffer for vertices. */
@@ -29,7 +33,7 @@ public class TexturedModel extends Model {
 	/** Buffer for vertex indices. */
 	private BufferObject ebo;
 
-	/** Coordinates of vertices, with a minimum of 3 vertices in total. */
+	/** Coordinates of vertices. */
 	private float[] vertices;
 
 	/** Vertex indices. */
@@ -37,10 +41,6 @@ public class TexturedModel extends Model {
 
 	/** Coordinates of used texture part. */
 	private float[] texture_coords;
-
-	/** Preset shader program for the model. */
-	private static final ShaderProgram prog = new ShaderProgram(
-			new Shader[] { Shaders.vertex_sampleless_texture, Shaders.fragment_sampleless_texture });
 
 	/**
 	 * Create a model with texture.
@@ -116,7 +116,7 @@ public class TexturedModel extends Model {
 	}
 
 	/**
-	 * Delete this model and release the spaces.
+	 * Delete the model and release the spaces.
 	 */
 	@Override
 	public void abrogate() {

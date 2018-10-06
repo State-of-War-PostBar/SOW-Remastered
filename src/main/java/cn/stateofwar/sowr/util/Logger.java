@@ -15,7 +15,7 @@ public class Logger {
 	public static final Logger PUBLIC_LOGGER = new Logger();
 
 	/** File to store logs. */
-	private File log = new File(References.LOG_FILE_NAME);
+	private File log_file = new File(References.LOG_FILE_NAME);
 
 	/** Source that processes logging. */
 	private String source;
@@ -44,7 +44,7 @@ public class Logger {
 	 */
 	public void init() {
 		try {
-			Utils.createFile(log.toString(), true);
+			Utils.createFile(log_file.toString(), true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -63,7 +63,7 @@ public class Logger {
 		b.append('[').append(source).append(']');
 		b.append(message);
 		System.out.println(b.toString());
-		writeToLog(b.toString());
+		record(b.toString());
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class Logger {
 		b.append('[').append(source).append(']');
 		b.append(message);
 		System.out.println(b.toString());
-		writeToLog(b.toString());
+		record(b.toString());
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class Logger {
 		b.append('[').append(source).append(']');
 		b.append(message);
 		System.out.println(b.toString());
-		writeToLog(b.toString());
+		record(b.toString());
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class Logger {
 		b.append('[').append(source).append(']');
 		b.append(message);
 		System.out.println(b.toString());
-		writeToLog(b.toString());
+		record(b.toString());
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class Logger {
 		b.append('[').append(source).append(']');
 		b.append(message);
 		System.out.println(b.toString());
-		writeToLog(b.toString());
+		record(b.toString());
 	}
 
 	/**
@@ -137,9 +137,9 @@ public class Logger {
 	 * 
 	 * @param message The message to write.
 	 */
-	private void writeToLog(String message) {
+	private void record(String message) {
 		try {
-			Utils.writeLine(log.toString(), message);
+			Utils.writeLine(log_file.toString(), message);
 		} catch (IOException e) {
 			System.out.println(e.getLocalizedMessage());
 			e.printStackTrace();

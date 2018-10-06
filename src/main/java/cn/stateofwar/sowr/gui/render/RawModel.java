@@ -26,10 +26,10 @@ public class RawModel extends Model {
 	/** Element buffer object for vertex indices. */
 	private BufferObject ebo;
 
-	/** Vertices for this model, with a minimum of 3 vertices in total. */
+	/** Vertices for the model. */
 	private float[] vertices;
 
-	/** Indices for lessening vertices. */
+	/** Vertex indices. */
 	private int[] indices;
 
 	/** Preset shader program for the model. */

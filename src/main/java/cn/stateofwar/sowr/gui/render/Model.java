@@ -1,7 +1,7 @@
 package cn.stateofwar.sowr.gui.render;
 
 /**
- * A rendering model which contains parameters for OpenGL rendering.
+ * A rendering model contains parameters and data for OpenGL rendering.
  */
 public abstract class Model {
 
@@ -11,7 +11,7 @@ public abstract class Model {
 	public abstract void draw();
 
 	/**
-	 * Delete this model and release the spaces.
+	 * Delete the model and release the spaces.
 	 */
 	public abstract void abrogate();
 

@@ -1,14 +1,25 @@
-package cn.stateofwar.sowr.input;
+package cn.stateofwar.sowr.core;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-import cn.stateofwar.sowr.gui.base.DkSInputs;
 import cn.stateofwar.sowr.gui.render.Graphic;
 
 /**
- * Hooks for different type of inputs.
+ * Hooks for inputs.
  */
-public class InputHooks {
+public class Inputs {
+
+	/** X position of the cursor. */
+	public static double cursor_x;
+
+	/** Y position of the cursor. */
+	public static double cursor_y;
+
+	/** Key inputs from keyboard; implements them from GLFW directly. */
+	public static boolean[] keys = new boolean[350];
+
+	/** Mouse button inputs from mouse; implements them from GLFW directly. */
+	public static boolean[] mouse = new boolean[11];
 
 	/**
 	 * A cursor position listener.
@@ -18,9 +29,8 @@ public class InputHooks {
 	 * @param y Y position (in pixels) of the cursor.
 	 */
 	public static void cursor(double x, double y) {
-		DkSInputs.cursor_x = x < 0 ? 0 : x > Graphic.win.getWidth() ? Graphic.win.getWidth() : x;
-		DkSInputs.cursor_y = y < 0 ? 0
-				: y > Graphic.win.getHeight() ? Graphic.win.getHeight() : Graphic.win.getHeight() - y;
+		cursor_x = x < 0 ? 0 : x > Graphic.win.getWidth() ? Graphic.win.getWidth() : x;
+		cursor_y = y < 0 ? 0 : y > Graphic.win.getHeight() ? Graphic.win.getHeight() : Graphic.win.getHeight() - y;
 	}
 
 	/**
@@ -36,9 +46,9 @@ public class InputHooks {
 	 */
 	public static void keyboard(int key, int scancode, int action, int mods) {
 		if (action == GLFW_PRESS)
-			DkSInputs.DK_keys[key] = true;
+			keys[key] = true;
 		if (action == GLFW_RELEASE)
-			DkSInputs.DK_keys[key] = false;
+			keys[key] = false;
 	}
 
 	/**
@@ -52,9 +62,9 @@ public class InputHooks {
 	 */
 	public static void mouse(int button, int action, int mods) {
 		if (action == GLFW_PRESS)
-			DkSInputs.DK_mouse[button] = true;
+			mouse[button] = true;
 		if (action == GLFW_RELEASE)
-			DkSInputs.DK_mouse[button] = false;
+			mouse[button] = false;
 	}
 
 }

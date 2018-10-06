@@ -8,22 +8,22 @@ import org.lwjgl.glfw.GLFW;
 public class Timer {
 
 	/** Time when last game loop started. */
-	private double lastLoopTime;
+	private double time_last_loop;
 
 	/** Time passed since the last game loop. */
-	private float timeCount;
+	private double time_count;
 
 	/** Frames per second. */
 	private int fps;
 
 	/** Counter for FPS. */
-	private int fpsCount;
+	private int fps_count;
 
 	/** Game updates per second. */
 	private int ups;
 
 	/** Counter for UPS. */
-	private int upsCount;
+	private int ups_count;
 
 	/**
 	 * Get the current time of GLFW timer.
@@ -39,11 +39,11 @@ public class Timer {
 	 * 
 	 * @return Time passed.
 	 */
-	public float getDelta() {
+	public double getDelta() {
 		double time = getTime();
-		float delta = (float) (time - lastLoopTime);
-		lastLoopTime = time;
-		timeCount += delta;
+		double delta = (double) (time - time_last_loop);
+		time_last_loop = time;
+		time_count += delta;
 		return delta;
 	}
 
@@ -71,14 +71,14 @@ public class Timer {
 	 * @return Time when last loop started.
 	 */
 	public double getLastLoopTime() {
-		return lastLoopTime;
+		return time_last_loop;
 	}
 
 	/**
 	 * Initialize the timer.
 	 */
 	public void init() {
-		lastLoopTime = getTime();
+		time_last_loop = getTime();
 	}
 
 	/**
@@ -86,14 +86,14 @@ public class Timer {
 	 */
 	public void update() {
 		getDelta();
-		if (timeCount >= 1.0f) {
-			fps = fpsCount;
-			fpsCount = 0;
+		if (time_count >= 1.0d) {
+			fps = fps_count;
+			fps_count = 0;
 
-			ups = upsCount;
-			upsCount = 0;
+			ups = ups_count;
+			ups_count = 0;
 
-			timeCount -= 1.0f;
+			time_count -= 1.0d;
 		}
 	}
 
@@ -101,14 +101,14 @@ public class Timer {
 	 * Add 1 to FPS.
 	 */
 	public void updateFPS() {
-		fpsCount++;
+		fps_count++;
 	}
 
 	/**
 	 * Add 1 to UPS.
 	 */
 	public void updateUPS() {
-		upsCount++;
+		ups_count++;
 	}
 
 }

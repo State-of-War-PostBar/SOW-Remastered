@@ -18,7 +18,7 @@ public class Graphic {
 	private static final Logger logger = new Logger("Render");
 
 	/** Maximum FPS the program wants to reach. */
-	public static int desiredFPS;
+	public static int desired_fps;
 
 	/** Window of the game engine. */
 	public static Window win;
@@ -33,7 +33,7 @@ public class Graphic {
 				Boolean.parseBoolean(Config.get("GUI", "Full Screen")));
 		win.initWindow();
 
-		desiredFPS = win.isVSync() ? References.VERTICAL_SYNC_FPS : Integer.parseInt(Config.get("GUI", "Max FPS"));
+		desired_fps = win.isVSync() ? References.VERTICAL_SYNC_FPS : Integer.parseInt(Config.get("GUI", "Max FPS"));
 
 		StringBuilder s = new StringBuilder();
 		s.append("Graphic Adaptor information: ").append(nl());

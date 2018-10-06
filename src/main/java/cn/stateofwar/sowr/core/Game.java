@@ -19,9 +19,6 @@ public class Game {
 	/** Current game state. */
 	public static GameState state = new GameState();
 
-	/** Renderer for the game. */
-	public static Renderer renderer = new Renderer();
-
 	/** Timer for the game engine. */
 	public static Timer timer = new Timer();
 
@@ -38,7 +35,7 @@ public class Game {
 		Graphic.initRenderCapabilities();
 		win = Graphic.win;
 
-		state.enter(renderer);
+		state.enter(new Renderer());
 		timer.init();
 
 		while (running && !win.isClosing()) {
@@ -50,12 +47,13 @@ public class Game {
 			timer.updateUPS();
 
 			state.render();
+
 			win.update();
 			timer.updateFPS();
 			if (win.isVSync())
 				syncFrame(References.VERTICAL_SYNC_FPS);
 			else
-				syncFrame(Graphic.desiredFPS);
+				syncFrame(Graphic.desired_fps);
 
 			timer.update();
 		}

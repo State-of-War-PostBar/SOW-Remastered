@@ -10,7 +10,7 @@ import java.nio.IntBuffer;
  */
 public class BufferObject {
 
-	/** ID of this object. */
+	/** ID of the object. */
 	private final int id;
 
 	public BufferObject() {
@@ -18,9 +18,9 @@ public class BufferObject {
 	}
 
 	/**
-	 * Get the ID of this buffer.
+	 * Get the ID of the buffer.
 	 * 
-	 * @return ID of this buffer.
+	 * @return ID of the buffer.
 	 */
 	public int getID() {
 		return id;
@@ -36,7 +36,7 @@ public class BufferObject {
 	}
 
 	/**
-	 * Upload vertex data to this buffer with specified target, data and usage.
+	 * Upload vertex data to the buffer with specified target, data and usage.
 	 * 
 	 * @param target Target to upload.
 	 * 
@@ -49,7 +49,7 @@ public class BufferObject {
 	}
 
 	/**
-	 * Upload element data to this buffer with specified target, data and usage.
+	 * Upload element data to the buffer with specified target, data and usage.
 	 * 
 	 * @param target Target to upload.
 	 * 
@@ -62,7 +62,7 @@ public class BufferObject {
 	}
 
 	/**
-	 * Upload null data to this buffer with specified target, size and usage.
+	 * Upload null data to the buffer with specified target, size and usage.
 	 * 
 	 * @param target Target to upload.
 	 * 
@@ -75,7 +75,7 @@ public class BufferObject {
 	}
 
 	/**
-	 * Upload sub data to this buffer with specified target, offset and data.
+	 * Upload sub data to the buffer with specified target, offset and data.
 	 * 
 	 * @param target Target to upload.
 	 * 
@@ -88,7 +88,7 @@ public class BufferObject {
 	}
 
 	/**
-	 * Upload sub data to this buffer with specified target, offset and data.
+	 * Upload sub data to the buffer with specified target, offset and data.
 	 * 
 	 * @param target Target to upload.
 	 * 
@@ -108,7 +108,7 @@ public class BufferObject {
 	}
 
 	/**
-	 * Delete this buffer.
+	 * Delete the buffer.
 	 */
 	public void abrogate() {
 		glDeleteBuffers(id);

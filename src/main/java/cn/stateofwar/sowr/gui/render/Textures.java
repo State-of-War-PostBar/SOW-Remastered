@@ -1,18 +1,16 @@
-package cn.stateofwar.sowr.gui;
+package cn.stateofwar.sowr.gui.render;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import cn.stateofwar.sowr.gui.render.Texture;
-
 /**
  * Manager for all the textures.
  */
-public class TextureManager {
+public class Textures {
 
 	/** Textures storage. */
-	public static Map<String, Texture> textures = new HashMap<>();
+	private static Map<String, Texture> textures = new HashMap<>();
 
 	/**
 	 * Register a texture.
@@ -21,7 +19,7 @@ public class TextureManager {
 	 * 
 	 * @param texture Texture to register.
 	 */
-	public static void regTexture(String name, Texture texture) {
+	public static void register(String name, Texture texture) {
 		textures.put(name, texture);
 	}
 
@@ -32,14 +30,23 @@ public class TextureManager {
 	 * 
 	 * @param path Path of the texture.
 	 */
-	public static void registerTexture(String name, String path) {
+	public static void register(String name, String path) {
 		textures.put(name, Texture.loadTexture(path));
+	}
+
+	/**
+	 * Get a texture.
+	 * 
+	 * @return Texture by the name.
+	 */
+	public static Texture get(String name) {
+		return textures.get(name);
 	}
 
 	/**
 	 * Abrogate all the textures.
 	 */
-	public static void abrogateTextures() {
+	public static void abrogate() {
 		for (Entry<String, Texture> e : textures.entrySet())
 			e.getValue().delete();
 	}
