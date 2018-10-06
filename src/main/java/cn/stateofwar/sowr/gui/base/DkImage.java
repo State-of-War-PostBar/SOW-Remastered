@@ -63,7 +63,7 @@ public class DkImage extends DkXVisual {
 			return;
 		}
 
-		Game.state.getRenderer().drawTexturedRect(coord.x, coord.y, coord.w, coord.z, texture);
+		Game.state.getRenderer().drawTexturedRect(coord.x, coord.y, coord.z, coord.w, texture);
 
 		super.render();
 	}
