@@ -19,13 +19,6 @@ public interface ICursorInductive extends IInputReceiver {
 	public Vector4d getInductiveArea();
 
 	/**
-	 * Set the area the element would detect the cursor.
-	 * 
-	 * @param inductive_area Area the element would detect the cursor.
-	 */
-	public void setInductiveArea(Vector4d inductive_area);
-
-	/**
 	 * Called when the mouse cursor is in the inductive area.
 	 */
 	public void cursorOn();
@@ -34,14 +27,6 @@ public interface ICursorInductive extends IInputReceiver {
 	 * Called when the mouse cursor is not in the inductive area.
 	 */
 	public void cursorOff();
-
-	/**
-	 * Check if the mouse cursor is in the inductive area.<br />
-	 * <i>This is just a reference for the interface.</i>
-	 * 
-	 * @return If the mouse cursor is in the inductive area.
-	 */
-	public boolean isCursorOn();
 
 	/**
 	 * Update input status of the element.
