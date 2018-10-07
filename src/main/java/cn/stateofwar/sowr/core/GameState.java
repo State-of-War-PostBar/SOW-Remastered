@@ -1,5 +1,6 @@
 package cn.stateofwar.sowr.core;
 
+import cn.stateofwar.sowr.gui.Gui;
 import cn.stateofwar.sowr.gui.render.Renderer;
 import cn.stateofwar.sowr.util.Logger;
 
@@ -18,15 +19,9 @@ public class GameState {
 	 */
 	public void enter(Renderer _renderer) {
 		renderer = _renderer;
+		Gui.registerElements();
 
 		logger.info("Initialized a game state.");
-	}
-
-	/**
-	 * Exit out of the game state controller.
-	 */
-	public void exit() {
-
 	}
 
 	/**
@@ -39,24 +34,31 @@ public class GameState {
 	}
 
 	/**
-	 * Handle input from the user.
+	 * Handle input from user.
 	 */
 	public void input() {
-
+		Gui.updateInputs();
 	}
 
 	/**
-	 * Update the game contents.
+	 * Update game contents.
 	 */
 	public void update() {
-
+		Gui.updateElements();
 	}
 
 	/**
-	 * Render the screen contents.
+	 * Render screen contents.
 	 */
 	public void render() {
+		Gui.renderElements();
+	}
 
+	/**
+	 * Exit out game state controller.
+	 */
+	public void exit() {
+		Gui.deleteAll();
 	}
 
 }
