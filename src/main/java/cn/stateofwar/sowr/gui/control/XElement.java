@@ -1,7 +1,8 @@
 package cn.stateofwar.sowr.gui.control;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 /**
  * An element of the gui.
@@ -15,7 +16,7 @@ public abstract class XElement {
 	private XElement parent;
 
 	/** Children of the element. */
-	private List<XElement> children = new ArrayList<>();
+	private Map<String, XElement> children = new TreeMap<>();
 
 	/** If the element is enabled. */
 	private boolean enabled = false;
@@ -78,7 +79,16 @@ public abstract class XElement {
 	 * @param child Child to add.
 	 */
 	public void addChild(XElement child) {
-		children.add(child);
+		children.put(child.getIdentifier(), child);
+	}
+
+	/**
+	 * Get a child of the element.
+	 * 
+	 * @param name Name of the child.
+	 */
+	public XElement getChild(String name) {
+		return children.get(name);
 	}
 
 	/**
@@ -86,7 +96,7 @@ public abstract class XElement {
 	 * 
 	 * @return List of children of the element.
 	 */
-	public List<XElement> getChildren() {
+	public Map<String, XElement> getChildren() {
 		return children;
 	}
 
@@ -107,8 +117,8 @@ public abstract class XElement {
 	public XElement enable() {
 		enabled = true;
 		if (hasChild())
-			for (XElement e : children)
-				e.enable();
+			for (Entry<String, XElement> e : children.entrySet())
+				e.getValue().enable();
 		return this;
 	}
 
@@ -120,8 +130,8 @@ public abstract class XElement {
 	public XElement disable() {
 		enabled = false;
 		if (hasChild())
-			for (XElement e : children)
-				e.disable();
+			for (Entry<String, XElement> e : children.entrySet())
+				e.getValue().disable();
 		return this;
 	}
 
@@ -148,8 +158,8 @@ public abstract class XElement {
 	 */
 	public void update() {
 		if (hasChild())
-			for (XElement e : children)
-				e.update();
+			for (Entry<String, XElement> e : children.entrySet())
+				e.getValue().update();
 	}
 
 	/**
@@ -160,8 +170,8 @@ public abstract class XElement {
 	public XElement hide() {
 		hidden = true;
 		if (hasChild())
-			for (XElement e : children)
-				e.hide();
+			for (Entry<String, XElement> e : children.entrySet())
+				e.getValue().hide();
 		return this;
 	}
 
@@ -173,8 +183,8 @@ public abstract class XElement {
 	public XElement show() {
 		hidden = false;
 		if (hasChild())
-			for (XElement e : children)
-				e.show();
+			for (Entry<String, XElement> e : children.entrySet())
+				e.getValue().show();
 		return this;
 	}
 
@@ -183,8 +193,8 @@ public abstract class XElement {
 	 */
 	public void render() {
 		if (hasChild())
-			for (XElement e : children)
-				e.update();
+			for (Entry<String, XElement> e : children.entrySet())
+				e.getValue().render();
 	}
 
 	/**
@@ -192,8 +202,8 @@ public abstract class XElement {
 	 */
 	public void abrogate() {
 		if (hasChild())
-			for (XElement e : children)
-				e.abrogate();
+			for (Entry<String, XElement> e : children.entrySet())
+				e.getValue().abrogate();
 	}
 
 	/**
@@ -208,8 +218,8 @@ public abstract class XElement {
 	 */
 	public void resize(Object size) {
 		if (hasChild())
-			for (XElement e : children)
-				e.onParentResize(e);
+			for (Entry<String, XElement> e : children.entrySet())
+				e.getValue().resize(size);
 	}
 
 	/**
