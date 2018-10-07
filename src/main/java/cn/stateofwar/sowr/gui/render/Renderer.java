@@ -19,6 +19,36 @@ public class Renderer {
 	public static final int[] indices_rect = new int[] { 0, 1, 3, 1, 2, 3 };
 
 	/**
+	 * Draw a horizontal line on the screen with color.
+	 * 
+	 * @param x      X coordinate of the start point.
+	 * 
+	 * @param y      Y coordinate of the start point.
+	 * 
+	 * @param length Length of the line.
+	 * 
+	 * @param color  Color of the line.
+	 */
+	public void drawHorizontalLine(int x, int y, int length, RGBA color) {
+		drawColoredRect(x, y, length - x, 1, color);
+	}
+
+	/**
+	 * Draw a vertical line on the screen with color.
+	 * 
+	 * @param x      X coordinate of the start point.
+	 * 
+	 * @param y      Y coordinate of the start point.
+	 * 
+	 * @param length Length of the line.
+	 * 
+	 * @param color  Color of the line.
+	 */
+	public void drawVerticalLine(int x, int y, int length, RGBA color) {
+		drawColoredRect(x, y, 1, length - y, color);
+	}
+
+	/**
 	 * Draw a rectangle and render a color on it.
 	 * 
 	 * @param x     X coordinate of the bottom-left vertex of the rectangle.
