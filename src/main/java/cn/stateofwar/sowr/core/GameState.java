@@ -19,7 +19,6 @@ public class GameState {
 	 */
 	public void enter(Renderer _renderer) {
 		renderer = _renderer;
-		Gui.registerElements();
 
 		logger.info("Initialized a game state.");
 	}
@@ -44,14 +43,14 @@ public class GameState {
 	 * Update game contents.
 	 */
 	public void update() {
-		Gui.updateElements();
+		Gui.update();
 	}
 
 	/**
 	 * Render screen contents.
 	 */
 	public void render() {
-		Gui.renderElements();
+		Gui.render();
 	}
 
 	/**

@@ -22,9 +22,12 @@ public class Gui {
 	 * Register an element.
 	 * 
 	 * @param element Element to register.
+	 * 
+	 * @return Instance of the element.
 	 */
-	public static void registerElement(XElement element) {
+	public static XElement register(XElement element) {
 		elements.put(element.getIdentifier(), element);
+		return element;
 	}
 
 	/**
@@ -33,11 +36,14 @@ public class Gui {
 	 * @param element Element to register.
 	 * 
 	 * @param parent  Parent of the element.
+	 * 
+	 * @return Instance of the element.
 	 */
-	public static void registerChildElement(XElement element, XElement parent) {
+	public static XElement registerChild(XElement element, XElement parent) {
 		if (parent == null)
-			registerElement(element);
+			register(element);
 		element.setParent(parent);
+		return element;
 	}
 
 	/**
@@ -56,7 +62,7 @@ public class Gui {
 	 * 
 	 * @param name Name of the element.
 	 */
-	public static void deleteElement(String name) {
+	public static void delete(String name) {
 		elements.get(name).abrogate();
 		elements.remove(name);
 	}
@@ -91,7 +97,7 @@ public class Gui {
 	/**
 	 * Update all the elements.
 	 */
-	public static void updateElements() {
+	public static void update() {
 		for (Entry<String, XElement> e : elements.entrySet())
 			e.getValue().update();
 	}
@@ -99,7 +105,7 @@ public class Gui {
 	/**
 	 * Render all the elements.
 	 */
-	public static void renderElements() {
+	public static void render() {
 		for (Entry<String, XElement> e : elements.entrySet())
 			e.getValue().render();
 	}

@@ -12,6 +12,8 @@ import org.lwjgl.opengl.GL;
 
 import cn.stateofwar.sowr.core.Inputs;
 import cn.stateofwar.sowr.util.Logger;
+import cn.stateofwar.sowr.util.Utils;
+import cn.stateofwar.sowr.util.Utils.OSType;
 
 /**
  * An instance of a GLFW window.
@@ -69,8 +71,10 @@ public class Window {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+
+		if (Utils.getOS() == OSType.MacOS)
+			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 		handle = glfwCreateWindow(width, height, title, full_screen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
