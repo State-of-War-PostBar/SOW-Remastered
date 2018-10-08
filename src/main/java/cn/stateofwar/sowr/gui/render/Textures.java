@@ -51,4 +51,11 @@ public class Textures {
 			e.getValue().delete();
 	}
 
+	/**
+	 * Initialize default textures.
+	 */
+	public static void init() {
+
+	}
+
 }
