@@ -2,6 +2,7 @@ package cn.stateofwar.sowr.core;
 
 import cn.stateofwar.sowr.References;
 import cn.stateofwar.sowr.gui.Gui;
+import cn.stateofwar.sowr.gui.Menu;
 import cn.stateofwar.sowr.gui.multimedia.Window;
 import cn.stateofwar.sowr.gui.render.Graphic;
 import cn.stateofwar.sowr.gui.render.Renderer;
@@ -35,7 +36,8 @@ public class Game {
 
 		Graphic.initRenderCapabilities();
 		win = Graphic.win;
-		Gui.registerElements();
+		Gui.init();
+		Menu.init();
 
 		state.enter(new Renderer());
 		timer.init();

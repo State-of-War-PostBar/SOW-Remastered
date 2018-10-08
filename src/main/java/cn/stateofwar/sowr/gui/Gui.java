@@ -113,7 +113,7 @@ public class Gui {
 	/**
 	 * Register default elements of the program.
 	 */
-	public static void registerElements() {
+	public static void init() {
 
 	}
 

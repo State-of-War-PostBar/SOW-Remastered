@@ -154,15 +154,6 @@ public abstract class XElement {
 	}
 
 	/**
-	 * Update the element and all of its children.
-	 */
-	public void update() {
-		if (hasChild())
-			for (Entry<String, XElement> e : children.entrySet())
-				e.getValue().update();
-	}
-
-	/**
 	 * Hide the element and all of its children.
 	 * 
 	 * @return Instance of the element.
@@ -189,12 +180,23 @@ public abstract class XElement {
 	}
 
 	/**
+	 * Update the element and all of its children.
+	 */
+	public void update() {
+		if (isEnabled())
+			if (hasChild())
+				for (Entry<String, XElement> e : children.entrySet())
+					e.getValue().update();
+	}
+
+	/**
 	 * Render the element and all of its children.
 	 */
 	public void render() {
-		if (hasChild())
-			for (Entry<String, XElement> e : children.entrySet())
-				e.getValue().render();
+		if (!isHidden())
+			if (hasChild())
+				for (Entry<String, XElement> e : children.entrySet())
+					e.getValue().render();
 	}
 
 	/**
