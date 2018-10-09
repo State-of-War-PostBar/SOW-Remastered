@@ -63,10 +63,15 @@ public class Utils {
 	 */
 	public static String getSysTime() {
 		Calendar c = Calendar.getInstance();
+
+		String hour = Integer.toString(c.get(Calendar.HOUR_OF_DAY));
+		hour = hour.length() == 2 ? hour : '0' + hour;
+		String minute = Integer.toString(c.get(Calendar.MINUTE));
+		minute = minute.length() == 2 ? minute : '0' + minute;
 		String second = Integer.toString(c.get(Calendar.SECOND));
 		second = second.length() == 2 ? second : '0' + second;
 
-		return "" + c.get(Calendar.HOUR_OF_DAY) + ':' + c.get(Calendar.MINUTE) + ':' + second;
+		return "" + hour + ':' + minute + ':' + second;
 	}
 
 	/**
