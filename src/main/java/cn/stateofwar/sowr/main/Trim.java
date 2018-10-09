@@ -11,7 +11,7 @@ import cn.stateofwar.sowr.util.Logger;
  */
 public class Trim {
 
-	private static final Logger logger = new Logger("Main");
+	private static final Logger LOGGER = new Logger("Main");
 
 	/**
 	 * Initialize the program.
@@ -20,14 +20,14 @@ public class Trim {
 	 */
 	protected static void init() {
 		Config.init();
-		logger.info("Loaded user configurations.");
+		LOGGER.info("Loaded user configurations.");
 
 		I18n.init();
-		logger.info("Loaded internationalization files.");
-		logger.info("Current language setting is: " + I18n.getLocaleName() + ".");
+		LOGGER.info("Loaded internationalization files.");
+		LOGGER.info("Current language setting is: " + I18n.getLocaleName() + ".");
 
 		if (!glfwInit()) {
-			logger.fatal("Cannot initialize GLFW!");
+			LOGGER.fatal("Cannot initialize GLFW!");
 			throw new IllegalStateException("Failed to initialize GLFW.");
 		}
 	}
@@ -37,10 +37,10 @@ public class Trim {
 	 */
 	protected static void abrogate() {
 		glfwTerminate();
-		logger.info("Unloaded the Lwjgl library.");
+		LOGGER.info("Unloaded the Lwjgl library.");
 
 		Config.abrogate();
-		logger.info("Configurations saved.");
+		LOGGER.info("Configurations saved.");
 	}
 
 }

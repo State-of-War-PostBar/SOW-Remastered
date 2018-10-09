@@ -20,7 +20,7 @@ import cn.stateofwar.sowr.util.Utils.OSType;
  */
 public class Window {
 
-	private static final Logger logger = new Logger("Render");
+	private static final Logger LOGGER = new Logger("Render");
 
 	/** Handle of the window. */
 	private long handle;
@@ -73,17 +73,17 @@ public class Window {
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
-		if (Utils.getOS() == OSType.MacOS)
+		if (Utils.getOS() == OSType.MAC_OS)
 			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 		handle = glfwCreateWindow(width, height, title, full_screen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
 		if (handle == NULL) {
-			logger.fatal("Failed to create a GLFW window!");
+			LOGGER.fatal("Failed to create a GLFW window!");
 			throw new RuntimeException("Failed to create a GLFW window.");
 		}
 
-		logger.info("Created a GLFW window with handle " + handle + ".");
+		LOGGER.info("Created a GLFW window with handle " + handle + ".");
 		glfwShowWindow(handle);
 		glfwMakeContextCurrent(handle);
 

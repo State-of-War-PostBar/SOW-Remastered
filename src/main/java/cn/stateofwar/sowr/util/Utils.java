@@ -24,7 +24,7 @@ public class Utils {
 	 * Types of operating systems.
 	 */
 	public static enum OSType {
-		Linux, Other, MacOS, Windows
+		LINUX, OTHER, MAC_OS, WINDOWS
 	}
 
 	/**
@@ -33,18 +33,18 @@ public class Utils {
 	 * @return Current operating system.
 	 */
 	public static OSType getOS() {
-		OSType detectedOS;
+		OSType detected_os;
 		String OS = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
 		if ((OS.indexOf("mac") >= 0) || (OS.indexOf("darwin") >= 0))
-			detectedOS = OSType.MacOS;
+			detected_os = OSType.MAC_OS;
 		else if (OS.indexOf("win") >= 0)
-			detectedOS = OSType.Windows;
+			detected_os = OSType.WINDOWS;
 		else if (OS.indexOf("nux") >= 0)
-			detectedOS = OSType.Linux;
+			detected_os = OSType.LINUX;
 		else
-			detectedOS = OSType.Other;
+			detected_os = OSType.OTHER;
 
-		return detectedOS;
+		return detected_os;
 	}
 
 	/**
@@ -63,7 +63,10 @@ public class Utils {
 	 */
 	public static String getSysTime() {
 		Calendar c = Calendar.getInstance();
-		return "" + c.get(Calendar.HOUR_OF_DAY) + ':' + c.get(Calendar.MINUTE) + ':' + c.get(Calendar.SECOND);
+		String second = Integer.toString(c.get(Calendar.SECOND));
+		second = second.length() == 2 ? second : '0' + second;
+
+		return "" + c.get(Calendar.HOUR_OF_DAY) + ':' + c.get(Calendar.MINUTE) + ':' + second;
 	}
 
 	/**
@@ -159,9 +162,9 @@ public class Utils {
 	 * @throws IOException
 	 */
 	public static int getTotalLines(String path) throws IOException {
-		File f = new File(path);
+		File file = new File(path);
 		List<String> lines = null;
-		lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODING));
+		lines = Files.readLines(file, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 
 		return lines.size();
 	}
@@ -224,9 +227,9 @@ public class Utils {
 	 * @throws IOException
 	 */
 	public static void writeLine(String path, String text) throws IOException {
-		File f = new File(path);
+		File file = new File(path);
 		BufferedWriter out = null;
-		out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true)));
+		out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
 		out.write(text);
 		out.write(nl());
 		out.close();
@@ -246,13 +249,13 @@ public class Utils {
 	 */
 	public static void writeLineS(String path, String text, int line) throws IOException {
 		line--;
-		File f = new File(path);
+		File file = new File(path);
 		List<String> lines;
-		lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODING));
+		lines = Files.readLines(file, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		if (lines.size() < line)
 			line = lines.size();
 		lines.set(line, text);
-		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODING));
+		java.nio.file.Files.write(file.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 	}
 
 	/**
@@ -273,14 +276,14 @@ public class Utils {
 	public static void writeLineSP(String path, String text, int line, int position) throws IOException {
 		position--;
 		line--;
-		File f = new File(path);
-		List<String> lines = Files.readLines(f, Charset.forName(References.DEFAULT_TEXT_ENCODING));
+		File file = new File(path);
+		List<String> lines = Files.readLines(file, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		String l = lines.get(line);
 		if (l.length() < position)
 			position = l.length();
 		l = l.substring(l.length() - position) + text;
 		lines.set(line, l);
-		java.nio.file.Files.write(f.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODING));
+		java.nio.file.Files.write(file.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 	};
 
 }

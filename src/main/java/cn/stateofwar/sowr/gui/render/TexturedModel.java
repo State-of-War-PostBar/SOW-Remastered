@@ -15,7 +15,7 @@ import cn.stateofwar.sowr.util.DataUtils;
 public class TexturedModel extends Model {
 
 	/** Preset shader program for the model. */
-	private static final ShaderProgram prog = new ShaderProgram(
+	private static final ShaderProgram SHADER_PROGRAM = new ShaderProgram(
 			new Shader[] { Shaders.vertex_sampleless_texture, Shaders.fragment_sampleless_texture });
 
 	/** Texture for the model. */
@@ -64,7 +64,7 @@ public class TexturedModel extends Model {
 		vbo_texcoords = new BufferObject();
 		ebo = new BufferObject();
 
-		prog.use();
+		SHADER_PROGRAM.use();
 
 		vao.bind();
 
@@ -91,7 +91,7 @@ public class TexturedModel extends Model {
 
 		vbo_texcoords.unbind(GL_ARRAY_BUFFER);
 		vao.unbind();
-		prog.unuse();
+		SHADER_PROGRAM.unuse();
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class TexturedModel extends Model {
 	 */
 	@Override
 	public void draw() {
-		prog.use();
+		SHADER_PROGRAM.use();
 		texture.bind();
 		vao.bind();
 
@@ -112,7 +112,7 @@ public class TexturedModel extends Model {
 		glDisableVertexAttribArray(0);
 
 		vao.unbind();
-		prog.unuse();
+		SHADER_PROGRAM.unuse();
 	}
 
 	/**
