@@ -9,7 +9,7 @@ import cn.stateofwar.sowr.util.Logger;
  */
 public class GameState {
 
-	private static final Logger logger = new Logger("Game");
+	private static final Logger LOGGER = new Logger("Game");
 
 	/** Renderer for the frame. */
 	private Renderer renderer;
@@ -20,7 +20,7 @@ public class GameState {
 	public void enter(Renderer _renderer) {
 		renderer = _renderer;
 
-		logger.info("Initialized a game state.");
+		LOGGER.info("Initialized a game state.");
 	}
 
 	/**

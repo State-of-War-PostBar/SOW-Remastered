@@ -15,7 +15,7 @@ import cn.stateofwar.sowr.util.Logger;
  */
 public class Graphic {
 
-	private static final Logger logger = new Logger("Render");
+	private static final Logger LOGGER = new Logger("Render");
 
 	/** Maximum FPS the program wants to reach. */
 	public static int desired_fps;
@@ -41,11 +41,11 @@ public class Graphic {
 		s.append("GPU Renderer: ").append(glGetString(GL_RENDERER)).append(nl());
 		s.append("OpenGL Version: ").append(glGetString(GL_VERSION)).append(nl());
 		s.append("GLSL Version: ").append(glGetString(GL_SHADING_LANGUAGE_VERSION));
-		logger.info(s.toString());
+		LOGGER.info(s.toString());
 
 		Shaders.init();
 
-		logger.info("Initialized rendering capabilities.");
+		LOGGER.info("Initialized rendering capabilities.");
 	}
 
 	/**

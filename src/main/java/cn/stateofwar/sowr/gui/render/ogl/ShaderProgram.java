@@ -15,7 +15,7 @@ import cn.stateofwar.sowr.util.Logger;
  */
 public class ShaderProgram {
 
-	private static final Logger logger = new Logger("Render");
+	private static final Logger LOGGER = new Logger("Render");
 
 	/** ID of the shader program. */
 	private final int id;
@@ -32,14 +32,14 @@ public class ShaderProgram {
 
 		glLinkProgram(id);
 		if ((glGetProgrami(id, GL_LINK_STATUS)) == GL_FALSE) {
-			logger.error("Error at linking an OpenGL shader program!");
-			logger.error(glGetProgramInfoLog(id));
+			LOGGER.error("Error at linking an OpenGL shader program!");
+			LOGGER.error(glGetProgramInfoLog(id));
 		}
 
 		glValidateProgram(id);
 		if ((glGetProgrami(id, GL_VALIDATE_STATUS)) == GL_FALSE) {
-			logger.error("Error at validating an OpenGL shader program!");
-			logger.error(glGetProgramInfoLog(id));
+			LOGGER.error("Error at validating an OpenGL shader program!");
+			LOGGER.error(glGetProgramInfoLog(id));
 		}
 	}
 

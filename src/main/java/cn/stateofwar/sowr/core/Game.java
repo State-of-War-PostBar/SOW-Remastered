@@ -13,7 +13,7 @@ import cn.stateofwar.sowr.util.Logger;
  */
 public class Game {
 
-	private static final Logger logger = new Logger("Game");
+	private static final Logger LOGGER = new Logger("Game");
 
 	/** If the game is running. */
 	public static boolean running;
@@ -31,7 +31,7 @@ public class Game {
 	 * Start the game engine.
 	 */
 	public static void startGame() {
-		logger.info("The game is starting.");
+		LOGGER.info("The game is starting.");
 		running = true;
 
 		Graphic.initRenderCapabilities();
@@ -71,7 +71,7 @@ public class Game {
 	public static void abrogate() {
 		Graphic.abrogateRender();
 
-		logger.info("The game is shut down.");
+		LOGGER.info("The game is shut down.");
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class Game {
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException ex) {
-				logger.fatal(ex.getLocalizedMessage());
+				LOGGER.fatal(ex.getLocalizedMessage());
 			}
 			now = timer.getTime();
 		}

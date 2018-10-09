@@ -19,7 +19,7 @@ import cn.stateofwar.sowr.util.Utils;
  */
 public class Texture {
 
-	private static final Logger logger = new Logger("Render");
+	private static final Logger LOGGER = new Logger("Render");
 
 	/** ID of the texture. */
 	private final int id;
@@ -168,13 +168,13 @@ public class Texture {
 			image = stbi_load(path, w, h, comp, 4);
 
 			if (image == null)
-				logger.error("Failed to load a texture file from " + path + " !" + Utils.nl() + stbi_failure_reason());
+				LOGGER.error("Failed to load a texture file from " + path + " !" + Utils.nl() + stbi_failure_reason());
 
 			width = w.get();
 			height = h.get();
 		}
 
-		logger.info("Loaded a texture at path " + path + ".");
+		LOGGER.info("Loaded a texture at path " + path + ".");
 		return createTexture(width, height, image);
 	}
 

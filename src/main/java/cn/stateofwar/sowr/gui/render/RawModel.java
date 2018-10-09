@@ -14,6 +14,10 @@ import cn.stateofwar.sowr.util.DataUtils;
  */
 public class RawModel extends Model {
 
+	/** Preset shader program for the model. */
+	private static final ShaderProgram SHADER_PROGRAM = new ShaderProgram(
+			new Shader[] { Shaders.vertex_raw, Shaders.fragment_raw });
+
 	/** Vertex array object. */
 	private ArrayObject vao;
 
@@ -31,10 +35,6 @@ public class RawModel extends Model {
 
 	/** Vertex indices. */
 	private int[] indices;
-
-	/** Preset shader program for the model. */
-	private static final ShaderProgram prog = new ShaderProgram(
-			new Shader[] { Shaders.vertex_raw, Shaders.fragment_raw });
 
 	/**
 	 * Construct the class while building the OpenGL model.
@@ -57,7 +57,7 @@ public class RawModel extends Model {
 		if (color == null)
 			color = RGBA.WHITE;
 
-		prog.use();
+		SHADER_PROGRAM.use();
 
 		vao.bind();
 
@@ -84,7 +84,7 @@ public class RawModel extends Model {
 
 		vbo_color.unbind(GL_ARRAY_BUFFER);
 		vao.unbind();
-		prog.unuse();
+		SHADER_PROGRAM.unuse();
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class RawModel extends Model {
 	 */
 	@Override
 	public void draw() {
-		prog.use();
+		SHADER_PROGRAM.use();
 		vao.bind();
 
 		glEnableVertexAttribArray(0);
@@ -104,7 +104,7 @@ public class RawModel extends Model {
 		glDisableVertexAttribArray(0);
 
 		vao.unbind();
-		prog.unuse();
+		SHADER_PROGRAM.unuse();
 	}
 
 	/**

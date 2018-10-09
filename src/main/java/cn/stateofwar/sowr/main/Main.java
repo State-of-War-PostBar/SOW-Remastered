@@ -5,22 +5,22 @@ import cn.stateofwar.sowr.util.Logger;
 
 public class Main {
 
-	private static final Logger logger = new Logger("Main");
+	private static final Logger LOGGER = new Logger("Main");
 
 	public static void main(String[] args) {
-		logger.init();
+		LOGGER.init();
 
-		logger.info("Welcome to the new State of War!");
-		logger.info("Initializing the program...");
+		LOGGER.info("Welcome to the new State of War!");
+		LOGGER.info("Initializing the program...");
 		Trim.init();
 
 		Game.startGame();
 
 		Game.abrogate();
 
-		logger.info("Shutting down client...");
+		LOGGER.info("Shutting down client...");
 		Trim.abrogate();
-		logger.info("The client is shut down. Thank you for playing!");
+		LOGGER.info("The client is shut down. Thank you for playing!");
 	}
 
 }

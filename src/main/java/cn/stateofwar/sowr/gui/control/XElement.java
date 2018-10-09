@@ -21,9 +21,6 @@ public abstract class XElement {
 	/** If the element is enabled. */
 	private boolean enabled = false;
 
-	/** If the element has size. */
-	private boolean has_size = false;
-
 	/** If the element is hidden from rendering. */
 	private boolean hidden = true;
 
@@ -133,15 +130,6 @@ public abstract class XElement {
 			for (Entry<String, XElement> e : children.entrySet())
 				e.getValue().disable();
 		return this;
-	}
-
-	/**
-	 * Check if the element has size.
-	 * 
-	 * @return If the element has size.
-	 */
-	public boolean hasSize() {
-		return has_size;
 	}
 
 	/**
