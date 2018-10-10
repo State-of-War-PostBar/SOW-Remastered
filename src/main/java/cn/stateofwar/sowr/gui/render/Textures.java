@@ -18,9 +18,12 @@ public class Textures {
 	 * @param name    Internal name for the texture.
 	 * 
 	 * @param texture Texture to register.
+	 * 
+	 * @return Instance of the texture.
 	 */
-	public static void register(String name, Texture texture) {
+	public static Texture register(String name, Texture texture) {
 		textures.put(name, texture);
+		return textures.get(name);
 	}
 
 	/**
@@ -29,9 +32,12 @@ public class Textures {
 	 * @param name Internal name for the texture.
 	 * 
 	 * @param path Path of the texture.
+	 * 
+	 * @return Instance of the texture.
 	 */
-	public static void register(String name, String path) {
+	public static Texture register(String name, String path) {
 		textures.put(name, Texture.loadTexture(path));
+		return textures.get(name);
 	}
 
 	/**

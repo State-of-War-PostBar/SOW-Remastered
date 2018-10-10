@@ -62,11 +62,4 @@ public class Menu extends XSprite {
 		return (Menu) menus.get(name).disable().hide();
 	}
 
-	/**
-	 * Initialize default menus.
-	 */
-	public static void init() {
-
-	}
-
 }
