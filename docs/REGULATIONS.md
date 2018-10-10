@@ -20,7 +20,7 @@ For others, please reduce it as possible.
 对于非这一类情况的，尽量减少之。
 
 ## Git
-*DO NOT* upload binary files unless there's no other way.
+**DO NOT** upload binary files unless there's no other way.
 
 除非别无他法，否则请勿上传二进制文件。
 
