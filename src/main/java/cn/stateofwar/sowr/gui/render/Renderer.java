@@ -2,6 +2,7 @@ package cn.stateofwar.sowr.gui.render;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.joml.Vector4d;
 
 import cn.stateofwar.sowr.util.DataUtils;
 
@@ -75,6 +76,17 @@ public class Renderer {
 	/**
 	 * Draw a rectangle with a texture.
 	 * 
+	 * @param coord   Coordinates of the rectangle.
+	 * 
+	 * @param texture Texture to use.
+	 */
+	public void drawTexturedRect(Vector4d coord, Texture texture) {
+		drawTexturedRect((int) coord.x, (int) coord.y, (int) coord.z, (int) coord.w, texture);
+	}
+
+	/**
+	 * Draw a rectangle with a texture.
+	 * 
 	 * @param x       X coordinate of the bottom-left vertex of the rectangle.
 	 * 
 	 * @param y       Y coordinate of the bottom-left vertex of the rectangle.
@@ -119,13 +131,13 @@ public class Renderer {
 		Vector2f coord6 = DataUtils.toTexCoord(s + u, t, texture);
 		Vector2f coord7 = DataUtils.toTexCoord(s, t, texture);
 		Vector2f coord8 = DataUtils.toTexCoord(s, t + v, texture);
-		TexturedModel mod = new TexturedModel(
+		TexturedModel model = new TexturedModel(
 				new float[] { coord1.x, coord1.y, coord1.z, coord2.x, coord2.y, coord2.z, coord3.x, coord3.y, coord3.z,
 						coord4.x, coord4.y, coord4.z },
 				INDICES_RECTANGLE, texture,
 				new float[] { coord5.x, coord5.y, coord6.x, coord6.y, coord7.x, coord7.y, coord8.x, coord8.y });
-		mod.draw();
-		mod.abrogate();
+		model.draw();
+		model.abrogate();
 	}
 
 }
