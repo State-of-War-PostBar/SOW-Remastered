@@ -34,12 +34,12 @@ public class Utils {
 	 */
 	public static OSType getOS() {
 		OSType detected_os;
-		String OS = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
-		if ((OS.indexOf("mac") >= 0) || (OS.indexOf("darwin") >= 0))
+		String os_name = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
+		if ((os_name.indexOf("mac") >= 0) || (os_name.indexOf("darwin") >= 0))
 			detected_os = OSType.MAC_OS;
-		else if (OS.indexOf("win") >= 0)
+		else if (os_name.indexOf("win") >= 0)
 			detected_os = OSType.WINDOWS;
-		else if (OS.indexOf("nux") >= 0)
+		else if (os_name.indexOf("nux") >= 0)
 			detected_os = OSType.LINUX;
 		else
 			detected_os = OSType.OTHER;
@@ -59,16 +59,16 @@ public class Utils {
 	/**
 	 * Get the current system time.
 	 * 
-	 * @return Current time in the format of <i>Hour:Minute:Second</i>
+	 * @return Current time in the format of <b>Hour:Minute:Second</b>.
 	 */
 	public static String getSysTime() {
-		Calendar c = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();
 
-		String hour = Integer.toString(c.get(Calendar.HOUR_OF_DAY));
+		String hour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
 		hour = hour.length() == 2 ? hour : '0' + hour;
-		String minute = Integer.toString(c.get(Calendar.MINUTE));
+		String minute = Integer.toString(calendar.get(Calendar.MINUTE));
 		minute = minute.length() == 2 ? minute : '0' + minute;
-		String second = Integer.toString(c.get(Calendar.SECOND));
+		String second = Integer.toString(calendar.get(Calendar.SECOND));
 		second = second.length() == 2 ? second : '0' + second;
 
 		return "" + hour + ':' + minute + ':' + second;
@@ -79,21 +79,21 @@ public class Utils {
 	 * 
 	 * @param path     Path of the file.
 	 * 
-	 * @param override Override the old file (if there is one).
+	 * @param override Override the old file (if there is one) if {@code true}.
 	 * 
 	 * @throws IOException
 	 */
 	public static void createFile(String path, boolean override) throws IOException {
-		File f = new File(path);
-		File parent = f.getParentFile();
+		File file = new File(path);
+		File parent = file.getParentFile();
 		if (parent != null && !parent.exists())
 			parent.mkdirs();
-		if (f.exists())
+		if (file.exists())
 			if (override)
-				f.delete();
+				file.delete();
 			else
 				return;
-		f.createNewFile();
+		file.createNewFile();
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class Utils {
 	 * 
 	 * @throws IOException
 	 */
-	public static byte[] getRes(String path) throws IOException {
+	public static byte[] getResource(String path) throws IOException {
 		return Resources.toByteArray(Resources.getResource(path));
 	}
 
@@ -119,7 +119,7 @@ public class Utils {
 	 * 
 	 * @throws IOException
 	 */
-	public static List<String> getResAsStrings(String path) throws IOException {
+	public static List<String> getResourceAsStrings(String path) throws IOException {
 		return Resources.readLines(Resources.getResource(path), Charset.forName(References.DEFAULT_TEXT_ENCODING));
 	}
 
@@ -142,7 +142,8 @@ public class Utils {
 	 * 
 	 * @param list     List of strings.
 	 * 
-	 * @param new_line Insert a line separator at the end of each line.
+	 * @param new_line Insert a line separator at the end of each line if
+	 *                 {@code true}.
 	 * 
 	 * @return The converted string.
 	 */

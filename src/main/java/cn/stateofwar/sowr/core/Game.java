@@ -2,7 +2,6 @@ package cn.stateofwar.sowr.core;
 
 import cn.stateofwar.sowr.References;
 import cn.stateofwar.sowr.gui.Gui;
-import cn.stateofwar.sowr.gui.Menu;
 import cn.stateofwar.sowr.gui.multimedia.Window;
 import cn.stateofwar.sowr.gui.render.Graphic;
 import cn.stateofwar.sowr.gui.render.Renderer;
@@ -56,7 +55,7 @@ public class Game {
 			if (win.isVSync())
 				syncFrame(References.VERTICAL_SYNC_FPS);
 			else
-				syncFrame(Graphic.desired_fps);
+				syncFrame(Graphic.fps_max);
 
 			timer.update();
 		}
@@ -74,7 +73,9 @@ public class Game {
 	}
 
 	/**
-	 * Eliminating over frames and lock in vertical sync (only if it's enabled).
+	 * Eliminating over frames.
+	 * 
+	 * @param fps The frames per second limit.
 	 */
 	private static void syncFrame(int fps) {
 		double lastLoopTime = timer.getLastLoopTime();

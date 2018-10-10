@@ -30,6 +30,9 @@ public class Texture {
 	/** Height of the texture. */
 	private int height;
 
+	/**
+	 * Generate an OpenGL texture.
+	 */
 	private Texture() {
 		id = glGenTextures();
 	}

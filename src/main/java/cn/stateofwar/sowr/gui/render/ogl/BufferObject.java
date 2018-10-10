@@ -13,6 +13,9 @@ public class BufferObject {
 	/** ID of the object. */
 	private final int id;
 
+	/**
+	 * Create an OpenGL buffer object.
+	 */
 	public BufferObject() {
 		id = glGenBuffers();
 	}

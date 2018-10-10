@@ -10,6 +10,9 @@ public class ArrayObject {
 	/** ID of the object. */
 	private final int id;
 
+	/**
+	 * Create an OpenGL vertex array.
+	 */
 	public ArrayObject() {
 		id = glGenVertexArrays();
 	}
