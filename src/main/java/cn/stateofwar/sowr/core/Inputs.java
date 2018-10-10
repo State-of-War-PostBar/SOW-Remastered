@@ -22,6 +22,7 @@ public class Inputs {
 	/** Mouse button inputs from mouse; implements them from GLFW directly. */
 	public static boolean[] mouse = new boolean[11];
 
+	/** The maximum interval between two clicks for determining double click. */
 	public static double double_click_interval = Double.parseDouble(Config.get("Control", "Double Click Interval"));
 
 	/**

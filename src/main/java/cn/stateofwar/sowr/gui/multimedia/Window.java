@@ -16,7 +16,7 @@ import cn.stateofwar.sowr.util.Utils;
 import cn.stateofwar.sowr.util.Utils.OSType;
 
 /**
- * An instance of a GLFW window.
+ * An instance of a window.
  */
 public class Window {
 
@@ -35,7 +35,7 @@ public class Window {
 	private int height;
 
 	/** If the window enabled vertical sync. */
-	private boolean vSync;
+	private boolean vertical_sync;
 
 	/** If the window takes all the screen. */
 	private boolean full_screen;
@@ -43,21 +43,21 @@ public class Window {
 	/**
 	 * Initialize window properties.
 	 * 
-	 * @param _title       Title of the program.
+	 * @param _title         Title of the program.
 	 * 
-	 * @param _width       With of the window.
+	 * @param _width         With of the window.
 	 * 
-	 * @param _height      Height of the window.
+	 * @param _height        Height of the window.
 	 * 
-	 * @param _vSync       Vertical sync for the window.
+	 * @param _vertical_sync Vertical sync for the window.
 	 * 
-	 * @param _full_screen Full screen capturing.
+	 * @param _full_screen   Full screen capturing.
 	 */
-	public Window(String _title, int _width, int _height, boolean _vSync, boolean _full_screen) {
+	public Window(String _title, int _width, int _height, boolean _vertical_sync, boolean _full_screen) {
 		title = _title;
 		width = _width;
 		height = _height;
-		vSync = _vSync;
+		vertical_sync = _vertical_sync;
 		full_screen = _full_screen;
 	}
 
@@ -99,12 +99,12 @@ public class Window {
 			Inputs.cursor(x, y);
 		}));
 
-		if (vSync)
+		if (vertical_sync)
 			glfwSwapInterval(1);
 
-		GL.createCapabilities(true);
+		GL.createCapabilities();
 		glViewport(0, 0, width, height);
-		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 		return this;
 	}
@@ -172,20 +172,20 @@ public class Window {
 	/**
 	 * Get the vertical sync status of the window.
 	 * 
-	 * @param Vertical sync status.
+	 * @return Vertical sync status.
 	 */
 	public boolean isVSync() {
-		return vSync;
+		return vertical_sync;
 	}
 
 	/**
 	 * Set the vertical sync status of the window.
 	 * 
-	 * @param vSync Vertical sync status.
+	 * @param _vertical_sync Vertical sync status.
 	 */
-	public void setVSync(boolean _vSync) {
-		vSync = _vSync;
-		if (_vSync)
+	public void setVSync(boolean _vertical_sync) {
+		vertical_sync = _vertical_sync;
+		if (_vertical_sync)
 			glfwSwapInterval(1);
 		else
 			glfwSwapInterval(0);

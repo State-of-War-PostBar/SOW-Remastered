@@ -28,6 +28,11 @@ public class Shader {
 			name = _name;
 		}
 
+		/**
+		 * Get the name of the shader type.
+		 * 
+		 * @return Name of the shader type.
+		 */
 		public String getName() {
 			return name;
 		}
@@ -105,6 +110,13 @@ public class Shader {
 	/** Type of the shader. */
 	private ShaderType type;
 
+	/**
+	 * Create an OpenGL shader.
+	 * 
+	 * @param _id   ID of the shader. Use {@code glCreateProgram} to get one.
+	 * 
+	 * @param _type Type of the shader.
+	 */
 	private Shader(int _id, ShaderType _type) {
 		id = _id;
 		type = _type;
@@ -205,7 +217,7 @@ public class Shader {
 		int shader = glCreateShader(GL_VERTEX_SHADER);
 
 		try {
-			glShaderSource(shader, Utils.listToString(Utils.getResAsStrings(path), true));
+			glShaderSource(shader, Utils.listToString(Utils.getResourceAsStrings(path), true));
 		} catch (IOException e) {
 			LOGGER.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
@@ -253,7 +265,7 @@ public class Shader {
 	private static Shader loadFragmentShaderA(String path) {
 		int shader = glCreateShader(GL_FRAGMENT_SHADER);
 		try {
-			glShaderSource(shader, Utils.listToString(Utils.getResAsStrings(path), true));
+			glShaderSource(shader, Utils.listToString(Utils.getResourceAsStrings(path), true));
 		} catch (IOException e) {
 			LOGGER.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
@@ -302,7 +314,7 @@ public class Shader {
 		int shader = glCreateShader(GL_GEOMETRY_SHADER);
 
 		try {
-			glShaderSource(shader, Utils.listToString(Utils.getResAsStrings(path), true));
+			glShaderSource(shader, Utils.listToString(Utils.getResourceAsStrings(path), true));
 		} catch (IOException e) {
 			LOGGER.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
@@ -352,7 +364,7 @@ public class Shader {
 		int shader = glCreateShader(GL_TESS_CONTROL_SHADER);
 
 		try {
-			glShaderSource(shader, Utils.listToString(Utils.getResAsStrings(path), true));
+			glShaderSource(shader, Utils.listToString(Utils.getResourceAsStrings(path), true));
 		} catch (IOException e) {
 			LOGGER.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}
@@ -402,7 +414,7 @@ public class Shader {
 		int shader = glCreateShader(GL_TESS_EVALUATION_SHADER);
 
 		try {
-			glShaderSource(shader, Utils.listToString(Utils.getResAsStrings(path), true));
+			glShaderSource(shader, Utils.listToString(Utils.getResourceAsStrings(path), true));
 		} catch (IOException e) {
 			LOGGER.error("Error at loading a shader source!" + Utils.nl() + e.getLocalizedMessage());
 		}

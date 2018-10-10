@@ -88,26 +88,26 @@ public class DataUtils {
 	public static int getQuadrant(double x, double y) {
 		y = Graphic.win.getHeight() - y;
 
-		int xMid = Graphic.win.getWidth() / 2;
-		int yMid = Graphic.win.getHeight() / 2;
+		int x_mid = Graphic.win.getWidth() / 2;
+		int y_mid = Graphic.win.getHeight() / 2;
 
 		if (x == y && x == 0)
 			return 3;
-		else if (x == xMid && y == yMid)
+		else if (x == x_mid && y == y_mid)
 			return 0;
-		else if (x > xMid && y < yMid)
+		else if (x > x_mid && y < y_mid)
 			return 1;
-		else if (x < xMid && y < yMid)
+		else if (x < x_mid && y < y_mid)
 			return 2;
-		else if (x < xMid && y > yMid)
+		else if (x < x_mid && y > y_mid)
 			return 3;
-		else if (x > xMid && y > yMid)
+		else if (x > x_mid && y > y_mid)
 			return 4;
-		else if (x == xMid && y < yMid)
+		else if (x == x_mid && y < y_mid)
 			return 5;
-		else if (x < xMid && y == yMid)
+		else if (x < x_mid && y == y_mid)
 			return 6;
-		else if (x == xMid && y > yMid)
+		else if (x == x_mid && y > y_mid)
 			return 7;
 		else
 			return 8;
@@ -116,15 +116,16 @@ public class DataUtils {
 	/**
 	 * Check if a point is in a rectangle.
 	 * 
-	 * @param point Coordinate of the point.
+	 * @param point     Coordinate of the point.
 	 * 
-	 * @param rect  Coordinates of the rectangle, x-y are the bottom left corner of
-	 *              the rectangle and z-w are its width and height.
+	 * @param rectangle Coordinates of the rectangle, x-y are the bottom left corner
+	 *                  of the rectangle and z-w are its width and height.
 	 * 
 	 * @return If the point is in the range of the rectangle.
 	 */
-	public static boolean pir(Vector2d point, Vector4d rect) {
-		if (point.x >= rect.x && point.x <= rect.x + rect.z && point.y >= rect.y && point.y <= rect.y + rect.w)
+	public static boolean pir(Vector2d point, Vector4d rectangle) {
+		if (point.x >= rectangle.x && point.x <= rectangle.x + rectangle.z && point.y >= rectangle.y
+				&& point.y <= rectangle.y + rectangle.w)
 			return true;
 		return false;
 	}
@@ -161,10 +162,10 @@ public class DataUtils {
 	 * @return A vector contains their percentages toward the screen.
 	 */
 	public static Vector2f toScrPerc(int x, int y) {
-		float xPerc = (float) x / (float) Graphic.win.getWidth();
-		float yPerc = (float) y / (float) Graphic.win.getHeight();
+		float x_percentage = (float) x / (float) Graphic.win.getWidth();
+		float y_percentage = (float) y / (float) Graphic.win.getHeight();
 
-		return new Vector2f(xPerc, yPerc);
+		return new Vector2f(x_percentage, y_percentage);
 	}
 
 	/**
@@ -185,10 +186,10 @@ public class DataUtils {
 		s = s > w ? w : s;
 		t = t > h ? h : t;
 
-		float sPerc = (float) s / (float) w;
-		float tPerc = (float) t / (float) h;
+		float s_percentage = (float) s / (float) w;
+		float t_percentage = (float) t / (float) h;
 
-		return new Vector2f(sPerc, tPerc);
+		return new Vector2f(s_percentage, t_percentage);
 	}
 
 }
