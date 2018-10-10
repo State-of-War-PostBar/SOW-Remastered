@@ -17,7 +17,7 @@ public class I18n {
 	private static final String PARSER = "=";
 
 	/** All the languages this program supports. */
-	private static final List<String> LEGAL_VAL = Stream.of("EN_US", "ZH_CN").collect(Collectors.toList());
+	private static final List<String> LEGAL_VAL = Stream.of("EN_US", "ZH_CN", "ZH_TW").collect(Collectors.toList());
 
 	/** Current language preference of the program. */
 	private static Locales locale;
@@ -84,7 +84,7 @@ public class I18n {
 	 */
 	public static enum Locales {
 
-		EN_US("EN_US"), ZH_CN("ZH_CN");
+		EN_US("EN_US"), ZH_CN("ZH_CN"), ZH_TW("ZH_TW");
 
 		/** Name of the locale. */
 		private String name;
@@ -112,9 +112,9 @@ public class I18n {
 		 * @throws IOException
 		 */
 		private void readValues() throws IOException {
-			List<String> trans = new ArrayList<>();
-			trans = Utils.getResAsStrings("sowr/language/" + name + ".lang");
-			for (String x : trans)
+			List<String> translations_read = new ArrayList<>();
+			translations_read = Utils.getResourceAsStrings("sowr/language/" + name + ".lang");
+			for (String x : translations_read)
 				if (x.indexOf(PARSER) != -1) {
 					int index = x.indexOf(PARSER);
 					translations.put(x.substring(0, index), x.substring(index + 1));
@@ -144,9 +144,9 @@ public class I18n {
 		 *         United States)</i> will be selected.
 		 */
 		public static Locales parseLoc(String name) {
-			for (Locales loc : Locales.values())
-				if (loc.name.equals(name))
-					return loc;
+			for (Locales locale : Locales.values())
+				if (locale.name.equals(name))
+					return locale;
 			return EN_US;
 		}
 	}

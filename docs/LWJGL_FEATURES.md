@@ -5,8 +5,6 @@ LWJGL Core
 
 Assimp
 
-BGFX
-
 GLFW
 
 LMDB
