@@ -37,7 +37,6 @@ public class Game {
 		Graphic.initRenderCapabilities();
 		win = Graphic.win;
 		Gui.init();
-		Menu.init();
 
 		state.enter(new Renderer());
 		timer.init();
