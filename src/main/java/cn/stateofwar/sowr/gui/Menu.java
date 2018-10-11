@@ -11,7 +11,7 @@ import cn.stateofwar.sowr.gui.render.Texture;
 /**
  * A game menu, which is a wrapper for a sprite (background).
  */
-public class Menu extends XSprite {
+public abstract class Menu extends XSprite {
 
 	/** All the menus of the program. */
 	private static Map<String, Menu> menus = new HashMap<>();
@@ -19,6 +19,11 @@ public class Menu extends XSprite {
 	public Menu(String _identifier, Vector4d coord, Texture texture) {
 		super(_identifier, coord, texture);
 	}
+
+	/**
+	 * Called when a menu is activated.
+	 */
+	public abstract Menu switched();
 
 	/**
 	 * Register a menu.
@@ -48,7 +53,7 @@ public class Menu extends XSprite {
 	 * @return Instance of the menu.
 	 */
 	public static Menu activateMenu(String name) {
-		return (Menu) menus.get(name).enable().show();
+		return ((Menu) menus.get(name).enable().show()).switched();
 	}
 
 	/**

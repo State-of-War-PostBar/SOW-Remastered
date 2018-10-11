@@ -12,4 +12,13 @@ public class MenuNewGame extends Menu {
 	public MenuNewGame(String _identifier, Vector4d coord, Texture texture) {
 		super(_identifier, coord, texture);
 	}
+
+	/**
+	 * Called when a menu is activated.
+	 */
+	@Override
+	public Menu switched() {
+		return this;
+	}
+
 }

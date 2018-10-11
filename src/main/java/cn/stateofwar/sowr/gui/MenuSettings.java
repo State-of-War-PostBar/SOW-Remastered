@@ -13,4 +13,12 @@ public class MenuSettings extends Menu {
 		super(_identifier, coord, texture);
 	}
 
+	/**
+	 * Called when a menu is activated.
+	 */
+	@Override
+	public Menu switched() {
+		return this;
+	}
+
 }

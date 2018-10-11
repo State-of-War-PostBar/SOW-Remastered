@@ -8,7 +8,7 @@ import cn.stateofwar.sowr.core.Inputs;
 /**
  * An area responses to mouse button inputs only for when it's double clicked.
  */
-public abstract class XButtonDoubleClick extends XButtonInstant {
+public abstract class XClickerDoubleClick extends XClickerInstant {
 
 	/** Mark to check if it's between two clicking. */
 	private boolean click_mark;
@@ -19,7 +19,7 @@ public abstract class XButtonDoubleClick extends XButtonInstant {
 	/** A timer to check if the click mark is expired. */
 	private double click_timer;
 
-	public XButtonDoubleClick(String _identifier, Vector4d coord, int _mouse_button) {
+	public XClickerDoubleClick(String _identifier, Vector4d coord, int _mouse_button) {
 		super(_identifier, coord, _mouse_button);
 	}
 
