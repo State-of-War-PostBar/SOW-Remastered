@@ -5,12 +5,12 @@ import org.joml.Vector4d;
 /**
  * An area responses to mouse button inputs only for when it's just pressed.
  */
-public abstract class XButtonInstant extends XButton {
+public abstract class XClickerInstant extends XClickerHold {
 
 	/** Mark to check if the mouse button is being hold down. */
 	private boolean has_clicked;
 
-	public XButtonInstant(String _identifier, Vector4d coord, int mouse_button) {
+	public XClickerInstant(String _identifier, Vector4d coord, int mouse_button) {
 		super(_identifier, coord, mouse_button);
 	}
 
