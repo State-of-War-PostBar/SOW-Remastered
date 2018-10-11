@@ -37,13 +37,14 @@ public class GameState {
 	 */
 	public void input() {
 		Gui.updateInputs();
+		Gui.update();
 	}
 
 	/**
 	 * Update game contents.
 	 */
 	public void update() {
-		Gui.update();
+
 	}
 
 	/**

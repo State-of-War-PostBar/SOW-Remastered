@@ -27,7 +27,6 @@ public class BtnMenuMainLoadGame extends XClickerInstant {
 	 */
 	@Override
 	public void releasedX() {
-
 	}
 
 	@Override
