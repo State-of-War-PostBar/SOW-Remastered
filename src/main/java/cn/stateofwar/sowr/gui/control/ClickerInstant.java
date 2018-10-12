@@ -5,12 +5,22 @@ import org.joml.Vector4d;
 /**
  * An area responses to mouse button inputs only for when it's just pressed.
  */
-public abstract class XClickerInstant extends XClickerHold {
+public abstract class ClickerInstant extends ClickerHold {
 
 	/** Mark to check if the mouse button is being hold down. */
 	private boolean has_clicked;
 
-	public XClickerInstant(String _identifier, Vector4d coord, int mouse_button) {
+	/**
+	 * Create an instant clicker.
+	 * 
+	 * @param _identifier  Identifier for GUI element.
+	 * 
+	 * @param coord        Coordinates of inductive area. x-y are coordinate values
+	 *                     of the bottom left corner, z-w are its width and height.
+	 * 
+	 * @param mouse_button Mouse button the clicker responses.
+	 */
+	public ClickerInstant(String _identifier, Vector4d coord, int mouse_button) {
 		super(_identifier, coord, mouse_button);
 	}
 

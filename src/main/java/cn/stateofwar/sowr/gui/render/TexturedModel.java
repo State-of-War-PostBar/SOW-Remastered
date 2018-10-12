@@ -65,7 +65,6 @@ public class TexturedModel extends Model {
 		ebo = new BufferObject();
 
 		SHADER_PROGRAM.use();
-
 		vao.bind();
 
 		vbo_vertices.bind(GL_ARRAY_BUFFER);
@@ -112,6 +111,7 @@ public class TexturedModel extends Model {
 		glDisableVertexAttribArray(0);
 
 		vao.unbind();
+		texture.unbind();
 		SHADER_PROGRAM.unuse();
 	}
 

@@ -29,10 +29,11 @@ public class Config {
 	public static void init() {
 		DefaultConfig.initDefault();
 		configs.putAll(DefaultConfig.defaults);
+
 		try {
 			Utils.createFile(References.CONFIG_FILE_NAME, false);
 		} catch (IOException e) {
-			System.out.println(e.getLocalizedMessage());
+			System.err.println(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 
@@ -43,7 +44,7 @@ public class Config {
 			try {
 				Utils.createFile(References.CONFIG_FILE_NAME, true);
 			} catch (IOException e1) {
-				System.out.println(e.getLocalizedMessage());
+				System.err.println(e.getLocalizedMessage());
 				e1.printStackTrace();
 			}
 		}
@@ -115,10 +116,11 @@ public class Config {
 		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet())
 			for (Entry<String, String> entry2 : entry.getValue().entrySet())
 				file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
+
 		try {
 			file.store();
 		} catch (IOException e) {
-			System.out.println(e.getLocalizedMessage());
+			System.err.println(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 	}
@@ -130,14 +132,17 @@ public class Config {
 	 */
 	private static void readAllConfig(Ini ini) {
 		Set<Entry<String, Section>> sections = ini.entrySet();
+
 		for (Entry<String, Section> e : sections) {
 			Section section = e.getValue();
 			LinkedHashMap<String, String> sectionValues = new LinkedHashMap<>();
 			Set<Entry<String, String>> values = section.entrySet();
+
 			for (Entry<String, String> e2 : values) {
 				sectionValues.put(e2.getKey(), e2.getValue());
 				configs.put(e.getKey(), sectionValues);
 			}
+
 		}
 	}
 
@@ -185,6 +190,7 @@ public class Config {
 			if (defaults.containsKey(block))
 				if (defaults.get(block).containsKey(index))
 					return defaults.get(block).get(index);
+
 			throw new IllegalStateException(
 					"Failed to find [" + block + '.' + index + "] field in default configurations.");
 		}
@@ -206,6 +212,7 @@ public class Config {
 			for (Entry<String, LinkedHashMap<String, String>> entry : defaults.entrySet())
 				if (entry.getValue().containsKey(index))
 					return entry.getValue().get(index);
+
 			throw new IllegalStateException("Failed to find [unknown." + index + "] field in default configurations.");
 		}
 

@@ -58,7 +58,6 @@ public class RawModel extends Model {
 			color = RGBA.WHITE;
 
 		SHADER_PROGRAM.use();
-
 		vao.bind();
 
 		vbo_vertices.bind(GL_ARRAY_BUFFER);

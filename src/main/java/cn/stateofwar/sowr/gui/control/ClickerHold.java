@@ -5,7 +5,7 @@ import org.joml.Vector4d;
 /**
  * An area responses to mouse button inputs.
  */
-public abstract class XClickerHold extends XElement implements IClickable {
+public abstract class ClickerHold extends Element implements IClickable {
 
 	/** Coordinate of the element. */
 	private Vector4d coord;
@@ -16,7 +16,17 @@ public abstract class XClickerHold extends XElement implements IClickable {
 	/** Mouse button that can trigger the element. */
 	private int mouse_button;
 
-	public XClickerHold(String _identifier, Vector4d coord, int _mouse_button) {
+	/**
+	 * Create a holding clicker.
+	 * 
+	 * @param _identifier  Identifier for GUI element.
+	 * 
+	 * @param coord        Coordinates of inductive area. x-y are coordinate values
+	 *                     of the bottom left corner, z-w are its width and height.
+	 * 
+	 * @param mouse_button Mouse button the clicker responses.
+	 */
+	public ClickerHold(String _identifier, Vector4d coord, int mouse_button) {
 		identifier = _identifier;
 		resize(coord);
 		setButton(mouse_button);

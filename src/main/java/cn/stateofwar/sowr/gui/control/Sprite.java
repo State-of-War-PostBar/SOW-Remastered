@@ -8,7 +8,7 @@ import cn.stateofwar.sowr.gui.render.Texture;
 /**
  * A sprite image on the screen.
  */
-public class XSprite extends XElement {
+public class Sprite extends Element {
 
 	/** Coordinate of the sprite. */
 	private Vector4d coord;
@@ -16,7 +16,17 @@ public class XSprite extends XElement {
 	/** Texture of the sprite. */
 	private Texture texture;
 
-	public XSprite(String _identifier, Vector4d coord, Texture texture) {
+	/**
+	 * Create a sprite image.
+	 * 
+	 * @param _identifier Identifier for the element.
+	 * 
+	 * @param coord       Coordinates of the sprite. x-y are coordinate values of
+	 *                    the bottom left corner, z-w are its width and height.
+	 * 
+	 * @param texture     Texture for the sprite image.
+	 */
+	public Sprite(String _identifier, Vector4d coord, Texture texture) {
 		identifier = _identifier;
 		resize(coord);
 		setTexture(texture);
@@ -44,7 +54,7 @@ public class XSprite extends XElement {
 	 */
 	@Override
 	public void render() {
-		if (!isHidden())
+		if (!isHidden() && isEnabled())
 			Game.state.getRenderer().drawTexturedRect((int) coord.x, (int) coord.y, (int) coord.z, (int) coord.w,
 					texture);
 		super.render();

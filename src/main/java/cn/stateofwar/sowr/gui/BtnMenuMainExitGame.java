@@ -3,12 +3,12 @@ package cn.stateofwar.sowr.gui;
 import org.joml.Vector4d;
 
 import cn.stateofwar.sowr.core.Game;
-import cn.stateofwar.sowr.gui.control.XClickerInstant;
+import cn.stateofwar.sowr.gui.control.ClickerInstant;
 
 /**
  * Button to exit the game.
  */
-public class BtnMenuMainExitGame extends XClickerInstant {
+public class BtnMenuMainExitGame extends ClickerInstant {
 
 	public BtnMenuMainExitGame(String _identifier, Vector4d coord, int mouse_button) {
 		super(_identifier, coord, mouse_button);
@@ -31,7 +31,6 @@ public class BtnMenuMainExitGame extends XClickerInstant {
 
 	@Override
 	public void onParentResize(Object size) {
-		resize(size);
 		super.resize(size);
 	}
 

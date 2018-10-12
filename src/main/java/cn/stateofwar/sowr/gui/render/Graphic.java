@@ -18,22 +18,22 @@ public class Graphic {
 	private static final Logger LOGGER = new Logger("Render");
 
 	/** Maximum FPS the program wants to reach. */
-	public static int fps_max;
+	public static int max_fps;
 
 	/** Window of the game engine. */
-	public static Window win;
+	public static Window window;
 
 	/**
 	 * Register the window and establish render capabilities.
 	 */
 	public static void initRenderCapabilities() {
-		win = new Window(I18n.t(References.PROGRAM_NAME), Integer.parseInt(Config.get("GUI", "Window Width")),
+		window = new Window(I18n.t(References.PROGRAM_NAME), Integer.parseInt(Config.get("GUI", "Window Width")),
 				Integer.parseInt(Config.get("GUI", "Window Height")),
 				Boolean.parseBoolean(Config.get("GUI", "Vertical Sync")),
 				Boolean.parseBoolean(Config.get("GUI", "Full Screen")));
-		win.initWindow();
+		window.initWindow();
 
-		fps_max = win.isVSync() ? References.VERTICAL_SYNC_FPS : Integer.parseInt(Config.get("GUI", "Max FPS"));
+		max_fps = window.isVSync() ? References.VERTICAL_SYNC_FPS : Integer.parseInt(Config.get("GUI", "Max FPS"));
 
 		StringBuilder s = new StringBuilder();
 		s.append("Graphic Adaptor information: ").append(nl());
@@ -53,7 +53,7 @@ public class Graphic {
 	 */
 	public static void abrogateRender() {
 		Shaders.abrogate();
-		win.abrogate();
+		window.abrogate();
 	}
 
 }

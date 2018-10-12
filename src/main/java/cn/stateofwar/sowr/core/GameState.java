@@ -36,7 +36,6 @@ public class GameState {
 	 * Handle input from user.
 	 */
 	public void input() {
-		Gui.updateInputs();
 		Gui.update();
 	}
 

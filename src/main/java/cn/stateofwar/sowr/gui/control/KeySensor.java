@@ -3,20 +3,24 @@ package cn.stateofwar.sowr.gui.control;
 /**
  * A key sensor.
  */
-public abstract class XKeySensor extends XElement implements IKeyInductive {
+public abstract class KeySensor extends Element implements IKeyInductive {
 
 	/** Key binds to the element. */
 	private int key;
 
-	public XKeySensor(String _identifier, int key) {
+	public KeySensor(String _identifier, int key) {
 		identifier = _identifier;
 		setKey(key);
 	}
 
-	/** Called when the key is pressed. */
+	/**
+	 * Called when the key is pressed.
+	 */
 	public abstract void pressed();
 
-	/** Called when the key is not pressed. */
+	/**
+	 * Called when the key is not pressed.
+	 **/
 	public abstract void released();
 
 	/**

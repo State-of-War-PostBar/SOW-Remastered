@@ -16,7 +16,7 @@ import com.google.common.io.Resources;
 import cn.stateofwar.sowr.References;
 
 /**
- * Small utility library for other code.
+ * Small utility library.
  */
 public class Utils {
 
@@ -33,18 +33,19 @@ public class Utils {
 	 * @return Current operating system.
 	 */
 	public static OSType getOS() {
-		OSType detected_os;
+		OSType os;
 		String os_name = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
-		if ((os_name.indexOf("mac") >= 0) || (os_name.indexOf("darwin") >= 0))
-			detected_os = OSType.MAC_OS;
-		else if (os_name.indexOf("win") >= 0)
-			detected_os = OSType.WINDOWS;
-		else if (os_name.indexOf("nux") >= 0)
-			detected_os = OSType.LINUX;
-		else
-			detected_os = OSType.OTHER;
 
-		return detected_os;
+		if ((os_name.indexOf("mac") >= 0) || (os_name.indexOf("darwin") >= 0))
+			os = OSType.MAC_OS;
+		else if (os_name.indexOf("win") >= 0)
+			os = OSType.WINDOWS;
+		else if (os_name.indexOf("nux") >= 0)
+			os = OSType.LINUX;
+		else
+			os = OSType.OTHER;
+
+		return os;
 	}
 
 	/**
@@ -66,8 +67,10 @@ public class Utils {
 
 		String hour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
 		hour = hour.length() == 2 ? hour : '0' + hour;
+
 		String minute = Integer.toString(calendar.get(Calendar.MINUTE));
 		minute = minute.length() == 2 ? minute : '0' + minute;
+
 		String second = Integer.toString(calendar.get(Calendar.SECOND));
 		second = second.length() == 2 ? second : '0' + second;
 
@@ -86,13 +89,16 @@ public class Utils {
 	public static void createFile(String path, boolean override) throws IOException {
 		File file = new File(path);
 		File parent = file.getParentFile();
+
 		if (parent != null && !parent.exists())
 			parent.mkdirs();
+
 		if (file.exists())
 			if (override)
 				file.delete();
 			else
 				return;
+
 		file.createNewFile();
 	}
 
@@ -149,6 +155,7 @@ public class Utils {
 	 */
 	public static String listToString(List<String> list, boolean new_line) {
 		StringBuilder sb = new StringBuilder();
+
 		for (String s : list)
 			if (new_line)
 				sb.append(s).append(nl());
@@ -169,7 +176,8 @@ public class Utils {
 	 */
 	public static int getTotalLines(String path) throws IOException {
 		File file = new File(path);
-		List<String> lines = null;
+		List<String> lines;
+
 		lines = Files.readLines(file, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 
 		return lines.size();
@@ -189,7 +197,8 @@ public class Utils {
 	 */
 	public static String readLineS(String path, int line) throws IOException {
 		line--;
-		List<String> lines = null;
+		List<String> lines;
+
 		lines = Files.readLines(new File(path), Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		if (lines.size() < line)
 			line = lines.size();
@@ -205,8 +214,8 @@ public class Utils {
 	 * 
 	 * @param line     Line to read, starts with 1.
 	 * 
-	 * @param position Position to read, starts with 1. Text in this position will
-	 *                 also be read.
+	 * @param position Position to read, starts with 1. Text starts being read by
+	 *                 this position, not after.
 	 * 
 	 * @return Text read.
 	 * 
@@ -214,6 +223,7 @@ public class Utils {
 	 */
 	public static String readLineSP(String path, int line, int position) throws IOException {
 		position--;
+
 		String l = readLineS(path, line);
 		if (l.length() < position)
 			position = l.length();
@@ -234,10 +244,11 @@ public class Utils {
 	 */
 	public static void writeLine(String path, String text) throws IOException {
 		File file = new File(path);
-		BufferedWriter out = null;
-		out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
+
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
 		out.write(text);
 		out.write(nl());
+
 		out.close();
 	}
 
@@ -256,10 +267,11 @@ public class Utils {
 	public static void writeLineS(String path, String text, int line) throws IOException {
 		line--;
 		File file = new File(path);
-		List<String> lines;
-		lines = Files.readLines(file, Charset.forName(References.DEFAULT_TEXT_ENCODING));
+
+		List<String> lines = Files.readLines(file, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		if (lines.size() < line)
 			line = lines.size();
+
 		lines.set(line, text);
 		java.nio.file.Files.write(file.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 	}
@@ -274,8 +286,8 @@ public class Utils {
 	 * 
 	 * @param line     Line to write, starts with 1.
 	 * 
-	 * @param position Position to write, starts with 1. Text starts replacing by
-	 *                 this position, not after.
+	 * @param position Position to write, starts with 1. Text starts being replaced
+	 *                 by this position, not after.
 	 * 
 	 * @throws IOException
 	 */
@@ -283,11 +295,13 @@ public class Utils {
 		position--;
 		line--;
 		File file = new File(path);
+
 		List<String> lines = Files.readLines(file, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		String l = lines.get(line);
 		if (l.length() < position)
 			position = l.length();
 		l = l.substring(l.length() - position) + text;
+
 		lines.set(line, l);
 		java.nio.file.Files.write(file.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 	};
