@@ -2,7 +2,7 @@ apply plugin: "java"
 
 ext {
 	guava_version = "26.0-jre"
-	netty_version = "4.1.29.Final"
+	netty_version = "4.1.30.Final"
 	lwjgl_version = "3.2.0"
 	joml_version = "1.9.11"
 	ini4j_version = "0.5.4"
@@ -73,13 +73,13 @@ compileJava {
 	options.encoding = "${default_text_encoding}"
 }
 
+jar {
+	from configurations.compile.collect { zipTree it }
+	manifest.attributes "Main-Class": "cn.stateofwar.sowr.main.Main"
+}
+
 task run(type: JavaExec, dependsOn: classes) {
     main = "Main"
     classpath sourceSets.main.runtimeClasspath
     classpath configurations.runtime
-}
-
-jar {
-	from configurations.compile.collect { zipTree it }
-	manifest.attributes "Main-Class": "cn.stateofwar.sowr.main.Main"
 }
