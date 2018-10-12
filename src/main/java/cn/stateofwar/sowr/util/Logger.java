@@ -22,7 +22,7 @@ public class Logger {
 
 	/**
 	 * Create a logger for the class constructed it. It should be private static
-	 * final to avoid anything strange...
+	 * final to avoid anything strange.
 	 */
 	public Logger() {
 		source = "UNKNOWN";
@@ -30,9 +30,9 @@ public class Logger {
 
 	/**
 	 * Create a logger for the class constructed it. It should be private static
-	 * final to avoid anything strange...
+	 * final to avoid anything strange.
 	 * 
-	 * @param _source Who is recording the log massage.
+	 * @param _source Target recording the log massage.
 	 */
 	public Logger(String _source) {
 		source = _source;
@@ -46,6 +46,7 @@ public class Logger {
 		try {
 			Utils.createFile(log_file.toString(), true);
 		} catch (IOException e) {
+			System.err.println(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 	}
@@ -57,13 +58,13 @@ public class Logger {
 	 * @param message The message to record.
 	 */
 	public void info(String message) {
-		StringBuilder b = new StringBuilder();
-		b.append('[').append(Utils.getSysTime()).append(']');
-		b.append("[INFO]");
-		b.append('[').append(source).append(']');
-		b.append(message);
-		System.out.println(b.toString());
-		record(b.toString());
+		StringBuilder sb = new StringBuilder();
+		sb.append('[').append(Utils.getSysTime()).append(']');
+		sb.append("[INFO]");
+		sb.append('[').append(source).append(']');
+		sb.append(message);
+		System.out.println(sb.toString());
+		record(sb.toString());
 	}
 
 	/**
@@ -74,13 +75,13 @@ public class Logger {
 	 * @param message The message to record.
 	 */
 	public void warn(String message) {
-		StringBuilder b = new StringBuilder();
-		b.append('[').append(Utils.getSysTime()).append(']');
-		b.append("[WARNING]");
-		b.append('[').append(source).append(']');
-		b.append(message);
-		System.out.println(b.toString());
-		record(b.toString());
+		StringBuilder sb = new StringBuilder();
+		sb.append('[').append(Utils.getSysTime()).append(']');
+		sb.append("[WARNING]");
+		sb.append('[').append(source).append(']');
+		sb.append(message);
+		System.out.println(sb.toString());
+		record(sb.toString());
 	}
 
 	/**
@@ -92,13 +93,13 @@ public class Logger {
 	 * @param message The message to record.
 	 */
 	public void error(String message) {
-		StringBuilder b = new StringBuilder();
-		b.append('[').append(Utils.getSysTime()).append(']');
-		b.append("[ERROR]");
-		b.append('[').append(source).append(']');
-		b.append(message);
-		System.out.println(b.toString());
-		record(b.toString());
+		StringBuilder sb = new StringBuilder();
+		sb.append('[').append(Utils.getSysTime()).append(']');
+		sb.append("[ERROR]");
+		sb.append('[').append(source).append(']');
+		sb.append(message);
+		System.out.println(sb.toString());
+		record(sb.toString());
 	}
 
 	/**
@@ -109,13 +110,13 @@ public class Logger {
 	 * @param message The message to record.
 	 */
 	public void fatal(String message) {
-		StringBuilder b = new StringBuilder();
-		b.append('[').append(Utils.getSysTime()).append(']');
-		b.append("[FATAL ERROR]");
-		b.append('[').append(source).append(']');
-		b.append(message);
-		System.out.println(b.toString());
-		record(b.toString());
+		StringBuilder sb = new StringBuilder();
+		sb.append('[').append(Utils.getSysTime()).append(']');
+		sb.append("[FATAL ERROR]");
+		sb.append('[').append(source).append(']');
+		sb.append(message);
+		System.out.println(sb.toString());
+		record(sb.toString());
 	}
 
 	/**
@@ -124,12 +125,12 @@ public class Logger {
 	 * @param message The message to record.
 	 */
 	public void debug(String message) {
-		StringBuilder b = new StringBuilder();
-		b.append("[========DEBUG========]");
-		b.append('[').append(source).append(']');
-		b.append(message);
-		System.out.println(b.toString());
-		record(b.toString());
+		StringBuilder sb = new StringBuilder();
+		sb.append("[========DEBUG========]");
+		sb.append('[').append(source).append(']');
+		sb.append(message);
+		System.out.println(sb.toString());
+		record(sb.toString());
 	}
 
 	/**
@@ -141,7 +142,7 @@ public class Logger {
 		try {
 			Utils.writeLine(log_file.toString(), message);
 		} catch (IOException e) {
-			System.out.println(e.getLocalizedMessage());
+			System.err.println(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 	}

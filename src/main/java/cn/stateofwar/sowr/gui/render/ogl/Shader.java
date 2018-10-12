@@ -134,7 +134,6 @@ public class Shader {
 	/**
 	 * Get the type of the shader.
 	 * 
-	 * 
 	 * @return Type of the shader.
 	 */
 	public ShaderType getType() {
@@ -161,6 +160,7 @@ public class Shader {
 	 */
 	public static Shader createShader(String path, ShaderType type, boolean in_archive) {
 		switch (type) {
+
 		case VERTEX:
 			return in_archive ? loadVertexShaderA(path) : loadVertexShader(path);
 
@@ -191,6 +191,7 @@ public class Shader {
 	 */
 	private static Shader loadVertexShader(String path) {
 		int shader = glCreateShader(GL_VERTEX_SHADER);
+
 		try {
 			glShaderSource(shader, Utils.readFileToString(path));
 		} catch (IOException e) {
@@ -240,6 +241,7 @@ public class Shader {
 	 */
 	private static Shader loadFragmentShader(String path) {
 		int shader = glCreateShader(GL_FRAGMENT_SHADER);
+
 		try {
 			glShaderSource(shader, Utils.readFileToString(path));
 		} catch (IOException e) {
@@ -264,6 +266,7 @@ public class Shader {
 	 */
 	private static Shader loadFragmentShaderA(String path) {
 		int shader = glCreateShader(GL_FRAGMENT_SHADER);
+
 		try {
 			glShaderSource(shader, Utils.listToString(Utils.getResourceAsStrings(path), true));
 		} catch (IOException e) {
@@ -288,6 +291,7 @@ public class Shader {
 	 */
 	private static Shader loadGeometricShader(String path) {
 		int shader = glCreateShader(GL_GEOMETRY_SHADER);
+
 		try {
 			glShaderSource(shader, Utils.readFileToString(path));
 		} catch (IOException e) {

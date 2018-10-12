@@ -146,6 +146,13 @@ public class Texture {
 	}
 
 	/**
+	 * Unbind textures from rendering.
+	 */
+	public void unbind() {
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	/**
 	 * Delete the texture.
 	 */
 	public void delete() {
@@ -162,6 +169,7 @@ public class Texture {
 	public static Texture loadTexture(String path) {
 		ByteBuffer image;
 		int width, height;
+
 		try (MemoryStack stack = MemoryStack.stackPush()) {
 			IntBuffer w = stack.mallocInt(1);
 			IntBuffer h = stack.mallocInt(1);
@@ -204,6 +212,7 @@ public class Texture {
 		texture.setPar(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		texture.setPar(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		texture.upload(GL_RGBA8, width, height, GL_RGBA, data);
+		texture.unbind();
 
 		return texture;
 	}

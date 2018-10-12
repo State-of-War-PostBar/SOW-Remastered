@@ -7,16 +7,16 @@ import java.util.TreeMap;
 /**
  * An element of the gui.
  */
-public abstract class XElement {
+public abstract class Element {
 
 	/** Identifier of the element. */
 	protected String identifier;
 
 	/** Parent of the element. */
-	private XElement parent;
+	private Element parent;
 
 	/** Children of the element. */
-	private Map<String, XElement> children = new TreeMap<>();
+	private Map<String, Element> children = new TreeMap<>();
 
 	/** If the element is enabled. */
 	private boolean enabled = false;
@@ -47,7 +47,7 @@ public abstract class XElement {
 	 * 
 	 * @return Parent of the element, {@code null} if none.
 	 */
-	public XElement getParent() {
+	public Element getParent() {
 		return parent;
 	}
 
@@ -56,7 +56,7 @@ public abstract class XElement {
 	 * 
 	 * @param _parent Parent of the element.
 	 */
-	public void setParent(XElement _parent) {
+	public void setParent(Element _parent) {
 		parent = _parent;
 		parent.addChild(this);
 	}
@@ -75,7 +75,7 @@ public abstract class XElement {
 	 * 
 	 * @param child Child to add.
 	 */
-	public void addChild(XElement child) {
+	public void addChild(Element child) {
 		children.put(child.getIdentifier(), child);
 	}
 
@@ -84,7 +84,7 @@ public abstract class XElement {
 	 * 
 	 * @param name Name of the child.
 	 */
-	public XElement getChild(String name) {
+	public Element getChild(String name) {
 		return children.get(name);
 	}
 
@@ -93,7 +93,7 @@ public abstract class XElement {
 	 * 
 	 * @return List of children of the element.
 	 */
-	public Map<String, XElement> getChildren() {
+	public Map<String, Element> getChildren() {
 		return children;
 	}
 
@@ -111,11 +111,13 @@ public abstract class XElement {
 	 * 
 	 * @return Instance of the element.
 	 */
-	public XElement enable() {
+	public Element enable() {
 		enabled = true;
+
 		if (hasChild())
-			for (Entry<String, XElement> e : children.entrySet())
+			for (Entry<String, Element> e : children.entrySet())
 				e.getValue().enable();
+
 		return this;
 	}
 
@@ -124,11 +126,13 @@ public abstract class XElement {
 	 * 
 	 * @return Instance of the element.
 	 */
-	public XElement disable() {
+	public Element disable() {
 		enabled = false;
+
 		if (hasChild())
-			for (Entry<String, XElement> e : children.entrySet())
+			for (Entry<String, Element> e : children.entrySet())
 				e.getValue().disable();
+
 		return this;
 	}
 
@@ -146,11 +150,13 @@ public abstract class XElement {
 	 * 
 	 * @return Instance of the element.
 	 */
-	public XElement hide() {
+	public Element hide() {
 		hidden = true;
+
 		if (hasChild())
-			for (Entry<String, XElement> e : children.entrySet())
+			for (Entry<String, Element> e : children.entrySet())
 				e.getValue().hide();
+
 		return this;
 	}
 
@@ -159,11 +165,13 @@ public abstract class XElement {
 	 * 
 	 * @return Instance of the element.
 	 */
-	public XElement show() {
+	public Element show() {
 		hidden = false;
+
 		if (hasChild())
-			for (Entry<String, XElement> e : children.entrySet())
+			for (Entry<String, Element> e : children.entrySet())
 				e.getValue().show();
+
 		return this;
 	}
 
@@ -173,7 +181,7 @@ public abstract class XElement {
 	public void update() {
 		if (isEnabled())
 			if (hasChild())
-				for (Entry<String, XElement> e : children.entrySet())
+				for (Entry<String, Element> e : children.entrySet())
 					e.getValue().update();
 	}
 
@@ -183,7 +191,7 @@ public abstract class XElement {
 	public void render() {
 		if (!isHidden())
 			if (hasChild())
-				for (Entry<String, XElement> e : children.entrySet())
+				for (Entry<String, Element> e : children.entrySet())
 					e.getValue().render();
 	}
 
@@ -192,7 +200,7 @@ public abstract class XElement {
 	 */
 	public void abrogate() {
 		if (hasChild())
-			for (Entry<String, XElement> e : children.entrySet())
+			for (Entry<String, Element> e : children.entrySet())
 				e.getValue().abrogate();
 	}
 
@@ -208,8 +216,8 @@ public abstract class XElement {
 	 */
 	public void resize(Object size) {
 		if (hasChild())
-			for (Entry<String, XElement> e : children.entrySet())
-				e.getValue().resize(size);
+			for (Entry<String, Element> e : children.entrySet())
+				e.getValue().onParentResize(size);
 	}
 
 	/**

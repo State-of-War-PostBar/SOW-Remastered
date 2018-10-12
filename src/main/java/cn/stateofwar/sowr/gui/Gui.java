@@ -9,10 +9,10 @@ import java.util.TreeMap;
 import org.joml.Vector4d;
 
 import cn.stateofwar.sowr.gui.control.IInputReceiver;
-import cn.stateofwar.sowr.gui.control.XClickerHold;
-import cn.stateofwar.sowr.gui.control.XClickerInstant;
-import cn.stateofwar.sowr.gui.control.XElement;
-import cn.stateofwar.sowr.gui.control.XSprite;
+import cn.stateofwar.sowr.gui.control.ClickerHold;
+import cn.stateofwar.sowr.gui.control.ClickerInstant;
+import cn.stateofwar.sowr.gui.control.Element;
+import cn.stateofwar.sowr.gui.control.Sprite;
 import cn.stateofwar.sowr.gui.render.Graphic;
 import cn.stateofwar.sowr.gui.render.Textures;
 
@@ -22,7 +22,7 @@ import cn.stateofwar.sowr.gui.render.Textures;
 public class Gui {
 
 	/** All the root gui elements. */
-	private static Map<String, XElement> elements = new TreeMap<>();
+	private static Map<String, Element> elements = new TreeMap<>();
 
 	/** All the elements that receive inputs. */
 	private static Map<String, IInputReceiver> input_receivers = new TreeMap<>();
@@ -34,7 +34,7 @@ public class Gui {
 	 * 
 	 * @return Instance of the element.
 	 */
-	public static XElement register(XElement element) {
+	public static Element register(Element element) {
 		elements.put(element.getIdentifier(), element);
 		return element;
 	}
@@ -48,9 +48,10 @@ public class Gui {
 	 * 
 	 * @return Instance of the element.
 	 */
-	public static XElement registerChild(XElement element, XElement parent) {
+	public static Element registerChild(Element element, Element parent) {
 		if (parent == null)
 			register(element);
+
 		element.setParent(parent);
 		return element;
 	}
@@ -90,7 +91,7 @@ public class Gui {
 	 */
 	public static void deleteAll() {
 		input_receivers.clear();
-		for (Entry<String, XElement> e : elements.entrySet())
+		for (Entry<String, Element> e : elements.entrySet())
 			e.getValue().abrogate();
 		elements.clear();
 	}
@@ -100,7 +101,7 @@ public class Gui {
 	 */
 	public static void updateInputs() {
 		for (Entry<String, IInputReceiver> e : input_receivers.entrySet())
-			if (((XElement) e).isEnabled())
+			if (((Element) e).isEnabled())
 				e.getValue().updateInputs();
 	}
 
@@ -108,7 +109,8 @@ public class Gui {
 	 * Update all the elements.
 	 */
 	public static void update() {
-		for (Entry<String, XElement> e : elements.entrySet())
+		updateInputs();
+		for (Entry<String, Element> e : elements.entrySet())
 			e.getValue().update();
 	}
 
@@ -116,7 +118,7 @@ public class Gui {
 	 * Render all the elements.
 	 */
 	public static void render() {
-		for (Entry<String, XElement> e : elements.entrySet())
+		for (Entry<String, Element> e : elements.entrySet())
 			e.getValue().render();
 	}
 
@@ -124,8 +126,8 @@ public class Gui {
 	 * Register default elements of the program.
 	 */
 	public static void init() {
-		double x_max = Graphic.win.getWidth();
-		double y_max = Graphic.win.getHeight();
+		double x_max = Graphic.window.getWidth();
+		double y_max = Graphic.window.getHeight();
 
 		Textures.init();
 
@@ -141,43 +143,43 @@ public class Gui {
 
 		Menu menu_main = (Menu) register(new MenuMain("menu.main", coord_menu_main, null));
 
-		XClickerHold main_btn_new_game = (XClickerInstant) registerChild(
+		ClickerHold main_btn_new_game = (ClickerInstant) registerChild(
 				new BtnMenuMainNewGame("menu.main.new_game", coord_menu_main_btn_new_game, GLFW_MOUSE_BUTTON_1),
 				menu_main);
 		registerInput(main_btn_new_game.getIdentifier(), main_btn_new_game);
-		registerChild(new XSprite("menu.main.new_game.img", coord_menu_main_btn_new_game, null), main_btn_new_game);
+		registerChild(new Sprite("menu.main.new_game.img", coord_menu_main_btn_new_game, null), main_btn_new_game);
 
-		XClickerHold main_btn_load_game = (XClickerInstant) registerChild(
+		ClickerHold main_btn_load_game = (ClickerInstant) registerChild(
 				new BtnMenuMainLoadGame("menu.main.load_game", coord_menu_main_btn_load_game, GLFW_MOUSE_BUTTON_1),
 				menu_main);
 		registerInput(main_btn_load_game.getIdentifier(), main_btn_load_game);
-		registerChild(new XSprite("menu.main.load_game.img", coord_menu_main_btn_load_game, null), main_btn_load_game);
+		registerChild(new Sprite("menu.main.load_game.img", coord_menu_main_btn_load_game, null), main_btn_load_game);
 
-		XClickerHold main_btn_multi_game = (XClickerInstant) registerChild(
+		ClickerHold main_btn_multi_game = (ClickerInstant) registerChild(
 				new BtnMenuMainMultiGame("menu.main.multi_game", coord_menu_main_btn_multi_game, GLFW_MOUSE_BUTTON_1),
 				menu_main);
 		registerInput(main_btn_multi_game.getIdentifier(), main_btn_multi_game);
-		registerChild(new XSprite("menu.main.multi_game.img", coord_menu_main_btn_multi_game, null),
+		registerChild(new Sprite("menu.main.multi_game.img", coord_menu_main_btn_multi_game, null),
 				main_btn_multi_game);
 
-		XClickerHold main_btn_mod_manage = (XClickerInstant) registerChild(
+		ClickerHold main_btn_mod_manage = (ClickerInstant) registerChild(
 				new BtnMenuMainModManage("menu.main.mod_manage", coord_menu_main_btn_mod_manage, GLFW_MOUSE_BUTTON_1),
 				menu_main);
 		registerInput(main_btn_mod_manage.getIdentifier(), main_btn_mod_manage);
-		registerChild(new XSprite("menu.main.mod_manage.img", coord_menu_main_btn_mod_manage, null),
+		registerChild(new Sprite("menu.main.mod_manage.img", coord_menu_main_btn_mod_manage, null),
 				main_btn_mod_manage);
 
-		XClickerHold main_btn_settings = (XClickerInstant) registerChild(
+		ClickerHold main_btn_settings = (ClickerInstant) registerChild(
 				new BtnMenuMainSettings("menu.main.settings", coord_menu_main_btn_settings, GLFW_MOUSE_BUTTON_1),
 				menu_main);
 		registerInput(main_btn_settings.getIdentifier(), main_btn_settings);
-		registerChild(new XSprite("menu.main.settings.img", coord_menu_main_btn_settings, null), main_btn_settings);
+		registerChild(new Sprite("menu.main.settings.img", coord_menu_main_btn_settings, null), main_btn_settings);
 
-		XClickerHold main_btn_exit_game = (XClickerInstant) registerChild(
+		ClickerHold main_btn_exit_game = (ClickerInstant) registerChild(
 				new BtnMenuMainExitGame("menu.main.exit_game", coord_menu_main_btn_exit_game, GLFW_MOUSE_BUTTON_1),
 				menu_main);
 		registerInput(main_btn_exit_game.getIdentifier(), main_btn_exit_game);
-		registerChild(new XSprite("menu.main.exit_game.img", coord_menu_main_btn_exit_game, null), main_btn_exit_game);
+		registerChild(new Sprite("menu.main.exit_game.img", coord_menu_main_btn_exit_game, null), main_btn_exit_game);
 
 		menu_main.enable().show();
 		Menu.registerMenu(menu_main);

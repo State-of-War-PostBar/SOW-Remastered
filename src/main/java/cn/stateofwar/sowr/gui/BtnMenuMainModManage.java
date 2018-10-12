@@ -2,12 +2,12 @@ package cn.stateofwar.sowr.gui;
 
 import org.joml.Vector4d;
 
-import cn.stateofwar.sowr.gui.control.XClickerInstant;
+import cn.stateofwar.sowr.gui.control.ClickerInstant;
 
 /**
  * Button to switch to mod manager menu.
  */
-public class BtnMenuMainModManage extends XClickerInstant {
+public class BtnMenuMainModManage extends ClickerInstant {
 
 	public BtnMenuMainModManage(String _identifier, Vector4d coord, int mouse_button) {
 		super(_identifier, coord, mouse_button);
@@ -31,7 +31,6 @@ public class BtnMenuMainModManage extends XClickerInstant {
 
 	@Override
 	public void onParentResize(Object size) {
-		resize(size);
 		super.resize(size);
 	}
 

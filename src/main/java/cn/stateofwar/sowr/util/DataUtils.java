@@ -86,10 +86,10 @@ public class DataUtils {
 	 *         <b>8</b> → Middle of 1st and 4th quadrant.
 	 */
 	public static int getQuadrant(double x, double y) {
-		y = Graphic.win.getHeight() - y;
+		y = Graphic.window.getHeight() - y;
 
-		int x_mid = Graphic.win.getWidth() / 2;
-		int y_mid = Graphic.win.getHeight() / 2;
+		int x_mid = Graphic.window.getWidth() / 2;
+		int y_mid = Graphic.window.getHeight() / 2;
 
 		if (x == y && x == 0)
 			return 3;
@@ -118,8 +118,9 @@ public class DataUtils {
 	 * 
 	 * @param point     Coordinate of the point.
 	 * 
-	 * @param rectangle Coordinates of the rectangle, x-y are the bottom left corner
-	 *                  of the rectangle and z-w are its width and height.
+	 * @param rectangle Coordinates of the rectangle, x-y are the coordinate values
+	 *                  of bottom left corner of the rectangle and z-w are its width
+	 *                  and height.
 	 * 
 	 * @return If the point is in the range of the rectangle.
 	 */
@@ -131,7 +132,7 @@ public class DataUtils {
 	}
 
 	/**
-	 * Convert a pair of x-y coordinate of the screen to OpenGL coordinate.
+	 * Convert a x-y coordinate of the screen to OpenGL coordinate.
 	 * 
 	 * @param x X coordinate.
 	 * 
@@ -141,8 +142,8 @@ public class DataUtils {
 	 *         0.</i>
 	 */
 	public static Vector3f toGLCoord(int x, int y) {
-		int w = Graphic.win.getWidth();
-		int h = Graphic.win.getHeight();
+		int w = Graphic.window.getWidth();
+		int h = Graphic.window.getHeight();
 
 		x = x > w ? w : x;
 		y = y > h ? h : y;
@@ -153,17 +154,35 @@ public class DataUtils {
 	}
 
 	/**
-	 * Convert a x-y coordinate to their ratios to the resolution of screen.
+	 * Convert a x-y coordinate of the screen to OpenGL coordinate with a desired Z
+	 * value.
 	 * 
 	 * @param x X coordinate.
 	 * 
 	 * @param y Y coordinate.
 	 * 
-	 * @return A vector contains their percentages toward the screen.
+	 * @param z Desired Z value.
+	 * 
+	 * @return OpenGL coordinate based on the coordinate.
+	 */
+	public static Vector3f toGLCoord(int x, int y, int z) {
+		Vector3f vec = toGLCoord(x, y);
+
+		return new Vector3f(vec.x, vec.y, z);
+	}
+
+	/**
+	 * Convert a x-y coordinate to their ratios toward the resolution of screen.
+	 * 
+	 * @param x X coordinate.
+	 * 
+	 * @param y Y coordinate.
+	 * 
+	 * @return Their percentages toward the screen resolution.
 	 */
 	public static Vector2f toScrPerc(int x, int y) {
-		float x_percentage = (float) x / (float) Graphic.win.getWidth();
-		float y_percentage = (float) y / (float) Graphic.win.getHeight();
+		float x_percentage = (float) x / (float) Graphic.window.getWidth();
+		float y_percentage = (float) y / (float) Graphic.window.getHeight();
 
 		return new Vector2f(x_percentage, y_percentage);
 	}

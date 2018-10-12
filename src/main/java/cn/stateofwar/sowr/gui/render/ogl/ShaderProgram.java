@@ -27,6 +27,7 @@ public class ShaderProgram {
 	 */
 	public ShaderProgram(Shader[] _shaders) {
 		id = glCreateProgram();
+
 		for (Shader shader : _shaders)
 			glAttachShader(id, shader.getID());
 
@@ -131,8 +132,10 @@ public class ShaderProgram {
 	 */
 	public void setUniform(String name, Vector4f value) {
 		int loc = getUniformLoc(name);
+
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(4);
 		value.get(buffer);
+
 		if (loc != 1)
 			glUniform4fv(loc, buffer);
 	}
@@ -146,8 +149,10 @@ public class ShaderProgram {
 	 */
 	public void setUniform(String name, Matrix4f value) {
 		int loc = getUniformLoc(name);
+
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(4 * 4);
 		value.get(buffer);
+
 		if (loc != 1)
 			glUniformMatrix4fv(loc, false, buffer);
 	}

@@ -8,7 +8,7 @@ import cn.stateofwar.sowr.core.Inputs;
 /**
  * An area responses to mouse button inputs only for when it's double clicked.
  */
-public abstract class XClickerDoubleClick extends XClickerInstant {
+public abstract class ClickerDoubleClick extends ClickerInstant {
 
 	/** Mark to check if it's between two clicking. */
 	private boolean click_mark;
@@ -19,8 +19,18 @@ public abstract class XClickerDoubleClick extends XClickerInstant {
 	/** A timer to check if the click mark is expired. */
 	private double click_timer;
 
-	public XClickerDoubleClick(String _identifier, Vector4d coord, int _mouse_button) {
-		super(_identifier, coord, _mouse_button);
+	/**
+	 * Create a double click clicker.
+	 * 
+	 * @param _identifier  Identifier for GUI element.
+	 * 
+	 * @param coord        Coordinates of inductive area. x-y are coordinate values
+	 *                     of the bottom left corner, z-w are its width and height.
+	 * 
+	 * @param mouse_button Mouse button the clicker responses.
+	 */
+	public ClickerDoubleClick(String _identifier, Vector4d coord, int mouse_button) {
+		super(_identifier, coord, mouse_button);
 	}
 
 	/**

@@ -18,30 +18,33 @@ public class Game {
 	public static boolean running;
 
 	/** Current game state. */
-	public static GameState state = new GameState();
+	public static GameState state;
 
 	/** Timer for the game engine. */
-	public static Timer timer = new Timer();
+	public static Timer timer;
 
 	/** Window of the game engine. */
-	protected static Window win;
+	private static Window window;
 
 	/**
 	 * Start the game engine.
 	 */
 	public static void startGame() {
 		LOGGER.info("The game is starting.");
+
 		running = true;
 
 		Graphic.initRenderCapabilities();
-		win = Graphic.win;
+		window = Graphic.window;
 		Gui.init();
 
+		state = new GameState();
+		timer = new Timer();
 		state.enter(new Renderer());
 		timer.init();
 
-		while (running && !win.isClosing()) {
-			win.clear();
+		while (running && !window.isClosing()) {
+			window.clear();
 
 			state.input();
 
@@ -50,12 +53,12 @@ public class Game {
 
 			state.render();
 
-			win.update();
+			window.update();
 			timer.updateFPS();
-			if (win.isVSync())
+			if (window.isVSync())
 				syncFrame(References.VERTICAL_SYNC_FPS);
 			else
-				syncFrame(Graphic.fps_max);
+				syncFrame(Graphic.max_fps);
 
 			timer.update();
 		}
@@ -78,16 +81,16 @@ public class Game {
 	 * @param fps The frames per second limit.
 	 */
 	private static void syncFrame(int fps) {
-		double lastLoopTime = timer.getLastLoopTime();
+		double last_loop_time = timer.getLastLoopTime();
 		double now = timer.getTime();
-		float targetTime = 1.0f / fps;
+		float target_time = 1.0f / fps;
 
-		while (now - lastLoopTime < targetTime) {
+		while (now - last_loop_time < target_time) {
 			Thread.yield();
 			try {
 				Thread.sleep(1);
-			} catch (InterruptedException ex) {
-				LOGGER.fatal(ex.getLocalizedMessage());
+			} catch (InterruptedException e) {
+				LOGGER.fatal(e.getLocalizedMessage());
 			}
 			now = timer.getTime();
 		}

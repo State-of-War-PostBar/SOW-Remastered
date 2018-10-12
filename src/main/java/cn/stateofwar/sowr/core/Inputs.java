@@ -30,11 +30,13 @@ public class Inputs {
 	 * 
 	 * @param x X position (in pixels) of the cursor.
 	 * 
-	 * @param y Y position (in pixels) of the cursor.
+	 * @param y Y position (in pixels) of the cursor. This is inverted since GLFW
+	 *          starts Y counting at top.
 	 */
 	public static void cursor(double x, double y) {
-		cursor_x = x < 0 ? 0 : x > Graphic.win.getWidth() ? Graphic.win.getWidth() : x;
-		cursor_y = y < 0 ? 0 : y > Graphic.win.getHeight() ? Graphic.win.getHeight() : Graphic.win.getHeight() - y;
+		cursor_x = x < 0 ? 0 : x > Graphic.window.getWidth() ? Graphic.window.getWidth() : x;
+		cursor_y = y < 0 ? 0
+				: y > Graphic.window.getHeight() ? Graphic.window.getHeight() : Graphic.window.getHeight() - y;
 	}
 
 	/**
@@ -42,7 +44,7 @@ public class Inputs {
 	 * 
 	 * @param key      Key triggered.
 	 * 
-	 * @param scancode System-specific scancode of the key.
+	 * @param scancode System-specific scan code of the key.
 	 * 
 	 * @param action   Action of the key triggered.
 	 * 

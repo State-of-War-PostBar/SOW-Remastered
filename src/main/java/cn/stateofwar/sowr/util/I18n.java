@@ -1,8 +1,7 @@
 package cn.stateofwar.sowr.util;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,7 +16,7 @@ public class I18n {
 	private static final String PARSER = "=";
 
 	/** All the languages this program supports. */
-	private static final List<String> LEGAL_VAL = Stream.of("EN_US", "ZH_CN", "ZH_TW").collect(Collectors.toList());
+	private static final List<String> LEGAL_VALUES = Stream.of("EN_US", "ZH_CN", "ZH_TW").collect(Collectors.toList());
 
 	/** Current language preference of the program. */
 	private static Locales locale;
@@ -30,9 +29,11 @@ public class I18n {
 			try {
 				l.readValues();
 			} catch (IOException e) {
+				System.err.println(e.getLocalizedMessage());
 				e.printStackTrace();
 			}
-		locale = Locales.parseLoc(Config.get("General", "Language"));
+
+		locale = Locales.parseLocale(Config.get("General", "Language"));
 	}
 
 	/**
@@ -70,8 +71,8 @@ public class I18n {
 	 * @param _locale Name of the new locale.
 	 */
 	public static void switchLocale(String _locale) {
-		if (LEGAL_VAL.contains(_locale))
-			locale = Locales.parseLoc(_locale);
+		if (LEGAL_VALUES.contains(_locale))
+			locale = Locales.parseLocale(_locale);
 		else {
 			locale = Locales.EN_US;
 			Logger.PUBLIC_LOGGER.error(
@@ -90,10 +91,10 @@ public class I18n {
 		private String name;
 
 		/** All the translation keys and results. */
-		private Map<String, String> translations = new LinkedHashMap<>();
+		private Map<String, String> translations = new HashMap<>();
 
 		private Locales(String _name) {
-			if (I18n.LEGAL_VAL.contains(_name))
+			if (I18n.LEGAL_VALUES.contains(_name))
 				name = _name;
 		}
 
@@ -112,12 +113,12 @@ public class I18n {
 		 * @throws IOException
 		 */
 		private void readValues() throws IOException {
-			List<String> translations_read = new ArrayList<>();
-			translations_read = Utils.getResourceAsStrings("sowr/language/" + name + ".lang");
-			for (String x : translations_read)
-				if (x.indexOf(PARSER) != -1) {
-					int index = x.indexOf(PARSER);
-					translations.put(x.substring(0, index), x.substring(index + 1));
+			List<String> translations_read = Utils.getResourceAsStrings("sowr/language/" + name + ".lang");
+
+			for (String s : translations_read)
+				if (s.indexOf(PARSER) != -1) {
+					int index = s.indexOf(PARSER);
+					translations.put(s.substring(0, index), s.substring(index + 1));
 				}
 		}
 
@@ -143,7 +144,7 @@ public class I18n {
 		 * @return The locale parsed.If the value is not valid, default <i>(English -
 		 *         United States)</i> will be selected.
 		 */
-		public static Locales parseLoc(String name) {
+		public static Locales parseLocale(String name) {
 			for (Locales locale : Locales.values())
 				if (locale.name.equals(name))
 					return locale;

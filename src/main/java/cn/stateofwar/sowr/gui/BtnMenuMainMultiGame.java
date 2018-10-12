@@ -2,12 +2,12 @@ package cn.stateofwar.sowr.gui;
 
 import org.joml.Vector4d;
 
-import cn.stateofwar.sowr.gui.control.XClickerInstant;
+import cn.stateofwar.sowr.gui.control.ClickerInstant;
 
 /**
  * Button to switch to multi-player games menu.
  */
-public class BtnMenuMainMultiGame extends XClickerInstant {
+public class BtnMenuMainMultiGame extends ClickerInstant {
 
 	public BtnMenuMainMultiGame(String _identifier, Vector4d coord, int mouse_button) {
 		super(_identifier, coord, mouse_button);
@@ -31,7 +31,6 @@ public class BtnMenuMainMultiGame extends XClickerInstant {
 
 	@Override
 	public void onParentResize(Object size) {
-		resize(size);
 		super.resize(size);
 	}
 

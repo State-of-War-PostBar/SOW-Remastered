@@ -3,12 +3,19 @@ package cn.stateofwar.sowr.gui.control;
 /**
  * A key sensor that only activates when the key is just pressed.
  */
-public abstract class XKeySensorInstant extends XKeySensor {
+public abstract class KeySensorInstant extends KeySensor {
 
 	/** A mark to check if the key is holding. */
 	private boolean has_pressed;
 
-	public XKeySensorInstant(String _identifier, int _key) {
+	/**
+	 * Create a instant key sensor.
+	 * 
+	 * @param _identifier Identifier for GUI element.
+	 * 
+	 * @param _key        The key binds to this key sensor.
+	 */
+	public KeySensorInstant(String _identifier, int _key) {
 		super(_identifier, _key);
 	}
 
