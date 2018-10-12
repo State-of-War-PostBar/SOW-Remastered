@@ -54,7 +54,7 @@ public class Sprite extends Element {
 	 */
 	@Override
 	public void render() {
-		if (!isHidden() && isEnabled())
+		if (!isHidden())
 			Game.state.getRenderer().drawTexturedRect((int) coord.x, (int) coord.y, (int) coord.z, (int) coord.w,
 					texture);
 		super.render();
