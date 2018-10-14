@@ -6,7 +6,6 @@ ext {
 	lwjgl_version = "3.2.0"
 	joml_version = "1.9.11"
 	ini4j_version = "0.5.4"
-	luaj_version = "3.0.1"
 
 	default_text_encoding = "utf-8"
 }
@@ -25,7 +24,6 @@ dependencies {
 	compile "io.netty:netty-all:${netty_version}"
 	compile "org.joml:joml:${joml_version}"
 	compile "org.ini4j:ini4j:${ini4j_version}"
-	compile "org.luaj:luaj-jse:${luaj_version}"
 	compile "org.lwjgl:lwjgl:${lwjgl_version}"
 	compile "org.lwjgl:lwjgl-assimp:${lwjgl_version}"
 	compile "org.lwjgl:lwjgl-glfw:${lwjgl_version}"

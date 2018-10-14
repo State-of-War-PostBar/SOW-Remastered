@@ -1,9 +1,9 @@
 # Development Guide
 ---
 ## Programming / 编程
-The main program is written in Java, and the plugins (including most game features) are written in Lua. If you don't know how to use them, feel free to ask or search for tutorials.
+The main program is written in Java. If you don't know how to use them, feel free to ask or search for tutorials.
 
-此程序主要使用Java编写，插件则主要使用Lua. 若您不会使用，可以询问或者寻找教程。
+此程序主要使用Java编写。若您不会使用，可以询问或者寻找教程。
 
 ## Workspace / 工作空间
 We are sorry for not providing workspace for any IDEs in our repository.
@@ -34,9 +34,6 @@ The followings are the libraries used in our program. For more information, plea
 
 
 [Ini4j](http://ini4j.sourceforge.net/)
-
-
-[LuaJ](http://www.luaj.org)
 
 
 以上为程序所使用到的库。更多信息请参阅[build.gradle](../build.gradle).
