@@ -7,7 +7,11 @@ public class Main {
 
 	private static final Logger LOGGER = new Logger("Main");
 
+	public static String[] arguments;
+
 	public static void main(String[] args) {
+		arguments = args;
+
 		LOGGER.init();
 
 		LOGGER.info("Welcome to the new State of War!");
