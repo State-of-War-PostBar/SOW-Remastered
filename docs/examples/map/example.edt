@@ -1,291 +1,210 @@
 # This is an example of State-of-War Remastered game map extra information file.
-
+#
+# The file is in custom *ini* format.
+#
+# [Blocks]
+# and
+# Key = Value
+# is available as usual.
+# sublayer is also allowed :
+# Key.SubKey = Value
+#
 # Use # to comment, no characters after the # symbol including itself is loaded.
-
-# The blocks are designed to optimize.
-# When a block is loaded, it is automatically a definition pool, and all the elements within a pair of {} bracelets will become a subelement of the block.
-# For example,
-
-# [block]
-# {
-#	 element = value
-# }
-
-# parses as block.element = value
-
-# As for value, if you have some values require more than one line, you can use {} to do so, but remember to add a '@' symbol after the '='.
-# The bracelets will not be loaded.
-
-# All the blocks and elements including their names shown in this example file are reserved by the program.
-
-
-# The Global Flags Block
-# It contains most global factors of the map. If a flag present in the block without value,
-# it is loaded and verified as true. All the flags are listed below.
-[global]
-{
-	single_player_only
-	# This map can only be loaded as a single player map. Default.
-
-	multi_player_only
-	# This map can only be loaded as a multiple player map. This and single_player cannot exist in the same time, otherwise none of them will be effective.
-
-	single_multi
-	# This map can be loaded as either a single player or multiple players map.
-
-	sp_description_base_number = ...
-	# The base number appears in the singleplayer game description. Spaces are ignored.
-
-	sp_description_difficulty = ...
-	# The diffuculty appears in the singleplayer game description. Spaces are ignored.
-
-	sp_description_mission_number = ...
-	# The mission number appears in the singleplayer game description. Spaces are ignored.
-
-	sp_description_etc =@
-	{
-		...
-	}
-	# There is a small space where you can put some extra information about the mission.
-
-	sp_description =@
-	{
-		...
-	}
-	# The description of the mission, automatically changes line so don't worry about that.
-
-	mp_description =@
-	{
-		...
-	}
-	# The description of the mission in multiple players.
-}
-
-
-# The Game Features Block
-# This block describes most game features.
-[sp_game]
-{
-	lose_with_base = true
-	# If the blue side loses when their base is down.
-
-	target = .
-	# Target of the map, an integer.
-	# 0: Destroy enemy base(s).
-	# 1: Destroy all enemy forces.
-	# 2: Defense. (If no time limit is set, this is invaild and considered as 1)
-	# 3: Escort. (If no escort targets specified, this is invaild and considered as 1)
-	# 4: Protect
-
-	has_time_limit = false
-	# If the map has time limit (for attack or defense).
-
-	time_limit = 0
-	# The time limits. Invaild if has_time_limit is false. The unit is SECOND.
-
-	reinforcements = false
-	# If the map has reinforcements. Define reinforcement at its own block.
-
-	maximum_money = ...
-	# The maximum money you players keep in this map.
-
-	maximum_research = ...
-	# The maximum research point players can keep in this map.
-
-	maximum_advanced_research = ...
-	# The maximum advanced research point players can keep in this map.
-}
-
-
-# The blue side.
-[sp_player1]
-{
-	lose_with_base = true
-	# If the player lose when all the bases are down.
-
-	advanture = true
-	# If the player can respawn the advanture.
-
-	starting_money = ...
-	# Starting money of the player.
-
-	starting_research = ...
-	# Starting research point of the player.
-
-	starting_advanced_research = ...
-	# Starting advanced research point of the player.
-
-	starting_airforce_fighter = .
-	# Number of fighter at the beginning. Belows' are the same.
-	
-	starting_airforce_bomber = .
-	starting_airforce_tripler = .
-	starting_airforce_carryall = .
-	starting_airforce_astron = .
-
-	turret_1 = true
-	turret_2 = true
-	turret_3 = true
-	turret_4 = true
-	turret_5 = true
-	turret_6 = true
-	# Enable turrets.
-
-	turret_6_research = true
-	# If the research is required for building laser turret.
-
-	orbital_strike_production = false
-	# If the base can produce orbital strike.
-}
-
-
-# The green side.
-[sp_player2]
-{
-	# Same as above, except that
-	# lose_with_base is invaild since it's defined in sp_game.
-}
-
-
-# The definitions of escort mission.
-# Invaild if sp_game.target != 3
-[sp_escort]
-{
-	# Escort mission is to escort a or some unit(s) to sertain area.
-
-	escort_targets =@
-	{
-		..., ...
-	}
-	# The names of the target(s), use comma (,) to separate. See below for more information about names.
-
-	escort_area_x = ...
-	escort_area_y = ...
-	escort_area_w = ...
-	escort_area_h = ...
-	# Define the escoring area. Player wins if the escort target(s) reaches this area.
-
-	only_one = true
-	# Only one target is needed for safety escort. If false, all targets must be safe.
-
-	targets_controllable = false
-	# If the player can control the targets. Targets would not move by themselves if true.
-}
-
-
-# The definitions of protecting mission.
-# Invaild if sp_game.target != 4
-[sp_protect]
-{
-	# Protect mission is to protect a or some building(s) until countdown. If there is no countdown then it is invaild and considered 0,
-	# although player still loses when the protecting target(s) are captured.
-
-	protection_targets =@
-	{
-		..., ...
-	}
-	# The names of the target(s), use comma (,) to separate. See below for more information about names.
-}
-
-
-# Definitions of reinforcements (if any).
-[sp_reinforcement]
-{
-	time_ea = 0
-	# Time when reinforcement arrives. Counts separatly form the map time limit.
-
-	total_waves = 0
-	# Total waves of reinfocements.
-
-	contents =@
-	{
-		money = ...
-		research = ...
-		advanced_research = ...
-
-		airforces =@
-		{
-			fighter = ...
-		}
-
-		units_carry_all =@
-		{
-			..., ...
-		}
-	}
-	# The contents of reinforcements.
-}
-
-
-# Preset buildings for the map!
-[sp_building]
-{
-	$
-	{
-	unit_name = ...
-	# You can define a specific unit name for escort and protecting missions. It's not necessary.
-
-	unit_type = ...
-
-	maximum_level = .
-	current_level = .
-
-	level_1 = ...
-	level_2 = ...
-	level_3 = ...
-	...
-
-	player = .
-	# 0: Player
-	# 1: Enemy
-	# 2: Neutral
-
-	hp = ...
-
-	position_x = ...
-	position_y = ...
-	}
-
-	$
-	{
-	...
-	}
-}
-
-
-# Preset units for the map!
-[sp_unit]
-{
-	$
-	{
-	unit_name = ...
-
-	unit_type = ...
-
-	hp = ...
-
-	player = .
-	# 0: Player
-	# 1: Enemy
-	# 2: Neutral
-
-	position_x = ...
-	position_y = ...
-	}
-
-	$
-	{
-	...
-	}
-}
-
-
-# For multiplayer map it's pretty much the same. Invaild if single_player_only flag presents.
-[mp_...]
-
-
-# This block is usually for mods. All the settings here will ultimately override the data above. 
-[custom]
-{
-
-}
+#
+# Spaces are ignored; use quotes to reference string that contains space, e.g.
+# ["String with space"]
+# or 
+# "Key with space" = ""
+#
+# Escaping not allowed.
+#
+# This file is for main map registering.
+# Any map should be registered by this file.
+# The correspoinding map data are described by file name or by content below.
+#
+# Some extra information (key-value pair *and* block) can be add to anywhere
+#   as long as there's a script that read the information.
+#
+# **Note it's better to store game logic parts into scripts, not here.**
+#
+
+###############################################################################
+# overall config.
+###############################################################################
+[.]
+map_id = 12500
+map_terrain = tile.127    # Index to terrain maps.
+map_visiable = vis.127    # Index to map mask.
+
+###############################################################################
+# single-player mode config.
+###############################################################################
+[sp]
+available = true
+
+sp.player = 1               # player control sp.1.
+
+difficulty = 3
+
+description.diffuculty = difficulty.example     # index to descriptions.
+description.id = mapid.example
+description.sp.briefing = brief.sp.example
+description.mp.briefing = brief.mp.example
+
+[sp.1]
+camp = 1                    # camps are used to determine allies.
+
+ai = player_control         # we see player's controlling as an AI. this is the default value of key *ai*.
+money = 12500               # money at the beginning.
+research = 0                # beginning value default is 0.
+max_money = 20000           # max value default is 1073741824
+max_research = 2000
+max_advanced_research = 1000
+
+[sp.2]
+camp = 1
+ai = sp.ai.normal           # index to AI definition.
+money = 1000
+research = 1000
+
+[sp.3]
+ai = sp.ai.advanced
+max_money = 0
+production_acceleration = 2
+
+###############################################################################
+# multi-player mode config.
+###############################################################################
+
+[mp]
+available = true
+# descriptions may not be allowed in multi-player mode.
+
+[mp.1]
+camp = 1
+money = 10000
+max_money = 10000
+
+[mp.2]
+camp = 1
+money = 10000
+max_money = 10000
+
+[mp.3]
+camp = 2
+ai = mp.ai.normal       # AI is allowed in multi-player mode.
+max_money = 10000
+
+###############################################################################
+# map config.
+###############################################################################
+
+[building.99]
+sp = true           # default true.
+mp = false          # default true.
+difficulty = 3      # only when diffuculty = 3 this building exists.
+                    # without specifing difficulty it will exist in any difficulty.
+x = 10
+y = 16
+type = heavy_factory
+owner = 1                       # player 1 owns it.
+production.0 = light_artillary
+upgrade.0 = 2                   # can use upgrade twice
+advanced_upgrade.0 = 1          # can use advanced upgrade once
+satellite_defence = true
+id = super_cannon               # this is a custom property and is not necessary. It can be used in some scripts.
+
+[building.98]
+x = 19
+y = 28
+owner = 1
+type = headquater
+production.0 = bomber
+upgrade.0 = 1
+production.9 = carryall         # production from 1 to 8 can be reserved.
+upgrade.9 = 1
+is_headquater = true            # property used by losing condition script described above.
+hp = 0                          # hp = 0 means full of hp; hp < 0 means destroy immediately. default 0.
+
+[unit.13372]
+x = 1177
+y = 2719
+type = normal_rogon
+owner = 1
+escort_target = true            # tag that this unit is to be escort. used by event scripts below.
+ai = escort_rogon               # unit ai can be set individually. Use this to disable player control.
+hp = 2500
+
+[unit.13373]
+x = 1177
+y = 2719
+type = kodiak
+owner = 1
+escort_target = true
+hp = 1000
+
+###############################################################################
+# events config.
+###############################################################################
+
+[event.11]                              # you can give it arbitary id as long as all event ids are distinct.
+sp = true
+mp = false
+condition = time_out                    # index to condition judgement script.
+action = reinforcement.example.1
+time_limit = 300                        # only used by this script; may not be used by lose judgement script.
+reinforcement.
+
+[event.12]
+sp = true
+mp = false
+conditon = chained_reinforcement
+reinforcement_previous = reinforcement.example.1
+action = reinforcement.example.2
+time_limit = 800                        # condition example.2 will judge whether example.1 is done
+                                        # and whether it is timeout.
+action = set_player_win
+player_id = 1                           # used by set_player_win script.
+
+[event.13]
+sp = true
+mp = false
+conditon = escort_target_destroyed
+action = set_player_lose
+player_id = 1
+
+[evnet.14]
+sp = true
+mp = false
+condition = escort_finish
+action = set_player_win
+player_id = 1
+escort_finish_x_min = 1
+escort_finish_x_max = 100
+escort_finish_y_min = 1
+escort_finish_y_max = 100
+
+
+[event.1]               # when headquater is destroyed, player loses.
+sp = false
+mp = true
+condition = headquater_destroyed
+action = set_player_lose
+player_id = 1
+target_id = 1
+
+[event.2]               # when player 1 failed, player fail.
+sp = false
+mp = true
+condition = headquater_destroyed
+action = set_player_lose
+player_id = 2
+target_id = 1
+
+[event.2]               # when player 1 's headquater is destroyed, enemy (player 3) wins.
+sp = false
+mp = true
+condition = headquater_destroyed
+action = set_player_win
+player_id = 3
+target_id = 1
