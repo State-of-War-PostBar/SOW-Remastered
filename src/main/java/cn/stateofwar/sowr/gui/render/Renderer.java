@@ -1,5 +1,7 @@
 package cn.stateofwar.sowr.gui.render;
 
+import static org.lwjgl.opengl.GL45.*;
+
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4d;
@@ -15,9 +17,34 @@ public class Renderer {
 	public static final int[] INDICES_TRIANGLE = new int[] { 0, 1, 2 };
 	/**
 	 * Vertex indices for a rectangle; for 4 vertices, their listing is <b>Top
-	 * Right</b> → <b>Bottom Right</b> → <b>Bottom Left</b> → <b>Top Left</b>.
+	 * Right</b> 鈫� <b>Bottom Right</b> 鈫� <b>Bottom Left</b> 鈫� <b>Top Left</b>.
 	 */
 	public static final int[] INDICES_RECTANGLE = new int[] { 0, 1, 3, 1, 2, 3 };
+
+	/**
+	 * OpenGL matrix mode for the program.
+	 */
+	private static int matrix_mode;
+
+	/**
+	 * Set the OpenGL matrix mode to projection.
+	 */
+	public static void setProjMatrix() {
+		if (matrix_mode == GL_PROJECTION)
+			return;
+		glMatrixMode(GL_PROJECTION);
+		matrix_mode = GL_PROJECTION;
+	}
+
+	/**
+	 * Set the OpenGL matrix mode to model.
+	 */
+	public static void setModelMatrix() {
+		if (matrix_mode == GL_MODELVIEW)
+			return;
+		glMatrixMode(GL_MODELVIEW);
+		matrix_mode = GL_MODELVIEW;
+	}
 
 	/**
 	 * Draw a horizontal line on the screen with color.
