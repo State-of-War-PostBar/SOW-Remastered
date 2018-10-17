@@ -1,0 +1,205 @@
+# This is an example of State-of-War Remastered game map extra information file.
+#
+# The file is in custom *ini* format.
+#
+# [Blocks]
+# and
+# Key = Value
+# is available as usual.
+# sublayer is also allowed :
+# Key.SubKey = Value
+#
+# Use # to comment, no characters after the # symbol including itself is loaded.
+#
+# Spaces are ignored; use quotes to reference string that contains space, e.g.
+# ["String with space"]
+# or 
+# "Key with space" = ""
+#
+# Escaping not allowed.
+#
+# This file is for main map registering, maps should be registered by this file.
+# The corresponding map data are described by file name or by content below.
+#
+# Some extra information (key-value pair *and* block) can be add to anywhere.
+#
+# **Note it's better to store game logic parts into scripts, not here.**
+#
+
+###############################################################################
+# overall config.
+###############################################################################
+[.]
+map_id = 12500
+map_terrain = tile.127    # Index to terrain maps.
+map_visiable = vis.127    # Index to map mask.
+
+###############################################################################
+# single-player mode config.
+###############################################################################
+[sp]
+available = true
+
+sp.player = 1               # player control sp.1.
+
+difficulty = 3
+
+description.diffuculty = difficulty.xx     # index to descriptions.
+description.id = mapid.xx
+description.sp.briefing = brief.sp.xx
+description.mp.briefing = brief.mp.xx
+
+[sp.1]
+camp = 1                    # camps are used to determine allies.
+
+ai = player_control         # we see player's controlling as an AI. this is the default value of key *ai*.
+money = 12500               # money at the beginning.
+research = 0                # beginning value default is 0.
+max_money = 20000           # max value default is 1073741824
+max_research = 2000
+max_advanced_research = 1000
+
+[sp.2]
+camp = 1
+ai = sp.ai.normal           # index to AI definition.
+money = 1000
+research = 1000
+
+[sp.3]
+ai = sp.ai.advanced
+max_money = 0
+production_acceleration = 2
+
+###############################################################################
+# multi-player mode config.
+###############################################################################
+
+[mp]
+available = true
+# descriptions may not be allowed in multi-player mode.
+
+[mp.1]
+camp = 1
+money = 10000
+max_money = 10000
+
+[mp.2]
+camp = 1
+money = 10000
+max_money = 10000
+
+[mp.3]
+camp = 2
+ai = mp.ai.normal       # AI is allowed in multi-player mode.
+max_money = 10000
+
+###############################################################################
+# map config.
+###############################################################################
+
+[building.99]
+sp = true           # default true.
+mp = false          # default true.
+difficulty = 3      # only when diffuculty = 3 this building exists.
+                    # without specifing difficulty it will exist in any difficulty.
+x = 10
+y = 16
+type = factory_3
+owner = 1                       # player 1 owns it.
+production.0 = artillary_1
+upgrade.0 = 2                   # can use upgrade twice
+advanced_upgrade.0 = 1          # can use advanced upgrade once
+satellite_defence = true
+id = super_cannon               # this is a custom property and is not necessary. It can be used in some scripts.
+
+[building.98]
+x = 19
+y = 28
+owner = 1
+type = headquater
+production.0 = af_bomber
+upgrade.0 = 1
+production.9 = af_carry_all         # production from 1 to 8 can be reserved.
+upgrade.9 = 1
+is_headquater = true            # property used by losing condition script described above.
+hp = 0                          # hp = 0 means full of hp; hp < 0 means destroy immediately. default 0.
+
+[unit.13372]
+x = 1177
+y = 2719
+type = rogon
+owner = 1
+hp = 2500
+id = escort_target				# As stated above this is a custom property. It can be used in some scripts such as escorting missions.
+
+[unit.13373]
+x = 1177
+y = 2719
+type = kodiak
+owner = 1
+hp = 1000
+
+###############################################################################
+# events config.
+###############################################################################
+
+[event.11]                              # you can give it arbitary id as long as all event ids are distinct.
+sp = true
+mp = false
+condition = time_out                    # index to condition judgement script.
+action = reinforcement.example.1
+time_limit = 300                        # only used by this script; may not be used by lose judgement script.
+
+[event.12]
+sp = true
+mp = false
+conditon = chained_reinforcement
+reinforcement_previous = reinforcement.example.1
+action = reinforcement.example.2
+time_limit = 800                        # condition example.2 will judge whether example.1 is done
+                                        # and whether it is timeout.
+action = set_player_win
+player_id = 1                           # used by set_player_win script.
+
+[event.13]
+sp = true
+mp = false
+conditon = escort_target_destroyed
+action = set_player_lose
+player_id = 1
+
+[evnet.14]
+sp = true
+mp = false
+condition = escort_finish
+action = set_player_win
+player_id = 1
+escort_finish_x_min = 1
+escort_finish_x_max = 100
+escort_finish_y_min = 1
+escort_finish_y_max = 100
+
+
+[event.1]               # when headquater is destroyed, player loses.
+sp = false
+mp = true
+condition = headquater_destroyed
+action = set_player_lose
+player_id = 1
+target_id = 1
+
+[event.2]               # when player 1 failed, player fail.
+sp = false
+mp = true
+condition = headquater_destroyed
+action = set_player_lose
+player_id = 2
+target_id = 1
+
+[event.2]               # when player 1 's headquater is destroyed, enemy (player 3) wins.
+sp = false
+mp = true
+condition = headquater_destroyed
+action = set_player_win
+player_id = 3
+target_id = 1
