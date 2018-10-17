@@ -2,9 +2,9 @@ package cn.stateofwar.sowr.core;
 
 import cn.stateofwar.sowr.References;
 import cn.stateofwar.sowr.gui.Gui;
-import cn.stateofwar.sowr.gui.multimedia.Window;
 import cn.stateofwar.sowr.gui.render.Graphic;
 import cn.stateofwar.sowr.gui.render.Renderer;
+import cn.stateofwar.sowr.gui.render.multimedia.Window;
 import cn.stateofwar.sowr.util.Logger;
 
 /**

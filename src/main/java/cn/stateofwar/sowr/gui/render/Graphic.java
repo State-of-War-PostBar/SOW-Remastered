@@ -4,7 +4,7 @@ import static cn.stateofwar.sowr.util.Utils.nl;
 import static org.lwjgl.opengl.GL45.*;
 
 import cn.stateofwar.sowr.References;
-import cn.stateofwar.sowr.gui.multimedia.Window;
+import cn.stateofwar.sowr.gui.render.multimedia.Window;
 import cn.stateofwar.sowr.gui.render.ogl.Shaders;
 import cn.stateofwar.sowr.util.Config;
 import cn.stateofwar.sowr.util.I18n;

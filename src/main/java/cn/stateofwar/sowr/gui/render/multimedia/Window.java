@@ -1,4 +1,4 @@
-package cn.stateofwar.sowr.gui.multimedia;
+package cn.stateofwar.sowr.gui.render.multimedia;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL45.*;
@@ -104,7 +104,13 @@ public class Window {
 
 		GL.createCapabilities();
 		glViewport(0, 0, width, height);
+
+		glShadeModel(GL_SMOOTH);
+		glDisable(GL_DITHER);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearDepth(1.0f);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 
 		return this;
 	}
