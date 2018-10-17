@@ -17,13 +17,11 @@ public class Renderer {
 	public static final int[] INDICES_TRIANGLE = new int[] { 0, 1, 2 };
 	/**
 	 * Vertex indices for a rectangle; for 4 vertices, their listing is <b>Top
-	 * Right</b> 鈫� <b>Bottom Right</b> 鈫� <b>Bottom Left</b> 鈫� <b>Top Left</b>.
+	 * Right</b> → <b>Bottom Right</b> → <b>Bottom Left</b> → <b>Top Left</b>.
 	 */
 	public static final int[] INDICES_RECTANGLE = new int[] { 0, 1, 3, 1, 2, 3 };
 
-	/**
-	 * OpenGL matrix mode for the program.
-	 */
+	/** OpenGL matrix mode for the program. */
 	private static int matrix_mode;
 
 	/**
