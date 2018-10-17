@@ -18,12 +18,10 @@
 #
 # Escaping not allowed.
 #
-# This file is for main map registering.
-# Any map should be registered by this file.
-# The correspoinding map data are described by file name or by content below.
+# This file is for main map registering, maps should be registered by this file.
+# The corresponding map data are described by file name or by content below.
 #
-# Some extra information (key-value pair *and* block) can be add to anywhere
-#   as long as there's a script that read the information.
+# Some extra information (key-value pair *and* block) can be add to anywhere.
 #
 # **Note it's better to store game logic parts into scripts, not here.**
 #
@@ -46,10 +44,10 @@ sp.player = 1               # player control sp.1.
 
 difficulty = 3
 
-description.diffuculty = difficulty.example     # index to descriptions.
-description.id = mapid.example
-description.sp.briefing = brief.sp.example
-description.mp.briefing = brief.mp.example
+description.diffuculty = difficulty.xx     # index to descriptions.
+description.id = mapid.xx
+description.sp.briefing = brief.sp.xx
+description.mp.briefing = brief.mp.xx
 
 [sp.1]
 camp = 1                    # camps are used to determine allies.
@@ -106,9 +104,9 @@ difficulty = 3      # only when diffuculty = 3 this building exists.
                     # without specifing difficulty it will exist in any difficulty.
 x = 10
 y = 16
-type = heavy_factory
+type = factory_3
 owner = 1                       # player 1 owns it.
-production.0 = light_artillary
+production.0 = artillary_1
 upgrade.0 = 2                   # can use upgrade twice
 advanced_upgrade.0 = 1          # can use advanced upgrade once
 satellite_defence = true
@@ -119,9 +117,9 @@ x = 19
 y = 28
 owner = 1
 type = headquater
-production.0 = bomber
+production.0 = af_bomber
 upgrade.0 = 1
-production.9 = carryall         # production from 1 to 8 can be reserved.
+production.9 = af_carry_all         # production from 1 to 8 can be reserved.
 upgrade.9 = 1
 is_headquater = true            # property used by losing condition script described above.
 hp = 0                          # hp = 0 means full of hp; hp < 0 means destroy immediately. default 0.
@@ -129,18 +127,16 @@ hp = 0                          # hp = 0 means full of hp; hp < 0 means destroy 
 [unit.13372]
 x = 1177
 y = 2719
-type = normal_rogon
+type = rogon
 owner = 1
-escort_target = true            # tag that this unit is to be escort. used by event scripts below.
-ai = escort_rogon               # unit ai can be set individually. Use this to disable player control.
 hp = 2500
+id = escort_target				# As stated above this is a custom property. It can be used in some scripts such as escorting missions.
 
 [unit.13373]
 x = 1177
 y = 2719
 type = kodiak
 owner = 1
-escort_target = true
 hp = 1000
 
 ###############################################################################
@@ -153,7 +149,6 @@ mp = false
 condition = time_out                    # index to condition judgement script.
 action = reinforcement.example.1
 time_limit = 300                        # only used by this script; may not be used by lose judgement script.
-reinforcement.
 
 [event.12]
 sp = true
