@@ -67,24 +67,6 @@ public class Config {
 	}
 
 	/**
-	 * Get a configuration from only an index.
-	 * 
-	 * @param index Index of the configuration.
-	 * 
-	 * @return Configuration value.
-	 * 
-	 * @deprecated If multiple blocks contain identical indices, it will only load
-	 *             the first one it found. It also has very low efficiency.
-	 */
-	@Deprecated
-	public static String get(String index) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet())
-			if (entry.getValue().containsKey(index))
-				return entry.getValue().get(index);
-		return DefaultConfig.get(index);
-	}
-
-	/**
 	 * Set a configuration.
 	 * 
 	 * @param block Block of the configuration.
@@ -193,27 +175,6 @@ public class Config {
 
 			throw new IllegalStateException(
 					"Failed to find [" + block + '.' + index + "] field in default configurations.");
-		}
-
-		/**
-		 * Get a configuration from only an index.
-		 * 
-		 * @param index Index of the configuration.
-		 * 
-		 * @return Configuration value.
-		 * 
-		 * @throws IllegalStateException Unable to find a default configuration.
-		 * 
-		 * @deprecated If multiple blocks contain identical indices, it will only load
-		 *             the first one it found. It also has very low efficiency.
-		 */
-		@Deprecated
-		private static final String get(String index) {
-			for (Entry<String, LinkedHashMap<String, String>> entry : defaults.entrySet())
-				if (entry.getValue().containsKey(index))
-					return entry.getValue().get(index);
-
-			throw new IllegalStateException("Failed to find [unknown." + index + "] field in default configurations.");
 		}
 
 	}

@@ -49,7 +49,6 @@ public class Game {
 			state.input();
 
 			state.update();
-			timer.updateUPS();
 
 			state.render();
 
@@ -91,6 +90,7 @@ public class Game {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
 				LOGGER.fatal(e.getLocalizedMessage());
+				e.printStackTrace();
 			}
 			now = timer.getTime();
 		}

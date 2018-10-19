@@ -126,6 +126,7 @@ public class Logger {
 	 */
 	public void debug(String message) {
 		StringBuilder sb = new StringBuilder();
+		sb.append('[').append(Utils.getSysTime()).append(']');
 		sb.append("[========DEBUG========]");
 		sb.append('[').append(source).append(']');
 		sb.append(message);

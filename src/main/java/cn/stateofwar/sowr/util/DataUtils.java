@@ -68,52 +68,6 @@ public class DataUtils {
 	}
 
 	/**
-	 * Determine the quadrant of a x-y coordinate on the screen.
-	 * 
-	 * @param x X coordinate.
-	 * 
-	 * @param y Y coordinate.
-	 * 
-	 * @return A number indicates the quadrant of the coordinate:<br />
-	 *         <b>0</b> → Origin;<br />
-	 *         <b>1</b> → 1st quadrant;<br />
-	 *         <b>2</b> → 2nd quadrant;<br />
-	 *         <b>3</b> → 3rd quadrant;<br />
-	 *         <b>4</b> → 4th quadrant;<br />
-	 *         <b>5</b> → Middle of 1st and 2nd quadrant;<br />
-	 *         <b>6</b> → Middle of 2nd and 3rd quadrant;<br />
-	 *         <b>7</b> → Middle of 3rd and 4th quadrant;<br />
-	 *         <b>8</b> → Middle of 1st and 4th quadrant.
-	 */
-	public static int getQuadrant(double x, double y) {
-		y = Graphic.window.getHeight() - y;
-
-		int x_mid = Graphic.window.getWidth() / 2;
-		int y_mid = Graphic.window.getHeight() / 2;
-
-		if (x == y && x == 0)
-			return 3;
-		else if (x == x_mid && y == y_mid)
-			return 0;
-		else if (x > x_mid && y < y_mid)
-			return 1;
-		else if (x < x_mid && y < y_mid)
-			return 2;
-		else if (x < x_mid && y > y_mid)
-			return 3;
-		else if (x > x_mid && y > y_mid)
-			return 4;
-		else if (x == x_mid && y < y_mid)
-			return 5;
-		else if (x < x_mid && y == y_mid)
-			return 6;
-		else if (x == x_mid && y > y_mid)
-			return 7;
-		else
-			return 8;
-	}
-
-	/**
 	 * Check if a point is in a rectangle.
 	 * 
 	 * @param point     Coordinate of the point.
