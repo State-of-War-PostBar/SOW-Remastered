@@ -1,5 +1,9 @@
 apply plugin: "java"
 
+group = "cn.stateofwar"
+archivesBaseName = "sowr"
+version = "indev"
+
 ext {
 	guava_version = "26.0-jre"
 	netty_version = "4.1.30.Final"
@@ -9,10 +13,6 @@ ext {
 
 	default_text_encoding = "utf-8"
 }
-
-group = "cn.stateofwar"
-archivesBaseName = "sowr"
-version = "indev"
 
 repositories {
 	mavenCentral()

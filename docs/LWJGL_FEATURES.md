@@ -1,6 +1,5 @@
 # List of LWJGL features implemented
 ---
-
 LWJGL Core
 
 Assimp

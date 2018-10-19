@@ -6,7 +6,7 @@ The main program is written in Java. If you don't know how to use them, feel fre
 此程序主要使用Java编写。若您不会使用，可以询问或者寻找教程。
 
 ## Workspace / 工作空间
-We are sorry for not providing workspace for any IDEs in our repository.
+We are sorry for not providing any IDE workspace in our repository.
 
 很抱歉我们并不提供任何IDE的工作环境。
 

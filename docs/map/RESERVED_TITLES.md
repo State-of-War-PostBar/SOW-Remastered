@@ -2,6 +2,8 @@
 ---
 This document contains reserved keywords of the program, either definition or build-in types.
 
+These titles will be loaded by the default map loader.
+
 ## Building
 ---
 |Keywords|Remarks|
