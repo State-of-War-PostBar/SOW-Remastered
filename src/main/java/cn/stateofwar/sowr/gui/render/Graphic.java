@@ -1,7 +1,7 @@
 package cn.stateofwar.sowr.gui.render;
 
 import static cn.stateofwar.sowr.util.Utils.nl;
-import static org.lwjgl.opengl.GL45.*;
+import static org.lwjgl.opengl.GL46.*;
 
 import cn.stateofwar.sowr.References;
 import cn.stateofwar.sowr.gui.render.multimedia.Window;

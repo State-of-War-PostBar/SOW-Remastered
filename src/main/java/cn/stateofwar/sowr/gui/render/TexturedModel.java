@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.gui.render;
 
-import static org.lwjgl.opengl.GL45.*;
+import static org.lwjgl.opengl.GL46.*;
 
 import cn.stateofwar.sowr.gui.render.ogl.ArrayObject;
 import cn.stateofwar.sowr.gui.render.ogl.BufferObject;

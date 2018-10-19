@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.gui.render.ogl;
 
-import static org.lwjgl.opengl.GL45.*;
+import static org.lwjgl.opengl.GL46.*;
 
 /**
  * A vertex array object.
@@ -14,7 +14,7 @@ public class ArrayObject {
 	 * Create an OpenGL vertex array.
 	 */
 	public ArrayObject() {
-		id = glGenVertexArrays();
+		id = glCreateVertexArrays();
 	}
 
 	/**

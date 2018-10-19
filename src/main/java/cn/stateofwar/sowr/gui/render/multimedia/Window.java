@@ -1,7 +1,7 @@
 package cn.stateofwar.sowr.gui.render.multimedia;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL45.*;
+import static org.lwjgl.opengl.GL46.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 import org.lwjgl.glfw.Callbacks;
@@ -68,8 +68,8 @@ public class Window {
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
@@ -105,8 +105,6 @@ public class Window {
 		GL.createCapabilities();
 		glViewport(0, 0, width, height);
 
-		glShadeModel(GL_SMOOTH);
-		glDisable(GL_DITHER);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClearDepth(1.0f);
 		glEnable(GL_CULL_FACE);

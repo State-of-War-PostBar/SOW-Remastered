@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.gui.render.ogl;
 
-import static org.lwjgl.opengl.GL45.*;
+import static org.lwjgl.opengl.GL46.*;
 
 import java.io.IOException;
 

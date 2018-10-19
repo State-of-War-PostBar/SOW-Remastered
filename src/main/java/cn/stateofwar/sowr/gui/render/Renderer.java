@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.gui.render;
 
-import static org.lwjgl.opengl.GL45.*;
+import static org.lwjgl.opengl.GL46.*;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;

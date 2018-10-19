@@ -11,7 +11,7 @@ All code and text files must encode in **UTF-8** with a line at EOF.
 
 For *import static* OpenGL or GLFW who have extraordinary number of constants and methods, please simply do the following:
 
-	import static org.lwjgl.opengl.GL45.*
+	import static org.lwjgl.opengl.GL46.*
 	import static org.lwjgl.glfw.GLFW.*
 
 For others, please reduce it as possible.

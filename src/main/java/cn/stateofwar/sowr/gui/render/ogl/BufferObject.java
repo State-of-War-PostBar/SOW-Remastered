@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.gui.render.ogl;
 
-import static org.lwjgl.opengl.GL45.*;
+import static org.lwjgl.opengl.GL46.*;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -17,7 +17,7 @@ public class BufferObject {
 	 * Create an OpenGL buffer object.
 	 */
 	public BufferObject() {
-		id = glGenBuffers();
+		id = glCreateBuffers();
 	}
 
 	/**
