@@ -133,13 +133,13 @@ All the fields with **-** cannot be initialized with default value. If they are 
 |available|该任务可以在多人模式下游玩|True|
 |max_players|最大的玩家数。此项包括电脑|2|
 ||||
-|**[sp.~]** / **[mp.~]**|定义单人任务中的第**~**个玩家的信息||
+|**[sp.~]** / **[mp.~]**|定义单人任务中的第~个玩家的信息||
 |camp|这个玩家的阵营|1|
 |ai|该玩家所使用的AI|player_control（玩家操控）|
 |money|玩家在开始时拥有的金钱|0|
 |research|玩家在开始时拥有的研究点数|0|
 |advanced_research|玩家在开始时拥有的高级研究点数|0|
-|max_money|玩家可以拥有的最大额金钱|1073741824 (Bytes for a GB)|
+|max_money|玩家可以拥有的最大额金钱|1073741824|
 |max_research|玩家可以拥有的最大额研究点数|5000|
 |max_advanced_research|玩家可以拥有的最大额高级研究点数|1000|
 ||||
@@ -152,9 +152,9 @@ All the fields with **-** cannot be initialized with default value. If they are 
 |owner|建筑物所属|0（中立）|
 |type|建筑物的类型，见上|hq|
 |level|建筑物的当前等级|0|
-|export.**~**|建筑物的第**~**项生产/科技|-|
-|upgrade.**~**|第**~**项输出可以被升级多少次|0|
-|advanced_upgrade.**~**|第**~**项输出是否可以被高级升级|0（不能）|
+|export.**~**|建筑物的第~项生产/科技|-|
+|upgrade.**~**|第~项输出可以被升级多少次|0|
+|advanced_upgrade.**~**|第~项输出是否可以被高级升级|0（不能）|
 |satellite_defence|是否拥有卫星保护|0（没有）|
 |hp|建筑物当前的血量。以0-1的浮点数来定义|1（满血）|
 ||||
