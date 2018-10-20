@@ -33,6 +33,8 @@ public class GameState {
 		graphics.window.update();
 		Core.timer.updateFPS();
 
+		sync(graphics.max_fps);
+
 		graphics.window.clear();
 	}
 
@@ -48,6 +50,22 @@ public class GameState {
 		graphics.abrogate();
 
 		LOGGER.info("Exited a game state.");
+	}
+
+	public static void sync(int fps) {
+		double last_loop_time = Core.timer.getLastLoopTime();
+		double now = Core.timer.getTime();
+		float target_time = 1.0f / fps;
+		while (now - last_loop_time < target_time) {
+			Thread.yield();
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				LOGGER.fatal(e.getLocalizedMessage());
+				e.printStackTrace();
+			}
+			now = Core.timer.getTime();
+		}
 	}
 
 }

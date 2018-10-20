@@ -41,7 +41,7 @@ public class I18n {
 
 	public static enum Locale {
 
-		EN_US("en_us"), ZH_CN("zh_cn"), ZH_TW("zh_tw");
+		EN_US("EN_US"), ZH_CN("ZH_CN"), ZH_TW("ZH_TW");
 
 		private String name;
 

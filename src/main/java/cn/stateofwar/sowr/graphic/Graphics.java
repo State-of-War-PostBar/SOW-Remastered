@@ -44,8 +44,8 @@ public class Graphics {
 	}
 
 	public void abrogate() {
-		glfwTerminate();
 		window.abrogate();
+		glfwTerminate();
 	}
 
 }

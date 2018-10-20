@@ -105,8 +105,8 @@ public class Config {
 			gui.put("Window Width", "1280");
 			gui.put("Window Height", "800");
 			gui.put("Full Screen", "False");
-			gui.put("Vertical Sync", "True");
-			gui.put("Max FPS", "60");
+			gui.put("Vertical Sync", "False");
+			gui.put("Max FPS", "120");
 			defaults.put("GUI", gui);
 		}
 
