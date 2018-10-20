@@ -103,6 +103,7 @@ public class Window {
 
 	public void setWidth(int _width) {
 		width = _width;
+		resize(width, height);
 	}
 
 	public int getHeight() {
@@ -111,6 +112,13 @@ public class Window {
 
 	public void setHeight(int _height) {
 		height = _height;
+		resize(width, height);
+	}
+
+	public void resize(int _width, int _height) {
+		width = _width;
+		height = _height;
+		glViewport(0, 0, width, height);
 	}
 
 	public boolean isClosing() {
