@@ -143,7 +143,7 @@ All the fields with **-** cannot be initialized with default value. If they are 
 |max_research|玩家可以拥有的最大额研究点数|5000|
 |max_advanced_research|玩家可以拥有的最大额高级研究点数|1000|
 ||||
-|**[building.~]**|定义一个建筑物。在这区块中的信息都会用于定义这个建筑||
+|**[building.~]**|定义一个编号为~的建筑物。在这区块中的信息都会用于定义这个建筑||
 |sp|是否在单人游戏中出现|1（是）|
 |mp|是否在多人游戏中出现|1（是）|
 |id|一个自定义ID，可以用于脚本中|-|
@@ -158,7 +158,7 @@ All the fields with **-** cannot be initialized with default value. If they are 
 |satellite_defence|是否拥有卫星保护|0（没有）|
 |hp|建筑物当前的血量。以0-1的浮点数来定义|1（满血）|
 ||||
-|**[unit.~]**|定义一个单位。在这区块中的信息都会用于定义这个单位||
+|**[unit.~]**|定义一个编号为~的单位。在这区块中的信息都会用于定义这个单位||
 |sp|是否在单人游戏中出现|1（是）|
 |mp|是否在多人游戏中出现|1（是）|
 |id|一个自定义ID，可以用于脚本中|-|
@@ -167,6 +167,7 @@ All the fields with **-** cannot be initialized with default value. If they are 
 |owner|建筑物所属|0（中立）|
 |type|单位的类型，见上|adventurer（飞碟）|
 |hp|单位的当前血量。若大于单位最大血量则视为最大血量|999999（即一般情况下的最大可能血量，当然如果有单位大于这个数也没辙）|
+||||
 |**[event.~]**|在地图中注册第~个事件||
 |sp|该事件在单人任务中会触发|True|
 |mp|该事件在多人对战中会触发|False|
