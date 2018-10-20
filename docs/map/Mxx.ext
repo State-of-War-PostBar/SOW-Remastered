@@ -1,0 +1,10 @@
+# This file contains the extra information about the mission.
+# All default values of these are empty strings. 
+
+[sp.brief]
+difficulty = "" # Description about the difficulty of the map.
+id = "" # Description about the mission id of the map.
+briefing = "" # Mission briefing.
+
+[mp.brief]
+briefing = "" # Mission briefing.

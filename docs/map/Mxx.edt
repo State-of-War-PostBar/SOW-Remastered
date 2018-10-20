@@ -44,18 +44,13 @@ sp.player = 1               # player control sp.1.
 
 difficulty = 3
 
-description.diffuculty = difficulty.xx     # index to descriptions.
-description.id = mapid.xx
-description.sp.briefing = brief.sp.xx
-description.mp.briefing = brief.mp.xx
-
 [sp.1]
 camp = 1                    # camps are used to determine allies.
 
 ai = player_control         # we see player's controlling as an AI. this is the default value of key *ai*.
 money = 12500               # money at the beginning.
 research = 0                # beginning value default is 0.
-max_money = 20000           # max value default is 1073741824
+max_money = 1073741824      
 max_research = 2000
 max_advanced_research = 1000
 
@@ -76,7 +71,6 @@ production_acceleration = 2
 
 [mp]
 available = true
-# descriptions may not be allowed in multi-player mode.
 
 [mp.1]
 camp = 1
@@ -108,7 +102,7 @@ type = factory_3
 owner = 1                       # player 1 owns it.
 production.0 = artillary_1
 upgrade.0 = 2                   # can use upgrade twice
-advanced_upgrade.0 = 1          # can use advanced upgrade once
+advanced_upgrade.0 = 1          # can use advanced upgrade
 satellite_defence = true
 id = super_cannon               # this is a custom property and is not necessary. It can be used in some scripts.
 
@@ -117,12 +111,11 @@ x = 19
 y = 28
 owner = 1
 type = headquater
-production.0 = af_bomber
+export.0 = af_bomber
 upgrade.0 = 1
-production.9 = af_carry_all         # production from 1 to 8 can be reserved.
+export.9 = af_carry_all         # production from 1 to 8 can be reserved.
 upgrade.9 = 1
-is_headquater = true            # property used by losing condition script described above.
-hp = 0                          # hp = 0 means full of hp; hp < 0 means destroy immediately. default 0.
+hp = 1                          # hp = 1 means full of hp; hp < 0 means destroy immediately. default 1.
 
 [unit.13372]
 x = 1177
