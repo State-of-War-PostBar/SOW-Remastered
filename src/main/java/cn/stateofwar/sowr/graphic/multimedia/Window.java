@@ -77,8 +77,8 @@ public class Window {
 
 		GL.createCapabilities();
 		glViewport(0, 0, width, height);
-
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glDepthFunc(GL_LEQUAL);
 		glClearDepth(1.0f);
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
