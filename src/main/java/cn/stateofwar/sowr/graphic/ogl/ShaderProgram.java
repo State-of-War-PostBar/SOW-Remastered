@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.graphic.ogl;
 
-import static org.lwjgl.opengl.GL46.*;
+import static org.lwjgl.opengl.GL45.*;
 
 import java.nio.FloatBuffer;
 
@@ -57,12 +57,14 @@ public class ShaderProgram {
 
 	public void setUniform(String name, float value) {
 		int loc = getUniformLoc(name);
+
 		if (loc != 1)
 			glUniform1f(loc, value);
 	}
 
 	public void setUniform(String name, int value) {
 		int loc = getUniformLoc(name);
+
 		if (loc != 1)
 			glUniform1i(loc, value);
 	}
@@ -71,6 +73,7 @@ public class ShaderProgram {
 		int loc = getUniformLoc(name);
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(4);
 		value.get(buffer);
+
 		if (loc != 1)
 			glUniform4fv(loc, buffer);
 	}
@@ -79,6 +82,7 @@ public class ShaderProgram {
 		int loc = getUniformLoc(name);
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(4 * 4);
 		value.get(buffer);
+
 		if (loc != 1)
 			glUniformMatrix4fv(loc, false, buffer);
 	}

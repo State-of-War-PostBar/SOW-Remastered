@@ -55,45 +55,45 @@ public class RGBA {
 	public void setR(float _r) {
 		if (_r < 0.0f)
 			_r = 0.0f;
+
 		if (_r > 1.0f)
 			_r = 1.0f;
+
 		r = _r;
 	}
 
 	public void setG(float _g) {
 		if (_g < 0.0f)
 			_g = 0.0f;
+
 		if (_g > 1.0f)
 			_g = 1.0f;
+
 		g = _g;
 	}
 
 	public void setB(float _b) {
 		if (_b < 0.0f)
 			_b = 0.0f;
+
 		if (_b > 1.0f)
 			_b = 1.0f;
+
 		b = _b;
 	}
 
 	public void setA(float _a) {
 		if (_a < 0.0f)
 			_a = 0.0f;
+
 		if (_a > 1.0f)
 			_a = 1.0f;
+
 		a = _a;
 	}
 
 	public FloatBuffer toFloatBuffer() {
 		return DataUtils.createFloatBuffer(new float[] { r, g, b, a });
-	}
-
-	public static float to100(float value) {
-		return value / 255.0f;
-	}
-
-	public static float to255(float value) {
-		return value * 255.0f;
 	}
 
 }

@@ -1,8 +1,8 @@
 package cn.stateofwar.sowr.graphic;
 
-import static org.lwjgl.opengl.GL45.*;
-import static org.lwjgl.glfw.GLFW.*;
 import static cn.stateofwar.sowr.util.Utils.nl;
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL45.*;
 
 import cn.stateofwar.sowr.References;
 import cn.stateofwar.sowr.graphic.multimedia.Window;
@@ -19,7 +19,6 @@ public class Graphics {
 	public Window window;
 
 	public void initRenderCapabilities() {
-
 		if (!glfwInit()) {
 			LOGGER.fatal("Cannot initialize GLFW!");
 			throw new IllegalStateException("Failed to initialize GLFW.");

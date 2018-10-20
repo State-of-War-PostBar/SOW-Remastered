@@ -31,7 +31,6 @@ public class Core {
 
 			timer.update();
 		}
-
 	}
 
 	public static void abrogate() {

@@ -1,7 +1,7 @@
 package cn.stateofwar.sowr.graphic.multimedia;
 
-import static org.lwjgl.opengl.GL46.*;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL45.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 import org.lwjgl.glfw.Callbacks;
@@ -57,6 +57,7 @@ public class Window {
 		}
 
 		LOGGER.info("Created a GLFW window.");
+
 		glfwShowWindow(handle);
 		glfwMakeContextCurrent(handle);
 

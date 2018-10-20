@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.graphic.ogl;
 
-import static org.lwjgl.opengl.GL46.*;
+import static org.lwjgl.opengl.GL45.*;
 
 import java.io.IOException;
 
@@ -36,14 +36,19 @@ public class Shader {
 		switch (type) {
 		case VERTEX:
 			return in_archive ? loadVertexShaderA(path) : loadVertexShader(path);
+
 		case FRAGMENT:
 			return in_archive ? loadFragmentShaderA(path) : loadFragmentShader(path);
+
 		case GEOMETRY:
 			return in_archive ? loadGeometricShaderA(path) : loadGeometricShader(path);
+
 		case TESS_CONTROL:
 			return in_archive ? loadTessControllingShaderA(path) : loadTessControllingShader(path);
+
 		case TESS_EVALUATION:
 			return in_archive ? loadTessEvaluatingShaderA(path) : loadTessEvaluatingShader(path);
+
 		default:
 			LOGGER.error("Failed to create a  " + type.getName() + " shader with file " + path + '!');
 			return null;

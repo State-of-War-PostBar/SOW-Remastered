@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.graphic.render;
 
-import static org.lwjgl.opengl.GL46.*;
+import static org.lwjgl.opengl.GL45.*;
 import static org.lwjgl.stb.STBImage.stbi_failure_reason;
 import static org.lwjgl.stb.STBImage.stbi_load;
 import static org.lwjgl.stb.STBImage.stbi_set_flip_vertically_on_load;
@@ -89,19 +89,24 @@ public class Texture2D {
 	public static Texture2D loadTexture(String path) {
 		ByteBuffer image;
 		int width, height;
+
 		try (MemoryStack stack = MemoryStack.stackPush()) {
 			IntBuffer w = stack.mallocInt(1);
 			IntBuffer h = stack.mallocInt(1);
 			IntBuffer comp = stack.mallocInt(1);
+
 			stbi_set_flip_vertically_on_load(true);
 			image = stbi_load(path, w, h, comp, 4);
+
 			if (image == null) {
 				LOGGER.error("Failed to load a texture file from " + path + " !");
 				LOGGER.error(stbi_failure_reason());
 			}
+
 			width = w.get();
 			height = h.get();
 		}
+
 		LOGGER.info("Loaded a texture at path " + path + ".");
 		return createTexture(width, height, image);
 	}
@@ -113,10 +118,13 @@ public class Texture2D {
 		try (MemoryStack stack = MemoryStack.stackPush()) {
 			InputStream stream = ClassLoader.getSystemResourceAsStream(url);
 			BufferedImage image = ImageIO.read(stream);
+
 			width = image.getWidth();
 			height = image.getHeight();
+
 			int[] raw_pixels = image.getRGB(0, 0, width, height, null, 0, width);
 			pixels = BufferUtils.createByteBuffer(width * height * 4);
+
 			for (int i = 0; i < width; i++)
 				for (int j = 0; j < height; j++) {
 					int pixel = raw_pixels[i * width + j];
@@ -125,18 +133,21 @@ public class Texture2D {
 					pixels.put((byte) (pixel & 0xFF));
 					pixels.put((byte) ((pixel >> 030) & 0xFF));
 				}
+
 			pixels.flip();
 		} catch (IOException e) {
 			LOGGER.error("Failed to load a texture file from " + url + " !");
 			LOGGER.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
+
 		LOGGER.info("Loaded a texture at path " + url + ".");
 		return createTexture(width, height, pixels);
 	}
 
 	private static Texture2D createTexture(int width, int height, ByteBuffer data) {
 		Texture2D texture = new Texture2D();
+
 		texture.setWidth(width);
 		texture.setHeight(height);
 		texture.bind();
@@ -147,6 +158,7 @@ public class Texture2D {
 		texture.setPar(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		texture.upload(GL_RGBA8, width, height, GL_RGBA, data);
 		texture.unbind();
+
 		return texture;
 	}
 
