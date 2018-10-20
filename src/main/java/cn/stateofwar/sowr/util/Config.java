@@ -103,7 +103,7 @@ public class Config {
 
 			LinkedHashMap<String, String> gui = new LinkedHashMap<>();
 			gui.put("Window Width", "1280");
-			gui.put("Window Height", "800");
+			gui.put("Window Height", "720");
 			gui.put("Full Screen", "False");
 			gui.put("Vertical Sync", "False");
 			gui.put("Max FPS", "120");
