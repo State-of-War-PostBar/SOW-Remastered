@@ -8,6 +8,10 @@ public class Timer {
 
 	private double time_count;
 
+	private int fps;
+
+	private int fps_counter;
+
 	public void init() {
 		last_loop_time = getTime();
 	}
@@ -30,8 +34,21 @@ public class Timer {
 
 	public void update() {
 		getDelta();
-		if (time_count >= 1.0d)
+		if (time_count >= 1.0d) {
+
+			fps = fps_counter;
+			fps_counter = 0;
+
 			time_count -= 1.0d;
+		}
+	}
+
+	public void updateFPS() {
+		fps_counter++;
+	}
+
+	public int getFPS() {
+		return fps == 0 ? fps_counter : fps;
 	}
 
 }

@@ -4,7 +4,9 @@ import cn.stateofwar.sowr.util.Logger;
 
 public class Core {
 
-	private static final Logger LOGGER = new Logger("Game");
+	private static final Logger LOGGER = new Logger("Core");
+
+	public static GameState state;
 
 	public static Timer timer;
 
@@ -13,17 +15,23 @@ public class Core {
 	public static void start() {
 		LOGGER.info("The game is starting.");
 
+		state = new GameState();
+		state.enter();
+
 		running = true;
 		timer = new Timer();
 		timer.init();
 
-		/*
-		 * while (running) {
-		 * 
-		 * timer.updateFPS();
-		 * 
-		 * timer.update(); }
-		 */
+		while (running) {
+			state.input();
+
+			state.update();
+
+			state.render();
+
+			timer.update();
+		}
+
 	}
 
 	public static void abrogate() {
