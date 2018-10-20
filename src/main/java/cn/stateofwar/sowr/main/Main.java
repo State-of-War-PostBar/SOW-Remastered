@@ -1,6 +1,6 @@
 package cn.stateofwar.sowr.main;
 
-import cn.stateofwar.sowr.core.Game;
+import cn.stateofwar.sowr.core.Core;
 import cn.stateofwar.sowr.util.Logger;
 
 public class Main {
@@ -18,9 +18,9 @@ public class Main {
 		LOGGER.info("Initializing the program...");
 		Trim.init();
 
-		Game.startGame();
+		Core.start();
 
-		Game.abrogate();
+		Core.abrogate();
 
 		LOGGER.info("Shutting down client...");
 		Trim.abrogate();

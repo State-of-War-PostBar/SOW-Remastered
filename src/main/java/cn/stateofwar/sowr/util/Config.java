@@ -11,21 +11,12 @@ import org.ini4j.Profile.Section;
 
 import cn.stateofwar.sowr.References;
 
-/**
- * A basic configuration system. All configurations are stored and proceeded by
- * the format of <b><i>block.index=value</i></b>.
- */
 public class Config {
 
-	/** Stored configurations. */
 	private static LinkedHashMap<String, LinkedHashMap<String, String>> configs = new LinkedHashMap<>();
 
-	/** Configuration storage file. */
-	private static Ini file;
+	private static Ini config_file;
 
-	/**
-	 * Initialize the default configurations and load user preferences.
-	 */
 	public static void init() {
 		DefaultConfig.initDefault();
 		configs.putAll(DefaultConfig.defaults);
@@ -38,8 +29,8 @@ public class Config {
 		}
 
 		try {
-			file = new Ini(new File(References.CONFIG_FILE_NAME));
-			readAllConfig(file);
+			config_file = new Ini(new File(References.CONFIG_FILE_NAME));
+			readAllConfig(config_file);
 		} catch (IOException e) {
 			try {
 				Utils.createFile(References.CONFIG_FILE_NAME, true);
@@ -50,15 +41,6 @@ public class Config {
 		}
 	}
 
-	/**
-	 * Get a configuration from a block and an index.
-	 * 
-	 * @param block Block of the configuration.
-	 * 
-	 * @param index Index of the configuration.
-	 * 
-	 * @return Configuration value.
-	 */
 	public static String get(String block, String index) {
 		if (configs.containsKey(block))
 			if (configs.get(block).containsKey(index))
@@ -66,15 +48,6 @@ public class Config {
 		return DefaultConfig.get(block, index);
 	}
 
-	/**
-	 * Set a configuration.
-	 * 
-	 * @param block Block of the configuration.
-	 * 
-	 * @param index Index of the configuration.
-	 * 
-	 * @param value Configuration value.
-	 */
 	public static void set(String block, String index, String value) {
 		LinkedHashMap<String, String> temp = new LinkedHashMap<>();
 		temp.putAll(configs.get(block));
@@ -82,63 +55,43 @@ public class Config {
 		configs.put(block, temp);
 	}
 
-	/**
-	 * Save all configurations to the file.
-	 */
 	public static void abrogate() {
 		putAllConfig(configs);
 	}
 
-	/**
-	 * Put all the configurations to the file.
-	 * 
-	 * @param configs Configurations to save.
-	 */
 	private static void putAllConfig(LinkedHashMap<String, LinkedHashMap<String, String>> configs) {
 		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet())
 			for (Entry<String, String> entry2 : entry.getValue().entrySet())
-				file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
+				config_file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
 
 		try {
-			file.store();
+			config_file.store();
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 	}
 
-	/**
-	 * Read all configurations from the file.
-	 * 
-	 * @param ini Configuration file.
-	 */
 	private static void readAllConfig(Ini ini) {
 		Set<Entry<String, Section>> sections = ini.entrySet();
 
-		for (Entry<String, Section> e : sections) {
-			Section section = e.getValue();
+		for (Entry<String, Section> entry : sections) {
+			Section section = entry.getValue();
 			LinkedHashMap<String, String> sectionValues = new LinkedHashMap<>();
 			Set<Entry<String, String>> values = section.entrySet();
 
-			for (Entry<String, String> e2 : values) {
-				sectionValues.put(e2.getKey(), e2.getValue());
-				configs.put(e.getKey(), sectionValues);
+			for (Entry<String, String> entry2 : values) {
+				sectionValues.put(entry2.getKey(), entry2.getValue());
+				configs.put(entry.getKey(), sectionValues);
 			}
 
 		}
 	}
 
-	/**
-	 * Default configurations of the program.
-	 */
 	private static final class DefaultConfig {
 
-		/** Stored configurations. */
 		private static LinkedHashMap<String, LinkedHashMap<String, String>> defaults = new LinkedHashMap<>();
 
-		/**
-		 * Initialize the default configurations.
-		 */
 		private static final void initDefault() {
 			LinkedHashMap<String, String> general = new LinkedHashMap<>();
 			general.put("Language", "EN_US");
@@ -149,25 +102,14 @@ public class Config {
 			defaults.put("Control", control);
 
 			LinkedHashMap<String, String> gui = new LinkedHashMap<>();
-			gui.put("Window Width", "1366");
-			gui.put("Window Height", "768");
+			gui.put("Window Width", "1280");
+			gui.put("Window Height", "800");
 			gui.put("Full Screen", "False");
 			gui.put("Vertical Sync", "True");
 			gui.put("Max FPS", "60");
 			defaults.put("GUI", gui);
 		}
 
-		/**
-		 * Get a configuration from a block and an index.
-		 * 
-		 * @param block Block of the configuration.
-		 * 
-		 * @param index Index of the configuration.
-		 * 
-		 * @return Configuration value.
-		 * 
-		 * @throws IllegalStateException Unable to find a default configuration.
-		 */
 		private static final String get(String block, String index) {
 			if (defaults.containsKey(block))
 				if (defaults.get(block).containsKey(index))
