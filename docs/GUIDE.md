@@ -1,9 +1,9 @@
 # Development Guide
 ---
 ## Programming / 编程
-The main program is written in Java. If you don't know how to use them, feel free to ask or search for tutorials.
+The main program is written in Java.
 
-此程序主要使用Java编写。若您不会使用，可以询问或者寻找教程。
+此程序主要使用Java编写。
 
 ## Workspace / 工作空间
 We are sorry for not providing any IDE workspace in our repository.

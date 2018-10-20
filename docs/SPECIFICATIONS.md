@@ -1,6 +1,6 @@
 # Development Specifications
 ---
-## Coordinate System
+## Coordinate System / 定位系统
 
 For any type of positioning in this program, e.g. rendering or game calculating or anything else, the coordinate system is always the same:
 
