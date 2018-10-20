@@ -5,11 +5,11 @@ archivesBaseName = "sowr"
 version = "indev"
 
 ext {
-	guava_version = "26.0-jre"
+	guava_version = "27.0-jre"
 	netty_version = "4.1.30.Final"
-	lwjgl_version = "3.2.0"
 	joml_version = "1.9.11"
 	ini4j_version = "0.5.4"
+	lwjgl_version = "3.2.0"
 
 	default_text_encoding = "utf-8"
 }
