@@ -116,7 +116,7 @@ public class Texture2D extends Texture {
 		ByteBuffer pixels = null;
 		int width = 0, height = 0;
 
-		try (MemoryStack stack = MemoryStack.stackPush()) {
+		try {
 			InputStream stream = ClassLoader.getSystemResourceAsStream(path);
 			BufferedImage image = ImageIO.read(stream);
 
