@@ -57,9 +57,6 @@ public class Window {
 
 		LOGGER.info("Created a GLFW window.");
 
-		glfwShowWindow(handle);
-		glfwMakeContextCurrent(handle);
-
 		glfwSetCursorPosCallback(handle, GLFWCursorPosCallback.create((window, x, y) -> {
 			Core.state.getInputHook().updateCursorPos(x, y);
 		}));
@@ -75,13 +72,14 @@ public class Window {
 		if (vertical_sync)
 			glfwSwapInterval(1);
 
+		glfwShowWindow(handle);
+		glfwMakeContextCurrent(handle);
+
 		GL.createCapabilities();
 		glViewport(0, 0, width, height);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glDepthFunc(GL_LEQUAL);
 		glClearDepth(1.0f);
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
 	}
 
 	public void clear() {
