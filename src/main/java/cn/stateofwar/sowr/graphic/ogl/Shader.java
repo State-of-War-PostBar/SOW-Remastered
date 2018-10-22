@@ -71,6 +71,7 @@ public class Shader {
 			LOGGER.error(glGetShaderInfoLog(shader));
 		}
 
+		LOGGER.info("Loaded a " + ShaderType.VERTEX.name + " shader at path " + path + ".");
 		return new Shader(shader, ShaderType.VERTEX);
 	}
 
@@ -90,6 +91,7 @@ public class Shader {
 			LOGGER.error(glGetShaderInfoLog(shader));
 		}
 
+		LOGGER.info("Loaded a " + ShaderType.VERTEX.name + " shader at path [jar]" + path + ".");
 		return new Shader(shader, ShaderType.VERTEX);
 	}
 
@@ -109,6 +111,7 @@ public class Shader {
 			LOGGER.error(glGetShaderInfoLog(shader));
 		}
 
+		LOGGER.info("Loaded a " + ShaderType.FRAGMENT.name + " shader at path " + path + ".");
 		return new Shader(shader, ShaderType.FRAGMENT);
 	}
 
@@ -128,6 +131,7 @@ public class Shader {
 			LOGGER.error(glGetShaderInfoLog(shader));
 		}
 
+		LOGGER.info("Loaded a " + ShaderType.FRAGMENT.name + " shader at path [jar]" + path + ".");
 		return new Shader(shader, ShaderType.FRAGMENT);
 	}
 
@@ -147,6 +151,7 @@ public class Shader {
 			LOGGER.error(glGetShaderInfoLog(shader));
 		}
 
+		LOGGER.info("Loaded a " + ShaderType.GEOMETRY.name + " shader at path " + path + ".");
 		return new Shader(shader, ShaderType.GEOMETRY);
 	}
 
@@ -166,6 +171,7 @@ public class Shader {
 			LOGGER.error(glGetShaderInfoLog(shader));
 		}
 
+		LOGGER.info("Loaded a " + ShaderType.GEOMETRY.name + " shader at path [jar]" + path + ".");
 		return new Shader(shader, ShaderType.GEOMETRY);
 	}
 
@@ -185,6 +191,7 @@ public class Shader {
 			LOGGER.error(glGetShaderInfoLog(shader));
 		}
 
+		LOGGER.info("Loaded a " + ShaderType.TESS_CONTROL.name + " shader at path " + path + ".");
 		return new Shader(shader, ShaderType.TESS_CONTROL);
 	}
 
@@ -204,6 +211,7 @@ public class Shader {
 			LOGGER.error(glGetShaderInfoLog(shader));
 		}
 
+		LOGGER.info("Loaded a " + ShaderType.TESS_CONTROL.name + " shader at path [jar]" + path + ".");
 		return new Shader(shader, ShaderType.TESS_CONTROL);
 	}
 
@@ -223,6 +231,7 @@ public class Shader {
 			LOGGER.error(glGetShaderInfoLog(shader));
 		}
 
+		LOGGER.info("Loaded a " + ShaderType.TESS_EVALUATION.name + " shader at path " + path + ".");
 		return new Shader(shader, ShaderType.TESS_EVALUATION);
 	}
 
@@ -242,12 +251,13 @@ public class Shader {
 			LOGGER.error(glGetShaderInfoLog(shader));
 		}
 
+		LOGGER.info("Loaded a " + ShaderType.TESS_EVALUATION.name + " shader at path [jar]" + path + ".");
 		return new Shader(shader, ShaderType.TESS_EVALUATION);
 	}
 
 	public static enum ShaderType {
-		VERTEX("vertex"), FRAGMENT("fragment"), GEOMETRY("geometry"), TESS_CONTROL("tess_control"),
-		TESS_EVALUATION("tess_evaluation"), UNKNOWN("unknown");
+		VERTEX("vertex"), FRAGMENT("fragment"), GEOMETRY("geometry"), TESS_CONTROL("tessellation control"),
+		TESS_EVALUATION("tessellation evaluation"), UNKNOWN("unknown");
 
 		private String name;
 

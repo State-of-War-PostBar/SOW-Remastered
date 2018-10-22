@@ -112,12 +112,12 @@ public class Texture2D extends Texture {
 		return createTexture(width, height, image);
 	}
 
-	public static Texture2D loadTextureA(String url) {
+	public static Texture2D loadTextureA(String path) {
 		ByteBuffer pixels = null;
 		int width = 0, height = 0;
 
 		try (MemoryStack stack = MemoryStack.stackPush()) {
-			InputStream stream = ClassLoader.getSystemResourceAsStream(url);
+			InputStream stream = ClassLoader.getSystemResourceAsStream(path);
 			BufferedImage image = ImageIO.read(stream);
 
 			width = image.getWidth();
@@ -137,12 +137,16 @@ public class Texture2D extends Texture {
 
 			pixels.flip();
 		} catch (IOException e) {
-			LOGGER.error("Failed to load a texture file from " + url + " !");
+			LOGGER.error("Failed to load a texture file from [jar]" + path + " !");
+			LOGGER.error(e.getLocalizedMessage());
+			e.printStackTrace();
+		} catch (IndexOutOfBoundsException e) {
+			LOGGER.fatal("The texture file of path " + path + " is too large! Try to add it in local path.");
 			LOGGER.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 
-		LOGGER.info("Loaded a texture at path " + url + ".");
+		LOGGER.info("Loaded a texture at path [jar]" + path + ".");
 		return createTexture(width, height, pixels);
 	}
 

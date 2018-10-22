@@ -17,7 +17,7 @@ public class GameState {
 
 		graphics.initRenderCapabilities();
 
-		LOGGER.info("Enabled a game state.");
+		LOGGER.info("Started a game state.");
 	}
 
 	public void input() {
