@@ -4,6 +4,9 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL45.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+import java.nio.ByteBuffer;
+
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
@@ -83,7 +86,7 @@ public class Window {
 
 		GL.createCapabilities();
 		glViewport(0, 0, width, height);
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
 		glDepthFunc(GL_LEQUAL);
 		glClearDepth(1.0f);
 
@@ -145,6 +148,26 @@ public class Window {
 			glfwSwapInterval(1);
 		else
 			glfwSwapInterval(0);
+	}
+
+	public ByteBuffer screenshot() {
+		ByteBuffer pixels = BufferUtils.createByteBuffer(width * height * 3);
+		ByteBuffer image = BufferUtils.createByteBuffer(width * height * 3);
+
+		glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+		int index = 0;
+		for (int i = 0; i < width; i++)
+			for (int j = 0; j < height; j++) {
+				image.put(index, (byte) ((pixels.get(index) >> 020)));
+				index++;
+				image.put(index, (byte) ((pixels.get(index) >> 010)));
+				index++;
+				image.put(index, (byte) ((pixels.get(index) >> 0)));
+				index++;
+			}
+
+		return image;
 	}
 
 	public void abrogate() {

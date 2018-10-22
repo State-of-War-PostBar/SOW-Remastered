@@ -38,6 +38,16 @@ public class Utils {
 		return System.lineSeparator();
 	}
 
+	public static String getSysDate() {
+		Calendar calendar = Calendar.getInstance();
+
+		String year = "" + calendar.get(Calendar.YEAR);
+		String month = "" + calendar.get(Calendar.MONTH);
+		String day = "" + calendar.get(Calendar.DAY_OF_MONTH);
+
+		return "" + year + '/' + month + '/' + day;
+	}
+
 	public static String getSysTime() {
 		Calendar calendar = Calendar.getInstance();
 

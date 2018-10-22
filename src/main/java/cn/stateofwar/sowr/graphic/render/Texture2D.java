@@ -141,7 +141,8 @@ public class Texture2D extends Texture {
 			LOGGER.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		} catch (IndexOutOfBoundsException e) {
-			LOGGER.fatal("The texture file of path " + path + " is too large! Try to add it in local path.");
+			LOGGER.fatal("The texture file of path " + path
+					+ " is too large! Consider adding it in local path instead of inside the jar.");
 			LOGGER.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
