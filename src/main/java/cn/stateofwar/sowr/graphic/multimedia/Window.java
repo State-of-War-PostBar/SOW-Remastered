@@ -8,6 +8,7 @@ import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
+import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 
 import cn.stateofwar.sowr.core.Core;
@@ -19,7 +20,7 @@ public class Window {
 
 	private static final Logger LOGGER = new Logger("Render");
 
-	private final long handle;
+	private long handle;
 
 	private String title;
 
@@ -37,7 +38,9 @@ public class Window {
 		height = _height;
 		vertical_sync = _vertical_sync;
 		full_screen = _full_screen;
+	}
 
+	public void init() {
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
@@ -57,6 +60,8 @@ public class Window {
 
 		LOGGER.info("Created a GLFW window.");
 
+		glfwMakeContextCurrent(handle);
+
 		glfwSetCursorPosCallback(handle, GLFWCursorPosCallback.create((window, x, y) -> {
 			Core.state.getInputHook().updateCursorPos(x, y);
 		}));
@@ -69,17 +74,20 @@ public class Window {
 			Core.state.getInputHook().updateMouseButton(button, action);
 		}));
 
+		glfwSetWindowSizeCallback(handle, GLFWWindowSizeCallback.create((window, width, height) -> {
+			Core.state.getGraphic().window.resize(width, height);
+		}));
+
 		if (vertical_sync)
 			glfwSwapInterval(1);
-
-		glfwShowWindow(handle);
-		glfwMakeContextCurrent(handle);
 
 		GL.createCapabilities();
 		glViewport(0, 0, width, height);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glDepthFunc(GL_LEQUAL);
 		glClearDepth(1.0f);
+
+		glfwShowWindow(handle);
 	}
 
 	public void clear() {

@@ -19,7 +19,7 @@ import org.lwjgl.system.MemoryStack;
 
 import cn.stateofwar.sowr.util.Logger;
 
-public class Texture2D {
+public class Texture2D extends Texture {
 
 	private static final Logger LOGGER = new Logger("Render");
 
@@ -82,6 +82,7 @@ public class Texture2D {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
+	@Override
 	public void delete() {
 		glDeleteTextures(id);
 	}
