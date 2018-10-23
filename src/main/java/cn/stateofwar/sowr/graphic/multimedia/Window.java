@@ -6,6 +6,7 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
+import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -76,6 +77,10 @@ public class Window {
 		}));
 
 		glfwSetWindowSizeCallback(handle, GLFWWindowSizeCallback.create((window, width, height) -> {
+			Core.state.getGraphic().window.resize(width, height);
+		}));
+
+		glfwSetFramebufferSizeCallback(handle, GLFWFramebufferSizeCallback.create((window, width, height) -> {
 			Core.state.getGraphic().window.resize(width, height);
 		}));
 
