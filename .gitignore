@@ -45,3 +45,6 @@ hs_err_pid*
 
 # Settings file
 *.ini
+
+# Testing generated files
+SOWR-Log.txt
