@@ -94,10 +94,10 @@ public class Texture2D extends Texture {
 		try (MemoryStack stack = MemoryStack.stackPush()) {
 			IntBuffer w = stack.mallocInt(1);
 			IntBuffer h = stack.mallocInt(1);
-			IntBuffer comp = stack.mallocInt(1);
+			IntBuffer components = stack.mallocInt(1);
 
 			stbi_set_flip_vertically_on_load(true);
-			image = stbi_load(path, w, h, comp, 4);
+			image = stbi_load(path, w, h, components, 4);
 
 			if (image == null) {
 				LOGGER.error("Failed to load a texture file from " + path + " !");
@@ -116,7 +116,7 @@ public class Texture2D extends Texture {
 		ByteBuffer pixels = null;
 		int width = 0, height = 0;
 
-		try {
+		try (MemoryStack stack = MemoryStack.stackPush()) {
 			InputStream stream = ClassLoader.getSystemResourceAsStream(path);
 			BufferedImage image = ImageIO.read(stream);
 
@@ -136,13 +136,13 @@ public class Texture2D extends Texture {
 				}
 
 			pixels.flip();
-		} catch (IOException e) {
-			LOGGER.error("Failed to load a texture file from [jar]" + path + " !");
-			LOGGER.error(e.getLocalizedMessage());
-			e.printStackTrace();
+		} catch (IOException e1) {
+			LOGGER.error("Failed to load a texture file from [jar]" + path + "!");
+			LOGGER.error(e1.getLocalizedMessage());
+			e1.printStackTrace();
 		} catch (IndexOutOfBoundsException e) {
-			LOGGER.fatal("The texture file of path " + path
-					+ " is too large! Consider adding it in local path instead of inside the jar.");
+			LOGGER.error("The texture file of path [jar]" + path
+					+ " is too large! Consider adding it in local path instead.");
 			LOGGER.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
@@ -159,7 +159,7 @@ public class Texture2D extends Texture {
 		texture.bind();
 		texture.setPar(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 		texture.setPar(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-		texture.setPar(GL_TEXTURE_BORDER_COLOR, RGBA.BLACK.toFloatBuffer());
+		texture.setPar(GL_TEXTURE_BORDER_COLOR, RGBA.BLACK.toFloatBuffer().flip());
 		texture.setPar(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		texture.setPar(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		texture.upload(GL_RGBA8, width, height, GL_RGBA, data);

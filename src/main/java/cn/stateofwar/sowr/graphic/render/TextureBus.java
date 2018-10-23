@@ -17,11 +17,13 @@ public class TextureBus {
 	}
 
 	public static void init() {
-
+		register("credit.dk", Texture2D.loadTextureA("sowr/graphic/texture/credit/credit_dk.png"));
+		register("credit.tax", Texture2D.loadTextureA("sowr/graphic/texture/credit/credit_tax.png"));
 	}
 
 	public static void abrogate() {
 		for (Entry<String, Texture> entry : textures.entrySet())
 			entry.getValue().delete();
 	}
+
 }

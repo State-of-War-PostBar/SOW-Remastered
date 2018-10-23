@@ -87,11 +87,11 @@ public class ShaderProgram {
 			glUniformMatrix4fv(loc, false, buffer);
 	}
 
-	public void use() {
+	public void bind() {
 		glUseProgram(id);
 	}
 
-	public void unuse() {
+	public void unbind() {
 		glUseProgram(0);
 	}
 

@@ -31,10 +31,9 @@ public class GameState {
 
 	public void render() {
 		graphics.window.update();
+
 		Core.timer.updateFPS();
-
 		sync(graphics.max_fps);
-
 		graphics.window.clear();
 	}
 
@@ -56,6 +55,7 @@ public class GameState {
 		double last_loop_time = Core.timer.getLastLoopTime();
 		double now = Core.timer.getTime();
 		float target_time = 1.0f / fps;
+
 		while (now - last_loop_time < target_time) {
 			Thread.yield();
 			try {

@@ -4,9 +4,6 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL45.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
-import java.nio.ByteBuffer;
-
-import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
@@ -50,7 +47,6 @@ public class Window {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
 		if (Utils.getOS() == OSType.MAC)
 			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
@@ -62,8 +58,6 @@ public class Window {
 		}
 
 		LOGGER.info("Created a GLFW window.");
-
-		glfwMakeContextCurrent(handle);
 
 		glfwSetCursorPosCallback(handle, GLFWCursorPosCallback.create((window, x, y) -> {
 			Core.state.getInputHook().updateCursorPos(x, y);
@@ -84,11 +78,13 @@ public class Window {
 		if (vertical_sync)
 			glfwSwapInterval(1);
 
+		glfwMakeContextCurrent(handle);
 		GL.createCapabilities();
 		glViewport(0, 0, width, height);
-		glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
 		glDepthFunc(GL_LEQUAL);
 		glClearDepth(1.0f);
+
+		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
 		glfwShowWindow(handle);
 	}
@@ -111,8 +107,7 @@ public class Window {
 	}
 
 	public void setWidth(int _width) {
-		width = _width;
-		resize(width, height);
+		resize(_width, height);
 	}
 
 	public int getHeight() {
@@ -120,8 +115,7 @@ public class Window {
 	}
 
 	public void setHeight(int _height) {
-		height = _height;
-		resize(width, height);
+		resize(width, _height);
 	}
 
 	public void resize(int _width, int _height) {
@@ -148,26 +142,6 @@ public class Window {
 			glfwSwapInterval(1);
 		else
 			glfwSwapInterval(0);
-	}
-
-	public ByteBuffer screenshot() {
-		ByteBuffer pixels = BufferUtils.createByteBuffer(width * height * 3);
-		ByteBuffer image = BufferUtils.createByteBuffer(width * height * 3);
-
-		glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-
-		int index = 0;
-		for (int i = 0; i < width; i++)
-			for (int j = 0; j < height; j++) {
-				image.put(index, (byte) ((pixels.get(index) >> 020)));
-				index++;
-				image.put(index, (byte) ((pixels.get(index) >> 010)));
-				index++;
-				image.put(index, (byte) ((pixels.get(index) >> 0)));
-				index++;
-			}
-
-		return image;
 	}
 
 	public void abrogate() {

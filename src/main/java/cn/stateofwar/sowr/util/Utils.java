@@ -38,17 +38,17 @@ public class Utils {
 		return System.lineSeparator();
 	}
 
-	public static String getSysDate() {
+	public static String getSysDate(char separator) {
 		Calendar calendar = Calendar.getInstance();
 
-		String year = "" + calendar.get(Calendar.YEAR);
-		String month = "" + calendar.get(Calendar.MONTH);
-		String day = "" + calendar.get(Calendar.DAY_OF_MONTH);
+		String year = Integer.toString(calendar.get(Calendar.YEAR));
+		String month = Integer.toString(calendar.get(Calendar.MONTH));
+		String day = Integer.toString(calendar.get(Calendar.DAY_OF_MONTH));
 
-		return "" + year + '/' + month + '/' + day;
+		return year + separator + month + separator + day;
 	}
 
-	public static String getSysTime() {
+	public static String getSysTime(char separator) {
 		Calendar calendar = Calendar.getInstance();
 
 		String hour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
@@ -60,7 +60,7 @@ public class Utils {
 		String second = Integer.toString(calendar.get(Calendar.SECOND));
 		second = second.length() == 2 ? second : '0' + second;
 
-		return "" + hour + ':' + minute + ':' + second;
+		return hour + separator + minute + separator + second;
 	}
 
 	public static void createFile(String path, boolean override) throws IOException {
@@ -99,16 +99,7 @@ public class Utils {
 		return sb.toString();
 	}
 
-	public static int getTotalLines(String path) throws IOException {
-		File file = new File(path);
-		List<String> lines;
-
-		lines = Files.readLines(file, Charset.forName(References.DEFAULT_TEXT_ENCODING));
-
-		return lines.size();
-	}
-
-	public static String readLineS(String path, int line) throws IOException {
+	public static String readLine(String path, int line) throws IOException {
 		line--;
 		List<String> lines;
 
@@ -119,10 +110,10 @@ public class Utils {
 		return lines.get(line).replaceAll(nl(), "");
 	}
 
-	public static String readLineSP(String path, int line, int position) throws IOException {
+	public static String readLine(String path, int line, int position) throws IOException {
 		position--;
 
-		String l = readLineS(path, line);
+		String l = readLine(path, line);
 		if (l.length() < position)
 			position = l.length();
 
@@ -143,7 +134,7 @@ public class Utils {
 		out.close();
 	}
 
-	public static void writeLineS(String path, String text, int line) throws IOException {
+	public static void writeLine(String path, String text, int line) throws IOException {
 		line--;
 		File file = new File(path);
 
@@ -155,7 +146,7 @@ public class Utils {
 		java.nio.file.Files.write(file.toPath(), lines, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 	}
 
-	public static void writeLineSP(String path, String text, int line, int position) throws IOException {
+	public static void writeLine(String path, String text, int line, int position) throws IOException {
 		position--;
 		line--;
 		File file = new File(path);

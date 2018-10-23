@@ -35,7 +35,6 @@ public class Timer {
 	public void update() {
 		getDelta();
 		if (time_count >= 1.0d) {
-
 			fps = fps_counter;
 			fps_counter = 0;
 

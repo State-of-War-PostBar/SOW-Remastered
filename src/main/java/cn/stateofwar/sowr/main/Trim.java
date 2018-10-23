@@ -14,7 +14,7 @@ public class Trim {
 
 		I18n.init();
 		LOGGER.info("Loaded internationalization files.");
-		LOGGER.info("Current language setting is: " + I18n.getLocaleName() + ".");
+		LOGGER.info("Current language setting is: " + I18n.getLocale().getName() + ".");
 	}
 
 	protected static void abrogate() {

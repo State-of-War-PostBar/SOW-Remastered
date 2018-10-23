@@ -10,19 +10,19 @@ import org.lwjgl.BufferUtils;
 public class DataUtils {
 
 	public static ByteBuffer createByteBuffer(byte[] data) {
-		return (ByteBuffer) BufferUtils.createByteBuffer(data.length).put(data).flip();
+		return (ByteBuffer) BufferUtils.createByteBuffer(data.length).put(data);
 	}
 
 	public static FloatBuffer createFloatBuffer(float[] data) {
-		return (FloatBuffer) BufferUtils.createFloatBuffer(data.length).put(data).flip();
+		return (FloatBuffer) BufferUtils.createFloatBuffer(data.length).put(data);
 	}
 
 	public static DoubleBuffer createDoubleBuffer(double[] data) {
-		return (DoubleBuffer) BufferUtils.createDoubleBuffer(data.length).put(data).flip();
+		return (DoubleBuffer) BufferUtils.createDoubleBuffer(data.length).put(data);
 	}
 
 	public static IntBuffer createIntBuffer(int[] data) {
-		return (IntBuffer) BufferUtils.createIntBuffer(data.length).put(data).flip();
+		return (IntBuffer) BufferUtils.createIntBuffer(data.length).put(data);
 	}
 
 }

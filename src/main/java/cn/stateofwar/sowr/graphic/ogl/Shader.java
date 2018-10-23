@@ -256,6 +256,7 @@ public class Shader {
 	}
 
 	public static enum ShaderType {
+
 		VERTEX("vertex"), FRAGMENT("fragment"), GEOMETRY("geometry"), TESS_CONTROL("tessellation control"),
 		TESS_EVALUATION("tessellation evaluation"), UNKNOWN("unknown");
 
@@ -269,54 +270,6 @@ public class Shader {
 			return name;
 		}
 
-		public static String gl2n(int name) {
-			return gl2t(name).getName();
-		}
-
-		public static ShaderType gl2t(int name) {
-			switch (name) {
-			case GL_VERTEX_SHADER:
-				return VERTEX;
-			case GL_FRAGMENT_SHADER:
-				return FRAGMENT;
-			case GL_GEOMETRY_SHADER:
-				return GEOMETRY;
-			case GL_TESS_CONTROL_SHADER:
-				return TESS_CONTROL;
-			case GL_TESS_EVALUATION_SHADER:
-				return TESS_EVALUATION;
-			default:
-				return UNKNOWN;
-			}
-		}
-
-		public static int n2gl(String name) {
-			return t2gl(n2t(name));
-		}
-
-		public static ShaderType n2t(String name) {
-			for (ShaderType e : ShaderType.values())
-				if (e.getName().equals(name))
-					return e;
-			return UNKNOWN;
-		}
-
-		public static int t2gl(ShaderType type) {
-			switch (type) {
-			case VERTEX:
-				return GL_VERTEX_SHADER;
-			case FRAGMENT:
-				return GL_FRAGMENT_SHADER;
-			case GEOMETRY:
-				return GL_GEOMETRY_SHADER;
-			case TESS_CONTROL:
-				return GL_TESS_CONTROL_SHADER;
-			case TESS_EVALUATION:
-				return GL_TESS_EVALUATION_SHADER;
-			default:
-				return 0;
-			}
-		}
 	}
 
 }

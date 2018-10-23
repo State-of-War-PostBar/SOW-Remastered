@@ -40,18 +40,6 @@ public class RGBA {
 		return r;
 	}
 
-	public float getG() {
-		return g;
-	}
-
-	public float getB() {
-		return b;
-	}
-
-	public float getA() {
-		return a;
-	}
-
 	public void setR(float _r) {
 		if (_r < 0.0f)
 			_r = 0.0f;
@@ -60,6 +48,10 @@ public class RGBA {
 			_r = 1.0f;
 
 		r = _r;
+	}
+
+	public float getG() {
+		return g;
 	}
 
 	public void setG(float _g) {
@@ -72,6 +64,10 @@ public class RGBA {
 		g = _g;
 	}
 
+	public float getB() {
+		return b;
+	}
+
 	public void setB(float _b) {
 		if (_b < 0.0f)
 			_b = 0.0f;
@@ -80,6 +76,10 @@ public class RGBA {
 			_b = 1.0f;
 
 		b = _b;
+	}
+
+	public float getA() {
+		return a;
 	}
 
 	public void setA(float _a) {

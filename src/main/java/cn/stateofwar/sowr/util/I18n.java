@@ -12,13 +12,13 @@ public class I18n {
 	private static Locale current_locale;
 
 	public static void init() {
-		for (Locale l : Locale.values())
-			try {
+		try {
+			for (Locale l : Locale.values())
 				l.readValues();
-			} catch (IOException e) {
-				System.err.println(e.getLocalizedMessage());
-				e.printStackTrace();
-			}
+		} catch (IOException e) {
+			System.err.println(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
 
 		current_locale = Locale.parseLocale(Config.get("General", "Language"));
 	}
@@ -29,10 +29,6 @@ public class I18n {
 
 	public static Locale getLocale() {
 		return current_locale;
-	}
-
-	public static String getLocaleName() {
-		return current_locale.getName();
 	}
 
 	public static void switchLocale(String locale) {
@@ -73,10 +69,11 @@ public class I18n {
 
 		public static Locale parseLocale(String _name) {
 			for (Locale locale : Locale.values())
-				if (locale.name.equals(_name))
+				if (locale.getName().equals(_name))
 					return locale;
 			return EN_US;
 		}
+
 	}
 
 }

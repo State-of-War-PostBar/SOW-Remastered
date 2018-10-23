@@ -32,57 +32,57 @@ public class Logger {
 
 	public void info(String message) {
 		StringBuilder sb = new StringBuilder();
-		sb.append('[').append(Utils.getSysTime()).append(']');
+		sb.append('[').append(Utils.getSysTime(':')).append(']');
 		sb.append("[INFO]");
 		sb.append('[').append(source).append(']');
 		sb.append(message);
 		System.out.println(sb.toString());
-		record(sb.toString());
+		log(sb.toString());
 	}
 
 	public void warn(String message) {
 		StringBuilder sb = new StringBuilder();
-		sb.append('[').append(Utils.getSysTime()).append(']');
+		sb.append('[').append(Utils.getSysTime(':')).append(']');
 		sb.append("[WARNING]");
 		sb.append('[').append(source).append(']');
 		sb.append(message);
 		System.out.println(sb.toString());
-		record(sb.toString());
+		log(sb.toString());
 	}
 
 	public void error(String message) {
 		StringBuilder sb = new StringBuilder();
-		sb.append('[').append(Utils.getSysTime()).append(']');
+		sb.append('[').append(Utils.getSysTime(':')).append(']');
 		sb.append("[ERROR]");
 		sb.append('[').append(source).append(']');
 		sb.append(message);
 		System.err.println(sb.toString());
-		record(sb.toString());
+		log(sb.toString());
 	}
 
 	public void fatal(String message) {
 		StringBuilder sb = new StringBuilder();
-		sb.append('[').append(Utils.getSysTime()).append(']');
+		sb.append('[').append(Utils.getSysTime(':')).append(']');
 		sb.append("[FATAL ERROR]");
 		sb.append('[').append(source).append(']');
 		sb.append(message);
 		System.err.println(sb.toString());
-		record(sb.toString());
+		log(sb.toString());
 	}
 
 	public void debug(String message) {
 		StringBuilder sb = new StringBuilder();
-		sb.append('[').append(Utils.getSysTime()).append(']');
+		sb.append('[').append(Utils.getSysTime(':')).append(']');
 		sb.append("[===DEBUG===]");
 		sb.append('[').append(source).append(']');
 		sb.append(message);
 		System.out.println(sb.toString());
-		record(sb.toString());
+		log(sb.toString());
 	}
 
-	private void record(String message) {
+	private void log(String message) {
 		try {
-			Utils.writeLine(log_file.toString(), message);
+			Utils.writeLine(References.LOG_FILE_NAME, message);
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());
 			e.printStackTrace();

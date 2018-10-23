@@ -30,12 +30,12 @@ public class Config {
 
 		try {
 			config_file = new Ini(new File(References.CONFIG_FILE_NAME));
-			readAllConfig(config_file);
+			readAllConfig();
 		} catch (IOException e) {
 			try {
 				Utils.createFile(References.CONFIG_FILE_NAME, true);
 			} catch (IOException e1) {
-				System.err.println(e.getLocalizedMessage());
+				System.err.println(e1.getLocalizedMessage());
 				e1.printStackTrace();
 			}
 		}
@@ -72,19 +72,18 @@ public class Config {
 		}
 	}
 
-	private static void readAllConfig(Ini ini) {
-		Set<Entry<String, Section>> sections = ini.entrySet();
+	private static void readAllConfig() {
+		Set<Entry<String, Section>> sections = config_file.entrySet();
 
 		for (Entry<String, Section> entry : sections) {
 			Section section = entry.getValue();
-			LinkedHashMap<String, String> sectionValues = new LinkedHashMap<>();
+			LinkedHashMap<String, String> section_values = new LinkedHashMap<>();
 			Set<Entry<String, String>> values = section.entrySet();
 
 			for (Entry<String, String> entry2 : values) {
-				sectionValues.put(entry2.getKey(), entry2.getValue());
-				configs.put(entry.getKey(), sectionValues);
+				section_values.put(entry2.getKey(), entry2.getValue());
+				configs.put(entry.getKey(), section_values);
 			}
-
 		}
 	}
 
