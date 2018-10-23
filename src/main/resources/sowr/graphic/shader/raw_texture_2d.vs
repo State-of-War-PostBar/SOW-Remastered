@@ -1,12 +1,12 @@
 #version 450 core
 
 layout (location = 0) in vec3 iCoord;
-layout (location = 1) in vec4 iColor;
+layout (location = 1) in vec2 iTexCoord;
 
-out vec4 color;
+layout (location = 0) out vec2 TexCoord;
 
 void main()
 {
-	color = iColor;
+	TexCoord = iTexCoord;
 	gl_Position = vec4(iCoord, 1.0);
 }
