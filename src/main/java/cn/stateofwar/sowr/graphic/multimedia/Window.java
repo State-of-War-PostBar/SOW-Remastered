@@ -8,6 +8,7 @@ import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 
@@ -56,6 +57,9 @@ public class Window {
 			LOGGER.fatal("Failed to create a GLFW window!");
 			throw new RuntimeException("Failed to create a GLFW window!");
 		}
+
+		GLFWVidMode video = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		glfwSetWindowPos(handle, (video.width() - width) / 2, (video.height() - height) / 2);
 
 		LOGGER.info("Created a GLFW window.");
 
