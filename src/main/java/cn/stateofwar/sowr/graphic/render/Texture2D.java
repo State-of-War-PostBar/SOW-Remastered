@@ -3,21 +3,18 @@ package cn.stateofwar.sowr.graphic.render;
 import static org.lwjgl.opengl.GL45.*;
 import static org.lwjgl.stb.STBImage.stbi_failure_reason;
 import static org.lwjgl.stb.STBImage.stbi_load;
+import static org.lwjgl.stb.STBImage.stbi_load_from_memory;
 import static org.lwjgl.stb.STBImage.stbi_set_flip_vertically_on_load;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import javax.imageio.ImageIO;
-
-import org.lwjgl.BufferUtils;
 import org.lwjgl.system.MemoryStack;
 
 import cn.stateofwar.sowr.util.Logger;
+import cn.stateofwar.sowr.util.Utils;
 
 public class Texture2D extends Texture {
 
@@ -88,67 +85,61 @@ public class Texture2D extends Texture {
 	}
 
 	public static Texture2D loadTexture(String path) {
-		ByteBuffer image;
+		ByteBuffer data;
 		int width, height;
 
 		try (MemoryStack stack = MemoryStack.stackPush()) {
-			IntBuffer w = stack.mallocInt(1);
-			IntBuffer h = stack.mallocInt(1);
+			IntBuffer image_width = stack.mallocInt(1);
+			IntBuffer image_height = stack.mallocInt(1);
 			IntBuffer components = stack.mallocInt(1);
 
 			stbi_set_flip_vertically_on_load(true);
-			image = stbi_load(path, w, h, components, 4);
+			data = stbi_load(path, image_width, image_height, components, 4);
 
-			if (image == null) {
+			if (data == null) {
 				LOGGER.error("Failed to load a texture file from " + path + " !");
 				LOGGER.error(stbi_failure_reason());
+				return null;
 			}
 
-			width = w.get();
-			height = h.get();
+			width = image_width.get();
+			height = image_height.get();
 		}
 
 		LOGGER.info("Loaded a texture at path " + path + ".");
-		return createTexture(width, height, image);
+		return createTexture(width, height, data);
 	}
 
 	public static Texture2D loadTextureA(String path) {
-		ByteBuffer pixels = null;
+		ByteBuffer data = null;
 		int width = 0, height = 0;
 
 		try (MemoryStack stack = MemoryStack.stackPush()) {
-			InputStream stream = ClassLoader.getSystemResourceAsStream(path);
-			BufferedImage image = ImageIO.read(stream);
+			IntBuffer image_width = stack.mallocInt(1);
+			IntBuffer image_height = stack.mallocInt(1);
+			IntBuffer components = stack.mallocInt(1);
 
-			width = image.getWidth();
-			height = image.getHeight();
+			ByteBuffer image = Utils.getResource(path).flip();
 
-			int[] raw_pixels = image.getRGB(0, 0, width, height, null, 0, width);
-			pixels = BufferUtils.createByteBuffer(width * height * 4);
+			stbi_set_flip_vertically_on_load(true);
+			data = stbi_load_from_memory(image, image_width, image_height, components, 4);
 
-			for (int i = 0; i < width; i++)
-				for (int j = 0; j < height; j++) {
-					int pixel = raw_pixels[i * width + j];
-					pixels.put((byte) ((pixel >> 020) & 0xFF));
-					pixels.put((byte) ((pixel >> 010) & 0xFF));
-					pixels.put((byte) (pixel & 0xFF));
-					pixels.put((byte) ((pixel >> 030) & 0xFF));
-				}
+			if (data == null) {
+				LOGGER.error("Failed to load a texture file from " + path + " !");
+				LOGGER.error(stbi_failure_reason());
+				return null;
+			}
 
-			pixels.flip();
-		} catch (IOException e1) {
-			LOGGER.error("Failed to load a texture file from [jar]" + path + "!");
-			LOGGER.error(e1.getLocalizedMessage());
-			e1.printStackTrace();
-		} catch (IndexOutOfBoundsException e) {
-			LOGGER.error("The texture file of path [jar]" + path
-					+ " is too large! Consider adding it in local path instead.");
+			width = image_width.get();
+			height = image_height.get();
+		} catch (IOException e) {
+			LOGGER.error("Failed to load a texture file from " + path + " !");
 			LOGGER.error(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 
 		LOGGER.info("Loaded a texture at path [jar]" + path + ".");
-		return createTexture(width, height, pixels);
+		return createTexture(width, height, data);
 	}
 
 	private static Texture2D createTexture(int width, int height, ByteBuffer data) {
