@@ -21,7 +21,7 @@ public class BufferObject {
 
 	public void bind(int _target) {
 		target = _target;
-		glBindBuffer(id, target);
+		glBindBuffer(target, id);
 	}
 
 	public void malloc(long size, int usage) {
