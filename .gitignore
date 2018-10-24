@@ -53,3 +53,6 @@ SOWR-Log.txt
 *.exe
 *.so
 *.o
+
+# git files
+dfa
