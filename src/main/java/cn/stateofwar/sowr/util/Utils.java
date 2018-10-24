@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Calendar;
 import java.util.List;
@@ -79,8 +80,8 @@ public class Utils {
 		file.createNewFile();
 	}
 
-	public static byte[] getResource(String path) throws IOException {
-		return Resources.toByteArray(Resources.getResource(path));
+	public static ByteBuffer getResource(String path) throws IOException {
+		return DataUtils.createByteBuffer(Resources.toByteArray(Resources.getResource(path)));
 	}
 
 	public static List<String> getResourceAsStrings(String path) throws IOException {

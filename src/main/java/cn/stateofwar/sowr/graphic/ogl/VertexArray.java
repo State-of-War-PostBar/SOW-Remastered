@@ -10,12 +10,12 @@ public class VertexArray {
 		id = glCreateVertexArrays();
 	}
 
-	public void bind() {
-		glBindVertexArray(id);
-	}
-
 	public int getID() {
 		return id;
+	}
+
+	public void bind() {
+		glBindVertexArray(id);
 	}
 
 	public void unbind() {
