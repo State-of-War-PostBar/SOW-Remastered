@@ -11,11 +11,11 @@ public class ShaderBus {
 	public static Shader fragment_raw_texture_2d;
 
 	public static void init() {
-		vertex_raw_color_2d = Shader.createShader("sowr/graphic/shader/raw_color_2d.vs", ShaderType.VERTEX, true);
-		fragment_raw_color_2d = Shader.createShader("sowr/graphic/shader/raw_color_2d.fs", ShaderType.FRAGMENT, true);
+		vertex_raw_color_2d = Shader.createShader("sowr/graphic/shader/raw_color_2d.vsh", ShaderType.VERTEX, true);
+		fragment_raw_color_2d = Shader.createShader("sowr/graphic/shader/raw_color_2d.fsh", ShaderType.FRAGMENT, true);
 
-		vertex_raw_texture_2d = Shader.createShader("sowr/graphic/shader/raw_texture_2d.vs", ShaderType.VERTEX, true);
-		fragment_raw_texture_2d = Shader.createShader("sowr/graphic/shader/raw_texture_2d.fs", ShaderType.FRAGMENT,
+		vertex_raw_texture_2d = Shader.createShader("sowr/graphic/shader/raw_texture_2d.vsh", ShaderType.VERTEX, true);
+		fragment_raw_texture_2d = Shader.createShader("sowr/graphic/shader/raw_texture_2d.fsh", ShaderType.FRAGMENT,
 				true);
 	}
 
