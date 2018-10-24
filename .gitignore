@@ -48,3 +48,8 @@ hs_err_pid*
 
 # Testing generated files
 SOWR-Log.txt
+
+# Binary Executables
+*.exe
+*.so
+*.o
