@@ -92,6 +92,10 @@ public class RGBA {
 		a = _a;
 	}
 
+	public float[] toFloatArray44() {
+		return new float[] { r, g, b, a, r, g, b, a, r, g, b, a, r, g, b, a };
+	}
+
 	public FloatBuffer toFloatBuffer() {
 		return DataUtils.createFloatBuffer(new float[] { r, g, b, a });
 	}
