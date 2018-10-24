@@ -15,8 +15,8 @@ public class InputHook {
 	public double double_click_interval;
 
 	public void updateCursorPos(double x, double y) {
-		cursor_x = x < 0 ? 0 : x;
-		cursor_y = y < 0 ? 0 : y;
+		cursor_x = x;
+		cursor_y = y;
 	}
 
 	public void updateKeys(int key, int action) {

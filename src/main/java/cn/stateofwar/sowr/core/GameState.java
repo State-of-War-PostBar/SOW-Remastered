@@ -1,6 +1,8 @@
 package cn.stateofwar.sowr.core;
 
 import cn.stateofwar.sowr.graphic.Graphics;
+import cn.stateofwar.sowr.graphic.multimedia.Window;
+import cn.stateofwar.sowr.graphic.render.Renderer;
 import cn.stateofwar.sowr.util.Logger;
 
 public class GameState {
@@ -43,6 +45,14 @@ public class GameState {
 
 	public Graphics getGraphic() {
 		return graphics;
+	}
+
+	public Window getWindow() {
+		return graphics.window;
+	}
+
+	public Renderer getRenderer() {
+		return graphics.renderer;
 	}
 
 	public void abrogate() {

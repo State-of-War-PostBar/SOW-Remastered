@@ -7,6 +7,7 @@ import static org.lwjgl.opengl.GL45.*;
 import cn.stateofwar.sowr.References;
 import cn.stateofwar.sowr.graphic.multimedia.Window;
 import cn.stateofwar.sowr.graphic.ogl.ShaderBus;
+import cn.stateofwar.sowr.graphic.render.Renderer;
 import cn.stateofwar.sowr.graphic.render.TextureBus;
 import cn.stateofwar.sowr.util.Config;
 import cn.stateofwar.sowr.util.I18n;
@@ -19,6 +20,8 @@ public class Graphics {
 	public int max_fps;
 
 	public Window window;
+
+	public Renderer renderer;
 
 	public void initRenderCapabilities() {
 		if (!glfwInit()) {
@@ -46,6 +49,8 @@ public class Graphics {
 
 		ShaderBus.init();
 		TextureBus.init();
+
+		renderer = new Renderer();
 
 		LOGGER.info("Initialized rendering capabilities.");
 	}

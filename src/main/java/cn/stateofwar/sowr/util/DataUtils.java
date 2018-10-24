@@ -6,7 +6,6 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import org.joml.Vector2f;
-import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
 
 import cn.stateofwar.sowr.core.Core;
@@ -31,15 +30,15 @@ public class DataUtils {
 	}
 
 	public static Vector2f toScreenPercentage(int x, int y) {
-		float x_percentage = (float) x / (float) Core.state.getGraphic().window.getWidth();
-		float y_percentage = (float) y / (float) Core.state.getGraphic().window.getHeight();
+		float x_percentage = (float) x / (float) Core.state.getWindow().getWidth();
+		float y_percentage = (float) y / (float) Core.state.getWindow().getHeight();
 
 		return new Vector2f(x_percentage, y_percentage);
 	}
 
 	public static Vector2f toGLCoord(int x, int y) {
-		int w = Core.state.getGraphic().window.getWidth();
-		int h = Core.state.getGraphic().window.getHeight();
+		int w = Core.state.getWindow().getWidth();
+		int h = Core.state.getWindow().getHeight();
 
 		x = x > w ? w : x;
 		y = y > h ? h : y;
@@ -59,13 +58,6 @@ public class DataUtils {
 		float t_percentage = (float) t / (float) h;
 
 		return new Vector2f(s_percentage, t_percentage);
-	}
-
-	public static boolean pir(Vector2f point, Vector4f rectangle) {
-		if (point.x >= rectangle.x && point.x <= rectangle.x + rectangle.z && point.y >= rectangle.y
-				&& point.y <= rectangle.y + rectangle.w)
-			return true;
-		return false;
 	}
 
 }
