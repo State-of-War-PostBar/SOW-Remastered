@@ -30,11 +30,11 @@ public class GameState {
 	}
 
 	public void render() {
-		graphics.window.update();
+		graphics.window.clear();
 
 		Core.timer.updateFPS();
 		sync(graphics.max_fps);
-		graphics.window.clear();
+		graphics.window.update();
 	}
 
 	public InputHook getInputHook() {
