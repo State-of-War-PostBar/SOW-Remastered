@@ -11,12 +11,20 @@ import org.ini4j.Profile.Section;
 
 import cn.stateofwar.sowr.References;
 
+/**
+ * A basic configuration system.
+ */
 public class Config {
 
+	/** Loaded configurations. */
 	private static LinkedHashMap<String, LinkedHashMap<String, String>> configs = new LinkedHashMap<>();
 
+	/** The configuration storage file. */
 	private static Ini config_file;
 
+	/**
+	 * Initialize default configurations and load user preferences.
+	 */
 	public static void init() {
 		DefaultConfig.initDefault();
 		configs.putAll(DefaultConfig.defaults);
@@ -41,6 +49,13 @@ public class Config {
 		}
 	}
 
+	/**
+	 * Get a configuration.
+	 * 
+	 * @param block Block of the configuration.
+	 * 
+	 * @param index Index of the configuration.
+	 */
 	public static String get(String block, String index) {
 		if (configs.containsKey(block))
 			if (configs.get(block).containsKey(index))
@@ -48,6 +63,15 @@ public class Config {
 		return DefaultConfig.get(block, index);
 	}
 
+	/**
+	 * Set a configuration.
+	 * 
+	 * @param block Block of the configuration.
+	 * 
+	 * @param index Index of the configuration.
+	 * 
+	 * @param value Value to set.
+	 */
 	public static void set(String block, String index, String value) {
 		LinkedHashMap<String, String> temp = new LinkedHashMap<>();
 		temp.putAll(configs.get(block));
@@ -55,23 +79,14 @@ public class Config {
 		configs.put(block, temp);
 	}
 
+	/** Clean up the configuration system and store user preferences. */
 	public static void abrogate() {
 		putAllConfig(configs);
 	}
 
-	private static void putAllConfig(LinkedHashMap<String, LinkedHashMap<String, String>> configs) {
-		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet())
-			for (Entry<String, String> entry2 : entry.getValue().entrySet())
-				config_file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
-
-		try {
-			config_file.store();
-		} catch (IOException e) {
-			System.err.println(e.getLocalizedMessage());
-			e.printStackTrace();
-		}
-	}
-
+	/**
+	 * Read all the configurations from the storage file.
+	 */
 	private static void readAllConfig() {
 		Set<Entry<String, Section>> sections = config_file.entrySet();
 
@@ -87,10 +102,35 @@ public class Config {
 		}
 	}
 
+	/**
+	 * Put all configurations to the storage file.
+	 * 
+	 * @param configs Configurations to save.
+	 */
+	private static void putAllConfig(LinkedHashMap<String, LinkedHashMap<String, String>> configs) {
+		for (Entry<String, LinkedHashMap<String, String>> entry : configs.entrySet())
+			for (Entry<String, String> entry2 : entry.getValue().entrySet())
+				config_file.put(entry.getKey(), entry2.getKey(), entry2.getValue());
+
+		try {
+			config_file.store();
+		} catch (IOException e) {
+			System.err.println(e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Default configurations of the program.
+	 */
 	private static final class DefaultConfig {
 
+		/** Saved default configurations. */
 		private static LinkedHashMap<String, LinkedHashMap<String, String>> defaults = new LinkedHashMap<>();
 
+		/**
+		 * Initialize default configurations.
+		 */
 		private static final void initDefault() {
 			LinkedHashMap<String, String> general = new LinkedHashMap<>();
 			general.put("Language", "EN_US");
@@ -109,12 +149,22 @@ public class Config {
 			defaults.put("GUI", gui);
 		}
 
+		/**
+		 * Get a configuration.
+		 * 
+		 * @param block Block of the configuration.
+		 * 
+		 * @param index Index of the configuration.
+		 * 
+		 * @throws IllegalArgumentException Attemption to look for a default
+		 *                                  configuration that does not exist.
+		 */
 		private static final String get(String block, String index) {
 			if (defaults.containsKey(block))
 				if (defaults.get(block).containsKey(index))
 					return defaults.get(block).get(index);
 
-			throw new IllegalStateException(
+			throw new IllegalArgumentException(
 					"Failed to find [" + block + '.' + index + "] field in default configurations.");
 		}
 

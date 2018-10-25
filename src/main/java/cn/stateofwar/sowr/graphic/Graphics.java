@@ -13,16 +13,27 @@ import cn.stateofwar.sowr.util.Config;
 import cn.stateofwar.sowr.util.I18n;
 import cn.stateofwar.sowr.util.Logger;
 
+/**
+ * The graphical processor for the engine.
+ */
 public class Graphics {
 
 	private static final Logger LOGGER = new Logger("Render");
 
+	/** The maximum frames per second the program would achieve. */
 	public int max_fps;
 
+	/** The main game window. */
 	public Window window;
 
+	/** Renderer for the window. */
 	public Renderer renderer;
 
+	/**
+	 * Initialize rendering capabilities for window and OpenGL.
+	 * 
+	 * @throws IllegalStateException Fails to initialize GLFW library.
+	 */
 	public void initRenderCapabilities() {
 		if (!glfwInit()) {
 			LOGGER.fatal("Cannot initialize GLFW!");
@@ -55,6 +66,9 @@ public class Graphics {
 		LOGGER.info("Initialized rendering capabilities.");
 	}
 
+	/**
+	 * Clean up rendering capabilities.
+	 */
 	public void abrogate() {
 		window.abrogate();
 

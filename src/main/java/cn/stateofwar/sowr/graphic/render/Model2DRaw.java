@@ -9,23 +9,42 @@ import cn.stateofwar.sowr.graphic.ogl.ShaderProgram;
 import cn.stateofwar.sowr.graphic.ogl.VertexArray;
 import cn.stateofwar.sowr.util.DataUtils;
 
+/**
+ * A 2D model with only one color.
+ */
 public class Model2DRaw extends Model2D {
 
+	/** Shader program for raw color models. */
 	private static final ShaderProgram SHADER = new ShaderProgram(
 			new Shader[] { ShaderBus.vertex_raw_color_2d, ShaderBus.fragment_raw_color_2d });
 
+	/** Vertices of the model. */
 	private float[] vertices;
 
+	/** Indices for vertices. */
 	private int[] indices;
 
+	/** Vertex array for the model. */
 	private VertexArray vao;
 
+	/** Buffer object for vertices. */
 	private BufferObject vbo_vertices;
 
+	/** Buffer object for color. */
 	private BufferObject vbo_color;
 
+	/** Buffer object for indices. */
 	private BufferObject ebo;
 
+	/**
+	 * Create a 2D raw colored render model.
+	 * 
+	 * @param _vertices Vertices of the model.
+	 * 
+	 * @param _indices  Indices for vertices.
+	 * 
+	 * @param color     Color of the model.
+	 */
 	public Model2DRaw(float[] _vertices, int[] _indices, RGBA color) {
 		vertices = _vertices;
 		indices = _indices;
@@ -36,7 +55,7 @@ public class Model2DRaw extends Model2D {
 		ebo = new BufferObject();
 
 		if (color == null)
-			color = RGBA.WHITE;
+			color = RGBA.BLACK;
 
 		SHADER.bind();
 		vao.bind();
@@ -67,6 +86,9 @@ public class Model2DRaw extends Model2D {
 		SHADER.unbind();
 	}
 
+	/**
+	 * Draw the model.
+	 */
 	@Override
 	public void draw() {
 		SHADER.bind();
@@ -84,18 +106,26 @@ public class Model2DRaw extends Model2D {
 		SHADER.unbind();
 	}
 
+	/**
+	 * Update vertices information of the model.
+	 * 
+	 * @param _vertices New vertices.
+	 */
 	public void updateVertices(float[] _vertices) {
 		vertices = _vertices;
 
 		vao.bind();
 
 		vbo_vertices.bind(GL_ARRAY_BUFFER);
-		vbo_vertices.buffer(DataUtils.createFloatBuffer(vertices).flip(), GL_STATIC_DRAW);
+		vbo_vertices.bufferSub(0, DataUtils.createFloatBuffer(vertices).flip());
 		vbo_vertices.unbind();
 
 		vao.unbind();
 	}
 
+	/**
+	 * Clean up the model.
+	 */
 	public void abrogate() {
 		vbo_vertices.abrogate();
 		vbo_color.abrogate();

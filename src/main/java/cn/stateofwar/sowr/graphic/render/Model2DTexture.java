@@ -11,25 +11,45 @@ import cn.stateofwar.sowr.util.DataUtils;
 
 public class Model2DTexture extends Model2D {
 
+	/** Shader program for raw texture models. */
 	private static final ShaderProgram SHADER = new ShaderProgram(
 			new Shader[] { ShaderBus.vertex_raw_texture_2d, ShaderBus.fragment_raw_texture_2d });
 
+	/** Vertices of the model. */
 	private float[] vertices;
 
+	/** Indices for vertices. */
 	private int[] indices;
 
+	/** Vertex array for the model. */
 	private VertexArray vao;
 
+	/** Buffer object for vertices. */
 	private BufferObject vbo_vertices;
 
+	/** Buffer object for indices. */
 	private BufferObject ebo;
 
+	/** Texture of the model. */
 	private Texture2D texture;
 
+	/** Coordinates of used texture area. */
 	private float[] texture_coordinates;
 
+	/** Buffer object for texture coordinates. */
 	private BufferObject vbo_texcoords;
 
+	/**
+	 * Create a 2D raw colored render model.
+	 * 
+	 * @param _vertices            Vertices of the model.
+	 * 
+	 * @param _indices             Indices for vertices.
+	 * 
+	 * @param _texture             The texture to use.
+	 * 
+	 * @param _texture_coordinates Coordinates of used texture area.
+	 */
 	public Model2DTexture(float[] _vertices, int[] _indices, Texture2D _texture, float[] _texture_coordinates) {
 		vertices = _vertices;
 		indices = _indices;
@@ -70,6 +90,9 @@ public class Model2DTexture extends Model2D {
 		SHADER.unbind();
 	}
 
+	/**
+	 * Draw the model.
+	 */
 	@Override
 	public void draw() {
 		SHADER.bind();
@@ -87,6 +110,11 @@ public class Model2DTexture extends Model2D {
 		SHADER.bind();
 	}
 
+	/**
+	 * Update vertices information of the model.
+	 * 
+	 * @param _vertices New vertices.
+	 */
 	public void updateVertices(float[] _vertices) {
 		vertices = _vertices;
 
@@ -99,6 +127,9 @@ public class Model2DTexture extends Model2D {
 		vao.unbind();
 	}
 
+	/**
+	 * Clean up the model.
+	 */
 	public void abrogate() {
 		vbo_vertices.abrogate();
 		vbo_texcoords.abrogate();

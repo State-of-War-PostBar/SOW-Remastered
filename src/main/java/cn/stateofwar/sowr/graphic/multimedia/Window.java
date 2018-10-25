@@ -18,22 +18,45 @@ import cn.stateofwar.sowr.util.Logger;
 import cn.stateofwar.sowr.util.Utils;
 import cn.stateofwar.sowr.util.Utils.OSType;
 
+/**
+ * A game window.
+ */
 public class Window {
 
 	private static final Logger LOGGER = new Logger("Render");
 
+	/** Handle for the window. */
 	private long handle;
 
+	/** Title of the window. */
 	private String title;
 
+	/** Width of the window. */
 	private int width;
 
+	/** Height of the window. */
 	private int height;
 
+	/** If vertical sync is enabled. */
 	private boolean vertical_sync;
 
+	/** If the window captures all display. */
 	private boolean full_screen;
 
+	/**
+	 * Initialize properties of the window.
+	 * 
+	 * @param _title         Title of the window.
+	 * 
+	 * @param _width         Width of the window.
+	 * 
+	 * @param _height        Height of the window.
+	 * 
+	 * @param _vertical_sync Enable vertical sync.
+	 * 
+	 * @param _full_screen   Enable full screen capture.
+	 * 
+	 */
 	public Window(String _title, int _width, int _height, boolean _vertical_sync, boolean _full_screen) {
 		title = _title;
 		width = _width;
@@ -42,6 +65,9 @@ public class Window {
 		full_screen = _full_screen;
 	}
 
+	/**
+	 * Initialize the window.
+	 */
 	public void init() {
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
@@ -98,53 +124,109 @@ public class Window {
 		glfwShowWindow(handle);
 	}
 
+	/**
+	 * Clear color buffer and depth buffer of the window.
+	 */
 	public void clear() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	/**
+	 * Update drawn elements to the window.
+	 */
 	public void update() {
 		glfwSwapBuffers(handle);
 		glfwPollEvents();
 	}
 
+	/**
+	 * Get the handle of the window.
+	 * 
+	 * @return Handle of the window.
+	 */
 	public long getHandle() {
 		return handle;
 	}
 
+	/**
+	 * Get the width of the window.
+	 * 
+	 * @return Width of the window.
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * Set the width of the window.
+	 * 
+	 * @param _width New width of the window.
+	 */
 	public void setWidth(int _width) {
 		resize(_width, height);
 	}
 
+	/**
+	 * Get the height of the window.
+	 * 
+	 * @return Height of the window.
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * Set the height of the window.
+	 * 
+	 * @param _height New height of the window.
+	 */
 	public void setHeight(int _height) {
 		resize(width, _height);
 	}
 
+	/**
+	 * Set the size of the window.
+	 * 
+	 * @param _width  New width of the window.
+	 * 
+	 * @param _height New height of the window.
+	 */
 	public void resize(int _width, int _height) {
 		width = _width;
 		height = _height;
 		glViewport(0, 0, width, height);
 	}
 
+	/**
+	 * Check if the window is set to be closing.
+	 * 
+	 * @return If the window is closing.
+	 */
 	public boolean isClosing() {
 		return glfwWindowShouldClose(handle);
 	}
 
+	/**
+	 * Close the window.
+	 */
 	public void close() {
 		glfwSetWindowShouldClose(handle, true);
 	}
 
+	/**
+	 * Check if the window is vertical sync.
+	 * 
+	 * @return If vertical sync is enabled.
+	 */
 	public boolean isVerticalSync() {
 		return vertical_sync;
 	}
 
+	/**
+	 * Set the vertical sync of the window.
+	 * 
+	 * @param _vertical_sync If vertical sync is enabled.
+	 */
 	public void setVerticalSync(boolean _vertical_sync) {
 		vertical_sync = _vertical_sync;
 		if (_vertical_sync)
@@ -153,6 +235,9 @@ public class Window {
 			glfwSwapInterval(0);
 	}
 
+	/**
+	 * Clean up the window.
+	 */
 	public void abrogate() {
 		Callbacks.glfwFreeCallbacks(handle);
 		glfwDestroyWindow(handle);

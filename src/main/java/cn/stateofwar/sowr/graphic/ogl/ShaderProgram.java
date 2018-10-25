@@ -10,12 +10,21 @@ import org.lwjgl.BufferUtils;
 
 import cn.stateofwar.sowr.util.Logger;
 
+/**
+ * An OpenGL shader program.
+ */
 public class ShaderProgram {
 
 	private static final Logger LOGGER = new Logger("Render");
 
+	/** ID of the shader program. */
 	private final int id;
 
+	/**
+	 * Create a shader program with shaders.
+	 * 
+	 * @param _shaders Shaders for this program.
+	 */
 	public ShaderProgram(Shader[] _shaders) {
 		id = glCreateProgram();
 
@@ -35,26 +44,66 @@ public class ShaderProgram {
 		}
 	}
 
+	/**
+	 * Get the ID of the program.
+	 * 
+	 * @return ID of the program.
+	 */
 	public int getID() {
 		return id;
 	}
 
+	/**
+	 * Get the location of an attribute.
+	 * 
+	 * @param name Attribute variable name.
+	 * 
+	 * @return Location of the attribute.
+	 */
 	public int getAttributeLoc(String name) {
 		return glGetAttribLocation(id, name);
 	}
 
+	/**
+	 * Bind an attribute index to an attribute variable.
+	 * 
+	 * @param index    Index of the attribute.
+	 * 
+	 * @param location Attribute variable name.
+	 */
 	public void bindAttribute(int index, String location) {
 		glBindAttribLocation(id, index, location);
 	}
 
+	/**
+	 * Bind the fragment out color variable location.
+	 *
+	 * @param number   Color number binds.
+	 * 
+	 * @param location Variable name.
+	 */
 	public void bindFragmentDataLoc(int number, String location) {
 		glBindFragDataLocation(id, number, location);
 	}
 
+	/**
+	 * Get the location of an uniform variable.
+	 * 
+	 * @param name Uniform variable name.
+	 * 
+	 * @return Uniform variable location.
+	 */
 	public int getUniformLoc(String name) {
 		return glGetUniformLocation(id, name);
 	}
 
+	/**
+	 * Set an uniform variable.
+	 * 
+	 * @param name  Name of the variable.
+	 * 
+	 * @param value Value to set.
+	 */
 	public void setUniform(String name, float value) {
 		int loc = getUniformLoc(name);
 
@@ -62,6 +111,13 @@ public class ShaderProgram {
 			glUniform1f(loc, value);
 	}
 
+	/**
+	 * Set an uniform variable.
+	 * 
+	 * @param name  Name of the variable.
+	 * 
+	 * @param value Value to set.
+	 */
 	public void setUniform(String name, int value) {
 		int loc = getUniformLoc(name);
 
@@ -69,6 +125,13 @@ public class ShaderProgram {
 			glUniform1i(loc, value);
 	}
 
+	/**
+	 * Set an uniform variable.
+	 * 
+	 * @param name  Name of the variable.
+	 * 
+	 * @param value Value to set.
+	 */
 	public void setUniform(String name, Vector4f value) {
 		int loc = getUniformLoc(name);
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(4);
@@ -78,6 +141,13 @@ public class ShaderProgram {
 			glUniform4fv(loc, buffer);
 	}
 
+	/**
+	 * Set an uniform variable.
+	 * 
+	 * @param name  Name of the variable.
+	 * 
+	 * @param value Value to set.
+	 */
 	public void setUniform(String name, Matrix4f value) {
 		int loc = getUniformLoc(name);
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(4 * 4);
@@ -87,14 +157,23 @@ public class ShaderProgram {
 			glUniformMatrix4fv(loc, false, buffer);
 	}
 
+	/**
+	 * Bind the program to current rendering procedure.
+	 */
 	public void bind() {
 		glUseProgram(id);
 	}
 
+	/**
+	 * Unbind programs from current rendering procedure.
+	 */
 	public void unbind() {
 		glUseProgram(0);
 	}
 
+	/**
+	 * Clean up the shader program.
+	 */
 	public void abrogate() {
 		glDeleteProgram(id);
 	}
