@@ -1,12 +1,12 @@
 # This is an example of State-of-War Remastered game map extra information file.
 #
-# The file is in custom *ini* format.
+# The file is in custom ini format.
 #
 # [Blocks]
 # and
 # Key = Value
 # is available as usual.
-# sublayer is also allowed :
+# Sublayer is also allowed :
 # Key.SubKey = Value
 #
 # Use # to comment, no characters after the # symbol including itself is loaded.
@@ -16,61 +16,63 @@
 # or 
 # "Key with space" = ""
 #
-# Escaping not allowed.
+# Escaping is not allowed.
 #
 # This file is for main map registering, maps should be registered by this file.
-# The corresponding map data are described by file name or by content below.
+# The corresponding map data are described by file name (Mxx).
 #
 # Some extra information (key-value pair *and* block) can be add to anywhere.
-#
-# **Note it's better to store game logic parts into scripts, not here.**
-#
+
 
 ###############################################################################
-# overall config.
+# Overall config.
 ###############################################################################
 [global]
 map_id = 12500
 map_terrain = tile.127    # Index to terrain maps.
 map_visiable = vis.127    # Index to map mask.
 
+
 ###############################################################################
-# single-player mode config.
+# Single-player mode config.
 ###############################################################################
 [sp]
-available = true
-
-sp.player = 1               # player control sp.1.
-
+available = 1
+sp.player = 1               # Player control sp.1.
 difficulty = 3
 
-[sp.1]
-camp = 1                    # camps are used to determine allies.
+[sp.0]
+is_neutral = 1;             # Set this player to be neutral (white).
+ai = 0                      # It is possible to let player control neutral camp, but there are no productions and attacks.
 
-ai = player_control         # we see player's controlling as an AI. this is the default value of key *ai*.
-money = 12500               # money at the beginning.
-research = 0                # beginning value default is 0.
+[sp.1]
+camp = 1                    # Camps are used to determine allies.
+
+ai = player_control         # We see player's controlling as an AI. This is the default value of key "ai".
+money = 12500               # Money at the beginning.
+research = 0                # Beginning value default is 0.
 max_money = 1073741824      
 max_research = 2000
 max_advanced_research = 1000
 
 [sp.2]
 camp = 1
-ai = sp.ai.normal           # index to AI definition.
+ai = sp.ai.normal           # Index to AI definition.
 money = 1000
 research = 1000
 
 [sp.3]
 ai = sp.ai.advanced
 max_money = 0
-production_acceleration = 2
+production_acceleration = 2 # Example of a custom property.
+
 
 ###############################################################################
-# multi-player mode config.
+# Multi-player mode config.
 ###############################################################################
 
 [mp]
-available = true
+available = 1
 
 [mp.1]
 camp = 1
@@ -87,35 +89,36 @@ camp = 2
 ai = mp.ai.normal       # AI is allowed in multi-player mode.
 max_money = 10000
 
+
 ###############################################################################
-# map config.
+# Map resources config.
 ###############################################################################
 
 [building.99]
-sp = true           # default true.
-mp = false          # default true.
-difficulty = 3      # only when diffuculty = 3 this building exists.
-                    # without specifing difficulty it will exist in any difficulty.
+sp = 1              # Default true.
+mp = 0              # Default true.
+difficulty = 3      # Only when difficulty = 3 this building exists.
+                    # Without specifying difficulty it will exist in any difficulty.
 x = 10
 y = 16
 type = factory_3
-owner = 1                       # player 1 owns it.
+owner = 1                       # Player 1 owns it.
 production.0 = artillary_1
-upgrade.0 = 2                   # can use upgrade twice
-advanced_upgrade.0 = 1          # can use advanced upgrade
-satellite_defence = true
-id = super_cannon               # this is a custom property and is not necessary. It can be used in some scripts.
+upgrade.0 = 2                   # Can use upgrade twice
+advanced_upgrade.0 = 1          # Can use advanced upgrade
+satellite_defence = 1
+id = super_cannon               # This is a custom property and is not necessary. It can be used in some scripts.
 
 [building.98]
 x = 19
 y = 28
 owner = 1
-type = headquater
+type = hq
 export.0 = af_bomber
 upgrade.0 = 1
-export.9 = af_carry_all         # production from 1 to 8 can be reserved.
+export.9 = af_carry_all         # Production from 1 to 5 can be reserved.
 upgrade.9 = 1
-hp = 1                          # hp = 1 means full of hp; hp < 0 means destroy immediately. default 1.
+hp = 1                          # hp = 1 means full of hp; hp < 0 means destroy immediately. Default 1.
 
 [unit.13372]
 x = 1177
@@ -132,38 +135,39 @@ type = kodiak
 owner = 1
 hp = 1000
 
+
 ###############################################################################
-# events config.
+# Events config.
 ###############################################################################
 
-[event.11]                              # you can give it arbitary id as long as all event ids are distinct.
-sp = true
-mp = false
-condition = time_out                    # index to condition judgement script.
+[event.11]                              # You can give it arbitrary id as long as all event ids are distinct.
+sp = 1
+mp = 0
+condition = time_out                    # Index to condition judgement script.
 action = reinforcement.example.1
-time_limit = 300                        # only used by this script; may not be used by lose judgement script.
+time_limit = 300                        # Only used by this script; may not be used by lose judgement script.
 
 [event.12]
-sp = true
-mp = false
-conditon = chained_reinforcement
+sp = 1
+mp = 0
+condition = chained_reinforcement
 reinforcement_previous = reinforcement.example.1
 action = reinforcement.example.2
-time_limit = 800                        # condition example.2 will judge whether example.1 is done
+time_limit = 800                        # Condition example.2 will judge whether example.1 is done
                                         # and whether it is timeout.
 action = set_player_win
-player_id = 1                           # used by set_player_win script.
+player_id = 1                           # Used by set_player_win script.
 
 [event.13]
-sp = true
-mp = false
-conditon = escort_target_destroyed
+sp = 1
+mp = 0
+condition = escort_target_destroyed
 action = set_player_lose
 player_id = 1
 
 [evnet.14]
-sp = true
-mp = false
+sp = 1
+mp = 0
 condition = escort_finish
 action = set_player_win
 player_id = 1
@@ -173,26 +177,26 @@ escort_finish_y_min = 1
 escort_finish_y_max = 100
 
 
-[event.1]               # when headquater is destroyed, player loses.
-sp = false
-mp = true
-condition = headquater_destroyed
+[event.1]               # When headquarter is destroyed, player loses.
+sp = 0
+mp = 1
+condition = headquarter_destroyed
 action = set_player_lose
 player_id = 1
 target_id = 1
 
-[event.2]               # when player 1 failed, player fail.
-sp = false
-mp = true
-condition = headquater_destroyed
+[event.2]               # When player 1 failed, player fail.
+sp = 0
+mp = 1
+condition = headquarter_destroyed
 action = set_player_lose
 player_id = 2
 target_id = 1
 
-[event.2]               # when player 1 's headquater is destroyed, enemy (player 3) wins.
-sp = false
-mp = true
-condition = headquater_destroyed
+[event.2]               # When player 1 's headquarter is destroyed, enemy (player 3) wins.
+sp = 0
+mp = 1
+condition = headquarter_destroyed
 action = set_player_win
 player_id = 3
 target_id = 1

@@ -125,12 +125,12 @@ All the fields with **-** cannot be initialized with default value. If they are 
 |Keywords|Remarks|Default Value|
 |:-:|:-:|:-:|
 |**[sp]**|定义单人任务信息||
-|available|该任务可以在单人模式下游玩|True|
+|available|该任务可以在单人模式下游玩|1（是）|
 |sp.player|玩家控制的单人任务玩家|1|
 |difficulty|该任务最大的难度|0|
 ||||
 |**[mp]**|定义多人任务信息||
-|available|该任务可以在多人模式下游玩|True|
+|available|该任务可以在多人模式下游玩|1（是）|
 |max_players|最大的玩家数。此项包括电脑|2|
 ||||
 |**[sp.~]** / **[mp.~]**|定义单人任务中的第~个玩家的信息||
@@ -142,6 +142,7 @@ All the fields with **-** cannot be initialized with default value. If they are 
 |max_money|玩家可以拥有的最大额金钱|1073741824|
 |max_research|玩家可以拥有的最大额研究点数|5000|
 |max_advanced_research|玩家可以拥有的最大额高级研究点数|1000|
+|is_neutral|该玩家是否中立。如果玩家操控设为中立之后虽然可以正常操作但是没有建筑生产（科技有效）而且攻击性单位/建筑不会攻击。|0（否）|
 ||||
 |**[building.~]**|定义一个编号为~的建筑物。在这区块中的信息都会用于定义这个建筑||
 |sp|是否在单人游戏中出现|1（是）|
@@ -169,5 +170,5 @@ All the fields with **-** cannot be initialized with default value. If they are 
 |hp|单位的当前血量。若大于单位最大血量则视为最大血量|999999（即一般情况下的最大可能血量，当然如果有单位大于这个数也没辙）|
 ||||
 |**[event.~]**|在地图中注册第~个事件||
-|sp|该事件在单人任务中会触发|True|
-|mp|该事件在多人对战中会触发|False|
+|sp|该事件在单人任务中会触发|1（是）|
+|mp|该事件在多人对战中会触发|0（否）|

@@ -3,7 +3,7 @@ Continue to play State of War? Y̲ / N
 
 ## Description
 ---
-A project attempts to rebuild an old game: *State of War* (2001).
+This is a project attempts to rebuild an old game: *State of War* (2001).
 
 *State of War* is a single-player or multi-players strategy game. You have to use good skills of
 micro-controlling, observing and managing to defeat your enemies!
