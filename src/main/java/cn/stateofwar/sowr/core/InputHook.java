@@ -4,9 +4,9 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class InputHook {
 
-	public double cursor_x;
+	public float cursor_x;
 
-	public double cursor_y;
+	public float cursor_y;
 
 	public boolean[] keys = new boolean[365];
 
@@ -15,8 +15,8 @@ public class InputHook {
 	public double double_click_interval;
 
 	public void updateCursorPos(double x, double y) {
-		cursor_x = x;
-		cursor_y = Core.state.getWindow().getHeight() - y;
+		cursor_x = (float) x;
+		cursor_y = (float) (Core.state.getWindow().getHeight() - y);
 	}
 
 	public void updateKeys(int key, int action) {
