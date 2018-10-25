@@ -2,11 +2,11 @@
 
 uniform sampler2D _texture;
 
-layout (location = 0) in vec2 TexCoord;
+layout (location = 0) in vec2 texture_coordinates;
 
-layout (location = 0) out vec4 FragColor;
+layout (location = 0) out vec4 fragment_color;
 
 void main()
 {
-	FragColor = texture(_texture, TexCoord);
+	fragment_color = texture(_texture, texture_coordinates);
 }

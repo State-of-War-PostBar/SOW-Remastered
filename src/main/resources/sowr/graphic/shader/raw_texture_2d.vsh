@@ -1,12 +1,12 @@
 #version 450 core
 
-layout (location = 0) in vec3 iCoord;
-layout (location = 1) in vec2 iTexCoord;
+layout (location = 0) in vec3 in_coordinates;
+layout (location = 1) in vec2 in_texture_coordinates;
 
-layout (location = 0) out vec2 TexCoord;
+layout (location = 0) out vec2 texture_coordinates;
 
 void main()
 {
-	TexCoord = iTexCoord;
-	gl_Position = vec4(iCoord, 1.0);
+	texture_coordinates = in_texture_coordinates;
+	gl_Position = vec4(in_coordinates, 1.0);
 }
