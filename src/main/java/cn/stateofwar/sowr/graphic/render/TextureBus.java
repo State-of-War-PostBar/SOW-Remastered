@@ -13,7 +13,9 @@ public class TextureBus {
 	}
 
 	public static Texture get(String name) {
-		return textures.get(name);
+		if (textures.containsKey(name))
+			return textures.get(name);
+		return textures.get("credit.dk");
 	}
 
 	public static void init() {
