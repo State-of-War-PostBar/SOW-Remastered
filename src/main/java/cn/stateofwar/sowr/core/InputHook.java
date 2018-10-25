@@ -16,7 +16,7 @@ public class InputHook {
 
 	public void updateCursorPos(double x, double y) {
 		cursor_x = x;
-		cursor_y = y;
+		cursor_y = Core.state.getWindow().getHeight() - y;
 	}
 
 	public void updateKeys(int key, int action) {
