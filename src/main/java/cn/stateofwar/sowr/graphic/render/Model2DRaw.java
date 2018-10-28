@@ -32,6 +32,9 @@ public class Model2DRaw extends Model2D {
 	/** Buffer object for indices. */
 	private BufferObject ebo;
 
+	/** Color for the model. */
+	private RGBA color;
+
 	/** Shader program for raw color models. */
 	private static final ShaderProgram SHADER = new ShaderProgram(
 			new Shader[] { ShaderBus.vertex_raw_color_2d, ShaderBus.fragment_raw_color_2d });
@@ -45,7 +48,7 @@ public class Model2DRaw extends Model2D {
 	 * 
 	 * @param color     Color of the model.
 	 */
-	public Model2DRaw(float[] _vertices, int[] _indices, RGBA color) {
+	public Model2DRaw(float[] _vertices, int[] _indices, RGBA _color) {
 		vertices = _vertices;
 		indices = _indices;
 
@@ -54,8 +57,10 @@ public class Model2DRaw extends Model2D {
 		vbo_color = new BufferObject();
 		ebo = new BufferObject();
 
-		if (color == null)
+		if (_color == null)
 			color = RGBA.BLACK;
+		else
+			color = _color;
 
 		SHADER.bind();
 		vao.bind();
@@ -78,8 +83,8 @@ public class Model2DRaw extends Model2D {
 		vbo_color.bind(GL_ARRAY_BUFFER);
 		glVertexAttribPointer(1, 4, GL_FLOAT, false, 0, 0);
 
-		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 
 		vbo_color.unbind();
 		vao.unbind();
@@ -98,8 +103,8 @@ public class Model2DRaw extends Model2D {
 
 		glDrawElements(GL_TRIANGLES, indices.length, GL_UNSIGNED_INT, 0);
 
-		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 
 		vao.unbind();
 		SHADER.unbind();
@@ -110,7 +115,7 @@ public class Model2DRaw extends Model2D {
 	 * 
 	 * @param _vertices New vertices.
 	 */
-	public void updateVertices(float[] _vertices) {
+	public void changeVertices(float[] _vertices) {
 		vertices = _vertices;
 
 		vao.bind();
@@ -118,6 +123,23 @@ public class Model2DRaw extends Model2D {
 		vbo_vertices.bind(GL_ARRAY_BUFFER);
 		vbo_vertices.bufferSub(0, DataUtils.createFloatBuffer(vertices).flip());
 		vbo_vertices.unbind();
+
+		vao.unbind();
+	}
+
+	/**
+	 * Update color information of the model.
+	 * 
+	 * @param _color New color.
+	 */
+	public void changeColor(RGBA _color) {
+		color = _color;
+
+		vao.bind();
+
+		vbo_color.bind(GL_ARRAY_BUFFER);
+		vbo_color.bufferSub(0, DataUtils.createFloatBuffer(color.toFloatArray44()));
+		vbo_color.unbind();
 
 		vao.unbind();
 	}

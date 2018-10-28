@@ -82,8 +82,8 @@ public class Model2DTexture extends Model2D {
 		vbo_texcoords.bind(GL_ARRAY_BUFFER);
 		glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
 
-		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 
 		vbo_texcoords.unbind();
 		vao.unbind();
@@ -103,8 +103,8 @@ public class Model2DTexture extends Model2D {
 
 		glDrawElements(GL_TRIANGLES, indices.length, GL_UNSIGNED_INT, 0);
 
-		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 
 		vao.unbind();
 		SHADER.bind();
@@ -116,14 +116,40 @@ public class Model2DTexture extends Model2D {
 	 * 
 	 * @param _vertices New vertices.
 	 */
-	public void updateVertices(float[] _vertices) {
+	public void changeVertices(float[] _vertices) {
 		vertices = _vertices;
 
 		vao.bind();
 
 		vbo_vertices.bind(GL_ARRAY_BUFFER);
-		vbo_vertices.buffer(DataUtils.createFloatBuffer(vertices).flip(), GL_STATIC_DRAW);
+		vbo_vertices.bufferSub(0, DataUtils.createFloatBuffer(vertices).flip());
 		vbo_vertices.unbind();
+
+		vao.unbind();
+	}
+
+	/**
+	 * Update texture of the model.
+	 * 
+	 * @param _texture New texture.
+	 */
+	public void changeTexture(Texture2D _texture) {
+		texture = _texture;
+	}
+
+	/**
+	 * Update texture coordinates information of the model.
+	 * 
+	 * @param _texture_coordinates New texture coordinates.
+	 */
+	public void changeTexCoord(float[] _texture_coordinates) {
+		texture_coordinates = _texture_coordinates;
+
+		vao.bind();
+
+		vbo_texcoords.bind(GL_ARRAY_BUFFER);
+		vbo_texcoords.bufferSub(0, DataUtils.createFloatBuffer(texture_coordinates));
+		vbo_texcoords.unbind();
 
 		vao.unbind();
 	}
