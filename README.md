@@ -27,6 +27,4 @@ For additional information about developing, please look forward to these refere
 
 This project is published under the [LGPLv3 License](https://www.gnu.org/licenses/lgpl.html).
 
-For more information, 
-contact us at the [State of War Baidu Postbar](https://tieba.baidu.com/f?kw=%E8%93%9D%E8%89%B2%E8%AD%A6%E6%88%92&fr=index)
-or join our QQ chat group 70410976. For developers, please join our development group 683409875.
+For more information, contact us at the [State of War Baidu Postbar](https://tieba.baidu.com/f?kw=%E8%93%9D%E8%89%B2%E8%AD%A6%E6%88%92&fr=index) or join our QQ chat group 70410976. For developers, please join our development group 683409875.
