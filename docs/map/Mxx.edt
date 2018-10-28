@@ -176,7 +176,6 @@ escort_finish_x_max = 100
 escort_finish_y_min = 1
 escort_finish_y_max = 100
 
-
 [event.1]               # When headquarter is destroyed, player loses.
 sp = 0
 mp = 1

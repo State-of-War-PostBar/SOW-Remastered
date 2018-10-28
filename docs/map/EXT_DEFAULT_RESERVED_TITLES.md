@@ -1,11 +1,11 @@
 # Reserved Titles
----
+
 This document contains reserved keywords for *ext* files of the program, either definition or build-in types.
 
 These titles will be loaded by the default map loader. All the other titles will be loaded and processed by other scripts.
 
 ## Declarations
----
+
 |Keywords|Remarks|
 |:-:|:-:|
 |**[sp.briefing]**|定义单人任务信息区块|

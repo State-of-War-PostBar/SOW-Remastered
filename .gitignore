@@ -27,21 +27,18 @@ hs_err_pid*
 # Eclipse configuration folder
 /.settings/
 
-# Visual Studio configuration folder
-/.vs/
-
-# Binaries folder or Eclipse build temps
-/bin/
-
-# Custom libraries folder
-/libs/
-
-# Gradle build folder
-/build/
-
 # Eclipse configurations
 .classpath
 .project
+
+# Visual Studio Code configuration folder
+/.vscode/
+
+# Binaries folder for Eclipse build temps
+/bin/
+
+# Gradle build folder
+/build/
 
 # Settings file
 *.ini
@@ -56,3 +53,6 @@ SOWR-Log.txt
 
 # git files
 dfa
+
+# Custom libraries folder
+/libs/

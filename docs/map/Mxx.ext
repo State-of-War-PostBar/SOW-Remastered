@@ -2,9 +2,9 @@
 # All default values are empty strings. 
 
 [sp.brief]
-difficulty = "" # Description about the difficulty of the map.
-id = "" # Description about the mission ID of the map.
-briefing = "" # Mission briefing.
+difficulty = ""     # Description about the difficulty of the map.
+id = ""             # Description about the mission ID of the map.
+briefing = ""       # Mission briefing.
 
 [mp.brief]
-briefing = "" # Mission briefing.
+briefing = ""       # Mission briefing.

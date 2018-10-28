@@ -1,37 +1,39 @@
 # Development Guide
+
 ---
+
 ## Programming / 编程
+
 The main program is written in Java.
 
 此程序主要使用Java编写。
 
 ## Workspace / 工作空间
+
 We are sorry for not providing any IDE workspace in our repository.
 
 很抱歉我们并不提供任何IDE的工作环境。
 
 ## Compiling / 编译
+
 Please install [Gradle](https://gradle.org/) in your system. Then, go to the directory where [build.gradle](../build.gradle) is located,
 use your remote to run
 
-	gradle build
+    gradle build
 
 请在您的机器上安装[Gradle](https://gradle.org/). 之后视您的操作系统，启动终端并在根目录下执行上述命令。
 
 ## Libraries / 库
+
 The followings are the libraries used in our program. For more information, please look forward to [build.gradle](../build.gradle).
 
 [Google Guava](https://github.com/google/guava)
 
-
 [LWJGL](https://www.lwjgl.org) *For a full list of implemented LWJGL features, see [here](LWJGL_FEATURES.md) ← 参阅此处以获取使用到的LWJGL特性列表。*
-
 
 [NIO(Netty)](http://netty.io)
 
-
 [JOML](https://github.com/JOML-CI/JOML)
-
 
 [Ini4j](http://ini4j.sourceforge.net/)
 

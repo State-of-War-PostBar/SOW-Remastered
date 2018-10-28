@@ -1,8 +1,8 @@
 apply plugin: "java"
 
 group = "cn.stateofwar"
-archivesBaseName = "sowr"
-version = "indev"
+archivesBaseName = "State-of-War-Remastered"
+version = ""
 
 ext {
 	guava_version = "27.0-jre"
@@ -74,10 +74,4 @@ compileJava {
 jar {
 	from configurations.compile.collect { zipTree it }
 	manifest.attributes "Main-Class": "cn.stateofwar.sowr.main.Main"
-}
-
-task run(type: JavaExec, dependsOn: classes) {
-    main = "Main"
-    classpath sourceSets.main.runtimeClasspath
-    classpath configurations.runtime
 }
