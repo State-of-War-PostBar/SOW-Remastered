@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class I18n {
 
-	private static final String PARSER = "=";
+	private static final char PARSER = '=';
 
 	/** Current language preference of the program. */
 	private static Locale current_locale;

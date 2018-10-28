@@ -14,10 +14,6 @@ import cn.stateofwar.sowr.util.DataUtils;
  */
 public class Model2DRaw extends Model2D {
 
-	/** Shader program for raw color models. */
-	private static final ShaderProgram SHADER = new ShaderProgram(
-			new Shader[] { ShaderBus.vertex_raw_color_2d, ShaderBus.fragment_raw_color_2d });
-
 	/** Vertices of the model. */
 	private float[] vertices;
 
@@ -35,6 +31,10 @@ public class Model2DRaw extends Model2D {
 
 	/** Buffer object for indices. */
 	private BufferObject ebo;
+
+	/** Shader program for raw color models. */
+	private static final ShaderProgram SHADER = new ShaderProgram(
+			new Shader[] { ShaderBus.vertex_raw_color_2d, ShaderBus.fragment_raw_color_2d });
 
 	/**
 	 * Create a 2D raw colored render model.
@@ -89,7 +89,6 @@ public class Model2DRaw extends Model2D {
 	/**
 	 * Draw the model.
 	 */
-	@Override
 	public void draw() {
 		SHADER.bind();
 		vao.bind();

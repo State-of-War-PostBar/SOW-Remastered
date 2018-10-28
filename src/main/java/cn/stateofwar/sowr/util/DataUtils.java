@@ -6,6 +6,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 
 import cn.stateofwar.sowr.core.Core;
@@ -69,11 +70,11 @@ public class DataUtils {
 	 * 
 	 * @return Percentages toward the screen resolution.
 	 */
-	public static Vector2f toScreenPercentage(int x, int y) {
-		float x_percentage = (float) x / (float) Core.state.getWindow().getWidth();
-		float y_percentage = (float) y / (float) Core.state.getWindow().getHeight();
+	public static Vector2f toScreenRatio(int x, int y) {
+		float x_ratio = (float) x / Core.state.getWindow().getWidth();
+		float y_ratio = (float) y / Core.state.getWindow().getHeight();
 
-		return new Vector2f(x_percentage, y_percentage);
+		return new Vector2f(x_ratio, y_ratio);
 	}
 
 	/**
@@ -92,8 +93,59 @@ public class DataUtils {
 		x = x > w ? w : x;
 		y = y > h ? h : y;
 
-		Vector2f vec = toScreenPercentage(x, y);
-		return vec.set(vec.x * 2.0f - 1.0f, vec.y * 2.0f - 1.0f);
+		Vector2f coordinate = toScreenRatio(x, y);
+		return coordinate.set(coordinate.x * 2.0f - 1.0f, coordinate.y * 2.0f - 1.0f);
+	}
+
+	/**
+	 * Convert a X-Y point of the screen to OpenGL coordinate.
+	 * 
+	 * @param x X coordinate.
+	 * 
+	 * @param y Y coordinate.
+	 * 
+	 * @param z Desired Z value.
+	 * 
+	 * @return OpenGL coordinate based on the coordinate.
+	 */
+	public static Vector3f toGLCoord(int x, int y, float z) {
+		Vector2f coordinate = toGLCoord(x, y);
+
+		return new Vector3f(coordinate.x, coordinate.y, z);
+	}
+
+	/**
+	 * Convert some X-Y-Z coordinates of the screen to an array of OpenGL
+	 * coordinates.
+	 * 
+	 * @param coordinates The coordinates.
+	 * 
+	 * @return OpenGL coordinate based on the coordinates.
+	 */
+	public static float[] toGLCoords(Vector3f[] coordinates) {
+		float[] gl_coordinates = new float[coordinates.length * 3];
+		int index = 0;
+
+		for (Vector3f coordinate : coordinates)
+			for (int i = 1; i <= 3; i++) {
+				switch (i) {
+				case 1:
+					gl_coordinates[index++] = coordinate.x;
+					break;
+
+				case 2:
+					gl_coordinates[index++] = coordinate.y;
+					index++;
+					break;
+
+				case 3:
+					gl_coordinates[index++] = coordinate.z;
+					index++;
+					break;
+				}
+			}
+
+		return gl_coordinates;
 	}
 
 	/**
@@ -115,10 +167,10 @@ public class DataUtils {
 		s = s > w ? w : s;
 		t = t > h ? h : t;
 
-		float s_percentage = (float) s / (float) w;
-		float t_percentage = (float) t / (float) h;
+		float s_ratio = (float) s / w;
+		float t_ratio = (float) t / h;
 
-		return new Vector2f(s_percentage, t_percentage);
+		return new Vector2f(s_ratio, t_ratio);
 	}
 
 }

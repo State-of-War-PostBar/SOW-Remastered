@@ -11,10 +11,6 @@ import cn.stateofwar.sowr.util.DataUtils;
 
 public class Model2DTexture extends Model2D {
 
-	/** Shader program for raw texture models. */
-	private static final ShaderProgram SHADER = new ShaderProgram(
-			new Shader[] { ShaderBus.vertex_raw_texture_2d, ShaderBus.fragment_raw_texture_2d });
-
 	/** Vertices of the model. */
 	private float[] vertices;
 
@@ -38,6 +34,10 @@ public class Model2DTexture extends Model2D {
 
 	/** Buffer object for texture coordinates. */
 	private BufferObject vbo_texcoords;
+
+	/** Shader program for raw texture models. */
+	private static final ShaderProgram SHADER = new ShaderProgram(
+			new Shader[] { ShaderBus.vertex_raw_texture_2d, ShaderBus.fragment_raw_texture_2d });
 
 	/**
 	 * Create a 2D raw colored render model.
@@ -93,21 +93,22 @@ public class Model2DTexture extends Model2D {
 	/**
 	 * Draw the model.
 	 */
-	@Override
 	public void draw() {
-		SHADER.bind();
 		texture.bind();
+		SHADER.bind();
 		vao.bind();
 
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+
 		glDrawElements(GL_TRIANGLES, indices.length, GL_UNSIGNED_INT, 0);
+
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(0);
 
 		vao.unbind();
-		texture.unbind();
 		SHADER.bind();
+		texture.unbind();
 	}
 
 	/**

@@ -15,8 +15,8 @@ ext {
 }
 
 repositories {
-	mavenCentral()
 	mavenLocal()
+	mavenCentral()
 }
 
 dependencies {

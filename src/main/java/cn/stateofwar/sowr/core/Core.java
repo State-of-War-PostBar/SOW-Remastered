@@ -61,7 +61,7 @@ public class Core {
 	/**
 	 * Stop the game engine.
 	 */
-	public static void stopRunning() {
+	public static void stop() {
 		running = false;
 	}
 

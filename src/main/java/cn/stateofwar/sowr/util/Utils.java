@@ -159,10 +159,7 @@ public class Utils {
 		StringBuilder sb = new StringBuilder();
 
 		for (String s : list)
-			if (new_line)
-				sb.append(s).append(nl());
-			else
-				sb.append(s);
+			sb.append(new_line ? s + nl() : s);
 
 		return sb.toString();
 	}
@@ -210,7 +207,7 @@ public class Utils {
 
 		String l = readLine(path, line);
 		if (l.length() < position)
-			position = l.length();
+			position = 1;
 
 		return l.substring(position, l.length());
 	}
@@ -296,8 +293,9 @@ public class Utils {
 
 		List<String> lines = Files.readLines(file, Charset.forName(References.DEFAULT_TEXT_ENCODING));
 		String l = lines.get(line);
+
 		if (l.length() < position)
-			position = l.length();
+			position = 1;
 		l = l.substring(l.length() - position) + text;
 
 		lines.set(line, l);

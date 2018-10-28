@@ -1,10 +1,10 @@
-# State of War-Remastered
+# State of War: Remastered
 
 Continue to play State of War? Y̲ / N
 
 ## Description
 
-This is a project attempts to rebuild an old game: *State of War* (2001).
+This is a project rebuilding an old game: *State of War* (2001) by [Cypron-Studios](http://www.cypron-studios.com).
 
 *State of War* is a single-player or multi-players strategy game. You have to use good skills of
 micro-controlling, observing and managing to defeat your enemies!

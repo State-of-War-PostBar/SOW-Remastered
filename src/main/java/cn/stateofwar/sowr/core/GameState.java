@@ -35,7 +35,7 @@ public class GameState {
 	 */
 	public void input() {
 		if (graphics.window.isClosing())
-			Core.stopRunning();
+			Core.stop();
 	}
 
 	/**
