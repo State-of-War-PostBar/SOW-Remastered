@@ -21,18 +21,13 @@
 # Virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# Generated gradle workspace
+# Gradle files
 /.gradle/
 
-# Eclipse configuration folder
-/.settings/
-
 # Eclipse configurations
+/.settings/
 .classpath
 .project
-
-# Visual Studio Code configuration folder
-/.vscode/
 
 # Binaries folder for Eclipse build temps
 /bin/
@@ -43,15 +38,12 @@ hs_err_pid*
 # Settings file
 *.ini
 
-# Testing generated files
-SOWR-Log.txt
-
 # Binary Executables
 *.exe
 *.so
 *.o
 
-# git files
+# Git files
 dfa
 
 # Custom libraries folder
