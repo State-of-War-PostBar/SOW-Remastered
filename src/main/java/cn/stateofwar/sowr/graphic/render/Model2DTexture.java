@@ -148,7 +148,7 @@ public class Model2DTexture extends Model2D {
 		vao.bind();
 
 		vbo_texcoords.bind(GL_ARRAY_BUFFER);
-		vbo_texcoords.bufferSub(0, DataUtils.createFloatBuffer(texture_coordinates));
+		vbo_texcoords.bufferSub(0, DataUtils.createFloatBuffer(texture_coordinates).flip());
 		vbo_texcoords.unbind();
 
 		vao.unbind();

@@ -138,7 +138,7 @@ public class Model2DRaw extends Model2D {
 		vao.bind();
 
 		vbo_color.bind(GL_ARRAY_BUFFER);
-		vbo_color.bufferSub(0, DataUtils.createFloatBuffer(color.toFloatArray44()));
+		vbo_color.bufferSub(0, DataUtils.createFloatBuffer(color.toFloatArray44()).flip());
 		vbo_color.unbind();
 
 		vao.unbind();
