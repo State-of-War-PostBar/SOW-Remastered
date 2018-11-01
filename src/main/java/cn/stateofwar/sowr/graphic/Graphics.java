@@ -13,69 +13,70 @@ import cn.stateofwar.sowr.util.Config;
 import cn.stateofwar.sowr.util.I18n;
 import cn.stateofwar.sowr.util.Logger;
 
-/**
- * The graphical processor for the engine.
- */
+/** The graphical processor for the engine. */
 public class Graphics {
 
-	private static final Logger LOGGER = new Logger("Render");
+  private static final Logger LOGGER = new Logger("Render");
 
-	/** The maximum frames per second the program would achieve. */
-	public int max_fps;
+  /** The maximum frames per second the program would achieve. */
+  public int max_fps;
 
-	/** The main game window. */
-	public Window window;
+  /** The main game window. */
+  public Window window;
 
-	/** Renderer for the window. */
-	public Renderer renderer;
+  /** Renderer for the window. */
+  public Renderer renderer;
 
-	/**
-	 * Initialize rendering capabilities for window and OpenGL.
-	 * 
-	 * @throws IllegalStateException Fails to initialize GLFW library.
-	 */
-	public void initRenderCapabilities() {
-		if (!glfwInit()) {
-			LOGGER.fatal("Cannot initialize GLFW!");
-			throw new IllegalStateException("Failed to initialize GLFW.");
-		}
+  /**
+   * Initialize rendering capabilities for window and OpenGL.
+   *
+   * @throws IllegalStateException Fails to initialize GLFW library.
+   */
+  public void initRenderCapabilities() {
+    if (!glfwInit()) {
+      LOGGER.fatal("Cannot initialize GLFW!");
+      throw new IllegalStateException("Failed to initialize GLFW.");
+    }
 
-		window = new Window(I18n.t(References.PROGRAM_NAME), Integer.parseInt(Config.get("GUI", "Window Width")),
-				Integer.parseInt(Config.get("GUI", "Window Height")),
-				Boolean.parseBoolean(Config.get("GUI", "Vertical Sync")),
-				Boolean.parseBoolean(Config.get("GUI", "Full Screen")));
+    window =
+        new Window(
+            I18n.t(References.PROGRAM_NAME),
+            Integer.parseInt(Config.get("GUI", "Window Width")),
+            Integer.parseInt(Config.get("GUI", "Window Height")),
+            Boolean.parseBoolean(Config.get("GUI", "Vertical Sync")),
+            Boolean.parseBoolean(Config.get("GUI", "Full Screen")));
 
-		max_fps = window.isVerticalSync() ? References.VERTICAL_SYNC_FPS
-				: Integer.parseInt(Config.get("GUI", "Max FPS"));
+    max_fps =
+        window.isVerticalSync()
+            ? References.VERTICAL_SYNC_FPS
+            : Integer.parseInt(Config.get("GUI", "Max FPS"));
 
-		window.init();
+    window.init();
 
-		StringBuilder s = new StringBuilder();
-		s.append("Graphic Adaptor information:").append(nl());
-		s.append("GPU Vendor: ").append(glGetString(GL_VENDOR)).append(nl());
-		s.append("GPU Renderer: ").append(glGetString(GL_RENDERER)).append(nl());
-		s.append("OpenGL Version: ").append(glGetString(GL_VERSION)).append(nl());
-		s.append("GLSL Version: ").append(glGetString(GL_SHADING_LANGUAGE_VERSION));
-		LOGGER.info(s.toString());
+    StringBuilder s = new StringBuilder();
+    s.append("Graphic Adaptor information:").append(nl());
+    s.append("GPU Vendor: ").append(glGetString(GL_VENDOR)).append(nl());
+    s.append("GPU Renderer: ").append(glGetString(GL_RENDERER)).append(nl());
+    s.append("OpenGL Version: ").append(glGetString(GL_VERSION)).append(nl());
+    s.append("GLSL Version: ").append(glGetString(GL_SHADING_LANGUAGE_VERSION));
+    LOGGER.info(s.toString());
 
-		ShaderBus.init();
-		TextureBus.init();
+    ShaderBus.init();
+    TextureBus.init();
 
-		renderer = new Renderer();
+    renderer = new Renderer();
 
-		LOGGER.info("Initialized rendering capabilities.");
-	}
+    LOGGER.info("Initialized rendering capabilities.");
+  }
 
-	/**
-	 * Clean up rendering capabilities.
-	 */
-	public void abrogate() {
-		window.abrogate();
+  /** Clean up rendering capabilities. */
+  public void abrogate() {
+    window.abrogate();
 
-		TextureBus.abrogate();
-		ShaderBus.abrogate();
+    TextureBus.abrogate();
+    ShaderBus.abrogate();
 
-		glfwTerminate();
-	}
+    glfwTerminate();
+  }
 
 }
