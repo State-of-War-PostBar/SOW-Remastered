@@ -1,9 +1,8 @@
 # Reserved Titles
 
-This document contains reserved keywords for *edt* files of the program, either definition or build-in types.
-
+This document contains reserved keywords for *edt* files of the program, either definition or build-in types.  
 These titles will be loaded by the default map loader. All the other titles will be loaded and processed by other scripts.
-
+  
 ## Building
 
 |Keywords|Remarks|
@@ -28,7 +27,7 @@ These titles will be loaded by the default map loader. All the other titles will
 |turret_4|莱德风暴|
 |turret_5|集束炮塔|
 |turret_6|激光炮塔|
-
+  
 ## Production
 
 |Keywords|Remarks|
@@ -85,7 +84,7 @@ These titles will be loaded by the default map loader. All the other titles will
 |af_carry_call|运兵飞船|
 |af_meteor|星体炸弹|
 |af_orbital_strike|轨道打击|
-
+  
 ## Upgrade
 
 |Keywords|Remarks|
@@ -113,13 +112,11 @@ These titles will be loaded by the default map loader. All the other titles will
 |focusing_len|聚焦透镜研究|
 |repairing_1|自动修复I|
 |repairing_2|自动修复II|
-
+  
 ## Script Keywords
 
-Keywords in this table are all loaded by the *default* map loader.
-
-If some are missing, they will be loaded as default value. Extras will be processed to map data pool.
-
+Keywords in this table are all loaded by the *default* map loader.  
+If some are missing, they will be loaded as default value. Extras will be processed to map data pool.  
 All the fields with **-** cannot be initialized with default value. If they are missing, the map will not be loaded.
 
 |Keywords|Remarks|Default Value|

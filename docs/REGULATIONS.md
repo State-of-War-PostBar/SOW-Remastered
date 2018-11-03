@@ -18,6 +18,7 @@ For *import static* OpenGL or GLFW that have extraordinary number of constants a
 For others, please import only the parts you used.
 
 对于 *import static* 的操作，如果是与OpenGL或者GLFW这一类有着极端数量的常量和方法的类有关，请直接import static其所有内容。
+
 对于非这一类情况的，尽量减少之。
 
 ## Git / Git使用

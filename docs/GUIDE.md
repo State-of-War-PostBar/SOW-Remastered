@@ -1,7 +1,5 @@
 # Development Guide
 
----
-
 ## Programming / 编程
 
 The main program is written in Java.

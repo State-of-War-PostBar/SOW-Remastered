@@ -1,7 +1,6 @@
 # Reserved Titles
 
-This document contains reserved keywords for *ext* files of the program, either definition or build-in types.
-
+This document contains reserved keywords for *ext* files of the program, either definition or build-in types.  
 These titles will be loaded by the default map loader. All the other titles will be loaded and processed by other scripts.
 
 ## Declarations
