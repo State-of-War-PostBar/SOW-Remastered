@@ -36,3 +36,9 @@ dfa
 
 # Visual Studio Code configurations
 /.vscode/
+
+# Custom include headers folder
+/include/
+
+# Custom libraries folder
+/dep-libs/
