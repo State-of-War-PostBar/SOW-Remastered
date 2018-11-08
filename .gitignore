@@ -33,3 +33,6 @@
 
 # Git files
 dfa
+
+# Visual Studio Code configurations
+/.vscode/
