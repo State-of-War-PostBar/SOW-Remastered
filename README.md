@@ -22,6 +22,10 @@ For additional information reguarding developing, please look forward to these r
 
 [Development Specifications / 开发指南](docs/SPECIFICATIONS.md)
 
+[Comparision to old State Of War / 新特性](docs/COMPARISION_TO_OLD_SOW.md)
+
+[Default Key Binding / 游戏默认键位](http://htmlpreview.github.io/?https://github.com/State-of-War-PostBar/SOW-Remastered/blob/master/docs/DEFAULT_KEY_BINDINGS.html)
+
 ---
 
 This project is published under the [LGPLv3 License](https://www.gnu.org/licenses/lgpl.html).
