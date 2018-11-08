@@ -117,7 +117,7 @@ These titles will be loaded by the default map loader. All the other titles will
 
 Keywords in this table are all loaded by the *default* map loader.  
 If some are missing, they will be loaded as default value. Extras will be processed to map data pool.  
-All the fields with **-** cannot be initialized with default value. If they are missing, the map will not be loaded.
+All fields with **-** cannot be initialized with default value. If they are missing, the map will not be loaded.
 
 |Keywords|Remarks|Default Value|
 |:-:|:-:|:-:|
