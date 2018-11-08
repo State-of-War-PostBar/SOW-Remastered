@@ -4,10 +4,9 @@ Continue to play State of War? Y̲ / N
 
 ## Description
 
-This is a project rebuilding an old game: *State of War* (2001) by [Cypron-Studios](http://www.cypron-studios.com).
+This is a project rebuilding an old game: *State of War* (2001), made by [Cypron-Studios](http://www.cypron-studios.com).
 
-*State of War* is a single-player or multi-players strategy game. You have to use good skills of
-micro-controlling, observing and managing to defeat your enemies!
+*State of War* is a RTS game. You have to use good skills of micro-controlling, observing and resource managing to defeat your enemies!
 
 **Goals:**
 
@@ -15,7 +14,7 @@ micro-controlling, observing and managing to defeat your enemies!
     - Enjoy the game more comfortably.
     - Make the game more customizable.
 
-For additional information about developing, please look forward to these references:
+For additional information reguarding developing, please look forward to these references:
 
 [Development Regulations / 开发规范](docs/REGULATIONS.md)
 

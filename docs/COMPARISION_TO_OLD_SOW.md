@@ -1,6 +1,6 @@
 # Comparision to old State Of War / 与老蓝警的对比
 
-The following content is the difference between this version and the original State Of War.  
+The following is the difference between this version and the original State Of War.  
 以下为新蓝警相对于旧蓝警而言拥有的新特性。
   
 ## Midifications / 旧建筑/单位的改动
@@ -21,8 +21,8 @@ The following content is the difference between this version and the original St
 现在非生产型建筑中的科技可以混搭。不同等级的同种科技的效果会叠加。
 
 **单位**  
-单位属性将被调整。  
-
+单位属性将被调整。
+  
 ## New Buildings / 新建筑
 
 **屠龙舰队整修区**  
@@ -54,7 +54,7 @@ The following content is the difference between this version and the original St
 **研究采集I-V**  
 获取研究点数。
 
-**高级研究采集I-V**  
+**高级研究采集I-II**  
 获取高级研究点数。
 
 **聚焦透镜**  
@@ -78,10 +78,10 @@ The following content is the difference between this version and the original St
 美洲狮升级。射程增强，能进行分叉攻击。
 
 **雷沃丁**  
-罗根炸弹升级。增加范围和冲击波速度。
+罗根炸弹升级。增加冲击波的范围和速度。
 
 **激光坦克**  
-和光棱类似。此单位只有1级和5级的A/B类升级。**该单位无法攻击建筑**。
+和光棱类似。此单位只有1级和5级的A/B类升级。**无法攻击建筑**。
 
 **代达罗斯**  
 科迪亚克升级，攻击力增强且可弱弹射。
@@ -140,7 +140,7 @@ The following content is the difference between this version and the original St
 ## New airforces / 新空中力量
 
 **轨道打击**  
-由基地生产的一种空中力量（需要地图启用）。对目标区域造成一次大型打击，对单位杀伤力极大单位建筑威力较弱。在一发轨道打击未使用时无法继续生产第二发。
+由基地生产的一种空中力量（需要地图启用）。对目标区域造成一次大型打击，对单位杀伤力极大但对建筑威力较弱。在一发轨道打击未使用时无法继续生产第二发。如果一个基地拥有卫星保护，其生产轨道打击的效率将提升。
   
 ## New mechanisms / 新机制
 
@@ -151,9 +151,9 @@ The following content is the difference between this version and the original St
 机器人需要600研究点数和100高级研究点数升级为下一个阶段的机器人，罗根炸弹需要600研究点数和130高级研究点数升级为雷沃丁。机器人工厂被占领后，已升级的单位将被重置。
 
 **飞碟升级**  
-飞碟可在基地使用200高级研究点数升级。2级飞碟可以增加工作效率，且对地方飞碟/防空单位分别发射多道攻击。
+飞碟可在基地使用200高级研究点数升级。2级飞碟工作效率提升，且可以对地方飞碟/防空单位分别发射多道攻击。
 
-**路径点(Shift)**  
+**路径点**  
 你懂得。不支持飞碟操作。
 
 **资源类建筑**  
@@ -164,8 +164,8 @@ The following content is the difference between this version and the original St
   
 ## Archived / 归档内容
 
-以下为在讨论中曾经出现但被废弃的设定。归档在此处以嘲笑之。  
-
+以下为在讨论中曾经出现但被废弃的设定。归档在此处以嘲笑之。
+  
 ### Buildings / 建筑
 
 ~~5级单位的选择中，AI为50%随机选择。~~  
@@ -185,7 +185,7 @@ The following content is the difference between this version and the original St
 ~~**导弹防御塔**  
 对地的防御塔，需要2K一个。射程和格林一样。同时发射8发导弹但不是很密集。对付大批军队有效但对小批队伍威力有限。~~  
 已放弃。过于鸡肋。
-
+  
 ### Technologies / 科技
 
 ~~**雷电爆能**~~  
@@ -194,24 +194,24 @@ The following content is the difference between this version and the original St
 ~~**速度增幅**~~  
 已放弃。
 
-~~**轨道打击研究**  
+~~**卫星轨道打击**  
 科技，需要拥有之后基地才可生产轨道打击。~~  
 现在基地可以直接生产。
 
 ~~**反应增幅**~~  
 已放弃。
-
+  
 ### Units / 单位
 
 ~~**流浪者**  
 拥有两个头的稀有坦克。在出厂时其两个头会随机为其它的坦克类型。~~  
 已放弃，过于奇葩。作为彩蛋似乎可行？
-
+  
 ### Airforces / 空中力量
 
 ~~**闪电风暴**~~  
-已放弃。
-
+你懂得。已放弃。
+  
 ### Mechanisms / 机制
 
 ~~坦克被打爆后直接爆炸，不会飞炮台。~~  
