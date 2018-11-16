@@ -1,9 +1,8 @@
-# Comparision to old State Of War / 与老蓝警的对比
+# 与老蓝警的对比
 
-The following is the difference between this version and the original State Of War.  
 以下为新蓝警相对于旧蓝警而言拥有的新特性。
   
-## Midifications / 旧建筑/单位的改动
+## 旧建筑/单位的改动
 
 **建筑**  
 所有建筑最多拥有5项科技/生产。
@@ -23,7 +22,7 @@ The following is the difference between this version and the original State Of W
 **单位**  
 单位属性将被调整。
   
-## New Buildings / 新建筑
+## 新建筑
 
 **屠龙舰队整修区**  
 主要的科技建筑。各种高新科技建议只放入此建筑。
@@ -43,7 +42,7 @@ The following is the difference between this version and the original State Of W
 **激光炮塔**  
 需要2K金一个的炮塔。能同时对多个单位进行持续射击（非折射类）。需要拥有“聚焦透镜”科技才可建造。**无法攻击建筑**。可以对空。
   
-## New Technologies / 新科技
+## 新科技
 
 **能量流入I-V**  
 增幅生产速度。
@@ -63,7 +62,7 @@ The following is the difference between this version and the original State Of W
 **自动修复I-II**  
 能够使地面单位自我修复。
   
-## New Units / 新单位
+## 新单位
 
 **赫尔克里斯**  
 对空复仇者升级。能够一次性发射六发防空导弹。
@@ -137,12 +136,12 @@ The following is the difference between this version and the original State Of W
 **T14激光坦克B**  
 增加折射次数和折射射程。
   
-## New airforces / 新空中力量
+## 新空中力量
 
 **轨道打击**  
 由基地生产的一种空中力量（需要地图启用）。对目标区域造成一次大型打击，对单位杀伤力极大但对建筑威力较弱。在一发轨道打击未使用时无法继续生产第二发。如果一个基地拥有卫星保护，其生产轨道打击的效率将提升。
   
-## New mechanisms / 新机制
+## 新机制
 
 **坦克单位升级**  
 1→2→3→4均为500研究点数。4→5为500研究点数和100高级研究点数，并且需要玩家选择升级为A类或B类的新坦克。升级之后类型之间可以通过消耗50高级研究点数更换。5级工厂被占领后，已升级的5级单位类型不会影响下一次升级，5级和4级单位均会重置为3级。
@@ -162,11 +161,11 @@ The following is the difference between this version and the original State Of W
 **编队**  
 你懂得……
   
-## Archived / 归档内容
+## 归档内容
 
 以下为在讨论中曾经出现但被废弃的设定。归档在此处以嘲笑之。
   
-### Buildings / 建筑
+### 建筑
 
 ~~5级单位的选择中，AI为50%随机选择。~~  
 已改为AI会偏向战场情况调整，并可以由地图作者设置。
@@ -186,7 +185,7 @@ The following is the difference between this version and the original State Of W
 对地的防御塔，需要2K一个。射程和格林一样。同时发射8发导弹但不是很密集。对付大批军队有效但对小批队伍威力有限。~~  
 已放弃。过于鸡肋。
   
-### Technologies / 科技
+### 科技
 
 ~~**雷电爆能**~~  
 已放弃。
@@ -201,18 +200,18 @@ The following is the difference between this version and the original State Of W
 ~~**反应增幅**~~  
 已放弃。
   
-### Units / 单位
+### 单位
 
 ~~**流浪者**  
 拥有两个头的稀有坦克。在出厂时其两个头会随机为其它的坦克类型。~~  
 已放弃，过于奇葩。作为彩蛋似乎可行？
   
-### Airforces / 空中力量
+### 空中力量
 
 ~~**闪电风暴**~~  
 你懂得。已放弃。
   
-### Mechanisms / 机制
+### 机制
 
 ~~坦克被打爆后直接爆炸，不会飞炮台。~~  
 保留点蓝警特色。

@@ -1,5 +1,7 @@
 # State of War: Remastered
 
+[![Gitter](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/State-of-War-PostBar)
+
 Continue to play State of War? Y̲ / N
 
 ## Description
@@ -16,15 +18,15 @@ This is a project rebuilding an old game: *State of War* (2001), made by [Cypron
 
 For additional information reguarding developing, please look forward to these references:
 
-[Development Regulations / 开发规范](docs/REGULATIONS.md)
+[(ZH_CN) 开发规范](docs/REGULATIONS_ZH.md)
 
-[Development Guide / 开发向导](docs/GUIDE.md)
+[(ZH_CN) 开发向导](docs/GUIDE_ZH.md)
 
-[Development Specifications / 开发指南](docs/SPECIFICATIONS.md)
+[(ZH_CN) 开发指南](docs/SPECIFICATIONS_ZH.md)
 
-[Comparision to old State Of War / 新特性](docs/COMPARISION_TO_OLD_SOW.md)
+[(ZH_CN) 新特性](docs/COMPARISION_TO_OLD_SOW_ZH.md)
 
-[Default Key Binding / 游戏默认键位](http://htmlpreview.github.io/?https://github.com/State-of-War-PostBar/SOW-Remastered/blob/master/docs/DEFAULT_KEY_BINDINGS.html)
+[(ZH_CN) 游戏默认键位](http://htmlpreview.github.io/?https://github.com/State-of-War-PostBar/SOW-Remastered/blob/master/docs/DEFAULT_KEY_BINDINGS_ZH.html)
 
 ---
 

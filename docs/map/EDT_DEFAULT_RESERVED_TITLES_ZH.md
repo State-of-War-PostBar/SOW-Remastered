@@ -1,14 +1,14 @@
-# Reserved Titles
+# 关键字
 
-This document contains reserved keywords for *edt* files of the program, either definition or build-in types.  
-These titles will be loaded by the default map loader. All the other titles will be loaded and processed by other scripts.
+此文档包括 `edt` 文件中的关键字，比如自带的建筑类型等等。  
+注意关键字≠保留字。
   
-## Building
+## 建筑
 
-|Keywords|Remarks|
+|关键字|备注|
 |:-:|:-:|
-|hq|基地|
-|goldmine|金矿|
+|hq|Headquarter|
+|goldmine|Goldmine|
 |researcher|̫太阳能收集器|
 |advanced_researcher|高级太阳能收集器|
 |radar|空军基地|
@@ -28,9 +28,9 @@ These titles will be loaded by the default map loader. All the other titles will
 |turret_5|集束炮塔|
 |turret_6|激光炮塔|
   
-## Production
+## 生产
 
-|Keywords|Remarks|
+|关键字|备注|
 |:-:|:-:|
 |adventurer|飞碟|
 |cannon_1|轻型装甲坦克|
@@ -85,9 +85,9 @@ These titles will be loaded by the default map loader. All the other titles will
 |af_meteor|星体炸弹|
 |af_orbital_strike|轨道打击|
   
-## Upgrade
+## 科技
 
-|Keywords|Remarks|
+|关键字|备注|
 |:-:|:-:|
 |income_1|金钱提炼I|
 |income_2|金钱提炼II|
@@ -113,13 +113,13 @@ These titles will be loaded by the default map loader. All the other titles will
 |repairing_1|自动修复I|
 |repairing_2|自动修复II|
   
-## Script Keywords
+## 信息
 
-Keywords in this table are all loaded by the *default* map loader.  
-If some are missing, they will be loaded as default value. Extras will be processed to map data pool.  
-All fields with **-** cannot be initialized with default value. If they are missing, the map will not be loaded.
+此表中的关键字都会被**默认**地图读取器读取。  
+如果edt文件中缺少一些信息，则会设置默认值。  
+**注意：**所有“默认值”栏为 **-** 的都没有默认值。如果它们缺少，那么地图将无法被读取。
 
-|Keywords|Remarks|Default Value|
+|关键字|备注|默认值|
 |:-:|:-:|:-:|
 |**[sp]**|定义单人任务信息||
 |available|该任务可以在单人模式下游玩|1（是）|

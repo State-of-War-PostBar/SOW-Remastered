@@ -8,9 +8,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <!-- 别问我为啥不写个.css，我懒 -->
+        <!-- 别问我为啥不写个.css，我懒233 -->
         <style>
 
+            /* 默认字体还有背景色。这个背景色应该比较舒服（吧 */
             *
             {
                 font-family: Consolas, monaco, monospace;
@@ -41,31 +42,42 @@
                 font-style: oblique
             }
 
+            /* 最左侧的键位格 */
             .key
             {
                 color: #ff0000
             }
 
+            /*
+            对受到特定按键的键位属性采取高亮显示
+            如果一个键位延伸到几个特定按键，按照Control -> Alt -> Shift -> Tab的顺序处理
+            */
+
+            /* 受Control影响的属性 */
             .ctrl
             {
                 color: #a200ff
             }
 
+            /* 受Alt影响的属性 */
             .alt
             {
                 color: #0000ff
             }
 
+            /* 受Shift影响的属性 */
             .shift
             {
                 color: #ff00ff
             }
 
+            /* 受Tab影响的属性 */
             .tab
             {
                 color: #ff6600
             }
 
+            /* 表示这个键位不可用，比如两个Control一起按 */
             .not_available
             {
                 background-color: #000000
@@ -465,7 +477,7 @@
                 <td>对当前选中的单位设定一个路径点</td>
                 <td class="ctrl">取消当前选中单位的所有路径点。单位不会停止移动</td>
                 <td class="alt">取消当前选中单位的所有路径点。单位同时停止移动</td>
-                <td colspan="2"></td>
+                <td colspan="2">对当前选中的单位设定一个路径点</td>
             </tr>
 
             <tr>
